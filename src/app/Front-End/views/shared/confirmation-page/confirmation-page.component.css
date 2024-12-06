@@ -1,0 +1,25 @@
+.success-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+  }
+  
+  .success-container p {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .login-link {
+    font-weight: bold;
+    color: #007bff; /* Adjust this for your primary color */
+    cursor: pointer;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  

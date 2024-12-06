@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="row justify-content-center" *ngIf="!isLoading">
+    <div class="col-md-4">
+      <div class="card centered-form mt-5">
+        <div class="card-body justify-content-center">
+
+          <div *ngIf="step === 1">
+            <form [formGroup]="signupDetails" (ngSubmit)="next()">
+              <div class="container">
+                <h4 class="text-center mb-5">Signup Details</h4>
+              </div>
+
+              <!-- Full Name Input -->
+              <div class="form-group row align-items-center mt-3">
+                <input [ngClass]="{'is-invalid': signupDetails.get('fullName')?.invalid && (signupDetails.get('fullName')?.touched || signupDetails.get('fullName')?.dirty)}" placeholder="Full Name" id="fullName" formControlName="fullName" type="text" class="form-control" style="height: 45px; border-radius: 10px;"  />
+                <div *ngIf="signupDetails.get('fullName')?.touched">
+                  <small *ngIf="signupDetails.get('fullName')?.errors?.['required']" class="text-danger">Full Name is required.</small>
+                  <small *ngIf="signupDetails.get('fullName')?.errors?.['pattern']" class="text-danger">Invalid format. Must start with a capital letter.</small>
+                </div>
+              </div>
+
+              <!-- Username Input -->
+              <div class="form-group row align-items-center mt-3">
+                <input [ngClass]="{'is-invalid': signupDetails.get('userName')?.invalid && signupDetails.get('userName')?.touched}" placeholder="UserName" id="userName" formControlName="userName" type="text" class="form-control" style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="signupDetails.get('userName')?.invalid && signupDetails.get('userName')?.touched">
+                  <small *ngIf="signupDetails.get('userName')?.errors?.['required']" class="text-danger">Username is required.</small>
+                  <small *ngIf="signupDetails.get('userName')?.errors?.['pattern']" class="text-danger">Invalid Username format.</small>
+                </div>
+              </div>
+
+              <!-- Email Input -->
+              <div class="form-group row align-items-center mt-3">
+                <input [ngClass]="{'is-invalid': signupDetails.get('email')?.invalid && signupDetails.get('email')?.touched}" placeholder="Email address" id="email" formControlName="email" type="email" class="form-control" style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="signupDetails.get('email')?.touched">
+                  <small *ngIf="signupDetails.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
+                  <small *ngIf="signupDetails.get('email')?.errors?.['pattern']" class="text-danger">Invalid Email format.</small>
+                </div>
+              </div>
+
+
+              <!-- Create Password -->
+              <div class="form-group row align-items-center mt-3">
+                <input [ngClass]="{'is-invalid': signupDetails.get('password')?.invalid && signupDetails.get('password')?.touched}" placeholder="Create Password" id="password" formControlName="password" type="password" class="form-control" style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="signupDetails.get('password')?.touched">
+                  <small *ngIf="signupDetails.get('password')?.errors?.['required']" class="text-danger">Password is required.</small>
+                  <small *ngIf="signupDetails.get('password')?.errors?.['pattern']" class="text-danger">Invalid Password format.</small>
+                </div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group row align-items-center mt-3">
+                <input [ngClass]="{'is-invalid': signupDetails.get('confirmPassword')?.invalid && signupDetails.get('confirmPassword')?.touched}" placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control" style="height: 45px; border-radius: 10px;" />
+                <small *ngIf="signupDetails.get('confirmPassword')?.touched && signupDetails.get('confirmPassword')?.hasError('required')" class="text-danger">Confirm Password is required.</small>
+                <small *ngIf="signupDetails.hasError('mismatch') && signupDetails.get('confirmPassword')?.touched" class="text-danger">Passwords do not match.</small>
+              </div>
+
+              <!-- Buttons -->
+              <div class="row justify-content-between mt-3">
+                <div class="col-auto">
+                  <button class="btn btn-secondary" (click)="back()">Back</button>
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary" [disabled]="signupDetails.invalid">Next</button>
+                </div>
+              </div>
+
+            </form>
+
+            <!-- Login link -->
+            <div class="col-12 justify-content-center">
+              <p class="mb-0 text-center fs-6">Already a member?
+                <span class="text-primary" (click)="LoginPage()" style="cursor: pointer;">Login</span>
+              </p>
+            </div>
+            
+          </div>
+
+          <div *ngIf="step === 2">
+            <form [formGroup]="profileDetails" (ngSubmit)="submit()">
+
+              <div class="container">
+                <h4 class="text-center mb-5">Profile Upload</h4>
+              </div>
+
+              <div class="form-group col text-center step-container">
+                <div class="card-profile-body   rounded-4 profile-container ">
+                  <div class="profile-avatar rounded-circle">
+                    <img id="avatarImage"
+                      [src]="profileUploadUrl || 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1726392723/person-circle_vlacco_2_k9fuwa.svg'"
+                      alt="Avatar">
+                  </div>
+                </div>
+
+                <small class="text-muted mt-2" style="font-size: 12px; display: flex; align-items: center;">
+                  <span style="margin-right: 5px;"><i class="bi bi-info-circle"
+                      style="font-size: 1rem; color: rgb(0, 110, 255);"></i></span>
+                  Allowed formats: JPEG, PNG, JPG
+                </small>
+
+                <div class="mt-3">
+                  <button type="button" class="btn btn-outline-secondary rounded-3 upload-button px-3">
+                    <label for="profileUpload" class="upload-icon d-flex align-items-center" title="Upload">
+                      <i class="bi bi-cloud-arrow-up upload-icon-style"></i>
+                      <span class="upload-text">Upload</span>
+                    </label>
+                    <input type="file" #fileInput id="profileUpload" class="d-none" formControlName="profileUpload"
+                      (change)="handleFileUpload($event)">
+                  </button>
+                </div>
+
+              </div>
+
+              <div class="row justify-content-between mt-3">
+                <div class="col-auto">
+                  <button (click)="previous()" class="btn btn-secondary">Previous</button>
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary" [disabled]="profileDetails.invalid">Submit</button>
+                </div>
+              </div>
+
+            </form>
+
+
+
+            <div class="col-12 justify-content-center">
+              <p class="mb-0 text-center fs-6">Already a member? <span class="text-primary" (click)="LoginPage()"
+                  style="cursor: pointer;">Login</span></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="row d-flex justify-content-center align-items-center spinner-wrapper" *ngIf="isLoading">
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="mt-3">
+        <p *ngIf="registrationSuccess">Redirecting you to cofirmation page</p>
+        <p *ngIf="!registrationSuccess">Redirecting to signup...</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>

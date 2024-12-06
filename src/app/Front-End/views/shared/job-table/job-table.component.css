@@ -1,0 +1,27 @@
+/* Styles for the table and dropdown */
+ngx-easy-table {
+    width: 100%;
+  }
+  
+  button.dropdown-item {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  
+  /* Ensure the dropdown is visible when clicked */
+  .dropdown-menu.show {
+    display: block;
+  }
+  
+  td {
+    padding: 10px;
+  }
+  
+  /* Styling for the table headers */
+  th {
+    text-align: center;
+  }
+  
+  

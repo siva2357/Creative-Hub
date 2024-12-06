@@ -1,0 +1,18 @@
+  <div class="container-fluid">
+    <app-talent-header></app-talent-header>
+  </div>
+  
+  <div style="margin-top: 60px;">
+    <div class="row">
+  
+      <div class="col-1"> 
+        <app-talent-sidebar [menuItems]="menu"></app-talent-sidebar>
+      </div>
+  
+      <div class="col-11">
+        <router-outlet></router-outlet>
+      </div>
+  
+    </div>
+  </div>
+  
