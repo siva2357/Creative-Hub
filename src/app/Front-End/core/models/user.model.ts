@@ -1,15 +1,39 @@
 export interface Recruiter {
     registrationDetails: {
         signupDetails: {
-            fullName: string;       // Full name of the recruiter
-            userName: string;       // Unique username for the recruiter
-            email: string;          // Email address
-            password: string;       // Password for the account
-            confirmPassword: string; // Confirm the password
-        };
+            fullName: string; 
+            userName: string; 
+            gender: string; 
+            email: string;      
+            password: string;    
+            confirmPassword?: string;
+        },
+
+        contactDetails: {
+            phoneNumber: string;
+            streetAddress: string; 
+            city: string;   
+            state: string; 
+            country:string;
+            pincode: string; 
+        },
+
+        professionalDetails: {
+            companyName: string;   
+            departmentName: string;  
+            designation: string;  
+            jobLevel: string;  
+            experience:string;
+            companyId: string;
+        },
+
+        bioDetails: {
+            bio: string; 
+        }
+        
         profileDetails: {
             profilePicture: string;  // Path or URL for the profile picture
-        };
+        }
     };
 }
 
@@ -17,14 +41,34 @@ export interface Recruiter {
 export interface Seeker {
     registrationDetails: {
         signupDetails: {
-            fullName: string;       // Full name of the recruiter
-            userName: string;       // Unique username for the recruiter
-            email: string;          // Email address
-            password: string;       // Password for the account
-            confirmPassword: string; // Confirm the password
-        };
+            fullName: string; 
+            userName: string; 
+            gender: string; 
+            email: string;      
+            password: string;    
+            confirmPassword?: string;
+
+        },
+        contactDetails: {
+            phoneNumber: string;
+            streetAddress: string; 
+            city: string;   
+            state: string; 
+            country:string;
+            pincode: string; 
+        },
+        educationDetails: {
+            instituteName: string;   
+            departmentName: string;
+            programOrDegree: string;  
+            branchOrSpecialization: string;  
+            instituteRollNumber: string;
+        },
+        bioDetails: {
+            bio: string; 
+        }
         profileDetails: {
             profilePicture: string;  // Path or URL for the profile picture
-        };
+        }
     };
 }

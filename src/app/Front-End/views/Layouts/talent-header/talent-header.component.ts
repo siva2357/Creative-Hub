@@ -27,12 +27,5 @@ export class TalentHeaderComponent implements OnInit{
     this.router.navigate(['/talent-page/login']);
   }
 
-  goToProfile()  {
-    this.router.navigate(['/talent-page/recruiter/mainpage']);
-  }
-
-  goToEditProfile(){
-    this.router.navigate(['/talent-page/recruiter/edit-profile']);
-  }
 
 }

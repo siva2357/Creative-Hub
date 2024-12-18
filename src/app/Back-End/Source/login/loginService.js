@@ -7,31 +7,31 @@ async function loginService(loginData) {
     const { email, password } = loginData;
 
     // Check recruiters database first
-    let user = await Recruiter.findOne({ 'registrationDetails.signupDetails.email': email });
+    let user = await Recruiter.findOne({ 'registrationDetails.basicDetails.email': email });
     if (user) {
-        const isPasswordValid = await bcrypt.compare(password, user.registrationDetails.signupDetails.password);
+        const isPasswordValid = await bcrypt.compare(password, user.registrationDetails.basicDetails.password);
         if (isPasswordValid) {
             // Return additional details like username
             return { 
                 id: user._id, 
                 role: 'recruiter', 
-                username: user.registrationDetails.signupDetails.userName, // Assuming the Recruiter model contains a username
-                email: user.registrationDetails.signupDetails.email,
+                username: user.registrationDetails.basicDetails.userName, // Assuming the Recruiter model contains a username
+                email: user.registrationDetails.basicDetails.email,
                 profile:user.registrationDetails.profileDetails.profilePicture, 
             };
         }
     }
 
     // If not found, check seekers database
-    user = await Seeker.findOne({ 'registrationDetails.signupDetails.email': email });
+    user = await Seeker.findOne({ 'registrationDetails.basicDetails.email': email });
     if (user) {
-        const isPasswordValid = await bcrypt.compare(password, user.registrationDetails.signupDetails.password);
+        const isPasswordValid = await bcrypt.compare(password, user.registrationDetails.basicDetails.password);
         if (isPasswordValid) {
             return { 
                 id: user._id, 
                 role: 'seeker', 
-                username: user.registrationDetails.signupDetails.userName, // Assuming the Seeker model contains a username
-                email: user.registrationDetails.signupDetails.email,
+                username: user.registrationDetails.basicDetails.userName, // Assuming the Seeker model contains a username
+                email: user.registrationDetails.basicDetails.email,
                 profile:user.registrationDetails.profileDetails.profilePicture, 
             };
         }

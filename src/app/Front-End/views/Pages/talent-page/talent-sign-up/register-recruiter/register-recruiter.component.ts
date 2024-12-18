@@ -12,8 +12,25 @@ import { AlertService } from 'src/app/Front-End/core/services/alerts.service';
 })
 export class RegisterRecruiterComponent implements OnInit {
   signupDetails!: FormGroup;
+  contactDetails!: FormGroup;
+  professionalDetails!: FormGroup;
+  bioDetails!: FormGroup;
   profileDetails!: FormGroup;
+
   registrationSuccess: boolean = false; 
+  
+
+  cities: string[] = ['Hyderabad', 'Mumbai', 'Delhi', 'Chennai'];
+  states: string[] = ['Telangana', 'Maharashtra', 'Karnataka', 'Tamil Nadu'];
+  countries: string[] = ['Telangana', 'Maharashtra', 'Karnataka', 'Tamil Nadu'];
+  genders: string[] = ['Male', 'Female', 'Other'];
+
+
+  
+  companyNames: string[] = ['A', 'B', 'C', 'D'];
+  departmentNames: string[] = ['I', 'J', 'K', 'L'];
+  jobLevels: string[] = ['M', 'N', 'O', 'P'];
+
   step = 1;
   profileUploadUrl: string | ArrayBuffer | null = null;
   isImageUploaded: boolean = false;
@@ -31,50 +48,107 @@ export class RegisterRecruiterComponent implements OnInit {
     this.initializeForms();
   }
 
-  initializeForms(): void {
+    initializeForms(): void {
     this.signupDetails = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z\s]+$/)]],
-      userName: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z0-9]+$/)]],
-      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
-      confirmPassword: ['', Validators.required]
+      fullName: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      email: ['', [Validators.required]], 
+      password: ['', [Validators.required]],
+      confirmPassword: ['', Validators.required],
     }, { validators: this.passwordMatchValidator });
 
+    this.contactDetails = this.formBuilder.group({
+      phoneNumber: ['', [Validators.required]], 
+      streetAddress: ['', [Validators.required]],
+      city: ['',[Validators.required]],
+      state: ['',[Validators.required]], 
+      country: ['',[Validators.required]], 
+      pincode: ['', [Validators.required]]
+    });
+
+    this.professionalDetails = this.formBuilder.group({
+      companyName: ['',[Validators.required]],
+      departmentName: ['',[Validators.required]], 
+      designation: ['',[Validators.required]], 
+      jobLevel: ['',[Validators.required]], 
+      experience: ['', [Validators.required]],
+      companyId: ['', [Validators.required]]
+    });
+
+    this.bioDetails = this.formBuilder.group({
+      bio: ['',[Validators.required]]
+    });
+  
     this.profileDetails = this.formBuilder.group({
       profileUpload: [null, Validators.required]
     });
   }
 
+  
   get signup() { return this.signupDetails.controls; }
+  get contact() { return this.contactDetails.controls; }
+  get professional() { return this.professionalDetails.controls; }
+  get bio() { return this.bioDetails.controls; }
   get profile() { return this.profileDetails.controls; }
 
-  next(): void {
-    if (this.signupDetails.invalid) {
-      if (this.signupDetails.get('fullName')?.invalid) {
-      }
-      if (this.signupDetails.get('userName')?.invalid) {
-      }
-      if (this.signupDetails.get('email')?.invalid) {
-      }
-      if (this.signupDetails.get('password')?.invalid) {
-      }
-      if (this.signupDetails.get('confirmPassword')?.invalid) {
-      } else if (this.signupDetails.hasError('mismatch')) {
-      }
-      return;
-  }
-    this.step++;
-  }
 
+  next(): void {
+    switch (this.step) {
+      case 1:
+        if (this.signupDetails.invalid) {
+          this.signupDetails.markAllAsTouched(); // Highlight errors
+          return;
+        }
+        break;
+      case 2:
+        if (this.contactDetails.invalid) {
+          this.contactDetails.markAllAsTouched(); // Highlight errors
+          return;
+        }
+        break;
+      case 3:
+        if (this.professionalDetails.invalid) {
+          this.professionalDetails.markAllAsTouched(); // Highlight errors
+          return;
+        }
+        break;
+      case 4:
+        if (this.bioDetails.invalid) {
+          this.bioDetails.markAllAsTouched(); // Highlight errors
+          return;
+        }
+        break;
+      case 5:
+        if (this.profileDetails.invalid) {
+          this.profileDetails.markAllAsTouched(); // Highlight errors
+          return;
+        }
+        this.submit(); // Submit only at step 5
+        return; // Prevent further step increment
+    }
+  
+    this.step++; // Increment step after validation
+  }
+  
+
+  
   previous(): void {
-    if (this.step > 1) this.step--;
+    if (this.step > 1) {
+      this.step--;
+    }
   }
 
   passwordMatchValidator(formGroup: FormGroup): { [key: string]: boolean } | null {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-    return password && confirmPassword && password !== confirmPassword ? { mismatch: true } : null;
-  }
+
+    if (password && confirmPassword) {
+        return password === confirmPassword ? null : { mismatch: true };
+    }
+    return null;
+}
+
 
   handleFileUpload(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -102,45 +176,79 @@ export class RegisterRecruiterComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.signupDetails.valid && this.profileDetails.valid) {
+    if (
+      this.signupDetails.valid &&
+      this.contactDetails.valid &&
+      this.professionalDetails.valid &&
+      this.bioDetails.valid &&
+      this.profileDetails.valid
+    ) {
+      if (this.signupDetails.value.password !== this.signupDetails.value.confirmPassword) {
+        console.error('Passwords do not match');
+        return;
+      }
+  
       const recruiterData: Recruiter = {
         registrationDetails: {
           signupDetails: {
             fullName: this.signupDetails.value.fullName,
             userName: this.signupDetails.value.userName,
+            gender: this.signupDetails.value.gender,
             email: this.signupDetails.value.email,
             password: this.signupDetails.value.password,
-            confirmPassword: this.signupDetails.value.confirmPassword
+            confirmPassword: this.signupDetails.value.confirmPassword,
+          },
+          contactDetails: {
+            phoneNumber: this.contactDetails.value.phoneNumber,
+            streetAddress: this.contactDetails.value.streetAddress,
+            city: this.contactDetails.value.city,
+            state: this.contactDetails.value.state,
+            country: this.contactDetails.value.country,
+            pincode: this.contactDetails.value.pincode,
+          },
+          professionalDetails: {
+            companyName: this.professionalDetails.value.companyName,
+            departmentName: this.professionalDetails.value.departmentName,
+            designation: this.professionalDetails.value.designation,
+            jobLevel: this.professionalDetails.value.jobLevel,
+            experience: this.professionalDetails.value.experience,
+            companyId: this.professionalDetails.value.companyId,
+          },
+          bioDetails: {
+            bio: this.bioDetails.value.bio,
           },
           profileDetails: {
-            profilePicture: this.profileDetails.value.profileUpload 
-          }
-        }
+            profilePicture: this.profileDetails.value.profileUpload
+          },
+        },
       };
   
-      this.isLoading = true; 
+      this.isLoading = true;
   
       this.authService.registerRecruiter(recruiterData).subscribe(
-        response => {
-
+        (response) => {
           console.log('Registration successful', response);
+          this.registrationSuccess = true;
           this.alertService.showAccountRegisteredSuccess();
-          this.registrationSuccess=true;
-
           setTimeout(() => {
             this.isLoading = false;
-            this.router.navigate(['talent-page/register/recruiter/account-confirmation']);
+            this.router.navigate(['talent-page/register/confirmation-page']);
           }, 3000);
         },
-        error => {
-          this.isLoading = false; 
-          this.alertService.showErrorRegisteringAccount(); 
+  
+        (error) => {
+          this.registrationSuccess = false; 
           console.error('Registration failed', error);
+          this.alertService.showErrorRegisteringAccount();
+          setTimeout(() => {
+            this.isLoading = false;
+            this.router.navigate(['talent-page/register/error-page']);
+          }, 3000); 
         }
       );
     }
   }
-
+  
 
   
 

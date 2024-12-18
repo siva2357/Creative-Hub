@@ -63,11 +63,11 @@ export class TalentLoginComponent {
 
                 // Navigate based on the user role after the delay
                 if (userType === 'recruiter') {
-                  this.router.navigate(['recruiter/dashboard']); // Redirect to Recruiter's Dashboard
+                  this.router.navigate(['talent-page/recruiter']); // Redirect to Recruiter's Dashboard
                 } else if (userType === 'seeker') {
-                    this.router.navigate(['seeker/dashboard']);
+                    this.router.navigate(['talent-page/seeker']);
                 } else if (userType === 'admin') {
-                    this.router.navigate(['admin/dashboard']);
+                    this.router.navigate(['talent-page/admin']);
                 } else {
                     console.warn('Unknown user role:', userType);
                 }

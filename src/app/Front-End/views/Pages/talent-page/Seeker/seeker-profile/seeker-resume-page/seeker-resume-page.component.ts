@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./seeker-resume-page.component.css']
 })
 export class SeekerResumePageComponent {
+  isResume:boolean = false;
+  isDocument:boolean = false;
+  isWriteUp:boolean = false;
 
 }

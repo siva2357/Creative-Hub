@@ -18,6 +18,7 @@ export class SeekerMainPageComponent implements OnInit{
     { label: 'Post project', link: 'post-project', icon: 'bi bi-plus-square'},
     { label: 'Portfolio', link: 'portfolio', icon: 'bi bi-grid-3x3-gap'},
     { label: 'Manage project', link: 'manage-project', icon: 'bi bi-pencil-square'},
+    { label: 'Resume', link: 'resume-builder', icon: 'bi bi-file-earmark'},
     { label: 'Launchpad', link: 'launchPad', icon: 'bi bi-rocket-takeoff'},
   ];
   

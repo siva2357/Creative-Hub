@@ -1,14 +1,30 @@
 <div class="container">
     <h4>Basic Details</h4>
-    <p>About</p>
-    <hr>
-    <p>Full Name : Seeker Name</p>
-    <p>Date Of Birth : 08 November, 2001</p>
-    <p>Gender : Male</p>
-    <p>College Name: SRM Unversity, chennai</p>
+    <p class="mt-3">About</p>
+    <hr class="mt-0">
+    <table class="table" >
+        <tbody>
+          <tr>
+            <td style="width: 20%; border: none;">Full Name:</td>
+            <td style="border: none;"> Seeker Name</td>
+          </tr>
+          <tr>
+            <td style="border: none;">Date Of Birth:</td>
+            <td style="border: none;">08 November, 2001</td>
+          </tr>
+          <tr>
+            <td style="border: none;">Gender:</td>
+            <td style="border: none;">Male</td>
+          </tr>
+          <tr>
+            <td style="border: none;">College Name:</td>
+            <td style="border: none;">SRM Unversity, chennai</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <p>Summary</p>
-    <hr>
+    <p class="mt-5">Bio-Data</p>
+    <hr class="mt-0">
     <p>I am Siva Prasad studying  civil engineering with computer applications.
        I am interested in 3D Modelling design and want to persue my  career in Architecture field.
        Had a basic knowledge of HTML,CSS.
@@ -16,42 +32,133 @@
 
 
 
-    <p>Address</p>
-    <hr>
-    <p>Permanent Address: Sample Address</p>
-    <p>Current Address: Sample Address</p>
+    <p class="mt-5">Address</p>
+    <hr class="mt-0">
+    <table class="table" >
+        <tbody>
+          <tr>
+            <td style="width: 20%; border: none;">Permanent Address:</td>
+            <td style="border: none;">Sample Address </td>
+          </tr>
+        </tbody>
+      </table>
 
 
 
     
-    <p>Social Media Accounts & Profiles</p>
-    <hr>
-
-        <div class="row d-flex">
-            <div class="col-4">
-                <p>
-                    <a href="https://linkedin.com" target="_blank" style="color: #000; text-decoration: none; transition: color 0.3s;">
-                        <i class="bi bi-linkedin" style="margin-right: 5px;"></i> LinkedIn
-                    </a>
-                </p>
-            </div>
-            <div class="col-4">
-                <p>
-                    <a href="https://github.com" target="_blank" style="color: #000; text-decoration: none; transition: color 0.3s;">
-                        <i class="bi bi-github" style="margin-right: 5px;"></i> GitHub
-                    </a>
-                </p>
-            </div>
-            <div class="col-4">
-                <p>
-                    <a href="https://example.com" target="_blank" style="color: #000; text-decoration: none; transition: color 0.3s;">
-                        <i class="bi bi-globe" style="margin-right: 5px;"></i> Website
-                    </a>
-                </p>
-            </div>
+    <div class="row d-flex justify-content-center align-items-center mb-3" style="margin-top: 50px;">
+        <div class="col-10">
+          <p style="margin: 0; font-size: 16px;">Social Media Accounts & Profiles</p>
+        </div>
+    
+        <div class="col-2 text-end">
+            <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-5" style="font-size: 14px; "  > <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+        </div>
     </div>
-    
+    <hr class="mt-0">
 
 
+    <div  *ngIf="isSocialMedia" class="container">
+      <div class="row d-flex">
 
+        <div class="col-4">
+            <div class="card rounded-5" style="width: 18rem;">
+                <div class="row d-flex justify-content-between mt-1 mb-1 px-3" style="align-items: center;">
+
+                    <div class="col" style="display: flex; align-items: center;">
+                        <div class="link">
+                          <a href="https://example.com" target="_blank" style="color: #000; text-decoration: none; transition: color 0.3s; font-size: 14px;">
+                            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1733564697/globe_1_id9cj5.png" style="height: 20px; width: 20px;margin-bottom: 3px; margin-right: 10px;" alt="">Website
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="col d-flex justify-content-end">
+                        <div class="icons">
+                          <i class="bi bi-pencil-square me-3" style="font-size: 1rem; cursor: pointer;"></i>
+                          <i class="bi bi-x-circle" style="font-size: 1rem; cursor: pointer;"></i>
+                        </div>
+                      </div>
+
+                </div>
+            </div>
+              
+        </div>
+
+        <div class="col-4">
+            <div class="card rounded-5" style="width: 18rem;">
+                <div class="row d-flex justify-content-between mt-1 mb-1 px-3" style="align-items: center;">
+                    <div class="col" style="display: flex; align-items: center;">
+                        <div class="link">
+                          <a href="https://linkedin.com" target="_blank" style="color: #000; text-decoration: none; transition: color 0.3s; font-size: 14px;">
+                            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1733564429/dribbble_ci3ktn.png" style="height: 20px; width: 20px;margin-bottom: 3px; margin-right: 10px;" alt=""> Dribble
+                          </a>
+                        </div>
+                      </div>
+                      <!-- Icons on the right -->
+                      <div class="col d-flex justify-content-end">
+                        <div class="icons">
+                          <i class="bi bi-pencil-square me-3" style="font-size: 1rem; cursor: pointer;"></i>
+                          <i class="bi bi-x-circle" style="font-size: 1rem; cursor: pointer;"></i>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card rounded-5" style="width: 18rem;">
+                <div class="row d-flex justify-content-between mt-1 mb-1 px-3" style="align-items: center;">
+                    <div class="col" style="display: flex; align-items: center;">
+                        <div class="link">
+                          <a href="https://linkedin.com" target="_blank" style="color: #000; text-decoration: none; transition: color 0.3s; font-size: 14px;">
+                            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1733565497/behance_1_qgg0y1.png" style="height: 20px; width: 20px;margin-bottom: 3px; margin-right: 10px;" alt="">Behance
+                          </a>
+                        </div>
+                      </div>
+                      <!-- Icons on the right -->
+                      <div class="col d-flex justify-content-end">
+                        <div class="icons">
+                          <i class="bi bi-pencil-square me-3" style="font-size: 1rem; cursor: pointer;"></i>
+                          <i class="bi bi-x-circle" style="font-size: 1rem; cursor: pointer;"></i>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row d-flex  mt-3">
+
+        <div class="col-4">
+            <div class="card rounded-5" style="width: 18rem;">
+                <div class="row d-flex justify-content-between mt-1 mb-1 px-3" style="align-items: center;">
+                    <div class="col" style="display: flex; align-items: center;">
+                        <div class="link">
+                          <a href="https://linkedin.com" target="_blank" style="color: #000; text-decoration: none; transition: color 0.3s; font-size: 14px;">
+                            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1733565596/medium_jgigwk.png" style="height: 20px; width: 20px;margin-bottom: 3px; margin-right: 10px;" alt=""> Medium
+                          </a>
+                        </div>
+                      </div>
+                      <!-- Icons on the right -->
+                      <div class="col d-flex justify-content-end">
+                        <div class="icons">
+                          <i class="bi bi-pencil-square me-3" style="font-size: 1rem; cursor: pointer;"></i>
+                          <i class="bi bi-x-circle" style="font-size: 1rem; cursor: pointer;" ></i>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <div *ngIf="!isSocialMedia" class="container">
+      <p>Please add the social media links</p>
+    </div>
+
+  
 </div>

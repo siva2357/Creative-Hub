@@ -5,7 +5,6 @@ import { SeekerEducationDetailsComponent } from './seeker-education-details/seek
 import { SeekerProfilePageComponent } from './seeker-profile-page.component';
 import { SeekerSkillsPageComponent } from './seeker-skills-page/seeker-skills-page.component';
 import { SeekerCertificationPageComponent } from './seeker-certification-page/seeker-certification-page.component';
-import { SeekerProjectPageComponent } from './seeker-project-page/seeker-project-page.component';
 import { SeekerResumePageComponent } from './seeker-resume-page/seeker-resume-page.component';
 
 
@@ -19,8 +18,8 @@ const routes: Routes = [
 		{ path: 'education', component: SeekerEducationDetailsComponent },
 		{ path: 'skills', component: SeekerSkillsPageComponent },
 		{ path: 'certifications', component: SeekerCertificationPageComponent },
-		{ path: 'projects', component: SeekerProjectPageComponent },
 		{ path: 'resume', component: SeekerResumePageComponent },
+
 	  ]
 	}
   ];

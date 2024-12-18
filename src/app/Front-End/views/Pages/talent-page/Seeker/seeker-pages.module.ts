@@ -16,7 +16,6 @@ import { LayoutModule } from '../../../Layouts/layout.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-routing.module';
 import { SeekerProfileModule } from './seeker-profile/seeker-profile.module';
-import { SeekerConfirmationComponent } from './seeker-account-confirmation/seeker-account-confirmation.component';
 @NgModule({
   declarations: [
     SeekerMainPageComponent,
@@ -26,7 +25,6 @@ import { SeekerConfirmationComponent } from './seeker-account-confirmation/seeke
     SeekerLaunchpadComponent,
     SeekerManageProjectPageComponent,
     SeekerPostProjectPageComponent ,
-    SeekerConfirmationComponent 
   ],
   imports: [
     CommonModule,

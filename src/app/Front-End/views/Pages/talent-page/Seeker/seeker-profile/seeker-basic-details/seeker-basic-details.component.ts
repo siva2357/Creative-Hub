@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./seeker-basic-details.component.css']
 })
 export class SeekerBasicDetailsComponent {
-
+  isSocialMedia:boolean = false;
 }

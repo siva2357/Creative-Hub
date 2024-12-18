@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class SeekerSkillsPageComponent {
 
+  isTechnicalSkills : boolean = false;
+  isLanguages : boolean = false;
+  isSubjects : boolean = false;
+
 }

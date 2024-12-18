@@ -14,9 +14,22 @@ import { AlertService } from 'src/app/Front-End/core/services/alerts.service';
 
 export class RegisterSeekerComponent implements OnInit {
   signupDetails!: FormGroup;
+  contactDetails!: FormGroup;
+  educationDetails!: FormGroup;
+  bioDetails!: FormGroup;
   profileDetails!: FormGroup;
 
   registrationSuccess :boolean = false; 
+
+  cities: string[] = ['Hyderabad', 'Mumbai', 'Delhi', 'Chennai'];
+  states: string[] = ['Telangana', 'Maharashtra', 'Karnataka', 'Tamil Nadu'];
+  countries: string[] = ['Telangana', 'Maharashtra', 'Karnataka', 'Tamil Nadu'];
+
+  genders: string[] = ['Male', 'Female', 'Other'];
+  instituteName: string[] = ['A', 'B', 'C', 'D'];
+  programOrDegree: string[] = ['E', 'F', 'G', 'H'];
+  departmentName: string[] = ['I', 'J', 'K', 'L'];
+  branchName: string[] = ['M', 'N', 'O', 'P'];
 
   step = 1;
   profileUploadUrl: string | ArrayBuffer | null = null;
@@ -31,42 +44,70 @@ export class RegisterSeekerComponent implements OnInit {
 
   initializeForms(): void {
     this.signupDetails = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z\s]+$/)]], // Capital letter, only letters
-      userName: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z0-9]+$/)]], // Starts with capital, letters and numbers
-      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)]], // Letters, numbers, ends with @gmail.com
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]], // Strong password
-      confirmPassword: ['', Validators.required]
+      fullName: ['', [Validators.required]], // Capital letter, only letters
+      userName: ['', [Validators.required]], // Starts with capital, letters and numbers
+      gender: ['', [Validators.required]], // Starts with capital, letters and numbers
+      email: ['', [Validators.required]], // Letters, numbers, ends with @gmail.com
+      password: ['', [Validators.required]], // Strong password
+      confirmPassword: ['', Validators.required],
     }, { validators: this.passwordMatchValidator });
-  
 
+    this.contactDetails = this.formBuilder.group({
+      phoneNumber: ['', [Validators.required]], // Starts with capital, letters and numbers
+      streetAddress: ['', [Validators.required]],
+      city: ['',[Validators.required]],
+      state: ['',[Validators.required]], 
+      country: ['',[Validators.required]], 
+      pincode: ['', [Validators.required]]
+    });
+
+    this.educationDetails = this.formBuilder.group({
+      instituteName: ['',[Validators.required]],
+      programOrDegree: ['',[Validators.required]], 
+      departmentName: ['',[Validators.required]], 
+      branchOrSpecialization: ['',[Validators.required]], 
+      instituteRollNumber: ['', [Validators.required]]
+    });
+
+    this.bioDetails = this.formBuilder.group({
+      bio: ['',[Validators.required]]
+    });
+  
     this.profileDetails = this.formBuilder.group({
       profileUpload: [null, Validators.required]
     });
   }
 
   get signup() { return this.signupDetails.controls; }
+  get contact() { return this.contactDetails.controls; }
+  get education() { return this.educationDetails.controls; }
+  get bio() { return this.bioDetails.controls; }
   get profile() { return this.profileDetails.controls; }
 
 
+
   next(): void {
-    if (this.signupDetails.invalid) {
-        if (this.signupDetails.get('fullName')?.invalid) {
-        }
-        if (this.signupDetails.get('userName')?.invalid) {
-        }
-        if (this.signupDetails.get('email')?.invalid) {
-        }
-        if (this.signupDetails.get('password')?.invalid) {
-        }
-        if (this.signupDetails.get('confirmPassword')?.invalid) {
-        } else if (this.signupDetails.hasError('mismatch')) {
-        }
-        return;
+    if (this.step === 1) {
+      if (this.signupDetails.invalid) { return; }
+      this.step++;
     }
-    this.step++;
-}
-
-
+    if (this.step === 2) {
+      if (this.contactDetails.invalid) { return; }
+      this.step++;
+    }
+    if (this.step === 3) {
+      if (this.educationDetails.invalid) { return; }
+      this.step++;
+    }
+    if (this.step === 4) {
+      if (this.bioDetails.invalid) { return; }
+      this.step++;
+    }
+    if (this.step === 5) {
+      if (this.profileDetails.invalid) { return; }
+      this.submit();  
+    }
+  }
 
 
   previous(): void {
@@ -86,81 +127,116 @@ export class RegisterSeekerComponent implements OnInit {
     return null;
 }
 
-  handleFileUpload(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
 
-      this.profileDetails.get('profileUpload')?.setErrors(null);
-  
+handleFileUpload(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const file = input.files[0];
+    this.profileDetails.get('profileUpload')?.setErrors(null); // Clear previous errors
 
-      const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-      if (!validTypes.includes(file.type)) {
-        this.profileDetails.get('profileUpload')?.setErrors({ invalidFileType: true });
-        this.alertService.showProfileImageFormatAlert();
-        return;
-      }
-  
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profileUploadUrl = reader.result;
-        this.isImageUploaded = true;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      this.profileDetails.get('profileUpload')?.setErrors({ required: true });
-      this.alertService.showProfileImageAlert();
+    const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (!validTypes.includes(file.type)) {
+      this.profileDetails.get('profileUpload')?.setErrors({ invalidFileType: true });
+      this.alertService.showProfileImageFormatAlert();
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.profileUploadUrl = reader.result; 
+      this.isImageUploaded = true;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    this.profileDetails.get('profileUpload')?.setErrors({ required: true });
+    this.alertService.showProfileImageAlert();
   }
-  
+}
 
-  submit(): void {
-    if (this.signupDetails.valid && this.profileDetails.valid) {
-      const seekerData: Seeker = {
-        registrationDetails: {
-          signupDetails: {
-            fullName: this.signupDetails.value.fullName,
-            userName: this.signupDetails.value.userName,
-            email: this.signupDetails.value.email,
-            password: this.signupDetails.value.password,
-            confirmPassword: this.signupDetails.value.confirmPassword
-          },
-          profileDetails: {
-            profilePicture: this.profileDetails.value.profileUpload 
-          }
-        }
-      };
-  
-      this.isLoading = true; 
-  
-      this.authService.registerSeeker(seekerData).subscribe(
-        response => {
 
-          console.log('Registration successful', response);
-          this.alertService.showAccountRegisteredSuccess();
-          this.registrationSuccess=true;
 
-          setTimeout(() => {
-            this.isLoading = false;
-            this.router.navigate(['talent-page/register/seeker/account-confirmation']); 
-          }, 3000);
+submit(): void {
+  if (
+    this.signupDetails.valid &&
+    this.contactDetails.valid &&
+    this.educationDetails.valid &&
+    this.bioDetails.valid &&
+    this.profileDetails.valid
+  ) {
+    if (this.signupDetails.value.password !== this.signupDetails.value.confirmPassword) {
+      console.error('Passwords do not match');
+      return;
+    }
+
+    const seekerData: Seeker = {
+      registrationDetails: {
+        signupDetails: {
+          fullName: this.signupDetails.value.fullName,
+          userName: this.signupDetails.value.userName,
+          gender: this.signupDetails.value. gender,
+          email: this.signupDetails.value.email,
+          password: this.signupDetails.value.password,
+          confirmPassword: this.signupDetails.value.confirmPassword,
         },
-        error => {
-          this.isLoading = false; 
-          this.alertService.showErrorRegisteringAccount(); 
-          console.error('Registration failed', error);
-        }
-      );
-    }
+        contactDetails: {
+          phoneNumber: this.contactDetails.value.phoneNumber,
+          streetAddress: this.contactDetails.value.streetAddress,
+          city: this.contactDetails.value.city,
+          state: this.contactDetails.value.state,
+          country: this.contactDetails.value.country,
+          pincode: this.contactDetails.value.pincode,
+        },
+        educationDetails: {
+          instituteName: this.educationDetails.value.instituteName, // Check this value
+          programOrDegree: this.educationDetails.value.programOrDegree,
+          departmentName: this.educationDetails.value.departmentName,
+          branchOrSpecialization: this.educationDetails.value.branchOrSpecialization,
+          instituteRollNumber: this.educationDetails.value.instituteRollNumber,
+        },
+        bioDetails: {
+          bio: this.bioDetails.value.bio,
+        },
+        profileDetails: {
+          profilePicture: this.profileDetails.value.profileUpload 
+        },
+      },
+    };
+
+    this.isLoading = true;
+
+    this.authService.registerSeeker(seekerData).subscribe(
+      (response) => {
+        console.log('Registration successful', response);
+        this.registrationSuccess = true;
+        // this.alertService.showAccountRegisteredSuccess();
+        setTimeout(() => {
+          this.isLoading = false;
+          this.router.navigate(['talent-page/register/confirmation-page']);
+        }, 3000);
+      },
+
+      (error) => {
+        this.registrationSuccess = false; 
+        console.error('Registration failed', error);
+        // this.alertService.showErrorRegisteringAccount();
+        setTimeout(() => {
+          this.isLoading = false;
+          this.router.navigate(['talent-page/register/error-page']);
+        }, 3000); 
+      }
+    );
   }
+}
+
+
   
 
   LoginPage(): void {
-    this.router.navigate(['talent-page/talent-login']);
+    this.router.navigate(['talent-page/login']);
   }
 
   back(): void {
-    this.router.navigate(['talent-page/talent-signup']);
+    this.router.navigate(['talent-page/signup']);
   }
 }
 

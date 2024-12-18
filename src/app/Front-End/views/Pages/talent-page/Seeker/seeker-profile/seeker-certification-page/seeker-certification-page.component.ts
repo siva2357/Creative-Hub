@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./seeker-certification-page.component.css']
 })
 export class SeekerCertificationPageComponent {
+  isCertificate:boolean = false;
 
 }

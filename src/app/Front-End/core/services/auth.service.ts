@@ -11,7 +11,7 @@ import { Recruiter, Seeker } from '../models/user.model';
 })
 export class AuthService {
 
-  private baseUrl: string = 'http://localhost:4600'; // Backend server URL
+  private baseUrl: string = 'http://localhost:3000'; // Backend server URL
   private userRole: string | null = null;
 
   constructor(private http: HttpClient) { }
@@ -78,8 +78,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('userData');
-    localStorage.removeItem('userRole'); // Clear userRole from localStorage
-    this.userRole = null; // Clear userRole in the service
+    localStorage.removeItem('userRole');
+    this.userRole = null;
   }
 
   // Error handling method

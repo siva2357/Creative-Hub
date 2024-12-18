@@ -7,10 +7,10 @@ import { SeekerEducationDetailsComponent } from './seeker-education-details/seek
 import { SeekerProfilePageComponent } from './seeker-profile-page.component';
 import { SeekerSkillsPageComponent } from './seeker-skills-page/seeker-skills-page.component';
 import { SeekerCertificationPageComponent } from './seeker-certification-page/seeker-certification-page.component';
-import { SeekerResumePageComponent } from './seeker-resume-page/seeker-resume-page.component';
-import { SeekerProjectPageComponent } from './seeker-project-page/seeker-project-page.component';
 import { RouterModule } from '@angular/router';
 import { SeekerProfileRoutingModule } from './seeker-profile-routing.module';
+import { SeekerResumePageComponent } from './seeker-resume-page/seeker-resume-page.component';
+import { LayoutModule } from "../../../../Layouts/layout.module";
 
 @NgModule({
   declarations: [
@@ -19,8 +19,7 @@ import { SeekerProfileRoutingModule } from './seeker-profile-routing.module';
     SeekerProfilePageComponent,
     SeekerSkillsPageComponent,
     SeekerCertificationPageComponent,
-    SeekerResumePageComponent,
-    SeekerProjectPageComponent
+    SeekerResumePageComponent
   ],
   imports: [
     CommonModule,
@@ -28,8 +27,9 @@ import { SeekerProfileRoutingModule } from './seeker-profile-routing.module';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SeekerProfileRoutingModule  // Import the routing module here
-  ],
+    SeekerProfileRoutingModule,
+    LayoutModule
+],
   providers: [],
 })
 export class SeekerProfileModule { }

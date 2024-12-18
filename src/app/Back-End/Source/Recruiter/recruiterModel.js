@@ -5,15 +5,36 @@ const Schema = mongoose.Schema;
 const recruiterSchema = new Schema({
     registrationDetails: {
         signupDetails: {
-            fullName: { type: String, required: true, unique: true },
-            userName: { type: String, required: true, unique: true },
-            email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
-            password: { type: String, required: true },
-        },
-        profileDetails: {
-            profilePicture: { type: String, required: true }, // Path or URL to the profile upload
-        },
-    },
+             fullName: { type: String, required: true },
+             userName: { type: String, required: true },
+             gender: { type: String, required: true },
+             email: { type: String, required: true },
+             password: { type: String, required: true },
+         },
+         contactDetails: {
+             phoneNumber: { type: String, required: true },
+             streetAddress: { type: String, required: true },
+             city: { type: String, required: true },
+             state: { type: String, required: true },
+             country: { type: String, required: true },
+             pincode: { type: String, required: true },
+         },
+         professionalDetails: {
+            companyName: { type: String, required: true },
+             departmentName: { type: String, required: true },
+             designation: { type: String, required: true },
+             jobLevel: { type: String, required: true },
+             experience: { type: String, required: true },
+             companyId: { type: String, required: true },
+
+         },
+        bioDetails: {
+             bio: { type: String, required: true },
+         },
+         profileDetails: {
+             profilePicture: { type: String, required: true },
+         },
+     },
     role: { type: String, default: 'recruiter' } // Default role set to 'recruiter'
 });
 

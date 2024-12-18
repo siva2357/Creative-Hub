@@ -27,8 +27,8 @@ mongoose.set('strictQuery', false);
 mongoose.connect("mongodb://127.0.0.1:27017/Creative-Hub", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Successfully connected to DB");
-        app.listen(4600, () => {
-            console.log("Server started on port 4600");
+        app.listen(3000, () => {
+            console.log("Server started on port 3000");
         });
     })
     .catch(error => {

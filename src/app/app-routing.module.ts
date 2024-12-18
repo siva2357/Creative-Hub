@@ -18,6 +18,8 @@ import { RegisterSeekerComponent } from './Front-End/views/Pages/talent-page/tal
 import { RegisterRecruiterComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/register-recruiter/register-recruiter.component';
 import { RoleGuard } from './Front-End/core/guards/role.guard';
 import { AuthGuard } from './Front-End/core/guards/auth.guard';
+import { ConfirmationComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/account-confirmation/account-confirmation.component';
+import { ErrorRegisterComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/error-account-register/account-confirmation.component';
 
 
 const routes: Routes = [
@@ -36,6 +38,10 @@ const routes: Routes = [
   { path: 'talent-page/signup', component: TalentSignUpComponent, title: 'Talent Login Page' },
   { path: 'talent-page/register/seeker', component: RegisterSeekerComponent, title: 'Talent Login Page' },
   { path: 'talent-page/register/recruiter', component: RegisterRecruiterComponent, title: 'Talent Login Page'  },
+  { path: 'talent-page/register/confirmation-page', component: ConfirmationComponent, title: 'Talent Confirmation Register Page' },
+  { path: 'talent-page/register/error-page', component: ErrorRegisterComponent, title: 'Talent Error Register Page' },
+
+
 
   {
     path: 'talent-page/recruiter',
