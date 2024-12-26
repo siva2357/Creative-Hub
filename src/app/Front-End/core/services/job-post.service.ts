@@ -71,21 +71,6 @@ export class JobPostService {
   }
 
 
- saveJobPostById(id: string, jobPostData: JobPost): Observable<JobPost> {
-    return this.http.put<JobPost>(`${this.jobPostApiUrl}/job/${id}/save`, jobPostData).pipe(catchError(this.handleError));
-  }
-
-  // Fetch applied job posts (Seeker specific)
-  getSavedJobPosts(): Observable<JobPost[]> {
-    return this.http.get<JobPost[]>(`${this.jobPostApiUrl}/jobs/saved`).pipe(catchError(this.handleError));
-  }
-
-  
-  // Withdraw job application (Seeker specific)
-  unsaveJobPostById(id: string, jobPostData: JobPost): Observable<JobPost> {
-    return this.http.put<JobPost>(`${this.jobPostApiUrl}/job/${id}/unsave`,jobPostData).pipe(catchError(this.handleError));
-  }
-
   // Handle HTTP errors
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
