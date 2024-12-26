@@ -197,4 +197,128 @@ export class AlertService {
 
 
 
+
+    // Success Messages
+    showJobCreatedSuccess(): void {
+      Swal.fire({
+        title: 'Success',
+        text: 'Job created successfully.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer:1500
+      });
+    }
+
+
+      // Success Messages
+  showErrorJobCreating(): void {
+    Swal.fire({
+      title: 'Error',
+      text: 'Error creating job ',
+      icon: 'error',
+      showConfirmButton: false,
+      timer:1500
+
+    });
+  }
+
+    // Signup Details Alerts
+    showJobFieildsError(): void {
+      Swal.fire({
+        title: 'Error',
+        text: 'Please enter all details.',
+        icon: 'error',
+        showConfirmButton: false,
+        timer:1500
+  
+      });
+    }
+
+
+
+    showJobReopenedSuccess(): void {
+      Swal.fire({
+        title: 'Success',
+        text: 'Job reopened successfully.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer:1500
+      });
+    }
+
+
+    async showJobConfirmReopen(): Promise<boolean> {
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you really want to reopen this job post?',
+        icon: 'warning',
+        showCancelButton: true, // Adds a Cancel button
+        confirmButtonText: 'Yes, open it!',
+        cancelButtonText: 'No, keep it',
+      });
+      return result.isConfirmed;
+    }
+
+
+
+    async showJobConfirmDelete(): Promise<boolean> {
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you really want to delete this job post?',
+        icon: 'warning',
+        showCancelButton: true, // Adds a Cancel button
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, keep it',
+      });
+      return result.isConfirmed;
+    }
+  
+    showJobDeletedSuccess(): void {
+      Swal.fire({
+        title: 'Success',
+        text: 'Job deleted successfully.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer:1500
+      });
+    }
+
+
+
+    async showJobConfirmClose(): Promise<boolean> {
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you really want to close this job post?',
+        icon: 'warning',
+        showCancelButton: true, // Adds a Cancel button
+        confirmButtonText: 'Yes, close it!',
+        cancelButtonText: 'No, keep it',
+      });
+      return result.isConfirmed;
+    }
+    
+    showJobClosedSuccess(): void {
+      Swal.fire({
+        title: 'Success',
+        text: 'Job closed successfully.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer:1500
+      });
+    }
+
+  showJobUpdatedSuccess(): void {
+    Swal.fire({
+      title: 'Success',
+      text: 'Job updated successfully.',
+      icon: 'success',
+      showConfirmButton: false,
+      timer:1500
+    });
+  }
+  
+  
+
+
+
 }

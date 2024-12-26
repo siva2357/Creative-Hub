@@ -1,9 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const recruiterRoutes = require('./Recruiter/recruiterRoutes');
-const seekerRoutes = require('./Seeker/seekerRoutes');
-const adminRoutes = require('./Admin/adminRoutes')
-const loginRoutes = require('./login/loginRoutes');
+const recruiterRoutes = require('./Role-based-login/Recruiter/recruiterRoutes');
+const seekerRoutes = require('./Role-based-login/Seeker/seekerRoutes');
+const adminRoutes = require('./Role-based-login/Admin/adminRoutes');
+const loginRoutes = require('./Role-based-login/login/loginRoutes');
+
+
+const jobPostRoutes = require('./JobPosts/routes/jobPostRoutes');
+
 const cors = require('cors');
 
 const app = express();
@@ -21,6 +25,8 @@ app.use(recruiterRoutes);
 app.use(seekerRoutes);
 app.use(adminRoutes);
 app.use(loginRoutes);
+
+app.use(jobPostRoutes);
 
 mongoose.set('strictQuery', false);
 

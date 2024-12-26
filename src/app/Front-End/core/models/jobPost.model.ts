@@ -1,14 +1,26 @@
 export interface JobPost {
+    _id?: string;
     jobId: string;
     jobRoleTitle: string;
-    offeredAnnualCTC: number;
-    sector: string;
     jobType: string;
+    jobLevel: string;
+
+    category: string;
+    skills: string;
+    proficiency: string;
+    language: string;
+
+    salary: string;
+    experience: number;
     location: string;
-    platform: string;
-    numberOfOpenings: number;
+    vacancy: number;
+
+    benefits: string;
+    postedOn: Date;
     applyByDate: Date;
-    requiredLevel: string;
+
     jobDescription: string;
+
+    status?: string;
   }
   

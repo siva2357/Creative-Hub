@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-</head>
-
-<body>
 
 
-  <div class="container">
-    <div class="row justify-content-center" *ngIf="!isLoading">
+<div class="container position-absolute top-50 start-50 translate-middle">
+
+  <div class="container pb-3 text-center align-items-cente " >
+    <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1713107223/Screenshot_2024-04-14_203418-removebg-preview_hg6usb.png" alt=""  style="width: 150px; height: 150px; object-fit: cover;">
+</div>
+
+  <div class="row justify-content-center" *ngIf="!isLoading">
       <div class="col-md-4">
-        <div class="card centered-form mt-5">
-          <div class="card-body justify-content-center">
 
             <form [formGroup]="loginDetails" (ngSubmit)="onSubmit()">
               <div class="container">
@@ -82,8 +75,7 @@
                   an account</span></p>
             </div>
 
-          </div>
-        </div>
+
 
       </div>
 
@@ -105,7 +97,3 @@
 
 
   </div>
-
-</body>
-
-</html>

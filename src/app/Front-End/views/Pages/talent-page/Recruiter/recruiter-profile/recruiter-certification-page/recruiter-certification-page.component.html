@@ -1,0 +1,110 @@
+<div class="container">
+
+    <div class="row d-flex justify-content-center align-items-center mb-3">
+        <div class="col-10">
+            <h5 style="margin: 0;">Certifications</h5>
+        </div>
+        <div class="col-2 text-end">
+            <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-5 " style="font-size: 14px; "  > <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+        </div>
+    </div>
+
+
+      <div  *ngIf="isCertificate" class="card mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10">
+                    <p class="card-title" style="font-size: 18px; font-weight: normal;">Autodesk Certified Professional: AutoCAD for Design and Drafting Exam Prep</p>
+                </div>
+
+                <div class="col-2 text-end">
+                    <i class="bi bi-pencil-square me-3" style="font-size: 1 rem;"></i>
+                    <i class="bi bi-trash" style="font-size: 1 rem;"></i>
+                    <i class="bi bi-upload" style="font-size: 1rem; margin-left: 10px;"></i>
+                </div>
+            </div>
+
+
+
+
+            <p class="mb-0 mt-3" style="font-weight: bold; font-size: 16px;">Certificate Description</p>
+            <p>Certification description data</p>
+
+            <p class="mt-5">
+                Certification URL: <a href="https://coursera.org/verify/QX7LZELN9TK7" target="_blank" style="color: blue;">coursera.org/verify/QX7LZELN9TK7</a>
+            </p>
+
+            <div class="card" style="width: 20rem; border-radius: 5px; padding: 10px;">
+
+                <div class="card-body" style="padding: 0;">
+                    <div class="row d-flex align-items-center justify-content-between">
+                
+                        <!-- Icon Section (left side) -->
+                        <div class="col-3  d-flex justify-content-center align-items-center" style="border-radius: 5px;">
+                            <i class="bi bi-file-pdf" style="font-size: 2.5rem; color: #dc3545;"></i>
+                        </div>
+                
+                        <!-- Content Section (middle) -->
+                        <div class="col" style="border-radius: 5px; margin-left: -20px;">
+                            <div class="row" style="display: flex; flex-direction: column;">
+                                <div class="col">
+                                    <p style="font-size: 14px; font-weight: bold; color: #333; white-space: nowrap; margin-bottom: 0;">CERTIFICATE NAME</p>
+                                </div>
+                                <div class="col">
+                                    <p style="color: gray; font-size: 12px; white-space: nowrap; margin-bottom: 0;">Created 12:00pm 09 Dec 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Action Icons Section (right side) -->
+                        <div class="col text-end d-flex align-items-center justify-content-center">
+                            <i class="bi bi-download" style="font-size: 1.2rem; cursor: pointer; margin-right: 10px; color: #007bff;"></i>
+                            <i class="bi bi-trash" style="font-size: 1.2rem; cursor: pointer; color: #dc3545;"></i>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+
+
+
+              
+            
+            
+        </div>
+      </div>
+
+</div>
+
+
+
+<div *ngIf="!isCertificate" class="text-center position-relative">
+
+    <div class="container mt-4">
+        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1733208068/6109669_h6pkgp.webp" alt="No Data Illustration" class="img-fluid" style="max-height: 300px;  display: block; margin: 0 auto;">
+    </div>
+
+    <div class="container">
+        <p class="mb-3"><strong>No Certificates Added Yet</strong><br>You have not added any certificates yet.<br>Please click below to add a certificate.</p>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
