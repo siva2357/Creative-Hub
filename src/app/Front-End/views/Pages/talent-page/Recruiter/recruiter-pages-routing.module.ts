@@ -19,7 +19,6 @@ const routes: Routes = [
 	  path: '', component: RecruiterMainPageComponent, // Main layout component with sidebar
 	  children: [
 		{ path: 'dashboard', component: RecruiterDashboardComponent }, // Dashboard route
-		{ path: 'profile', component: RecruiterProfilePageComponent }, // Profile page route
 		{ path: 'profile', loadChildren: () => import('./recruiter-profile/recruiter-profile.module').then((m) => m. RecruiterProfileModule)},
 		{ path: 'post-job', component: RecruiterPostJobPageComponent } ,// Hire Seeker page route
 		{ path: 'manage-jobs', component: RecruiterManageJobPageComponent } ,// Hire Seeker page route
