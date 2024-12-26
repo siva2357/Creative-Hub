@@ -8,7 +8,7 @@ import { RecruiterPostJobPageComponent } from './recruiter-post-job/recruiter-po
 import { RecruiterManageJobPageComponent } from './recruiter-manage-job/recruiter-manage-job.component';
 import { RecruiterClosedJobsPageComponent } from './recruiter-closed-jobs/recruiter-closed-jobs.component';
 import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/recruiter-job-applicants.component';
-
+import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
 
 
 const routes: Routes = [
@@ -20,8 +20,10 @@ const routes: Routes = [
 	  children: [
 		{ path: 'dashboard', component: RecruiterDashboardComponent }, // Dashboard route
 		{ path: 'profile', component: RecruiterProfilePageComponent }, // Profile page route
+		{ path: 'profile', loadChildren: () => import('./recruiter-profile/recruiter-profile.module').then((m) => m. RecruiterProfileModule)},
 		{ path: 'post-job', component: RecruiterPostJobPageComponent } ,// Hire Seeker page route
 		{ path: 'manage-jobs', component: RecruiterManageJobPageComponent } ,// Hire Seeker page route
+		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent },		
 		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent } ,// Hire Seeker page route
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent } // Hire Seeker page route

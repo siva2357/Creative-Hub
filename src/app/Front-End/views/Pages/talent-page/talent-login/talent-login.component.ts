@@ -20,8 +20,11 @@ export class TalentLoginComponent {
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private alertService:AlertService) {
     this.loginDetails = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
+      // email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)]],
+      // password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
+
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
