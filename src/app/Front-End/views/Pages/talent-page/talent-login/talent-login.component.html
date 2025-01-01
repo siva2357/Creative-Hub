@@ -1,9 +1,15 @@
-<div class="container-fluid  d-flex justify-content-center align-items-center vh-100" style="background-image: url(https://res.cloudinary.com/dpp8aspqs/image/upload/v1735368346/pngtree-vibrant-liquid-layout-a-dynamic-and-trendy-hipster-texture-landing-page-image_13908596_kclp4m.png);  background-size: cover;">
-  <div class="card text-center " style="max-width: 400px; width: 100%; border:  1px solid rgba(0, 0, 255, 0.7);   background-color: rgba(151, 151, 151, 0.175); box-shadow: 0 0 10px 5px rgba(0, 149, 255, 0.7);  border-radius: 20px; -webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px);" >
+<div class="container-fluid  d-flex justify-content-center align-items-center vh-100" style="background: #11131c;">
+  <div class="card text-center " style="max-width: 400px; width: 100%; border:  1px solid rgba(0, 0, 255, 0.7); box-shadow: 0 0 10px 5px rgba(0, 149, 255, 0.7);  border-radius: 20px; -webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px); background: radial-gradient(circle, rgba(255, 255, 255, 0.274), #11131c); " >
+
+<!-- 
+    <div class="container-xl p-5 mt-5 mb-5  rounded-5" style="background: #11131c;" >
+
+      <div class="container p-5 mt-5 mb-5 "> -->
 
 
 
     <div class="card-body" style="border-radius: 15px;">
+      
       <div class="container pb-3 text-center align-items-center">
         <img
           src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1713107223/Screenshot_2024-04-14_203418-removebg-preview_hg6usb.png"
@@ -13,7 +19,7 @@
       <div class="row justify-content-center" *ngIf="!isLoading">
         <div class="col-md-10">
           <form [formGroup]="loginDetails" (ngSubmit)="onSubmit()">
-            <h4 class="text-center text-black mb-5">Login Details</h4>
+            <h4 class="text-center text-white mb-5">Login Details</h4>
 
             <div class="form-group row align-items-center mt-3">
               <input [ngClass]="{'is-invalid': loginDetails.get('email')?.invalid && loginDetails.get('email')?.touched}" placeholder="Email address" id="email" formControlName="email" type="email" class="form-control" style="height: 45px; border-radius: 10px;" />
@@ -38,7 +44,7 @@
             </div>
           </form>
 
-          <p class="mb-0 mt-3 text-nlack">New user?
+          <p class="mb-5 mt-5 text-white">New user?
             <span class="text-primary" (click)="register()" style="cursor: pointer;">Create an account</span>
           </p>
         </div>
