@@ -15,12 +15,11 @@ export class AuthGuard implements CanActivate {
       const userRole = this.authService.getRole();
 
       if (expectedRole && userRole !== expectedRole) {
-        // Redirect if the user does not have the expected role
         this.router.navigate(['/app/login']);
         return false;
       }
 
-      return true; // User is logged in and has the correct role
+      return true;
     } else {
       this.router.navigate(['/app/login']);
       return false;

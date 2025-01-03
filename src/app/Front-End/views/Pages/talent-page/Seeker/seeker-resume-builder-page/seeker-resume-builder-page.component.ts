@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./seeker-resume-builder-page.component.css']
 })
 export class SeekerResumeBuilderPageComponent {
+  isResume:boolean = false;
 
 }

@@ -7,5 +7,5 @@ import { FormBuilder, Validators, FormGroup} from '@angular/forms';
   styleUrls: ['./seeker-post-project.component.css']
 })
 export class SeekerPostProjectPageComponent {
-
+ifPreview:boolean=false;
 }

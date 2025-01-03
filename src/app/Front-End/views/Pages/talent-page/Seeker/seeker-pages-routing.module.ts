@@ -8,6 +8,7 @@ import { SeekerLaunchpadComponent } from './seeker-launchPad/seeker-launchPad.co
 import { SeekerPostProjectPageComponent } from './seeker-post-project/seeker-post-project.component';
 import { SeekerManageProjectPageComponent } from './seeker-manage-project/seeker-manage-project.component';
 import { SeekerResumeBuilderPageComponent} from './seeker-resume-builder-page/seeker-resume-builder-page.component';
+import { SeekerInterviewComponent } from './seeker-interview/seeker-interview.component';
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
@@ -22,6 +23,7 @@ const routes: Routes = [
 		{ path: 'manage-project', component: SeekerManageProjectPageComponent }, // Profile page route
 		{ path: 'portfolio', component: SeekerPortfolioComponent }, // Profile page route
 		{ path: 'jobProfile', component: SeekerJobProfileComponent }, // Profile page route
+		{ path: 'interview', component: SeekerInterviewComponent }, // Profile page route
 		{ path: 'resume-builder', component: SeekerResumeBuilderPageComponent }, // Profile page route
 		{ path: 'launchPad', component: SeekerLaunchpadComponent }, // Profile page route
 	  ]

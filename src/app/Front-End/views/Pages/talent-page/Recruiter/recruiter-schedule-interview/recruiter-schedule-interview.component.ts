@@ -2,13 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-seeker-portfolio',
-  templateUrl: './seeker-portfolio.component.html',
-  styleUrls: ['./seeker-portfolio.component.css']
+  selector: 'app-recruiter-schedule-interview',
+  templateUrl: './recruiter-schedule-interview.component.html',
+  styleUrls: ['./recruiter-schedule-interview.component.css']
 })
-export class SeekerPortfolioComponent {
-  isPortfolio:boolean =false;
-  
+export class RecruiterScheduleInterviewComponent {
   constructor(private router: Router ) {}
 
   goBack() {

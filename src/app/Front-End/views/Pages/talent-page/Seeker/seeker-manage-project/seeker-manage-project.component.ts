@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./seeker-manage-project.component.css']
 })
 export class SeekerManageProjectPageComponent {
+  isProject:boolean = false;
 
 }

@@ -1,7 +1,7 @@
 
 
-<div *ngIf="jobs.length > 0" class="container mt-3">
-    <h5>Active Job Posts</h5>
+<div *ngIf="jobs.length > 0" class="container mt-5">
+    <h5 class="mb-3 mt-5">Active Job Posts</h5>
     <app-job-table  [jobs]="jobs" (jobClosed)="onJobClosed($event)"></app-job-table>
 </div>
 

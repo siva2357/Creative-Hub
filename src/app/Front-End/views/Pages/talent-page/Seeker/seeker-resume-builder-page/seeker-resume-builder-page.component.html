@@ -1,13 +1,13 @@
-<div class="container p-5 bg-body-secondary mt-5">
+<div class="container bg-body-secondary mt-5 mb-5">
 
     <div class="card">
         <div class="card-body">
-        
-            <div class="row d-flex align-items-center mb-3">
-                <div class="col">
+
+            <div  class="row d-flex align-items-center justify-content-between mb-3">
+                <div class="col-auto">
                     <h5 style="margin: 0;">Resumes</h5>
                 </div>
-                <div class="col text-end">
+                <div class="col-auto text-end">
                     <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-0"
                         style="font-size: 14px;">
                         <i class="bi bi-plus me-2" style="font-size: 1rem;"></i>
@@ -15,8 +15,8 @@
                     </button>
                 </div>
             </div>
-        
-            <div class="container p-5">
+            
+            <div *ngIf="isResume" class="container p-5">
                 <div class="col" style="margin: auto;  width: 80%; text-align: center;">
                     <p style="font-size: 20px; font-weight: bold;">My Resumes</p>
                     <hr class="mt-0" >
@@ -122,7 +122,17 @@
                 </div>
                     
             </div>
+
+            <div *ngIf="!isResume" class="text-center position-relative">
+                <div class="container">
+                    <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1733208068/6109669_h6pkgp.webp" alt="No Data Illustration" class="img-fluid" style="max-height: 400px;  display: block; margin: 0 auto;">
+                </div>
+                <div class="container">
+                    <p class="mb-5"><strong>No Resumes added yet</strong><br>You have not added any resumes yet.<br>Please click below to add a resume.</p>
+                </div>
             
+            </div>
+
         </div>
     </div>
 

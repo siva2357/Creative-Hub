@@ -16,6 +16,7 @@ import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/
 import { RecruiterProfileRoutingModule } from './recruiter-profile/recruiter-profile-routing.module';
 import { RecruiterProfileModule } from './recruiter-profile/recruiter-profile.module';
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
+import { RecruiterScheduleInterviewComponent } from './recruiter-schedule-interview/recruiter-schedule-interview.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edi
     RecruiterManageJobPageComponent,
     RecruiterClosedJobsPageComponent,
     RecruiterJobApplicantsPageComponent,
-    RecruiterEditJobPageComponent
+    RecruiterEditJobPageComponent,
+    RecruiterScheduleInterviewComponent
   ],
   imports: [
     CommonModule,
