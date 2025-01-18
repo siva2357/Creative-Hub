@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-recruiter-schedule-interview',
-  templateUrl: './recruiter-schedule-interview.component.html',
-  styleUrls: ['./recruiter-schedule-interview.component.css']
+  selector: 'app-recruiter-reports',
+  templateUrl: './recruiter-reports.component.html',
+  styleUrls: ['./recruiter-reports.component.css']
 })
-export class RecruiterScheduleInterviewComponent {
+export class RecruiterReportsComponent {
   constructor(private router: Router ) {}
 
   goBack() {

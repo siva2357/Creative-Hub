@@ -1,11 +1,11 @@
-<div class="d-flex flex-column" style="position: fixed; width: 8.6%; height: 100vh; background-color: black; margin-left: -15px;">
+<div class="d-flex flex-column" style="position: fixed; width: 8.6%; height: 100vh; background-color: white;  margin-left: -15px;">
 
   <ul class="nav nav-pills nav-flush flex-column text-center">
     <li class="nav-item" *ngFor="let menu of menuItems">
       <a [routerLink]="menu.link" routerLinkActive="active" class="nav-link border-bottom rounded-0" style="text-decoration: none; color: #fff;" [attr.aria-label]="menu.label">
-        <div class="menu-item" style="display: flex; flex-direction: column; align-items: center;">
-          <i [class]="menu.icon" class="icon" style="font-size: 1.2rem;"></i>
-          <p class="mb-0" style="font-size: 12px; display: block; overflow: hidden; text-overflow: ellipsis;" [attr.title]="menu.label"> {{ menu.label }}</p>
+        <div class="menu-item  text-black" style="display: flex; flex-direction: column; align-items: center;">
+          <i [class]="menu.icon" class="icon  text-black" style="font-size: 1.2rem;"></i>
+          <p class="mb-0 " style="font-size: 12px; display: block; overflow: hidden; text-overflow: ellipsis;" [attr.title]="menu.label"> {{ menu.label }}</p>
         </div>
       </a>
     </li>

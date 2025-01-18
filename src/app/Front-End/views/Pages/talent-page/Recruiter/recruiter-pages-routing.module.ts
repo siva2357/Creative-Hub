@@ -9,7 +9,9 @@ import { RecruiterManageJobPageComponent } from './recruiter-manage-job/recruite
 import { RecruiterClosedJobsPageComponent } from './recruiter-closed-jobs/recruiter-closed-jobs.component';
 import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/recruiter-job-applicants.component';
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
-import { RecruiterScheduleInterviewComponent } from './recruiter-schedule-interview/recruiter-schedule-interview.component';
+import { RecruiterScheduleInterviewComponent } from './recruiter-interview/recruiter-schedule-interview/recruiter-schedule-interview.component';
+import { RecruiterReportsComponent } from './recruiter-reports/recruiter-reports.component';
+import { RecruiterCalenderComponent } from './recruiter-interview/recruiter-calender/recruiter-calender.component';
 
 
 const routes: Routes = [
@@ -26,9 +28,10 @@ const routes: Routes = [
 		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent },		
 		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent } ,// Hire Seeker page route
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent } ,// Hire Seeker page route
-		{ path: 'schedule-interview', component: RecruiterScheduleInterviewComponent } ,// Hire Seeker page route
-		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent } // Hire Seeker page route
-
+		{ path: 'interview', loadChildren: () => import('./recruiter-interview/recruiter-interview.module').then((m) => m. RecruiterInterviewModule)},
+		{ path: 'reports', component: RecruiterReportsComponent } ,// Hire Seeker page route
+		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent }, // Hire Seeker page route
+		{ path: 'calender-page', component: RecruiterCalenderComponent } // Hire Seeker page route
 	  ]
 	}
   ];

@@ -20,10 +20,12 @@ import { RoleGuard } from './Front-End/core/guards/role.guard';
 import { AuthGuard } from './Front-End/core/guards/auth.guard';
 import { ConfirmationComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/account-confirmation/account-confirmation.component';
 import { ErrorRegisterComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/error-account-register/account-confirmation.component';
+import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-logo/introduction-logo.component';
 
 
 const routes: Routes = [
   // Public routes
+  { path: 'introduction', component: IntroductionLogoComponent, title: 'Introduction page' },
   { path: 'main', component: MainPageComponent, title: 'Main page' },
   { path: 'for-developer', component: ForDeveloperComponent, title: 'For Developer page' },
   { path: 'learn-page', component: LearnPageComponent, title: 'Learn page' },

@@ -36,7 +36,6 @@ export class RecruiterManageJobPageComponent {
 
   onJobClosed(jobId: string) {
     this.jobs = this.jobs.filter((job) => job._id !== jobId);
-
   }
   
 }

@@ -15,7 +15,6 @@ export class JobTableComponent {
   @Output() jobUpdated = new EventEmitter<JobPost>();
   @Output() jobDeleted = new EventEmitter<string>();
   @Output() jobReopen = new EventEmitter<string>();
-  @Output() jobPosted = new EventEmitter<JobPost>();
   showJobPostForm: boolean = false;
 
   selectedJob!:JobPost

@@ -27,6 +27,7 @@ import { RegisterRecruiterComponent } from './Front-End/views/Pages/talent-page/
 import { UnauthorizedPageComponent } from './Front-End/views/other-pages/unauthorized-page/unauthorized-page.component';
 import { LayoutModule } from "./Front-End/views/Layouts/layout.module";
 import { SharedModule } from './Front-End/views/shared/shared.module';
+import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-logo/introduction-logo.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SharedModule } from './Front-End/views/shared/shared.module';
     TalentLoginComponent,
     TalentSignUpComponent,
     RegisterRecruiterComponent,
-    RegisterSeekerComponent 
+    RegisterSeekerComponent,
+    IntroductionLogoComponent 
   ],
 
   imports: [
