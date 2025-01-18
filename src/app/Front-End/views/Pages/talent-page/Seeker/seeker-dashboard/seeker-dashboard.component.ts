@@ -9,20 +9,14 @@ import { Router } from '@angular/router';
 export class SeekerDashboardComponent {
   constructor(private router: Router ) {}
 
-  goBack() {
-    this.router.navigate(['talent-page/seeker/mainpage']);
+  goToJobApplications(){
+    this.router.navigate(['talent-page/seeker/jobProfile']);
+
   }
   
-  goToStudentProfile() {
-    this.router.navigate(['talent-page/seeker/mainpage']);
+  goToProjectUploadPage(){
+    this.router.navigate(['talent-page/seeker/post-project']);
+
   }
-  goToEditProfile() {
-    this.router.navigate(['talent-page/seeker/edit-profile']);
-  }
-  
-  goToUploadPage() {
-    this.router.navigate(['talent-page/seeker/upload-section']);
-  }
-  
 
 }
