@@ -18,8 +18,6 @@ export class SeekerMainPageComponent implements OnInit{
     { label: 'Portfolio', link: 'portfolio', icon: 'bi bi-grid-3x3-gap'},
     { label: 'Manage project', link: 'manage-project', icon: 'bi bi-pencil-square'},
     { label: 'Job Profile', link: 'jobProfile', icon: 'bi bi-suitcase-lg'},
-    { label: 'Interview', link: 'interview', icon: 'bi bi-laptop'},
-    { label: 'Resume', link: 'resume-builder', icon: 'bi bi-file-earmark'},
     { label: 'Launchpad', link: 'launchPad', icon: 'bi bi-rocket-takeoff'},
   ];
   

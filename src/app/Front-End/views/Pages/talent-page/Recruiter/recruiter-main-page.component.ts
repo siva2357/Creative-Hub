@@ -16,8 +16,6 @@ export class RecruiterMainPageComponent {
     { label: 'Manage Jobs', link: 'manage-jobs', icon: 'bi bi-pencil-square' },
     { label: 'Closed Jobs', link: 'closed-jobs', icon: 'bi bi-archive' },
     { label: 'Job Applicants', link: 'job-applicants', icon: 'bi bi-people-fill' }, 
-    { label: 'Interview', link: 'interview', icon: 'bi bi-laptop' }, 
-    { label: 'Reports', link: 'reports', icon: 'bi bi-bar-chart' }, 
     { label: 'Hire Seeker', link: 'hire-seeker', icon: 'bi bi-person-add' },
   ];
   

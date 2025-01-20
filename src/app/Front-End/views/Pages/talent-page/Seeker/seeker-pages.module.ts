@@ -16,19 +16,18 @@ import { LayoutModule } from '../../../Layouts/layout.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-routing.module';
 import { SeekerProfileModule } from './seeker-profile/seeker-profile.module';
-import { SeekerResumeBuilderPageComponent } from './seeker-resume-builder-page/seeker-resume-builder-page.component';
-import { SeekerInterviewComponent } from './seeker-interview/seeker-interview.component';
+
 @NgModule({
   declarations: [
     SeekerMainPageComponent,
     SeekerPortfolioComponent,
     SeekerDashboardComponent,
     SeekerJobProfileComponent,
-    SeekerInterviewComponent,
+
     SeekerLaunchpadComponent,
     SeekerManageProjectPageComponent,
     SeekerPostProjectPageComponent ,
-    SeekerResumeBuilderPageComponent
+
   ],
   imports: [
     CommonModule,

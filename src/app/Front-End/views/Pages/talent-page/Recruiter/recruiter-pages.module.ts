@@ -16,9 +16,6 @@ import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/
 import { RecruiterProfileRoutingModule } from './recruiter-profile/recruiter-profile-routing.module';
 import { RecruiterProfileModule } from './recruiter-profile/recruiter-profile.module';
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
-import { RecruiterReportsComponent } from './recruiter-reports/recruiter-reports.component';
-import { RecruiterInterviewRoutingModule } from './recruiter-interview/recruiter-interview-routing.module';
-import { RecruiterInterviewModule } from './recruiter-interview/recruiter-interview.module';
 
 @NgModule({
   declarations: [
@@ -30,14 +27,11 @@ import { RecruiterInterviewModule } from './recruiter-interview/recruiter-interv
     RecruiterClosedJobsPageComponent,
     RecruiterJobApplicantsPageComponent,
     RecruiterEditJobPageComponent,
-    RecruiterReportsComponent,
   ],
   imports: [
     CommonModule,
     RecruiterPagesRoutingModule,
     RecruiterProfileRoutingModule,
-    RecruiterInterviewRoutingModule,
-    RecruiterInterviewModule,
     RecruiterProfileModule,
     HttpClientModule,
     LayoutModule,
