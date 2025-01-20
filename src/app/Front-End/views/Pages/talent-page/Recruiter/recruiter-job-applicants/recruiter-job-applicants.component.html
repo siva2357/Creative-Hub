@@ -1,13 +1,46 @@
-<div class="container  ">
+<div *ngIf="!hasjobApplicants" class="container mt-5">
+    <h5 class="mb-3 mt-5">Job Applicants</h5>
+  
+    <div class="container mb-5 mt-5">
+      <table class="table" style="border: 1px solid; width: 100%; text-align: center;">
+        <thead style="border: 1px solid; font-size: 14px;">
+          <tr style="border: 1px solid;">
+            <th style="border: 1px solid; width: 5%;">S.No</th>
+            <th style="border: 1px solid; width: 10%;">Seeker ID</th>
+            <th style="border: 1px solid; width: 15%;">Seeker Name</th>
+            <th style="border: 1px solid; width: 10%;">Profile</th>
+            <th style="border: 1px solid; width: 10%;">Location</th>
+            <th style="border: 1px solid; width: 10%;">Applied On</th>
+            <th style="border: 1px solid; width: 10%;">Status</th>
+            <th style="border: 1px solid; width: 25%;">Actions</th>
+          </tr>
+        </thead>
+        <tbody style="border: 1px solid; font-size: 14px;">
+          <tr style="border: 1px solid;">
+            <td style="border: 1px solid; text-align: center;">1</td>
+            <td style="border: 1px solid; text-align: center;">CH-8798</td>
+            <td style="border: 1px solid; text-align: center;">Seeker Name</td>
+            <td style="border: 1px solid; text-align: center;">Profile link</td>
+            <td style="border: 1px solid; text-align: center;">Hyderabad</td>
+            <td style="border: 1px solid; text-align: center;">20-01-2025</td>
 
-    <!-- <div class="container mt-5 mb-5">
-        <h5 >Job Applicants</h5>
-        <app-job-table></app-job-table>
-    </div> -->
-
-    <div class="container d-flex justify-content-center align-items-center " >
-        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 600px; width: 600px;">
+            <td style="border: 1px solid; text-align: center;">Applied</td>
+            <td style="border: 1px solid;">
+              <div style="display: flex; justify-content: space-around;">
+                <button class="btn btn-sm btn-info">Schedule</button>
+                <button class="btn btn-sm btn-danger">Reject</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
-
-</div>
+  </div>
+  
+  <div *ngIf="!hasjobApplicants">
+    <div class="container d-flex flex-column justify-content-center align-items-center text-center">
+      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg"
+           style="height: 550px; width: 550px; margin-bottom: 10px;">
+    </div>
+  </div>
+  

@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./recruiter-job-applicants.component.css']
 })
 export class RecruiterJobApplicantsPageComponent {
+  public jobApplicants: any[] = [];
+
+get hasjobApplicants(): boolean {
+  return this.jobApplicants.length > 0;
+}
 
 }
