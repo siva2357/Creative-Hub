@@ -28,6 +28,7 @@ import { UnauthorizedPageComponent } from './Front-End/views/other-pages/unautho
 import { LayoutModule } from "./Front-End/views/Layouts/layout.module";
 import { SharedModule } from './Front-End/views/shared/shared.module';
 import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-logo/introduction-logo.component';
+import { RecruiterSeekerProfileComponent } from './Front-End/views/Pages/talent-page/Recruiter/recruiter-seeker-profile/recruiter-seeker-profile.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-
     TalentSignUpComponent,
     RegisterRecruiterComponent,
     RegisterSeekerComponent,
-    IntroductionLogoComponent 
+    IntroductionLogoComponent,
+    RecruiterSeekerProfileComponent
   ],
 
   imports: [
@@ -60,7 +62,7 @@ import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    SharedModule 
+    SharedModule
 ],
   providers: [ DatePipe ],
   bootstrap: [AppComponent]

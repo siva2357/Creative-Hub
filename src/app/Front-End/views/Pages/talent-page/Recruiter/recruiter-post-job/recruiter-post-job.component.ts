@@ -17,7 +17,6 @@ export class RecruiterPostJobPageComponent {
   isLoading:boolean=false;
   isSubmitting:boolean=false;
 
-  @Input() jobPost!: JobPost; // Input property to receive job post data
 
   constructor(private fb: FormBuilder, private jobPostService: JobPostService, private alert:AlertService ) {}
 

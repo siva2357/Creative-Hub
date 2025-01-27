@@ -1,6 +1,6 @@
 <div *ngIf="!hasjobApplicants" class="container mt-5">
     <h5 class="mb-3 mt-5">Job Applicants</h5>
-  
+
     <div class="container mb-5 mt-5">
       <table class="table" style="border: 1px solid; width: 100%; text-align: center;">
         <thead style="border: 1px solid; font-size: 14px;">
@@ -12,7 +12,7 @@
             <th style="border: 1px solid; width: 10%;">Location</th>
             <th style="border: 1px solid; width: 10%;">Applied On</th>
             <th style="border: 1px solid; width: 10%;">Status</th>
-            <th style="border: 1px solid; width: 25%;">Actions</th>
+            <th style="border: 1px solid; width: 15%;">Actions</th>
           </tr>
         </thead>
         <tbody style="border: 1px solid; font-size: 14px;">
@@ -26,21 +26,22 @@
 
             <td style="border: 1px solid; text-align: center;">Applied</td>
             <td style="border: 1px solid;">
-              <div style="display: flex; justify-content: space-around;">
+              <div style="display: flex; justify-content: space-evenly; align-items: center;">
                 <button class="btn btn-sm btn-info">Schedule</button>
-                <button class="btn btn-sm btn-danger">Reject</button>
+                <button class="btn btn-sm btn-danger"  style="margin-left: 30px;">Reject</button>
               </div>
             </td>
+
+
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  
+
   <div *ngIf="!hasjobApplicants">
     <div class="container d-flex flex-column justify-content-center align-items-center text-center">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg"
            style="height: 550px; width: 550px; margin-bottom: 10px;">
     </div>
   </div>
-  

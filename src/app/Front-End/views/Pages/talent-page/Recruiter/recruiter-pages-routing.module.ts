@@ -8,13 +8,14 @@ import { RecruiterManageJobPageComponent } from './recruiter-manage-job/recruite
 import { RecruiterClosedJobsPageComponent } from './recruiter-closed-jobs/recruiter-closed-jobs.component';
 import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/recruiter-job-applicants.component';
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
+import { RecruiterSeekerProfileComponent } from './recruiter-seeker-profile/recruiter-seeker-profile.component';
 
 
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  
+
 	{
 	  path: '', component: RecruiterMainPageComponent, // Main layout component with sidebar
 	  children: [
@@ -22,10 +23,11 @@ const routes: Routes = [
 		{ path: 'profile', loadChildren: () => import('./recruiter-profile/recruiter-profile.module').then((m) => m. RecruiterProfileModule)},
 		{ path: 'post-job', component: RecruiterPostJobPageComponent } ,// Hire Seeker page route
 		{ path: 'manage-jobs', component: RecruiterManageJobPageComponent } ,// Hire Seeker page route
-		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent },		
+		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent },
 		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent } ,// Hire Seeker page route
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent }, // Hire Seeker page route
+    { path:'seeker-profile', component: RecruiterSeekerProfileComponent}
 	  ]
 	}
   ];
