@@ -1,23 +1,25 @@
-// adminModel.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
-// Define the Admin schema
 const adminSchema = new Schema({
-    username: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
-    password: { type: String, required: true },
-    profilePicture: { type: String, required: true, default: 'path/to/default/profile/picture.jpg' }, // Default profile picture
+    registrationDetails: {
+        fullName: { type: String, required: true },
+        userName: { type: String, required: true },
+        email: { type: String, required: true },
+        password: { type: String, required: true },
+        profilePicture: { fileName: { type: String, required: true }, url: { type: String, required: true } }
+    },
+    role: { type: String, default: 'admin' }
 });
 
-// Hash password before saving
+
 adminSchema.pre('save', async function(next) {
-    if (this.isModified('password')) {
-        this.password = await bcrypt.hash(this.password, 10);
+    if (this.isModified('registrationDetails.password')) {
+        this.registrationDetails.password = await bcrypt.hash(this.registrationDetails.password, 10);
     }
     next();
-});
+})
 
 // Create the Admin model
 const Admin = mongoose.model('Admin', adminSchema);

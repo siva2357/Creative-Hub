@@ -3,61 +3,43 @@ const Recruiter = require('../Recruiter/recruiterModel');
 const Seeker = require('../Seeker/seekerModel');
 const Admin = require('../Admin/adminModel');
 
+// Helper function to check password and return user data
+async function authenticateUser(userModel, email, password, role) {
+  const user = await userModel.findOne({ 'registrationDetails.email': email });
+  if (user) {
+    const isPasswordValid = await bcrypt.compare(password, user.registrationDetails.password);
+    if (isPasswordValid) {
+      return {
+        id: user._id,
+        role: role,
+        username: user.registrationDetails.userName,
+        email: user.registrationDetails.email,
+        profile: user.registrationDetails.profilePicture,
+      };
+    }
+  }
+  return null;
+}
+
+// Main login service function
 async function loginService(loginData) {
-    const { email, password } = loginData;
+  const { email, password } = loginData;
 
-    // Check recruiters database first
-    let user = await Recruiter.findOne({ 'registrationDetails.basicDetails.email': email });
-    if (user) {
-        const isPasswordValid = await bcrypt.compare(password, user.registrationDetails.basicDetails.password);
-        if (isPasswordValid) {
-            // Return additional details like username
-            return { 
-                id: user._id, 
-                role: 'recruiter', 
-                username: user.registrationDetails.basicDetails.userName, // Assuming the Recruiter model contains a username
-                email: user.registrationDetails.basicDetails.email,
-                profile:user.registrationDetails.profileDetails.profilePicture, 
-            };
-        }
-    }
+  // Try to authenticate in each user type
+  let user = await authenticateUser(Recruiter, email, password, 'recruiter');
+  if (user) return user;
 
-    // If not found, check seekers database
-    user = await Seeker.findOne({ 'registrationDetails.basicDetails.email': email });
-    if (user) {
-        const isPasswordValid = await bcrypt.compare(password, user.registrationDetails.basicDetails.password);
-        if (isPasswordValid) {
-            return { 
-                id: user._id, 
-                role: 'seeker', 
-                username: user.registrationDetails.basicDetails.userName, // Assuming the Seeker model contains a username
-                email: user.registrationDetails.basicDetails.email,
-                profile:user.registrationDetails.profileDetails.profilePicture, 
-            };
-        }
-    }
+  user = await authenticateUser(Seeker, email, password, 'seeker');
+  if (user) return user;
 
-    // Check admin database
-    user = await Admin.findOne({ 'email': email });
-    if (user) {
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (isPasswordValid) {
-            return { 
-                id: user._id, 
-                role: 'admin', 
-                username: user.username, // Assuming the Admin model contains a username
-                email: user.email,
-                profile:user.profilePicture 
-            };
-        }
-    }
+  user = await authenticateUser(Admin, email, password, 'admin');
+  if (user) return user;
 
-    // Log details for debugging purposes (avoid in production)
-    console.error(`Login failed for email: ${email}`);
-    
-    throw new Error('Invalid credentials');
+  // If no user is found in any model, throw error
+  console.error(`Login failed for email: ${email}`);  // Ensure this is used only in development
+  throw new Error('Invalid credentials');
 }
 
 module.exports = {
-    loginService
+  loginService
 };

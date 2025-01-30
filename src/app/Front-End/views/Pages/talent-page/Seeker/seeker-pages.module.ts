@@ -14,9 +14,8 @@ import { SeekerManageProjectPageComponent } from './seeker-manage-project/seeker
 import { SeekerPostProjectPageComponent } from './seeker-post-project/seeker-post-project.component';
 import { LayoutModule } from '../../../Layouts/layout.module';
 import { SharedModule } from '../../../shared/shared.module';
-import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-routing.module';
 import { SeekerProfileModule } from './seeker-profile/seeker-profile.module';
-
+import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-routing.module';
 @NgModule({
   declarations: [
     SeekerMainPageComponent,
@@ -32,13 +31,13 @@ import { SeekerProfileModule } from './seeker-profile/seeker-profile.module';
   imports: [
     CommonModule,
     SeekerPagesRoutingModule,
-    SeekerProfileRoutingModule,
     HttpClientModule,
     LayoutModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    SeekerProfileModule
+    SeekerProfileModule,
+    SeekerProfileRoutingModule
   ],
   providers: [DatePipe],
 })

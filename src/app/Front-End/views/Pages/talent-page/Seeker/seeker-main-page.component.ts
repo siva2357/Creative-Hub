@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
+import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user-registration.model';
 
 @Component({
   selector: 'app-seeker-main-page',
@@ -8,8 +9,10 @@ import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
 })
 export class SeekerMainPageComponent implements OnInit{
   constructor() { }
+
+  userDetails!: Seeker | Recruiter;
   ngOnInit(): void {
-    
+
   }
   menu: MenuItem[] = [
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid'},
@@ -20,5 +23,11 @@ export class SeekerMainPageComponent implements OnInit{
     { label: 'Job Profile', link: 'jobProfile', icon: 'bi bi-suitcase-lg'},
     { label: 'Launchpad', link: 'launchPad', icon: 'bi bi-rocket-takeoff'},
   ];
-  
+
+  handleUserDetails(userDetails: Seeker | Recruiter): void {
+    this.userDetails = userDetails;
+    // Here you can perform any further action, e.g., navigate or display more data
+    console.log('Received user details:', userDetails);
+  }
+
 }

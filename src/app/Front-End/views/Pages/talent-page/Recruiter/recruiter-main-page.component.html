@@ -1,6 +1,7 @@
 
 <div class="container-fluid" style="margin-top: 60px;">
-  <app-talent-header></app-talent-header>
+  <app-talent-header (userDetailsEmitter)="handleUserDetails($event)"></app-talent-header>
+
 
   <div class="row" style="background: #e4e9f7; height: 91vh;">
 

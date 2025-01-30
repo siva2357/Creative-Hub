@@ -8,7 +8,6 @@ import { LayoutModule } from '../../../Layouts/layout.module';
 import { AdminPageComponent } from './admin-page.component';
 import { AdminPagesRoutingModule } from './admin-pages-routing.module';
 
-import { AdminCreateUserPageComponent } from './admin-create-user/admin-create-user.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminManageUserPageComponent } from './admin-manage-users/admin-manage-users.component';
 import { AdminProfilePageComponent } from './admin-profile/admin-profile-page.component';
@@ -17,7 +16,6 @@ import { AdminUserDataPageComponent } from './admin-user-data/admin-user-data.co
 @NgModule({
   declarations: [
     AdminPageComponent,
-    AdminCreateUserPageComponent,
     AdminDashboardComponent,
     AdminManageUserPageComponent,
     AdminProfilePageComponent,

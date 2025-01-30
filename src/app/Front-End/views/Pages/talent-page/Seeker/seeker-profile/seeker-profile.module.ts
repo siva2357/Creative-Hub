@@ -8,10 +8,9 @@ import { SeekerProfilePageComponent } from './seeker-profile-page.component';
 import { SeekerSkillsPageComponent } from './seeker-skills-page/seeker-skills-page.component';
 import { SeekerCertificationPageComponent } from './seeker-certification-page/seeker-certification-page.component';
 import { RouterModule } from '@angular/router';
-import { SeekerProfileRoutingModule } from './seeker-profile-routing.module';
 import { SeekerResumePageComponent } from './seeker-resume-page/seeker-resume-page.component';
 import { LayoutModule } from "../../../../Layouts/layout.module";
-
+import { SeekerProfileRoutingModule } from './seeker-profile-routing.module';
 @NgModule({
   declarations: [
     SeekerBasicDetailsComponent,
@@ -27,8 +26,8 @@ import { LayoutModule } from "../../../../Layouts/layout.module";
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SeekerProfileRoutingModule,
-    LayoutModule
+    LayoutModule,
+    SeekerProfileRoutingModule
 ],
   providers: [],
 })

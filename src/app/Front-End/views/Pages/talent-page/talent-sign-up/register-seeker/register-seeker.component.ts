@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Front-End/core/services/auth.service';
-import { Seeker } from 'src/app/Front-End/core/models/user.model';
+import { Seeker } from 'src/app/Front-End/core/models/user-registration.model';
 import { AlertService } from 'src/app/Front-End/core/services/alerts.service';
-
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { Folder } from 'src/app/Front-End/core/enums/folder-name.enum';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-register-seeker',
@@ -13,101 +16,98 @@ import { AlertService } from 'src/app/Front-End/core/services/alerts.service';
 })
 
 export class RegisterSeekerComponent implements OnInit {
-  signupDetails!: FormGroup;
-  contactDetails!: FormGroup;
-  educationDetails!: FormGroup;
-  bioDetails!: FormGroup;
-  profileDetails!: FormGroup;
-
-  registrationSuccess :boolean = false; 
-
-  cities: string[] = ['Hyderabad', 'Mumbai', 'Delhi', 'Chennai'];
-  states: string[] = ['Telangana', 'Maharashtra', 'Karnataka', 'Tamil Nadu'];
-  countries: string[] = ['Telangana', 'Maharashtra', 'Karnataka', 'Tamil Nadu'];
-
-  genders: string[] = ['Male', 'Female', 'Other'];
-  instituteName: string[] = ['A', 'B', 'C', 'D'];
-  programOrDegree: string[] = ['E', 'F', 'G', 'H'];
-  departmentName: string[] = ['I', 'J', 'K', 'L'];
-  branchName: string[] = ['M', 'N', 'O', 'P'];
-
+  registrationForm!: FormGroup;
+  registrationSuccess: boolean = false;
   step = 1;
   profileUploadUrl: string | ArrayBuffer | null = null;
   isImageUploaded: boolean = false;
   isLoading: boolean = false;
+  isSubmitting = false;
+  errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private alertService: AlertService ) {}
+
+  uploadedFileData: { fileName: string; url: string; filePath: string } | null = null;
+  ifPreview = false;
+  previewURL: SafeResourceUrl | null = null;
+  fileRef: any; // Firebase reference for file deletion
+  fileType: string | null = null; // Store the file type (image, video, pdf, audio, etc.)
+  fileUploadProgress: Observable<number | undefined> | undefined;
+  uploadComplete = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private alertService: AlertService,
+    private domSanitizer: DomSanitizer,
+    private storage: AngularFireStorage,
+  ) {}
 
   ngOnInit(): void {
-    this.initializeForms();
+    this.initializeForm();
   }
 
-  initializeForms(): void {
-    this.signupDetails = this.formBuilder.group({
-      fullName: ['', [Validators.required]], // Capital letter, only letters
-      userName: ['', [Validators.required]], // Starts with capital, letters and numbers
-      gender: ['', [Validators.required]], // Starts with capital, letters and numbers
-      email: ['', [Validators.required]], // Letters, numbers, ends with @gmail.com
-      password: ['', [Validators.required]], // Strong password
+  initializeForm(): void {
+    this.registrationForm = this.formBuilder.group({
+      fullName: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
       confirmPassword: ['', Validators.required],
+      profilePicture: [null, Validators.required]
     }, { validators: this.passwordMatchValidator });
-
-    this.contactDetails = this.formBuilder.group({
-      phoneNumber: ['', [Validators.required]], // Starts with capital, letters and numbers
-      streetAddress: ['', [Validators.required]],
-      city: ['',[Validators.required]],
-      state: ['',[Validators.required]], 
-      country: ['',[Validators.required]], 
-      pincode: ['', [Validators.required]]
-    });
-
-    this.educationDetails = this.formBuilder.group({
-      instituteName: ['',[Validators.required]],
-      programOrDegree: ['',[Validators.required]], 
-      departmentName: ['',[Validators.required]], 
-      branchOrSpecialization: ['',[Validators.required]], 
-      instituteRollNumber: ['', [Validators.required]]
-    });
-
-    this.bioDetails = this.formBuilder.group({
-      bio: ['',[Validators.required]]
-    });
-  
-    this.profileDetails = this.formBuilder.group({
-      profileUpload: [null, Validators.required]
-    });
   }
 
-  get signup() { return this.signupDetails.controls; }
-  get contact() { return this.contactDetails.controls; }
-  get education() { return this.educationDetails.controls; }
-  get bio() { return this.bioDetails.controls; }
-  get profile() { return this.profileDetails.controls; }
+  get controls() {
+    return this.registrationForm.controls;
+  }
 
-
+  passwordMatchValidator(formGroup: FormGroup): { [key: string]: boolean } | null {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+    return password && confirmPassword && password !== confirmPassword
+      ? { mismatch: true }
+      : null;
+  }
 
   next(): void {
     if (this.step === 1) {
-      if (this.signupDetails.invalid) { return; }
+      if (this.registrationForm.get('fullName')?.invalid || this.registrationForm.get('userName')?.invalid || this.registrationForm.get('email')?.invalid) {
+        return;
+      }
       this.step++;
     }
     if (this.step === 2) {
-      if (this.contactDetails.invalid) { return; }
+      if (this.registrationForm.get('password')?.invalid || this.registrationForm.get('confirmPassword')?.invalid) {
+        return;
+      }
       this.step++;
     }
     if (this.step === 3) {
-      if (this.educationDetails.invalid) { return; }
-      this.step++;
-    }
-    if (this.step === 4) {
-      if (this.bioDetails.invalid) { return; }
-      this.step++;
-    }
-    if (this.step === 5) {
-      if (this.profileDetails.invalid) { return; }
-      this.submit();  
+      if (this.registrationForm.get('profilePicture')?.invalid) {
+        return;
+      }
+      this.submit();
     }
   }
+
+  isStepValid(): boolean {
+    switch (this.step) {
+      case 1:
+        return (this.registrationForm.get('fullName')?.valid ?? false) &&
+               (this.registrationForm.get('userName')?.valid ?? false) &&
+               (this.registrationForm.get('email')?.valid ?? false);
+      case 2:
+        return (this.registrationForm.get('password')?.valid ?? false) &&
+               (this.registrationForm.get('confirmPassword')?.valid ?? false);
+      case 3:
+        return (this.registrationForm.get('profilePicture')?.valid ?? false);
+      default:
+        return false;
+    }
+
+  }
+
 
 
   previous(): void {
@@ -116,120 +116,123 @@ export class RegisterSeekerComponent implements OnInit {
     }
   }
 
+uploadFile(event: any) {
+  const file = event.target.files && event.target.files[0];
+  if (file) {
 
-  passwordMatchValidator(formGroup: FormGroup): { [key: string]: boolean } | null {
-    const password = formGroup.get('password')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
+    const filePath = `${Folder.Main_Folder}/${Folder.Seeker_Folder}/${Folder.Seeker_Sub_Folder_1}/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    // this.previewURL = URL.createObjectURL(file);
+    this.previewURL = this.domSanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file));
 
-    if (password && confirmPassword) {
-        return password === confirmPassword ? null : { mismatch: true };
-    }
-    return null;
-}
+    this.fileType = this.getFileType(file);
 
+    this.fileUploadProgress = task.percentageChanges();
+    this.ifPreview = true;
 
-handleFileUpload(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  if (input.files && input.files.length > 0) {
-    const file = input.files[0];
-    this.profileDetails.get('profileUpload')?.setErrors(null); // Clear previous errors
+    task.snapshotChanges().subscribe({
+      next: (snapshot) => {
+        if (snapshot?.state === 'success') {
+          fileRef.getDownloadURL().subscribe((url) => {
+            console.log('File uploaded successfully. URL:', url);
 
-    const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    if (!validTypes.includes(file.type)) {
-      this.profileDetails.get('profileUpload')?.setErrors({ invalidFileType: true });
-      this.alertService.showProfileImageFormatAlert();
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.profileUploadUrl = reader.result; 
-      this.isImageUploaded = true;
-    };
-    reader.readAsDataURL(file);
-  } else {
-    this.profileDetails.get('profileUpload')?.setErrors({ required: true });
-    this.alertService.showProfileImageAlert();
-  }
-}
-
-
-
-submit(): void {
-  if (
-    this.signupDetails.valid &&
-    this.contactDetails.valid &&
-    this.educationDetails.valid &&
-    this.bioDetails.valid &&
-    this.profileDetails.valid
-  ) {
-    if (this.signupDetails.value.password !== this.signupDetails.value.confirmPassword) {
-      console.error('Passwords do not match');
-      return;
-    }
-
-    const seekerData: Seeker = {
-      registrationDetails: {
-        signupDetails: {
-          fullName: this.signupDetails.value.fullName,
-          userName: this.signupDetails.value.userName,
-          gender: this.signupDetails.value. gender,
-          email: this.signupDetails.value.email,
-          password: this.signupDetails.value.password,
-          confirmPassword: this.signupDetails.value.confirmPassword,
-        },
-        contactDetails: {
-          phoneNumber: this.contactDetails.value.phoneNumber,
-          streetAddress: this.contactDetails.value.streetAddress,
-          city: this.contactDetails.value.city,
-          state: this.contactDetails.value.state,
-          country: this.contactDetails.value.country,
-          pincode: this.contactDetails.value.pincode,
-        },
-        educationDetails: {
-          instituteName: this.educationDetails.value.instituteName, // Check this value
-          programOrDegree: this.educationDetails.value.programOrDegree,
-          departmentName: this.educationDetails.value.departmentName,
-          branchOrSpecialization: this.educationDetails.value.branchOrSpecialization,
-          instituteRollNumber: this.educationDetails.value.instituteRollNumber,
-        },
-        bioDetails: {
-          bio: this.bioDetails.value.bio,
-        },
-        profileDetails: {
-          profilePicture: this.profileDetails.value.profileUpload 
-        },
+            // Store the file details for later submission
+            this.uploadedFileData = {
+              fileName: file.name,
+              url: url,
+              filePath: filePath // Save the file path for deletion
+            };
+            this.uploadComplete = true;
+          });
+        }
       },
-    };
-
-    this.isLoading = true;
-
-    this.authService.registerSeeker(seekerData).subscribe(
-      (response) => {
-        console.log('Registration successful', response);
-        this.registrationSuccess = true;
-        // this.alertService.showAccountRegisteredSuccess();
-        setTimeout(() => {
-          this.isLoading = false;
-          this.router.navigate(['talent-page/register/confirmation-page']);
-        }, 3000);
-      },
-
-      (error) => {
-        this.registrationSuccess = false; 
-        console.error('Registration failed', error);
-        // this.alertService.showErrorRegisteringAccount();
-        setTimeout(() => {
-          this.isLoading = false;
-          this.router.navigate(['talent-page/register/error-page']);
-        }, 3000); 
+      error: (error) => {
+        console.error('Upload error:', error);
+        this.errorMessage = 'File upload failed. Please try again.';
       }
-    );
+    });
+
+  }
+
+}
+
+
+
+deletePreview(): void {
+  this.previewURL = null;
+  this.fileType = null;
+  this.fileUploadProgress = undefined;
+  this.uploadComplete =false;
+
+  if (this.uploadedFileData) {
+    const { filePath } = this.uploadedFileData;
+
+    this.storage.ref(filePath).delete().subscribe({
+      next: () => {
+        console.log('File deleted from Firebase Storage');
+        this.uploadedFileData = null;
+        this.ifPreview = false;
+      },
+      error: (error) => {
+        console.error('Error deleting file from Firebase Storage:', error);
+        this.errorMessage = 'Failed to delete the file. Please try again.';
+      }
+    });
   }
 }
 
 
-  
+getFileType(file: File): string {
+  const mimeType = file.type;
+
+  if (mimeType.startsWith('image/')) {
+    return 'image';
+  } else if (mimeType.startsWith('video/')) {
+    return 'video';
+  } else if (mimeType === 'application/pdf') {
+    return 'pdf';
+  } else if (mimeType.startsWith('audio/')) {
+    return 'audio';
+  } else {
+    return 'unknown'; // For other file types (could be handled further)
+  }
+}
+
+
+  submit() {
+    if (this.registrationForm.valid && this.uploadedFileData) {
+      const seekerData: Seeker = {
+      registrationDetails: {
+        fullName: this.registrationForm.value.fullName,
+        userName: this.registrationForm.value.userName,
+        email: this.registrationForm.value.email,
+        password: this.registrationForm.value.password,
+        confirmPassword: this.registrationForm.value.confirmPassword,
+        profilePicture: this.uploadedFileData, //
+
+      }
+    };
+      console.log('Seeker Data:', seekerData); // Add this line to check the data
+      this.isSubmitting = true;
+      this.authService.registerSeeker(seekerData).subscribe({
+        next: () => {
+          this.registrationForm.reset({});
+          this.uploadedFileData = null;
+          this.isSubmitting = false;
+          this.previewURL = null;
+          this.ifPreview = false;
+          this.uploadComplete= false;
+          this.fileUploadProgress = undefined;
+        },
+        error: (err) => {
+          console.error('Error submitting project:', err);
+          this.errorMessage = 'Project submission failed. Please try again.';
+          this.isSubmitting = false;
+        }
+      });
+    }
+  }
 
   LoginPage(): void {
     this.router.navigate(['talent-page/login']);
@@ -239,11 +242,3 @@ submit(): void {
     this.router.navigate(['talent-page/signup']);
   }
 }
-
-
-
-
-
-
-
-

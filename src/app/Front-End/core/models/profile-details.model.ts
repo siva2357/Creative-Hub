@@ -1,36 +1,37 @@
 export interface Recruiter {
+  _id?: string;
     registrationDetails: {
         signupDetails: {
-            fullName: string; 
-            userName: string; 
-            gender: string; 
-            email: string;      
-            password: string;    
+            fullName: string;
+            userName: string;
+            gender: string;
+            email: string;
+            password: string;
             confirmPassword?: string;
         },
 
         contactDetails: {
             phoneNumber: string;
-            streetAddress: string; 
-            city: string;   
-            state: string; 
+            streetAddress: string;
+            city: string;
+            state: string;
             country:string;
-            pincode: string; 
+            pincode: string;
         },
 
         professionalDetails: {
-            companyName: string;   
-            departmentName: string;  
-            designation: string;  
-            jobLevel: string;  
+            companyName: string;
+            departmentName: string;
+            designation: string;
+            jobLevel: string;
             experience:string;
             companyId: string;
         },
 
         bioDetails: {
-            bio: string; 
+            bio: string;
         }
-        
+
         profileDetails: {
             profilePicture: string;  // Path or URL for the profile picture
         }
@@ -39,33 +40,34 @@ export interface Recruiter {
 
 
 export interface Seeker {
+     _id?: string;
     registrationDetails: {
         signupDetails: {
-            fullName: string; 
-            userName: string; 
-            gender: string; 
-            email: string;      
-            password: string;    
+            fullName: string;
+            userName: string;
+            gender: string;
+            email: string;
+            password: string;
             confirmPassword?: string;
 
         },
         contactDetails: {
             phoneNumber: string;
-            streetAddress: string; 
-            city: string;   
-            state: string; 
+            streetAddress: string;
+            city: string;
+            state: string;
             country:string;
-            pincode: string; 
+            pincode: string;
         },
         educationDetails: {
-            instituteName: string;   
+            instituteName: string;
             departmentName: string;
-            programOrDegree: string;  
-            branchOrSpecialization: string;  
+            programOrDegree: string;
+            branchOrSpecialization: string;
             instituteRollNumber: string;
         },
         bioDetails: {
-            bio: string; 
+            bio: string;
         }
         profileDetails: {
             profilePicture: string;  // Path or URL for the profile picture
