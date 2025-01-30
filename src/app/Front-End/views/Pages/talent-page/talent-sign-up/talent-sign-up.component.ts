@@ -20,13 +20,14 @@ export class TalentSignUpComponent {
   login() {
     this.router.navigate(['talent-page/login']); // Corrected navigation
   }
-
   navigateToRegistration() {
     if (this.selectedUserType === 'seeker') {
-      this.router.navigate(['talent-page/register/seeker']);
+      this.router.navigate(['/talent-page/register/seeker']);  // 🔥 Absolute path
     } else if (this.selectedUserType === 'recruiter') {
-      this.router.navigate(['talent-page/register/recruiter']);
+      this.router.navigate(['/talent-page/register/recruiter']);
     }
   }
+
+
 }
 

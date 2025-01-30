@@ -11,17 +11,7 @@ import { MarketPageComponent } from './Front-End/views/Pages/market-page/market-
 import { PublishPageComponent } from './Front-End/views/Pages/publish-page/publish-page.component';
 import { PurposePageComponent } from './Front-End/views/Pages/purpose-page/purpose-page.component';
 import { CloudPageComponent } from './Front-End/views/Pages/cloud-page/cloud-page.component';
-import { TalentMainPageComponent } from './Front-End/views/Pages/talent-page/talent-main-pagecomponent';
-import { TalentLoginComponent } from './Front-End/views/Pages/talent-page/talent-login/talent-login.component';
-import { TalentSignUpComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/talent-sign-up.component';
-import { RegisterSeekerComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/register-seeker/register-seeker.component';
-import { RegisterRecruiterComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/register-recruiter/register-recruiter.component';
-import { ConfirmationComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/account-confirmation/account-confirmation.component';
-import { ErrorRegisterComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/error-account-register/account-confirmation.component';
 import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-logo/introduction-logo.component';
-import { RecruiterEditProfileComponent } from './Front-End/views/Pages/talent-page/Recruiter/recruiter-edit-profile/recruiter-edit-profile.component';
-import { SeekerEditProfileComponent } from './Front-End/views/Pages/talent-page/Seeker/seeker-edit-profile/seeker-edit-profile.component';
-
 
 const routes: Routes = [
   // Public routes
@@ -35,37 +25,7 @@ const routes: Routes = [
   { path: 'publish-page', component: PublishPageComponent, title: 'Publish Page' },
   { path: 'purpose-page', component: PurposePageComponent, title: 'Purpose Page' },
   { path: 'cloud-page', component: CloudPageComponent, title: 'Cloud Page' },
-  { path: 'talent-page', component: TalentMainPageComponent, title: 'Talent Page' },
-  { path: 'talent-page/login', component: TalentLoginComponent, title: 'Talent Login Page' },
-  { path: 'talent-page/signup', component: TalentSignUpComponent, title: 'Talent Login Page' },
-  { path: 'talent-page/register/seeker', component: RegisterSeekerComponent, title: 'Talent Login Page' },
-  { path: 'talent-page/register/recruiter', component: RegisterRecruiterComponent, title: 'Talent Login Page'  },
-  { path: 'talent-page/seeker/edit-profile/:id', component: SeekerEditProfileComponent, title: 'Seeker Edit Profile Page' },
-  { path: 'talent-page/recruiter/edit-profile', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page'  },
-  { path: 'talent-page/register/confirmation-page', component: ConfirmationComponent, title: 'Talent Confirmation Register Page' },
-  { path: 'talent-page/register/error-page', component: ErrorRegisterComponent, title: 'Talent Error Register Page' },
-
-
-
-  {
-    path: 'talent-page/recruiter',
-    loadChildren: () => import('./Front-End/views/Pages/talent-page/Recruiter/recruiter-pages.module').then((m) => m.RecruiterPageModule),
-    // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }
-  },
-
-  {
-    path: 'talent-page/seeker',
-    loadChildren: () => import('./Front-End/views/Pages/talent-page/Seeker/seeker-pages.module').then((m) => m.SeekerPageModule),
-    // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }
-  },
-
-  {
-    path: 'talent-page/admin',
-    loadChildren: () => import('./Front-End/views/Pages/talent-page/admin/admin-pages.module').then((m) => m.AdminPageModule),
-    // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }
-  },
-
-
+  { path: 'talent-page', loadChildren: () => import('./Front-End/views/Pages/talent-page/talent-pages.module').then((m) => m.TalentPageModule ), title: 'Talent Page' },
   { path: '**', redirectTo: 'main' }, // Fallback rou
 
 ];

@@ -6,7 +6,6 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RecruiterHireSeekerPageComponent } from './recruiter-hire-seeker/recruiter-hire-seeker.component';
 import { RecruiterMainPageComponent } from './recruiter-main-page.component';
 import { RecruiterPagesRoutingModule } from './recruiter-pages-routing.module';
-import { LayoutModule } from '../../../Layouts/layout.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { RecruiterDashboardComponent } from './recruiter-dashboard/recruiter-dashboard.component';
 import { RecruiterPostJobPageComponent } from './recruiter-post-job/recruiter-post-job.component';
@@ -16,7 +15,8 @@ import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/
 import { RecruiterProfileRoutingModule } from './recruiter-profile/recruiter-profile-routing.module';
 import { RecruiterProfileModule } from './recruiter-profile/recruiter-profile.module';
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
-
+import { LayoutModule } from "../../../Layouts/layout.module";
+import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
 @NgModule({
   declarations: [
     RecruiterMainPageComponent,
@@ -27,6 +27,7 @@ import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edi
     RecruiterClosedJobsPageComponent,
     RecruiterJobApplicantsPageComponent,
     RecruiterEditJobPageComponent,
+    RecruiterEditProfileComponent
   ],
   imports: [
     CommonModule,
@@ -34,11 +35,11 @@ import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edi
     RecruiterProfileRoutingModule,
     RecruiterProfileModule,
     HttpClientModule,
-    LayoutModule,
     FormsModule,
-    ReactiveFormsModule ,
-    SharedModule
-  ],
+    ReactiveFormsModule,
+    SharedModule,
+    LayoutModule
+],
   providers: [DatePipe],
 })
 export class RecruiterPageModule { }

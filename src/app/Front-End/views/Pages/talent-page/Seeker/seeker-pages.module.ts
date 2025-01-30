@@ -16,6 +16,10 @@ import { LayoutModule } from '../../../Layouts/layout.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { SeekerProfileModule } from './seeker-profile/seeker-profile.module';
 import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-routing.module';
+
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { SeekerEditProfileComponent } from './seeker-edit-profile/seeker-edit-profile.component';
+
 @NgModule({
   declarations: [
     SeekerMainPageComponent,
@@ -26,6 +30,8 @@ import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-rout
     SeekerLaunchpadComponent,
     SeekerManageProjectPageComponent,
     SeekerPostProjectPageComponent ,
+    ProjectDetailsComponent,
+    SeekerEditProfileComponent
 
   ],
   imports: [

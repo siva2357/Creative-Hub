@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TalentMainPageComponent } from './talent-main-pagecomponent';
+import { TalentMainPageComponent } from './talent-main-page.component';
 
 describe('TalentPageComponent', () => {
   let component: TalentMainPageComponent;

@@ -7,12 +7,10 @@ import { SeekerJobProfileComponent } from './seeker-jobProfile/seeker-jobProfile
 import { SeekerLaunchpadComponent } from './seeker-launchPad/seeker-launchPad.component';
 import { SeekerPostProjectPageComponent } from './seeker-post-project/seeker-post-project.component';
 import { SeekerManageProjectPageComponent } from './seeker-manage-project/seeker-manage-project.component';
-import { SeekerProfilePageComponent } from './seeker-profile/seeker-profile-page.component';
-
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { SeekerEditProfileComponent } from './seeker-edit-profile/seeker-edit-profile.component';
 const routes: Routes = [
-	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-
 	{
 	  path: '', component:  SeekerMainPageComponent, // Main layout component with sidebar
 	  children: [
@@ -23,6 +21,8 @@ const routes: Routes = [
 		{ path: 'portfolio', component: SeekerPortfolioComponent }, // Profile page route
 		{ path: 'jobProfile', component: SeekerJobProfileComponent }, // Profile page route
 		{ path: 'launchPad', component: SeekerLaunchpadComponent }, // Profile page route
+    { path: 'project-details/:id', component: ProjectDetailsComponent }, // Profile page route
+    {path:  'edit-profile/:id', component: SeekerEditProfileComponent, title: 'Seeker Edit Profile Page' },
 	  ]
 	}
   ];

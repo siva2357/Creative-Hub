@@ -9,6 +9,7 @@ import { RecruiterClosedJobsPageComponent } from './recruiter-closed-jobs/recrui
 import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/recruiter-job-applicants.component';
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
 import { RecruiterSeekerProfileComponent } from './recruiter-seeker-profile/recruiter-seeker-profile.component';
+import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
 
 
 
@@ -27,7 +28,9 @@ const routes: Routes = [
 		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent } ,// Hire Seeker page route
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent }, // Hire Seeker page route
-    { path:'seeker-profile', component: RecruiterSeekerProfileComponent}
+    { path:'seeker-profile', component: RecruiterSeekerProfileComponent},
+    { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page'  },
+
 	  ]
 	}
   ];

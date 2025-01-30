@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
-import { LayoutModule } from '../../../Layouts/layout.module';
 import { AdminPageComponent } from './admin-page.component';
 import { AdminPagesRoutingModule } from './admin-pages-routing.module';
 
@@ -13,6 +12,7 @@ import { AdminManageUserPageComponent } from './admin-manage-users/admin-manage-
 import { AdminProfilePageComponent } from './admin-profile/admin-profile-page.component';
 import { AdminUserActivityPageComponent } from './admin-user-activity/admin-user-activity.component';
 import { AdminUserDataPageComponent } from './admin-user-data/admin-user-data.component';
+import { LayoutModule } from "../../../Layouts/layout.module";
 @NgModule({
   declarations: [
     AdminPageComponent,
@@ -25,11 +25,11 @@ import { AdminUserDataPageComponent } from './admin-user-data/admin-user-data.co
   imports: [
     CommonModule,
     HttpClientModule,
-    LayoutModule,
     FormsModule,
-    ReactiveFormsModule ,
-    AdminPagesRoutingModule
-  ],
+    ReactiveFormsModule,
+    AdminPagesRoutingModule,
+    LayoutModule
+],
   providers: [DatePipe],
 
 })

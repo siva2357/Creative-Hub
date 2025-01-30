@@ -9,7 +9,6 @@ import { RecruiterCertificationPageComponent } from './recruiter-certification-p
 import { RouterModule } from '@angular/router';
 import { RecruiterProfileRoutingModule} from './recruiter-profile-routing.module';
 import { RecruiterResumePageComponent } from './recruiter-resume-page/recruiter-resume-page.component';
-import { LayoutModule } from "../../../../Layouts/layout.module";
 import { RecruiterSkillsPageComponent } from './recruiter-skills-page/recruiter-skills-page.component';
 
 @NgModule({
@@ -28,7 +27,6 @@ import { RecruiterSkillsPageComponent } from './recruiter-skills-page/recruiter-
     ReactiveFormsModule,
     RouterModule,
     RecruiterProfileRoutingModule,
-    LayoutModule
 ],
   providers: [],
 })
