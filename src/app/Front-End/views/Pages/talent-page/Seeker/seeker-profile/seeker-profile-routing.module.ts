@@ -1,31 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { SeekerProfilePageComponent } from './seeker-profile-page.component';
 import { SeekerBasicDetailsComponent } from './seeker-basic-details/seeker-basic-details.component';
 import { SeekerEducationDetailsComponent } from './seeker-education-details/seeker-education-details.component';
-import { SeekerProfilePageComponent } from './seeker-profile-page.component';
 import { SeekerSkillsPageComponent } from './seeker-skills-page/seeker-skills-page.component';
 import { SeekerCertificationPageComponent } from './seeker-certification-page/seeker-certification-page.component';
 import { SeekerResumePageComponent } from './seeker-resume-page/seeker-resume-page.component';
 
-
 const routes: Routes = [
-	{
-	  path: '',
-	  component: SeekerProfilePageComponent,
+	{ path: '', component: SeekerProfilePageComponent,
 	  children: [
 		{ path: '', redirectTo: 'basic', pathMatch: 'full' },
-		{ path: 'basic', component: SeekerBasicDetailsComponent },
+		{ path: 'basic', component:  SeekerBasicDetailsComponent },
 		{ path: 'education', component: SeekerEducationDetailsComponent },
-		{ path: 'skills', component: SeekerSkillsPageComponent },
-		{ path: 'certifications', component: SeekerCertificationPageComponent },
-		{ path: 'resume', component: SeekerResumePageComponent },
-
+		{ path: 'skills', component:   SeekerSkillsPageComponent },
+		{ path: 'certifications', component:  SeekerCertificationPageComponent },
+		{ path: 'resume', component: SeekerResumePageComponent  },
 	  ]
 	}
   ];
-  
-  
-  
+
+
+
 
 
 @NgModule({

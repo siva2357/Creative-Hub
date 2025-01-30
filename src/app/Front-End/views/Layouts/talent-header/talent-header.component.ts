@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user-registration.model';
 import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 
 @Component({
@@ -7,25 +8,58 @@ import { AuthService } from 'src/app/Front-End/core/services/auth.service';
   templateUrl: './talent-header.component.html',
   styleUrls: ['./talent-header.component.css']
 })
-export class TalentHeaderComponent implements OnInit{
+export class TalentHeaderComponent implements OnInit {
 
-  userName: string | null = null;// Variable to hold the username
-  userRole: string | null = null;// Variable to hold the username
-  userProfileImage: string |  null = null;// URL for the user's profile image
+  userProfileImage: string | null = null; // URL for the user's profile image
+  public userDetails!: any; // This will hold the user details
 
-  constructor(private authService: AuthService, private router: Router) { }
 
+  @Output() userDetailsEmitter = new EventEmitter<Seeker | Recruiter>();
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userName = this.authService.getUserName();
-    this.userRole = this.authService.getRole(); // Get role if needed
-    this.userProfileImage = this.authService.getUserProfile(); // Repla
+    const userData = localStorage.getItem('userData');
+
+    if (!userData) {
+      console.error('User not logged in. Redirecting to login...');
+      this.router.navigate(['talent-page/login']); // Redirect if no user data
+      return;
+    }
+
+    this.loadUserProfile();
   }
 
-  logout() {
+  private hasValidExtension(url: string, validExtensions: string[]): boolean {
+    const ext = url.split('?')[0].toLowerCase();
+    const extension = ext.split('.').pop() || '';
+    return validExtensions.includes(extension);
+  }
+
+  isImage(url: string): boolean {
+    return this.hasValidExtension(url, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+  }
+
+  logout(): void {
     this.authService.logout();
     this.router.navigate(['/talent-page/login']);
   }
 
+
+  loadUserProfile(): void {
+    this.authService.getUserDetails().subscribe({
+      next: (userDetails: any) => {
+        if (userDetails) {
+          this.userDetails = userDetails;
+          this.userDetailsEmitter.emit(this.userDetails); // Emit the user details to the parent component
+        } else {
+          console.error('User details not found.');
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching user details:', error);
+      }
+    });
+  }
 
 }

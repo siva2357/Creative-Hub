@@ -1,383 +1,252 @@
 <div class="container-fluid  d-flex justify-content-center align-items-center vh-100" style="background: #11131c;">
 
   <div class="col-md-4">
-  
+
     <div *ngIf="!isLoading">
-  
-      <div class="card text-center"
-        style="border:  1px solid rgba(0, 0, 255, 0.7); box-shadow: 0 0 10px 5px rgba(0, 149, 255, 0.7);  border-radius: 20px; -webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px); background: radial-gradient(circle, rgba(255, 255, 255, 0.274), #11131c); ">
-  
+
+      <div class="card text-center" style="border:  1px solid rgba(0, 0, 255, 0.7); box-shadow: 0 0 10px 5px rgba(0, 149, 255, 0.7);  border-radius: 20px; -webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px); background: radial-gradient(circle, rgba(255, 255, 255, 0.274), #11131c); ">
+
+
+
         <div class="card-body p-5" style="border-radius: 15px;">
-  
-          <form *ngIf="step === 1" [formGroup]="signupDetails" (ngSubmit)="next()">
-            <div class="container">
-              <h4 class="text-center text-white">Signup Details</h4>
-  
-  
+
+          <!-- Step 1: Basic User Information -->
+          <div *ngIf="step === 1">
+            <form [formGroup]="registrationForm">
+              <!-- Full Name Input -->
+              <!-- This input field allows the user to enter their full name. It has validation to ensure the field is not empty and follows a specific format -->
               <div class="form-group row align-items-center mt-3">
                 <input
-                  [ngClass]="{'is-invalid': signupDetails.get('fullName')?.invalid && (signupDetails.get('fullName')?.touched || signupDetails.get('fullName')?.dirty)}"
+                  [ngClass]="{'is-invalid': registrationForm.get('fullName')?.invalid && (registrationForm.get('fullName')?.touched || registrationForm.get('fullName')?.dirty)}"
                   placeholder="Full Name" id="fullName" formControlName="fullName" type="text" class="form-control"
-                  style="height: 45px;  border-radius: 10px;" />
-                <div *ngIf="signupDetails.get('fullName')?.touched">
-                  <small *ngIf="signupDetails.get('fullName')?.errors?.['required']" class="text-danger"
+                  style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="registrationForm.get('fullName')?.touched">
+                  <small *ngIf="registrationForm.get('fullName')?.errors?.['required']" class="text-danger"
                     style="font-size: 13px;">Full Name is required.</small>
-                  <small *ngIf="signupDetails.get('fullName')?.errors?.['pattern']" class="text-danger">Invalid
-                    format. Must start with a capital letter.</small>
+                  <small *ngIf="registrationForm.get('fullName')?.errors?.['pattern']" class="text-danger">Invalid format. Must
+                    start with a capital letter.</small>
                 </div>
               </div>
-  
-  
+
+              <!-- Username Input -->
+              <!-- This input field allows the user to choose a username. It has validation to ensure the username follows the correct format -->
               <div class="form-group row align-items-center mt-3">
                 <input
-                  [ngClass]="{'is-invalid': signupDetails.get('userName')?.invalid && signupDetails.get('userName')?.touched}"
+                  [ngClass]="{'is-invalid': registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched}"
                   placeholder="Username" id="userName" formControlName="userName" type="text" class="form-control"
                   style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="signupDetails.get('userName')?.invalid && signupDetails.get('userName')?.touched">
-                  <small *ngIf="signupDetails.get('userName')?.errors?.['required']" class="text-danger"
+                <div *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
+                  <small *ngIf="registrationForm.get('userName')?.errors?.['required']" class="text-danger"
                     style="font-size: 13px;">Username is required.</small>
-                  <small *ngIf="signupDetails.get('userName')?.errors?.['pattern']" class="text-danger">Invalid
-                    Username format.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="gender" formControlName="gender" class="form-select"
-                  [ngClass]="{'is-invalid':  signupDetails.get('gender')?.invalid &&  signupDetails.get('gender')?.touched}"
-                  style=" height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected>Select Gender</option>
-                  <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
-                </select>
-                <div *ngIf="signupDetails.get('gender')?.touched">
-                  <small *ngIf="signupDetails.get('gender')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Gender is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': signupDetails.get('email')?.invalid && signupDetails.get('email')?.touched}"
-                  placeholder="Email Address" id="email" formControlName="email" type="email" class="form-control"
-                  style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="signupDetails.get('email')?.touched">
-                  <small *ngIf="signupDetails.get('email')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Email is required.</small>
-                  <small *ngIf="signupDetails.get('email')?.errors?.['pattern']" class="text-danger">Invalid Email
+                  <small *ngIf="registrationForm.get('userName')?.errors?.['pattern']" class="text-danger">Invalid Username
                     format.</small>
                 </div>
               </div>
-  
+
+              <!-- Email Input -->
+              <!-- This input field allows the user to enter their email address. It has validation to ensure a valid email format -->
               <div class="form-group row align-items-center mt-3">
                 <input
-                  [ngClass]="{'is-invalid': signupDetails.get('password')?.invalid && signupDetails.get('password')?.touched}"
-                  placeholder="Create Password" id="password" formControlName="password" type="password"
-                  class="form-control" style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="signupDetails.get('password')?.touched">
-                  <small *ngIf="signupDetails.get('password')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Password is required.</small>
-                  <small *ngIf="signupDetails.get('password')?.errors?.['pattern']" class="text-danger">Invalid
-                    Password format.</small>
+                  [ngClass]="{'is-invalid': registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched}"
+                  placeholder="Email Address" id="email" formControlName="email" type="email" class="form-control"
+                  style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="registrationForm.get('email')?.touched">
+                  <small *ngIf="registrationForm.get('email')?.errors?.['required']" class="text-danger"
+                    style="font-size: 13px;">Email is required.</small>
+                  <small *ngIf="registrationForm.get('email')?.errors?.['pattern']" class="text-danger">Invalid Email
+                    format.</small>
                 </div>
               </div>
-  
+
+              <!-- Navigation Buttons -->
+              <!-- These buttons allow the user to navigate to the next or previous step in the form -->
+              <div class="row justify-content-between mt-3">
+                <div class="col-auto">
+                  <button (click)="previous()" class="btn btn-secondary" type="button">Previous</button>
+                </div>
+                <div class="col-auto">
+                  <button (click)="next()" class="btn btn-success" [disabled]="!isStepValid()" type="button">Next</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 2: Password and Confirmation -->
+          <!-- This section allows the user to set a password and confirm it -->
+          <div *ngIf="step === 2">
+            <form [formGroup]="registrationForm">
+              <!-- Password Input -->
               <div class="form-group row align-items-center mt-3">
                 <input
-                  [ngClass]="{'is-invalid': signupDetails.get('confirmPassword')?.invalid && signupDetails.get('confirmPassword')?.touched}"
+                  [ngClass]="{'is-invalid': registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched}"
+                  placeholder="Create Password" id="password" formControlName="password" type="password" class="form-control"
+                  style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="registrationForm.get('password')?.touched">
+                  <small *ngIf="registrationForm.get('password')?.errors?.['required']" class="text-danger"
+                    style="font-size: 13px;">Password is required.</small>
+                  <small *ngIf="registrationForm.get('password')?.errors?.['pattern']" class="text-danger">Invalid Password
+                    format.</small>
+                </div>
+              </div>
+
+              <!-- Confirm Password Input -->
+              <div class="form-group row align-items-center mt-3">
+                <input
+                  [ngClass]="{'is-invalid': registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched}"
                   placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" type="password"
-                  class="form-control" style=" height: 45px; border-radius: 10px;" />
+                  class="form-control" style="height: 45px; border-radius: 10px;" />
                 <small
-                  *ngIf="signupDetails.get('confirmPassword')?.touched && signupDetails.get('confirmPassword')?.hasError('required')"
+                  *ngIf="registrationForm.get('confirmPassword')?.touched && registrationForm.get('confirmPassword')?.hasError('required')"
                   class="text-danger" style="font-size: 13px;">Confirm Password is required.</small>
-                <small *ngIf="signupDetails.hasError('mismatch') && signupDetails.get('confirmPassword')?.touched"
+                <small *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('confirmPassword')?.touched"
                   class="text-danger">Passwords do not match.</small>
               </div>
-  
+
+              <!-- Navigation Buttons -->
               <div class="row justify-content-between mt-3">
                 <div class="col-auto">
-                  <button class="btn btn-secondary " (click)="back()">Back</button>
+                  <button (click)="previous()" class="btn btn-secondary" type="button">Previous</button>
                 </div>
                 <div class="col-auto">
-                  <button class="btn btn-primary" type="submit" [disabled]="signupDetails.invalid">Next</button>
+                  <button (click)="next()" class="btn btn-success" [disabled]="!isStepValid()" type="button">Next</button>
                 </div>
               </div>
-  
-            </div>
-          </form>
-  
-          <form *ngIf="step === 2" [formGroup]="contactDetails" (ngSubmit)="next()">
-            <div class=" container mt-3 mb-3">
-              <h4 class="text-center text-white">Contact Details</h4>
-  
-              <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': contactDetails.get('phoneNumber')?.invalid && (contactDetails.get('phoneNumber')?.touched || contactDetails.get('phoneNumber')?.dirty)}"
-                  placeholder="Phone Number" id="phoneNumber" formControlName="phoneNumber" type="text"
-                  class="form-control" style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="contactDetails.get('phoneNumber')?.touched">
-                  <small *ngIf="contactDetails.get('phoneNumber')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Phone Number is required.</small>
-                </div>
+            </form>
+          </div>
+
+          <!-- Step 3: Profile Upload -->
+          <div *ngIf="step === 3">
+            <form [formGroup]="registrationForm">
+              <!-- Profile Upload Header -->
+              <div class="container mt-3 mb-3">
+                <h4 class="text-center text-white">Profile Upload</h4>
               </div>
-  
-              <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': contactDetails.get('streetAddress')?.invalid && (contactDetails.get('streetAddress')?.touched || contactDetails.get('streetAddress')?.dirty)}"
-                  placeholder="Street Address" id="streetAddress" formControlName="streetAddress" type="text"
-                  class="form-control" style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="contactDetails.get('streetAddress')?.touched">
-                  <small *ngIf="contactDetails.get('streetAddress')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Street address is required.</small>
+
+              <!-- Profile Upload Image -->
+              <!-- <div class="form-group col text-center step-container" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 100%;">
+                        <div class="card-profile-body rounded-4 profile-container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid black; width: 180px; height: 180px; overflow: hidden;">
+                          <div class="profile-avatar rounded-circle" style="width: 150px; height: 150px; overflow: hidden; border: 2px solid black;">
+                           <div *ngIf="ifPreview">
+                            <ng-container *ngIf="fileType === 'image'">
+                              <img id="avatarImage" [src]="'https://res.cloudinary.com/dpp8aspqs/image/upload/v1733121824/profie_images_opbm8k.png'" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                              <img [src]="previewURL" class="card-img-top" id="avatarImage" style=" height: 200px;" alt="Preview Image">
+                            </ng-container>
+                            <i class="bi bi-x-circle-fill position-absolute text-danger" style=" right: 5px; font-size: 1.5rem; cursor: pointer;" (click)="deletePreview()"></i>
+                           </div>
+                           <div *ngIf="!ifPreview">
+                            <img id="avatarImage" [src]="'https://res.cloudinary.com/dpp8aspqs/image/upload/v1733121824/profie_images_opbm8k.png'" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                          </div>
+                          </div>
+                        </div>
+
+                        <small class="text-muted mt-2" style="font-size: 12px; display: flex; align-items: center;">
+                          <span style="margin-right: 5px;"><i class="bi bi-info-circle" style="font-size: 1rem; color: rgb(0, 110, 255);"></i></span>
+                          Allowed formats: JPEG, PNG, JPG
+                        </small>
+
+
+                        <div class="progress w-75 mt-3 mb-5 " *ngIf="fileUploadProgress" role="progressbar" aria-label="Dynamic File Upload Progress">
+                          <div class="progress-bar" [style.width.%]="fileUploadProgress | async">
+                              {{ fileUploadProgress | async }}%
+                          </div>
+                      </div>
+
+
+
+          <div *ngIf="uploadComplete" class="mt-3">
+              <p class="text-success">Upload Completed!</p>
+          </div>
+
+
+                        <div class="mt-3">
+                          <button type="button" class="btn btn-primary rounded-3 upload-button px-3 d-flex align-items-center" title="Upload" (click)="fileInput.click()">
+                            <i class="bi bi-cloud-arrow-up upload-icon-style me-2" style="font-size: 1rem;"></i>
+                            <span class="upload-text">Upload</span>
+                          </button>
+                          <input type="file" #fileInput id=" profilePicture" formControlName="profilePicture" class="d-none" (change)="uploadFile($event)">
+                        </div>
+
+                      </div> -->
+
+              <!-- Profile Upload Image -->
+              <div class="form-group col text-center step-container"
+                style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 100%;">
+                <div class="card-profile-body rounded-4 profile-container"
+                  style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid black; width: 180px; height: 180px; overflow: hidden;">
+
+                  <!-- Image Preview -->
+                  <div *ngIf="ifPreview && fileType === 'image'">
+                    <img [src]="previewURL" class="card-img-top" id="avatarImage" style="height: 200px;" alt="Preview Image">
+                    <i class="bi bi-x-circle-fill position-absolute text-danger"
+                      style="right: 5px; font-size: 1.5rem; cursor: pointer;" (click)="deletePreview()"></i>
+                  </div>
+
+                  <!-- Placeholder Image when no file selected -->
+                  <div *ngIf="!ifPreview">
+                    <img id="avatarImage"
+                      [src]="previewURL||'https://res.cloudinary.com/dpp8aspqs/image/upload/v1733121824/profie_images_opbm8k.png'"
+                      alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+
                 </div>
+
+                <small class="text-muted mt-2" style="font-size: 12px; display: flex; align-items: center;">
+                  <span style="margin-right: 5px;"><i class="bi bi-info-circle"
+                      style="font-size: 1rem; color: rgb(0, 110, 255);"></i></span>
+                  Allowed formats: JPEG, PNG, JPG
+                </small>
+
+                <!-- Upload Progress Bar -->
+                <div class="progress w-75 mt-3 mb-5" *ngIf="fileUploadProgress" role="progressbar"
+                  aria-label="Dynamic File Upload Progress">
+                  <div class="progress-bar" [style.width.%]="fileUploadProgress | async">
+                    {{ fileUploadProgress | async }}%
+                  </div>
+                </div>
+
+                <!-- Success message when upload is completed -->
+                <div *ngIf="uploadComplete" class="mt-3">
+                  <p class="text-success">Upload Completed!</p>
+                </div>
+
+                <!-- Upload Button -->
+                <div class="mt-3">
+                  <button type="button" class="btn btn-primary rounded-3 upload-button px-3 d-flex align-items-center"
+                    title="Upload" (click)="fileInput.click()">
+                    <i class="bi bi-cloud-arrow-up upload-icon-style me-2" style="font-size: 1rem;"></i>
+                    <span class="upload-text">Upload</span>
+                  </button>
+                  <input type="file" #fileInput id="profilePicture" formControlName="profilePicture" class="d-none"
+                    (change)="uploadFile($event)">
+                </div>
+
               </div>
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="city" formControlName="city" class="form-select"
-                  [ngClass]="{'is-invalid':  contactDetails.get('city')?.invalid &&  contactDetails.get('city')?.touched}"
-                  style="height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected>Select City</option>
-                  <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
-                </select>
-                <div *ngIf="contactDetails.get('city')?.touched">
-                  <small *ngIf="contactDetails.get('city')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">City is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="state" formControlName="state" class="form-select"
-                  [ngClass]="{'is-invalid':  contactDetails.get('state')?.invalid &&  contactDetails.get('state')?.touched}"
-                  style="height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected>Select State</option>
-                  <option *ngFor="let state of states" [value]="state">{{ state }}</option>
-                </select>
-                <div *ngIf="contactDetails.get('state')?.touched">
-                  <small *ngIf="contactDetails.get('state')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">State is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="country" formControlName="country" class="form-select"
-                  [ngClass]="{'is-invalid':  contactDetails.get('country')?.invalid &&  contactDetails.get('country')?.touched}"
-                  style="height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected>Select Country</option>
-                  <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
-                </select>
-                <div *ngIf="contactDetails.get('country')?.touched">
-                  <small *ngIf="contactDetails.get('country')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Country is required.</small>
-                </div>
-              </div>
-  
-              <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': contactDetails.get('pincode')?.invalid && (contactDetails.get('pincode')?.touched ||  contactDetails.get('pincode')?.dirty)}"
-                  placeholder="Pincode" id="pincode" formControlName="pincode" type="text" class="form-control"
-                  style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="contactDetails.get('pincode')?.touched">
-                  <small *ngIf="contactDetails.get('pincode')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Pincode is required.</small>
-                </div>
-              </div>
-  
-              <div class="row justify-content-between mt-3">
-                <div class="col-auto">
-                  <button (click)="previous()" class="btn btn-secondary">Previous</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="submit" [disabled]="contactDetails.invalid">Next</button>
-                </div>
-              </div>
-  
-  
-            </div>
-          </form>
-  
-  
-          <form *ngIf="step === 3" [formGroup]="educationDetails" (ngSubmit)="next()">
-            <div class=" container mt-3 mb-3">
-              <h4 class="text-center text-white">Education Details</h4>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="instituteName" formControlName="instituteName" class="form-select"
-                  [ngClass]="{'is-invalid': educationDetails.get('instituteName')?.invalid &&  educationDetails.get('instituteName')?.touched}"
-                  style="height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected style="font-size: 14px;">Select Institute</option>
-                  <option *ngFor="let institute of instituteName" [value]="institute" style="font-size: 14px;">{{
-                    institute }}</option>
-                </select>
-                <div *ngIf="educationDetails.get('instituteName')?.touched">
-                  <small *ngIf="educationDetails.get('instituteName')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Insititute Name is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="programOrDegree" formControlName="programOrDegree" class="form-select"
-                  [ngClass]="{'is-invalid': educationDetails.get('programOrDegree')?.invalid &&  educationDetails.get('programOrDegree')?.touched}"
-                  style="height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected style="font-size: 14px;">Select Program Or Degree</option>
-                  <option *ngFor="let program of  programOrDegree" [value]="program" style="font-size: 14px;">{{
-                    program }}</option>
-                </select>
-                <div *ngIf="educationDetails.get('programOrDegree')?.touched">
-                  <small *ngIf="educationDetails.get('programOrDegree')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Program Or Degree is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="departmentName" formControlName="departmentName" class="form-select"
-                  [ngClass]="{'is-invalid': educationDetails.get('departmentName')?.invalid &&  educationDetails.get('departmentName')?.touched}"
-                  style="height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected style="font-size: 14px;">Select Department Name</option>
-                  <option *ngFor="let  department of   departmentName" [value]=" department" style="font-size: 14px;">
-                    {{ department }}</option>
-                </select>
-                <div *ngIf="educationDetails.get('departmentName')?.touched">
-                  <small *ngIf="educationDetails.get('departmentName')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Department Name is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <select id="branchOrSpecialization" formControlName="branchOrSpecialization" class="form-select"
-                  [ngClass]="{'is-invalid': educationDetails.get('branchOrSpecialization')?.invalid &&  educationDetails.get('branchOrSpecialization')?.touched}"
-                  style="height: 45px; border-radius: 10px;">
-                  <option value="" disabled selected style="font-size: 14px;">Select Branch Or Specialization</option>
-                  <option *ngFor="let branch of  branchName" [value]="branch" style="font-size: 14px;">{{ branch }}
-                  </option>
-                </select>
-                <div *ngIf="educationDetails.get('branchOrSpecialization')?.touched">
-                  <small *ngIf="educationDetails.get('branchOrSpecialization')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Branch Or Specialization is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': educationDetails.get('instituteRollNumber')?.invalid && (educationDetails.get('instituteRollNumber')?.touched || educationDetails.get('instituteRollNumber')?.dirty)}"
-                  placeholder="Institute Roll Number" id="instituteRollNumber" formControlName="instituteRollNumber"
-                  type="text" class="form-control" style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="educationDetails.get('instituteRollNumber')?.touched">
-                  <small *ngIf="educationDetails.get('instituteRollNumber')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Institute Roll Number is required.</small>
-                </div>
-              </div>
-  
-  
-              <div class="row justify-content-between mt-3">
-                <div class="col-auto">
-                  <button (click)="previous()" class="btn btn-secondary">Previous</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="submit" [disabled]="educationDetails.invalid">Next</button>
-                </div>
-              </div>
-  
-  
-            </div>
-          </form>
-  
-          <form *ngIf="step === 4" [formGroup]="bioDetails" (ngSubmit)="next()">
-            <div class=" container mt-3 mb-3">
-              <h4 class="text-center text-white">Bio Details</h4>
-  
-              <div class="form-group row align-items-center mt-3">
-                <textarea
-                  [ngClass]="{'is-invalid': bioDetails.get('bio')?.invalid && (bioDetails.get('bio')?.touched || bioDetails.get('bio')?.dirty)}"
-                  placeholder="Enter your bioDetails or objective" id="bio" formControlName="bio" class="form-control"
-                  style="height: 300px; border-radius: 10px; "></textarea>
-                <div *ngIf="bioDetails.get('bio')?.touched">
-                  <small *ngIf="bioDetails.get('bio')?.errors?.['required']" class="text-danger" style="font-size: 13px;">
-                    Bio Details is required.
-                  </small>
-                </div>
-              </div>
-  
-  
-              <div class="row justify-content-between mt-3">
-                <div class="col-auto">
-                  <button (click)="previous()" class="btn btn-secondary">Previous</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="submit" [disabled]="bioDetails.invalid">Next</button>
-                </div>
-              </div>
-  
-            </div>
-          </form>
-  
-          <form *ngIf="step === 5" [formGroup]="profileDetails" (ngSubmit)="submit()">
-            <div class="container mt-3 mb-3">
-              <h4 class="text-center text-white">Profile Upload</h4>
-            </div>
-  
-  
-            <div class="form-group col text-center step-container"
-              style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 100%;">
-              <div class="card-profile-body  rounded-4 profile-container"
-                style=" display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid black; width: 180px; height: 180px;  overflow: hidden;">
-                <div class="profile-avatar rounded-circle"
-                  style="width: 150px; height: 150px; overflow: hidden; border: 2px solid black;">
-                  <img id="avatarImage"
-                    [src]="profileUploadUrl || 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1733121824/profie_images_opbm8k.png'"
-                    alt="Avatar" style=" width: 100%; height: 100%; object-fit: cover;">
-                </div>
-              </div>
-  
-              <small class="text-muted mt-2" style="font-size: 12px; display: flex; align-items: center;">
-                <span style="margin-right: 5px;"><i class="bi bi-info-circle"
-                    style="font-size: 1rem; color: rgb(0, 110, 255);"></i></span>
-                Allowed formats: JPEG, PNG, JPG
-              </small>
-  
-              <div class="mt-3">
-                <button type="button" class="btn btn-primary rounded-3 upload-button px-3 d-flex align-items-center"
-                  title="Upload" (click)="fileInput.click()">
-                  <i class="bi bi-cloud-arrow-up upload-icon-style me-2" style="font-size: 1rem;"></i>
-                  <span class="upload-text">Upload</span>
-                </button>
-  
-                <input type="file" #fileInput id="profileUpload" formControlName="profileUpload" class="d-none"
-                  (change)="handleFileUpload($event)">
-              </div>
-  
-            </div>
-  
+
+            </form>
+
+            <!-- Navigation Buttons -->
             <div class="row justify-content-between mt-3">
               <div class="col-auto">
-                <button (click)="previous()" class="btn btn-secondary">Previous</button>
+                <button (click)="previous()" class="btn btn-secondary" type="button">Previous</button>
               </div>
               <div class="col-auto">
-                <button type="submit" class="btn btn-success" [disabled]="profileDetails.invalid">Submit</button>
+                <button type="submit" class="btn btn-success" [disabled]="registrationForm.invalid"
+                  (click)="submit()">Submit</button>
               </div>
             </div>
-  
-  
-  
-          </form>
-  
-  
-          <div class="col-12 justify-content-center mt-3">
-            <p class="mb-0 text-center fs-6 text-white">Already a member?
-              <span class="text-primary" (click)="LoginPage()" style="cursor: pointer;">Login</span>
-            </p>
           </div>
-  
+
+          <!-- Login Link -->
+          <div class="col-12 justify-content-center mt-3">
+            <p class="mb-0 text-center fs-6 text-white">Already a member? <span class="text-primary" (click)="LoginPage()"
+                style="cursor: pointer;">Login</span></p>
+          </div>
         </div>
-  
-  
-  
+
+
+
+
+
         <div class="row d-flex justify-content-center align-items-center spinner-wrapper" *ngIf="isLoading">
           <div class="text-center">
             <div class="spinner-border" role="status">
@@ -387,14 +256,14 @@
               <!-- <p *ngIf="registrationSuccess">Redirecting you to confirmation page</p>
                       <p *ngIf="!registrationSuccess">Redirecting to signup page...</p> -->
               <p>Registering you account details</p>
-  
+
             </div>
           </div>
         </div>
-  
+
       </div>
     </div>
-  
+
   </div>
 
 </div>

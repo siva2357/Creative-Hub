@@ -13,7 +13,7 @@ export class TalentLoginComponent {
   loginDetails!: FormGroup;
 
   isLoading: boolean = false;
-  loginSuccess: boolean = false; 
+  loginSuccess: boolean = false;
 
   submitted = false;
   errorMessage = '';
@@ -37,7 +37,7 @@ export class TalentLoginComponent {
 
     // Log the form value for debugging
     console.log('Form Submitted:', this.loginDetails.value);
-    
+
     // Stop if form is invalid and mark all controls as touched
     if (this.loginDetails.invalid) {
         console.log('Form is invalid');
@@ -53,26 +53,26 @@ export class TalentLoginComponent {
     // Call the login API
     this.authService.login(this.loginDetails.value).subscribe(
         response => {
-            console.log('Login response:', response); 
+            console.log('Login response:', response);
             this.alertService.showLoginSuccess(); // Show success alert
             this.loginSuccess = true;
-            
-            const userType = response.role;
-            this.authService.setUserRole(userType);
+
+            const user = response;
+            this.authService.setUserData(user);
 
             // Delay for 3 seconds before navigating
             setTimeout(() => {
                 this.isLoading = false; // Stop loading indicator
 
                 // Navigate based on the user role after the delay
-                if (userType === 'recruiter') {
+                if (user.role === 'recruiter') {
                   this.router.navigate(['talent-page/recruiter']); // Redirect to Recruiter's Dashboard
-                } else if (userType === 'seeker') {
+                } else if (user.role === 'seeker') {
                     this.router.navigate(['talent-page/seeker']);
-                } else if (userType === 'admin') {
+                } else if (user.role === 'admin') {
                     this.router.navigate(['talent-page/admin']);
                 } else {
-                    console.warn('Unknown user role:', userType);
+                    console.warn('Unknown user role:', user);
                 }
             }, 3000);
         },
@@ -82,15 +82,10 @@ export class TalentLoginComponent {
             this.isLoading = false; // Stop loading indicator on error
         }
     );
+
+
 }
 
-
-
-
-  
-  login() {
-    this.router.navigate(['talent-page/login']); // Corrected navigation
-  }
 
   // Navigate to register page
   register() {

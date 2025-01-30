@@ -7,11 +7,12 @@ import { SeekerJobProfileComponent } from './seeker-jobProfile/seeker-jobProfile
 import { SeekerLaunchpadComponent } from './seeker-launchPad/seeker-launchPad.component';
 import { SeekerPostProjectPageComponent } from './seeker-post-project/seeker-post-project.component';
 import { SeekerManageProjectPageComponent } from './seeker-manage-project/seeker-manage-project.component';
+import { SeekerProfilePageComponent } from './seeker-profile/seeker-profile-page.component';
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  
+
 	{
 	  path: '', component:  SeekerMainPageComponent, // Main layout component with sidebar
 	  children: [

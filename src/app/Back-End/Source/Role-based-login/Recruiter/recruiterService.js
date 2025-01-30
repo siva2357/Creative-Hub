@@ -1,7 +1,5 @@
 const Recruiter = require('./recruiterModel');
 
-
-// Custom error class for duplicate entries
 class DuplicateError extends Error {
     constructor(message) {
         super(message);
@@ -9,66 +7,98 @@ class DuplicateError extends Error {
     }
 }
 
-
-// Service to check if full name exists
-async function checkRecruiterFullNameExists(fullName) {
-    const existingFullName = await Recruiter.findOne({
-        'registrationDetails.signupDetails.fullName': fullName
-    });
-    if (existingFullName) {
-        throw new DuplicateError('Full name already exists.');
-    }
-}
-
-// Service to check if username exists
+// Helper functions to check for duplicate username and email
 async function checkRecruiterUsernameExists(userName) {
-    const existingUsername = await Recruiter.findOne({
-        'registrationDetails.signupDetails.userName': userName
-    });
+    const existingUsername = await Recruiter.findOne({ 'registrationDetails.userName': userName });
     if (existingUsername) {
         throw new DuplicateError('Username already exists.');
     }
 }
 
-// Service to check if email exists
 async function checkRecruiterEmailExists(email) {
-    const existingEmail = await Recruiter.findOne({
-        'registrationDetails.signupDetails.email': email
-    });
+    const existingEmail = await Recruiter.findOne({ 'registrationDetails.email': email });
     if (existingEmail) {
         throw new DuplicateError('Email already exists.');
     }
 }
 
-// Service to create recruiter
-async function createRecruiterService(recruiterData) {
-    const { registrationDetails: { signupDetails } } = recruiterData;
+// Create a new Recruiter
+async function createRecruiterService(RecruiterData) {
+  const { registrationDetails } = RecruiterData;
 
-    // Validate incoming data
-    if (!signupDetails.fullName || !signupDetails.userName || !signupDetails.email) {
-        throw new Error('All fields are required.');
-    }
+  // Validate incoming data
+  if (!registrationDetails.userName || !registrationDetails.email || !registrationDetails.password) {
+    throw new Error('All fields are required.');
+}
 
-    // Validate uniqueness with separate functions
-    await checkRecruiterFullNameExists(signupDetails.fullName);
-    await checkRecruiterUsernameExists(signupDetails.userName);
-    await checkRecruiterEmailExists(signupDetails.email);
+  // Validate uniqueness with separate functions
+  await checkRecruiterUsernameExists(registrationDetails.userName);
+  await checkRecruiterEmailExists(registrationDetails.email);
 
-    // Create recruiter instance
-    const recruiter = new Recruiter(recruiterData);
-    
+  // Rename the variable to avoid conflict with the model name
+  const newRecruiter = new Recruiter(RecruiterData);
+
+  try {
+      await newRecruiter.save();
+      return newRecruiter;
+  } catch (error) {
+      throw new Error(`Error saving Recruiter: ${error.message}`);
+  }
+}
+
+
+// Update an existing Recruiter
+async function updateRecruiterService(id, updatedDetails) {
     try {
-        await recruiter.validate(); // Validate schema
-        await recruiter.save();     // Save to the database
-        return recruiter;           // Return the recruiter instance
+        const recruiter = await Recruiter.findByIdAndUpdate(id, { $set: updatedDetails }, { new: true });
+        return recruiter;
     } catch (error) {
-        throw new Error(`Error saving recruiter: ${error.message}`);
+        throw new Error(`Error updating Recruiter: ${error.message}`);
+    }
+}
+
+// Get all Recruiters
+async function getAllRecruitersService() {
+    try {
+        const Recruiters = await Recruiter.find();
+        return Recruiters;
+    } catch (error) {
+        throw new Error(`Error fetching Recruiters: ${error.message}`);
+    }
+}
+
+// Get Recruiter by ID
+async function getRecruiterByIdService(id) {
+    try {
+        const recruiter = await Recruiter.findById(id);
+        if (!Recruiter) {
+            throw new Error('Recruiter not found');
+        }
+        return recruiter;
+    } catch (error) {
+        throw new Error(`Error fetching Recruiter: ${error.message}`);
+    }
+}
+
+// Delete Recruiter by ID
+async function deleteRecruiterService(id) {
+    try {
+        const recruiter = await Recruiter.findByIdAndDelete(id);
+        if (!recruiter) {
+            throw new Error('Recruiter not found');
+        }
+        return 'Recruiter deleted successfully';
+    } catch (error) {
+        throw new Error(`Error deleting Recruiter: ${error.message}`);
     }
 }
 
 module.exports = {
     createRecruiterService,
-    checkRecruiterFullNameExists,
     checkRecruiterUsernameExists,
-    checkRecruiterEmailExists
+    checkRecruiterEmailExists,
+    updateRecruiterService,
+    getAllRecruitersService,
+    getRecruiterByIdService,
+    deleteRecruiterService
 };

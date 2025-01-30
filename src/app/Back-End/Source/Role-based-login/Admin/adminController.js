@@ -1,11 +1,10 @@
-// adminController.js
 const adminService = require('./adminService');
 
 // Controller to create the admin (this will only run once)
 async function createAdminController(req, res) {
     try {
         const newAdmin = await adminService.createAdminService();
-        return res.status(201).json(newAdmin);
+        return res.status(201).json({ message: 'Admin is initialized or already exists', admin: newAdmin });
     } catch (error) {
         return res.status(500).json({ message: `Error creating admin: ${error.message}` });
     }
@@ -21,7 +20,7 @@ async function adminLoginController(req, res) {
             return res.status(404).json({ message: 'Admin not found' });
         }
 
-        const isMatch = await bcrypt.compare(password, admin.password);
+        const isMatch = await bcrypt.compare(password, admin.registrationDetails.password);
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid password' });
         }
@@ -34,5 +33,5 @@ async function adminLoginController(req, res) {
 
 module.exports = {
     createAdminController,
-    
+    adminLoginController
 };
