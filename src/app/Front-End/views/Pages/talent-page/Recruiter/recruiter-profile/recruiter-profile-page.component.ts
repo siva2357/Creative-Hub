@@ -1,8 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileBar } from 'src/app/Front-End/core/models/sidebar-menu.model';
-import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user-registration.model';
-import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 @Component({
   selector: 'app-recruiter-profile-page',
   templateUrl: './recruiter-profile-page.component.html',
@@ -16,7 +14,7 @@ export class RecruiterProfilePageComponent {
     { label: 'Certifications', link: 'certifications'},
     { label: 'Resume, Docs & Write-ups', link: 'resume'},
   ];
-    constructor(private router: Router, private authService: AuthService) { }
+    constructor(private router: Router) { }
     ngOnInit(): void {
 
     }

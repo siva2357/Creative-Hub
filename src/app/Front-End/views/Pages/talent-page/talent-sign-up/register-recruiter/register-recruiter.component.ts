@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 import { Recruiter } from 'src/app/Front-End/core/models/user-registration.model';
-import { AlertService } from 'src/app/Front-End/core/services/alerts.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { Folder } from 'src/app/Front-End/core/enums/folder-name.enum';
@@ -37,8 +35,6 @@ export class RegisterRecruiterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
-    private alertService: AlertService,
     private domSanitizer: DomSanitizer,
     private storage: AngularFireStorage,
   ) {}
@@ -117,69 +113,11 @@ export class RegisterRecruiterComponent implements OnInit {
   }
 
 uploadFile(event: any) {
-  const file = event.target.files && event.target.files[0];
-  if (file) {
-
-    const filePath = `${Folder.Main_Folder}/${Folder.Recruiter_Folder}/${Folder.Recruiter_Sub_Folder_1}/${file.name}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
-    // this.previewURL = URL.createObjectURL(file);
-    this.previewURL = this.domSanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file));
-
-    this.fileType = this.getFileType(file);
-
-    this.fileUploadProgress = task.percentageChanges();
-    this.ifPreview = true;
-
-    task.snapshotChanges().subscribe({
-      next: (snapshot) => {
-        if (snapshot?.state === 'success') {
-          fileRef.getDownloadURL().subscribe((url) => {
-            console.log('File uploaded successfully. URL:', url);
-
-            // Store the file details for later submission
-            this.uploadedFileData = {
-              fileName: file.name,
-              url: url,
-              filePath: filePath // Save the file path for deletion
-            };
-            this.uploadComplete = true;
-          });
-        }
-      },
-      error: (error) => {
-        console.error('Upload error:', error);
-        this.errorMessage = 'File upload failed. Please try again.';
-      }
-    });
-
-  }
-
 }
 
 
 
 deletePreview(): void {
-  this.previewURL = null;
-  this.fileType = null;
-  this.fileUploadProgress = undefined;
-  this.uploadComplete =false;
-
-  if (this.uploadedFileData) {
-    const { filePath } = this.uploadedFileData;
-
-    this.storage.ref(filePath).delete().subscribe({
-      next: () => {
-        console.log('File deleted from Firebase Storage');
-        this.uploadedFileData = null;
-        this.ifPreview = false;
-      },
-      error: (error) => {
-        console.error('Error deleting file from Firebase Storage:', error);
-        this.errorMessage = 'Failed to delete the file. Please try again.';
-      }
-    });
-  }
 }
 
 
@@ -201,37 +139,6 @@ getFileType(file: File): string {
 
 
   submit() {
-    if (this.registrationForm.valid && this.uploadedFileData) {
-      const recruiterData: Recruiter  = {
-      registrationDetails: {
-        fullName: this.registrationForm.value.fullName,
-        userName: this.registrationForm.value.userName,
-        email: this.registrationForm.value.email,
-        password: this.registrationForm.value.password,
-        confirmPassword: this.registrationForm.value.confirmPassword,
-        profilePicture: this.uploadedFileData, //
-
-      }
-    };
-      console.log('Recruiter Data:', recruiterData); // Add this line to check the data
-      this.isSubmitting = true;
-      this.authService.registerRecruiter(recruiterData).subscribe({
-        next: () => {
-          this.registrationForm.reset({});
-          this.uploadedFileData = null;
-          this.isSubmitting = false;
-          this.previewURL = null;
-          this.ifPreview = false;
-          this.uploadComplete= false;
-          this.fileUploadProgress = undefined;
-        },
-        error: (err) => {
-          console.error('Error submitting project:', err);
-          this.errorMessage = 'Project submission failed. Please try again.';
-          this.isSubmitting = false;
-        }
-      });
-    }
   }
 
   LoginPage(): void {

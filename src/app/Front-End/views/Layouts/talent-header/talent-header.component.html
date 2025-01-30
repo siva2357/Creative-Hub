@@ -17,18 +17,17 @@
         </button>
 
 
-        <span class="me-3">{{userDetails?.registrationDetails?.userName}}</span>
+        <span class="me-3">Username</span>
 
 <button class="nav-link d-flex justify-content-center align-items-center rounded-circle text-decoration-none bg-white" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-  <img *ngIf="userDetails?.registrationDetails?.profilePicture?.url && isImage(userDetails.registrationDetails.profilePicture.url)" [src]="userDetails.registrationDetails.profilePicture.url" alt="Profile Image" style="width: 35px; height: 35px; border-radius: 50%;">
-  <img *ngIf="!userDetails?.registrationDetails?.profilePicture?.url || !isImage(userDetails.registrationDetails.profilePicture.url)" [src]="'https://res.cloudinary.com/dpp8aspqs/image/upload/v1737957959/profie_images_j53njq.png'" alt="Profile Image" style="width: 35px; height: 35px; border-radius: 50%;">
+  <img [src]="'https://res.cloudinary.com/dpp8aspqs/image/upload/v1737957959/profie_images_j53njq.png'" alt="Profile Image" style="width: 35px; height: 35px; border-radius: 50%;">
 </button>
 
 
         <div class="dropdown mt-5">
           <ul class="dropdown-menu dropdown-menu-end shadow">
 
-            <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer; font-size: 14px;">Sign Out</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer; font-size: 14px;">Sign Out</a></li>
           </ul>
         </div>
 

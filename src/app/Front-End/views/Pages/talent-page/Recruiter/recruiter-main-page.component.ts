@@ -1,6 +1,5 @@
 import { Component} from '@angular/core';
 import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
-import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user-registration.model';
 
 @Component({
   selector: 'app-recruiter-main-page',
@@ -9,9 +8,6 @@ import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user-registrati
 })
 export class RecruiterMainPageComponent {
   constructor() { }
-
-
-    userDetails!: Seeker | Recruiter;
 
   menu: MenuItem[] = [
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid' },
@@ -22,13 +18,5 @@ export class RecruiterMainPageComponent {
     { label: 'Job Applicants', link: 'job-applicants', icon: 'bi bi-people-fill' },
     { label: 'Hire Seeker', link: 'hire-seeker', icon: 'bi bi-person-add' },
   ];
-
-
-    handleUserDetails(userDetails: Seeker | Recruiter): void {
-      this.userDetails = userDetails;
-      // Here you can perform any further action, e.g., navigate or display more data
-      console.log('Received user details:', userDetails);
-    }
-
 
 }

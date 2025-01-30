@@ -19,30 +19,6 @@
     </thead>
     <tbody style="border: 1px solid; font-size: 14px;">
 
-        <tr style="border: 1px solid;" *ngFor="let job of jobs; let i = index">            
-            <td style="border: 1px solid; text-align: center; ">{{ i + 1 }}</td>
-            <td style="border: 1px solid; text-align: center;">{{job.jobId}}</td>
-            <td style="border: 1px solid; text-align: center;">{{job.jobRoleTitle}}</td>
-            <td style="border: 1px solid; text-align: center;">{{job.jobType}}</td>
-            <td style="border: 1px solid; text-align: center;">{{job.location}}</td>
-            <td style="border: 1px solid; text-align: center;">{{job.salary}}</td>
-
-            <td style="border: 1px solid; text-align: center;">{{ job.postedOn | date: 'dd-MM-yyyy' }}</td>
-
-            <td style="border: 1px solid; text-align: center;">{{job.status}}</td>
-            <td style="border: 1px solid;">
-              <div style=" display: flex; justify-content: space-around;">
-                <button  class="btn btn-sm btn-info" *ngIf="job.status == 'active'"  (click)="viewDetails(job)">View</button>
-                <button class="btn btn-sm btn-warning" *ngIf="job.status == 'active'" (click)="confirmClose(job)">Close</button>
-                <button class="btn btn-sm btn-info" *ngIf="job.status === 'closed'" (click)="confirmReopen(job)">Reopen</button>
-                <button class="btn btn-sm btn-danger" *ngIf="job.status === 'closed'" (click)="confirmDelete(job)">Delete</button>
-              </div>
-
-            </td>
-            
-        </tr>
-
-
     </tbody>
   </table>
 
@@ -50,7 +26,6 @@
 
 
 
-      
 
 
 
@@ -61,4 +36,4 @@
 
 
 
-  
+

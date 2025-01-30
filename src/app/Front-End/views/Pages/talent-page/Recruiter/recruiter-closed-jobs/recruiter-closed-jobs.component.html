@@ -1,11 +1,11 @@
 
-<div *ngIf="jobs.length > 0" class="container mt-3">
+<div class="container mt-3">
   <h5 class="mb-3 mt-5">Closed Job Posts</h5>
-  <app-job-table  [jobs]="jobs"  (jobReopen)="onJobReopened($event)"  (jobDeleted)="onJobDeleted($event)"></app-job-table>
+  <app-job-table></app-job-table>
 </div>
 
 
-<div *ngIf="jobs.length == 0">
+<div>
     <div class="container d-flex flex-column justify-content-center align-items-center text-center">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 550px; width: 550px; margin-bottom: 10px;">
     </div>

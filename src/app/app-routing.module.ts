@@ -16,12 +16,9 @@ import { TalentLoginComponent } from './Front-End/views/Pages/talent-page/talent
 import { TalentSignUpComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/talent-sign-up.component';
 import { RegisterSeekerComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/register-seeker/register-seeker.component';
 import { RegisterRecruiterComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/register-recruiter/register-recruiter.component';
-import { RoleGuard } from './Front-End/core/guards/role.guard';
-import { AuthGuard } from './Front-End/core/guards/auth.guard';
 import { ConfirmationComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/account-confirmation/account-confirmation.component';
 import { ErrorRegisterComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/error-account-register/account-confirmation.component';
 import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-logo/introduction-logo.component';
-// import { SeekerEditProfileComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/seeker-edit-profile/seeker-edit-profile.component';
 import { RecruiterEditProfileComponent } from './Front-End/views/Pages/talent-page/Recruiter/recruiter-edit-profile/recruiter-edit-profile.component';
 import { SeekerEditProfileComponent } from './Front-End/views/Pages/talent-page/Seeker/seeker-edit-profile/seeker-edit-profile.component';
 
