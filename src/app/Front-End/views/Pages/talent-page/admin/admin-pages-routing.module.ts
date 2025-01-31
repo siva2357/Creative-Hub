@@ -13,6 +13,7 @@ import { SeekerComponent } from './seeker/seeker.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
 import { SeekerDetailsComponent } from './seeker-details/seeker-details.component';
 import { UserLocationComponent } from './user-location/user-location.component';
+import { UniversityCompanyLocationComponent } from 'src/app/university-company-location/university-company-location.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
     { path: 'recruiter-details/:id', component: RecruiterDetailsComponent } ,// Hire Seeker page route
 		{ path: 'seeker-details/:id', component: SeekerDetailsComponent } ,// Hire Seeker page route
     { path: 'user-location', component: UserLocationComponent } ,// Hire Seeker page route
+    { path: 'university-company-location', component: UniversityCompanyLocationComponent } ,// Hire Seeker page route
 
 	  ]
 	}

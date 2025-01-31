@@ -18,4 +18,9 @@ export class AdminDashboardComponent {
     this.router.navigateByUrl('talent-page/admin/company');
   }
 
+  goToLocationPage(){
+    this.router.navigateByUrl('talent-page/admin/university-company-location');
+
+  }
+
 }

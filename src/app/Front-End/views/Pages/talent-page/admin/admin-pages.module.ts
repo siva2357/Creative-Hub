@@ -20,6 +20,7 @@ import { SeekerComponent } from './seeker/seeker.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
 import { SeekerDetailsComponent } from './seeker-details/seeker-details.component';
 import { UserLocationComponent } from './user-location/user-location.component';
+import { UniversityCompanyLocationComponent } from 'src/app/university-company-location/university-company-location.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserLocationComponent } from './user-location/user-location.component';
     SeekerComponent,
     RecruiterDetailsComponent,
     SeekerDetailsComponent,
-    UserLocationComponent
+    UserLocationComponent,
+    UniversityCompanyLocationComponent
   ],
   imports: [
     CommonModule,

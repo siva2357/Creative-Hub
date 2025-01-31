@@ -29,7 +29,6 @@ import { UnauthorizedPageComponent } from './Front-End/views/other-pages/unautho
 import { LayoutModule } from "./Front-End/views/Layouts/layout.module";
 import { SharedModule } from './Front-End/views/shared/shared.module';
 import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-logo/introduction-logo.component';
-import { UserLocationComponent } from './Front-End/views/Pages/talent-page/admin/user-location/user-location.component';
 
 
 @NgModule({
