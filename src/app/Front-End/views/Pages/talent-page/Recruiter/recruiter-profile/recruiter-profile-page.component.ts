@@ -17,5 +17,6 @@ export class RecruiterProfilePageComponent {
     constructor(private router: Router) { }
     ngOnInit(): void {}
 
-
+    viewProfile(): void {
+    }
 }
