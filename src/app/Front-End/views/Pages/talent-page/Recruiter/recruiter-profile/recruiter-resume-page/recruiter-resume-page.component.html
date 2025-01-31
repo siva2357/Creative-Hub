@@ -1,5 +1,6 @@
-<div class="container ">
+<!-- Resume-->
 
+<div class="container ">
     <div class="row d-flex justify-content-center align-items-center mb-3">
       <div class="col">
         <p style="margin: 0; font-size: 18px; font-weight: bold;">My Resume</p>
@@ -11,18 +12,16 @@
         </button>
       </div>
     </div>
-
-
-    <div *ngIf="isResume" class="card" style="width: 20rem; border-radius: 5px; padding: 10px;">
+    <div  class="card" style="width: 20rem; border-radius: 5px; padding: 10px;">
 
         <div class="card-body" style="padding: 0;">
             <div class="row d-flex align-items-center justify-content-between">
-        
+
                 <!-- Icon Section (left side) -->
                 <div class="col-3  d-flex justify-content-center align-items-center" style="border-radius: 5px;">
                     <i class="bi bi-file-pdf" style="font-size: 2.5rem; color: #dc3545;"></i>
                 </div>
-        
+
                 <!-- Content Section (middle) -->
                 <div class="col" style="border-radius: 5px; margin-left: -20px;">
                     <div class="row" style="display: flex; flex-direction: column;">
@@ -34,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Action Icons Section (right side) -->
                 <div class="col text-end d-flex align-items-center justify-content-center">
                     <i class="bi bi-download" style="font-size: 1.2rem; cursor: pointer; margin-right: 10px; color: #007bff;"></i>
@@ -42,18 +41,13 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-
-
-    <p *ngIf="!isResume" class="mt-5" style="font-size: 14px;">No resumes has been added yet.  </p>
-
-    
-
+    <p class="mt-5" style="font-size: 14px;">No resumes has been added yet.  </p>
 </div>
-  
 
-  
+
+<!-- Documents -->
 <div class="container mt-5">
 
     <div class="row d-flex justify-content-center align-items-center mb-3">
@@ -69,16 +63,16 @@
     </div>
 
 
-    <div *ngIf="isDocument" class="card" style="width: 20rem; border-radius: 5px; padding: 10px;">
+    <div class="card" style="width: 20rem; border-radius: 5px; padding: 10px;">
 
         <div class="card-body" style="padding: 0;">
             <div class="row d-flex align-items-center justify-content-between">
-        
+
                 <!-- Icon Section (left side) -->
                 <div class="col-3  d-flex justify-content-center align-items-center" style="border-radius: 5px;">
                     <i class="bi bi-file-pdf" style="font-size: 2.5rem; color: #dc3545;"></i>
                 </div>
-        
+
                 <!-- Content Section (middle) -->
                 <div class="col" style="border-radius: 5px; margin-left: -20px;">
                     <div class="row" style="display: flex; flex-direction: column;">
@@ -90,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Action Icons Section (right side) -->
                 <div class="col text-end d-flex align-items-center justify-content-center">
                     <i class="bi bi-download" style="font-size: 1.2rem; cursor: pointer; margin-right: 10px; color: #007bff;"></i>
@@ -98,69 +92,12 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
 
-    <p *ngIf="!isDocument" class="mt-5" style="font-size: 14px;">No documents has been added yet.  </p>
-    
+    <p class="mt-5" style="font-size: 14px;">No documents has been added yet.  </p>
+
 
 </div>
 
-
-
-
-<div class="container mt-5">
-
-    <div class="row d-flex justify-content-center align-items-center mb-3">
-      <div class="col">
-        <p style="margin: 0; font-size: 18px; font-weight: bold;">Write-ups</p>
-      </div>
-      <div class="col" style="margin-left: 280px;">
-        <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-5">
-          <i class="bi bi-plus me-2" style="font-size: 1rem;"></i>
-          <span style="font-size: 14px; ">Add New</span>
-        </button>
-      </div>
-    </div>
-
-
-    <div *ngIf="isWriteUp"  class="card" style="width: 20rem; border-radius: 5px; padding: 10px;">
-
-        <div class="card-body" style="padding: 0;">
-            <div class="row d-flex align-items-center justify-content-between">
-        
-                <!-- Icon Section (left side) -->
-                <div class="col-3  d-flex justify-content-center align-items-center" style="border-radius: 5px;">
-                    <i class="bi bi-file-pdf" style="font-size: 2.5rem; color: #dc3545;"></i>
-                </div>
-        
-                <!-- Content Section (middle) -->
-                <div class="col" style="border-radius: 5px; margin-left: -20px;">
-                    <div class="row" style="display: flex; flex-direction: column;">
-                        <div class="col">
-                            <p style="font-size: 14px; font-weight: bold; color: #333; white-space: nowrap; margin-bottom: 0;">SEEKER NAME</p>
-                        </div>
-                        <div class="col">
-                            <p style="color: gray; font-size: 12px; white-space: nowrap; margin-bottom: 0;">Created 12:00pm 09 Dec 2024</p>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Action Icons Section (right side) -->
-                <div class="col text-end d-flex align-items-center justify-content-center">
-                    <i class="bi bi-download" style="font-size: 1.2rem; cursor: pointer; margin-right: 10px; color: #007bff;"></i>
-                    <i class="bi bi-trash" style="font-size: 1.2rem; cursor: pointer; color: #dc3545;"></i>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-
-
-
-    <p  *ngIf="!isWriteUp"  class="mt-5" style="font-size: 14px;">You have not added any write-ups yet.</p>
-
-    
-
-</div>

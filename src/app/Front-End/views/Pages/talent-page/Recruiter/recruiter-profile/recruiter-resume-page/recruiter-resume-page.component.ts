@@ -8,6 +8,5 @@ import { Component } from '@angular/core';
 export class RecruiterResumePageComponent {
   isResume:boolean = false;
   isDocument:boolean = false;
-  isWriteUp:boolean = false;
 
 }
