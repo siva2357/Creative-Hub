@@ -23,6 +23,7 @@ export class SeekerProfilePageComponent {
   ngOnInit(): void {
   }
 
-  viewProfile(): void {
+  editProfile(): void {
+    this.router.navigateByUrl('talent-page/seeker/edit-profile/:id');
   }
 }

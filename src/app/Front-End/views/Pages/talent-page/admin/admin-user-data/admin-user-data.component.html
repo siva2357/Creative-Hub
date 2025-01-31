@@ -1,13 +1,43 @@
-<div class="container  ">
+<div class="container d-flex justify-content-center align-items-center" >
+  <div class="row g-4 justify-content-center position-absolute top-50 start-50 translate-middle">
 
-    <!-- <div class="container mt-5 mb-5">
-        <h5 >Active Job Posts</h5>
-        <app-job-table></app-job-table>
-    </div> -->
 
-    <div class="container d-flex justify-content-center align-items-center " >
-        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 600px; width: 600px;">
+    <div class="col-md-4 d-flex justify-content-center">
+      <div class="card text-center d-flex justify-content-center align-items-center" style="width: 18rem; height: 10rem; cursor: pointer;" (click)="goToRecruiterPage()">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <i class="bi bi-person-add" style="font-size: 2rem;"></i>
+          <h5 class="card-title mt-2">Recruiter</h5>
+          <p class="card-text" style="font-size: 14px;">Track recruiter data.</p>
+        </div>
+      </div>
     </div>
-    
+
+    <div class="col-md-4 d-flex justify-content-center">
+      <div class="card text-center d-flex justify-content-center align-items-center" style="width: 18rem; height: 10rem; cursor: pointer;" (click)="goToSeekerPage()">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <i class="bi bi-person-vcard" style="font-size: 2rem;"></i>
+          <h5 class="card-title mt-2">Seeker</h5>
+          <p class="card-text" style="font-size: 14px;">Track seeker data..</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4 d-flex justify-content-center">
+      <div class="card text-center d-flex justify-content-center align-items-center" style="width: 18rem; height: 10rem; cursor: pointer;" (click)="goToLocationPage()">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <i class="bi bi-geo-alt" style="font-size: 2rem;"></i>
+          <h5 class="card-title mt-2">Locations </h5>
+          <p class="card-text" style="font-size: 14px;">Track user locations</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
 
 </div>
+
+
+

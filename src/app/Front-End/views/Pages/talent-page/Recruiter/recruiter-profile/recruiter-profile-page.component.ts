@@ -17,6 +17,7 @@ export class RecruiterProfilePageComponent {
     constructor(private router: Router) { }
     ngOnInit(): void {}
 
-    viewProfile(): void {
+    editProfile(): void {
+      this.router.navigateByUrl('talent-page/recruiter/edit-profile/:id');
     }
 }

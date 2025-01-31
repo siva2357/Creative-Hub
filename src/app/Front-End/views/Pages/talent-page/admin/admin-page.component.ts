@@ -14,9 +14,6 @@ export class AdminPageComponent {
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid' },
     { label: 'My Profile', link: 'profile', icon: 'bi bi-person-circle' },
     { label: 'User Data', link: 'user-data', icon: 'bi bi-database' },
-    { label: 'User Activity', link: 'user-activity', icon: 'bi bi-graph-up' },
-    { label: 'Manage Users', link: 'manage-users', icon: 'bi bi-pencil-square' },
-
   ];
 
 }
