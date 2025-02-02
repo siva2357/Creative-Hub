@@ -1,19 +1,19 @@
 <div class="container mt-5 mb-5 bg-body-tertiary">
     <p class="fw-semibold fs-5">Dashboard</p>
-    
+
     <!-- cards display with count -->
     <div class="row  bg-warning p-3 mb-5">
         <!-- Card 1 -->
         <div class="col-4">
-          <div class="card rounded-2 border-primary h-100" style="cursor: pointer;">
-            <div class="card-body p-5">
+          <div class="card rounded-2 border-primary" style="cursor: pointer;">
+            <div class="card-body px-5">
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-9 bg-info">
                         <h3 class="fs-5 text-body-emphasis">Projects uploaded</h3>
                         <p class="text-align-right fs-5 mt-4 mb-4">5</p>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-3 bg-warning">
                         <div class="feature-icon d-flex align-items-center justify-content-center" style="margin-top: -10px;">
                             <i class="bi bi-cloud-arrow-up" style="font-size: 1.8rem;"></i>
                         </div>
@@ -23,19 +23,19 @@
           </div>
 
         </div>
-    
+
         <!-- Card 2 -->
         <div class="col-4">
             <div class="card rounded-2 border-primary h-100" style="cursor: pointer;">
-              <div class="card-body p-5 ">
+              <div class="card-body px-5 ">
 
                   <div class="row ">
-                      <div class="col-9">
+                      <div class="col-9 bg-info">
                           <h3 class="fs-5 text-body-emphasis">Jobs Applied</h3>
                           <p class="text-align-right fs-5 mt-4 mb-4">5</p>
                       </div>
-  
-                      <div class="col-3">
+
+                      <div class="col-3 bg-warning">
                           <div class="feature-icon d-flex align-items-center justify-content-center" style="margin-top: -10px;">
                               <i class="bi bi-briefcase" style="font-size: 1.8rem;"></i>
                           </div>
@@ -59,7 +59,7 @@
             <p>Project Statistics</p>
           </div>
         </div>
-      
+
         <div class="col-5">
           <div class="container border border-dark" style="height: 450px;">
             <p>Project Statistics</p>
@@ -67,103 +67,7 @@
         </div>
     </div>
 
-     <!-- job applications -->
-    <div class="card rounded-0 p-5" style="border: 1px solid white;">
-        <p>Job Applications</p>
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">S.No</th>
-                <th scope="col">Job ID</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Job Role</th>
-                <th scope="col">Status</th>
-                <th scope="col">Job Posted On</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>123456</td>
-                <td>XR Infinity</td>
-                <td>AR/VR Developer</td>
-                <td>Open</td>
-                <td>18-01-2025</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>654321</td>
-                <td>XR Plugin</td>
-                <td>Unity developer</td>
-                <td>Open</td>
-                <td>20-01-2025</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>878531</td>
-                <td>Arena animations</td>
-                <td>Unreal engine instructor</td>
-                <td>Open</td>
-                <td>15-01-2025</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>876421</td>
-                <td>Pixelloid studio</td>
-                <td>3D Animator</td>
-                <td>Open</td>
-                <td>13-01-2025</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>788233</td>
-                <td>CG Spectrum</td>
-                <td>Animation instructor</td>
-                <td>Open</td>
-                <td>25-01-2025</td>
-              </tr>
-
-            </tbody>
-          </table>
-    </div>
 
 
-     <!-- cards redirecting to project uploading page and job post page -->
-    <div class="row  bg-warning p-3 mb-5">
-        <!-- Card 1 -->
-        <div class="col-4">
-          <div class="card rounded-2 border-primary h-100" style="cursor: pointer;">
-            <div class="card-body p-5">
-                <div class="row">
-                    <div class="col-9">
-                        <h3 class="fs-5 text-body-emphasis">Projects uploaded</h3>
-                        <button class="btn btn-primary text-align-right mt-4 mb-4" (click)="goToProjectUploadPage()">Project upload page</button>
-                    </div>
-                </div>
-            </div>
-          </div>
-
-        </div>
-    
-        <!-- Card 2 -->
-        <div class="col-4">
-            <div class="card rounded-2 border-primary h-100" style="cursor: pointer;">
-              <div class="card-body p-5 ">
-                  <div class="row ">
-                      <div class="col-9">
-                          <h3 class="fs-5 text-body-emphasis">Jobs Applied</h3>
-                          <button class="btn btn-primary text-align-right mt-4 mb-4" (click)="goToJobApplications()">Job Applications</button>
-                        </div>
-                  </div>
-
-              </div>
-            </div>
-        </div>
-
-
-        <!-- Card 3 -->
-
-    </div>
-      
 
 </div>

@@ -12,7 +12,6 @@ export class AdminPageComponent {
 
   menu: MenuItem[] = [
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid' },
-    { label: 'My Profile', link: 'profile', icon: 'bi bi-person-circle' },
     { label: 'User Data', link: 'user-data', icon: 'bi bi-database' },
   ];
 

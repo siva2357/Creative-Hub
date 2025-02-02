@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './admin-page.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminProfilePageComponent } from './admin-profile/admin-profile-page.component';
 import { AdminUserDataPageComponent } from './admin-user-data/admin-user-data.component';
 import { UniversityComponent } from './university/university.component';
 import { UniversityDetailsComponent } from './university-details/university-details.component';
@@ -13,7 +12,7 @@ import { SeekerComponent } from './seeker/seeker.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
 import { SeekerDetailsComponent } from './seeker-details/seeker-details.component';
 import { UserLocationComponent } from './user-location/user-location.component';
-import { UniversityCompanyLocationComponent } from 'src/app/university-company-location/university-company-location.component';
+import { UniversityCompanyLocationComponent } from 'src/app/Front-End/views/Pages/talent-page/admin/university-company-location/university-company-location.component';
 
 
 const routes: Routes = [
@@ -24,7 +23,6 @@ const routes: Routes = [
 	  path: '', component: AdminPageComponent, // Main layout component with sidebar
 	  children: [
 		{ path: 'dashboard', component: AdminDashboardComponent }, // Dashboard route
-		{ path: 'profile', component: AdminProfilePageComponent  }, // Profile page route
 		{ path: 'user-data', component: AdminUserDataPageComponent } ,// Hire Seeker page route
     { path: 'university', component: UniversityComponent } ,// Hire Seeker page route
 		{ path: 'company', component: CompanyComponent } ,// Hire Seeker page route

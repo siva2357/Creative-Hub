@@ -20,9 +20,6 @@ import { PublishPageComponent } from './Front-End/views/Pages/publish-page/publi
 import { PurposePageComponent } from './Front-End/views/Pages/purpose-page/purpose-page.component';
 import { CloudPageComponent } from './Front-End/views/Pages/cloud-page/cloud-page.component';
 
-
-
-
 import { TalentPageModule } from './Front-End/views/Pages/talent-page/talent-pages.module';
 
 import { UnauthorizedPageComponent } from './Front-End/views/other-pages/unauthorized-page/unauthorized-page.component';
