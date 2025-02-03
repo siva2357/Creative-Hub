@@ -20,7 +20,7 @@ const routes: Routes = [
 	{
 	  path: '', component: RecruiterMainPageComponent, // Main layout component with sidebar
 	  children: [
-		{ path: 'dashboard', component: RecruiterDashboardComponent }, // Dashboard route
+		{ path: 'dashboard', component: RecruiterDashboardComponent, title: 'Recruiter dashboard page'  }, // Dashboard route
 		{ path: 'profile', loadChildren: () => import('./recruiter-profile/recruiter-profile.module').then((m) => m. RecruiterProfileModule)},
 		{ path: 'post-job', component: RecruiterPostJobPageComponent, title: 'Post Jobpost Page'  } ,// Hire Seeker page route
 		{ path: 'manage-jobs', component: RecruiterManageJobPageComponent, title: 'Manage Jobpost Page'  } ,// Hire Seeker page route
@@ -29,7 +29,7 @@ const routes: Routes = [
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
         { path:'seeker-profile', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
-        { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page'  },
+        { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
 
 	  ]
 	}

@@ -14,7 +14,7 @@ const routes: Routes = [
 	{
 	  path: '', component:  SeekerMainPageComponent, // Main layout component with sidebar
 	  children: [
-		{ path: 'dashboard', component: SeekerDashboardComponent }, // Profile page route
+		{ path: 'dashboard', component: SeekerDashboardComponent,  title: 'Seeker dashboard page'   }, // Profile page route
 		{ path: 'profile', loadChildren: () => import('./seeker-profile/seeker-profile.module').then((m) => m. SeekerProfileModule)},
 		{ path: 'post-project', component: SeekerPostProjectPageComponent, title: 'Seeker post project Page'   }, // Profile page route
 		{ path: 'manage-project', component: SeekerManageProjectPageComponent,  title: 'Seeker manage project Page'   }, // Profile page route
