@@ -47,23 +47,23 @@
 
   
 
-  <div class="container p-5 ">
+  <div class="container p-5 mt-4">
     <div class="card p-5 shadow-lg text-center bg-body-secondary">
   
-      <div class="card-body p-5 bg-info">
+      <div class="card-body p-4">
         <!-- OTP Verification Header Section -->
-        <div class="col text-center mb-5 bg-danger">
-          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg" alt="" style="height: 100px; width: 100px;">
+        <div class="col text-center mb-5 ">
+          <i class="bi bi-envelope-at" style="font-size: 5rem;"></i>
         </div>
 
-        <div class="col text-center bg-warning">
+        <div class="col text-center">
             <h2>OTP Verification</h2>
-            <p>An OTP has been sent to your email <strong>sample&#64;gmail.com</strong><br> <span class="text-center">Please enter the code.</span></p>  
+            <p>An OTP has been sent to your email <strong>sa***le&#64;gmail.com</strong><br> <span class="text-center">Please enter the code.</span></p>  
         </div>
 
       
         <!-- OTP Form Section -->
-        <div class="row d-flex justify-content-center align-items-center  bg-warning ">
+        <div class="row d-flex justify-content-center align-items-center ">
           <div class="col text-center">
             <form [formGroup]="otpForm" (ngSubmit)="submitOtp()">
               <div class="d-flex justify-content-center gap-2 mt-3">
