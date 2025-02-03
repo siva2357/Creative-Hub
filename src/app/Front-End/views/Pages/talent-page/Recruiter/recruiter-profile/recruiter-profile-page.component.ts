@@ -15,9 +15,9 @@ export class RecruiterProfilePageComponent {
     { label: 'Resume, Docs & Write-ups', link: 'resume'},
   ];
     constructor(private router: Router) { }
-    ngOnInit(): void {
+    ngOnInit(): void {}
 
+    editProfile(): void {
+      this.router.navigateByUrl('talent-page/recruiter/edit-profile/:id');
     }
-
-
 }

@@ -6,7 +6,6 @@ const adminRoutes = require('./Role-based-login/Admin/adminRoutes');
 const loginRoutes = require('./Role-based-login/login/loginRoutes');
 
 
-const jobPostRoutes = require('./JobPosts/routes/jobPostRoutes');
 
 const cors = require('cors');
 
@@ -25,8 +24,6 @@ app.use(recruiterRoutes);
 app.use(seekerRoutes);
 app.use(adminRoutes);
 app.use(loginRoutes);
-
-app.use(jobPostRoutes);
 
 mongoose.set('strictQuery', false);
 

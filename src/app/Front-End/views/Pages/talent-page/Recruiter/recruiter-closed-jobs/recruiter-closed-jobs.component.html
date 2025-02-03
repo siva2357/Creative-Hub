@@ -1,20 +1,54 @@
 
-<div class="container mt-3">
-  <h5 class="mb-3 mt-5">Closed Job Posts</h5>
-  <app-job-table></app-job-table>
+<div  class="container mt-5">
+  <h5 class="mb-3 mt-5">Close Job Posts</h5>
+
+
+  <div class="container mb-5 mt-5">
+    <table class="table" style="border: 1px solid; width: 100%; text-align: center;">
+
+      <thead style="border: 1px solid; font-size: 14px;">
+        <tr style="border: 1px solid;">
+          <th style="border: 1px solid; width: 5%;">S.No</th>
+          <th style="border: 1px solid; width: 10%;">Job ID</th>
+          <th style="border: 1px solid; width: 15%;">Job Role</th>
+          <th style="border: 1px solid; width: 10%;">Job Type</th>
+          <th style="border: 1px solid; width: 10%;">Location</th>
+          <th style="border: 1px solid; width: 10%;">Salary</th>
+          <th style="border: 1px solid; width: 10%;">Posted On</th>
+          <th style="border: 1px solid; width: 10%;">Status</th>
+          <th style="border: 1px solid; width: 25%;">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody style="border: 1px solid; font-size: 14px;">
+        <tr style="border: 1px solid;">
+          <td style="border: 1px solid; text-align: center;">S.No</td>
+          <td style="border: 1px solid; text-align: center;">Job ID</td>
+          <td style="border: 1px solid; text-align: center;">Job Role</td>
+          <td style="border: 1px solid; text-align: center;">Job Type</td>
+          <td style="border: 1px solid; text-align: center;">Location</td>
+          <td style="border: 1px solid; text-align: center;">Salary</td>
+          <td style="border: 1px solid; text-align: center;">Posted On</td>
+          <td style="border: 1px solid; text-align: center;">Status</td>
+          <td style="border: 1px solid;">
+            <div style="display: flex; justify-content: space-evenly; align-items: center;">
+              <button class="btn btn-sm btn-info">Reopen</button>
+              <button class="btn btn-sm btn-danger"style="margin-left: 30px;">Delete</button>
+            </div>
+          </td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
 </div>
 
 
-<div>
-    <div class="container d-flex flex-column justify-content-center align-items-center text-center">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 550px; width: 550px; margin-bottom: 10px;">
-    </div>
+<div >
+  <div class="container d-flex flex-column justify-content-center align-items-center text-center">
+    <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 550px; width: 550px; margin-bottom: 10px;">
+  </div>
 </div>
-
-
-
-<!-- <div class="container ">
-    <h5>Closed Job Posts</h5>
-    <app-job-table *ngIf="jobs.length > 0" [jobs]="jobs" (jobReopen)="onJobReopened($event)" (jobDeleted)="onJobDeleted($event)"></app-job-table>
-    <p *ngIf="jobs.length == 0">No closed job posts</p>
-  </div> -->

@@ -11,7 +11,7 @@ export class SeekerProfilePageComponent {
 
      profile:  ProfileBar[] = [
       { label: 'Basic Details', link: 'basic'},
-      { label: 'Educationl Details', link: 'education'},
+      { label: 'Education Details', link: 'education'},
       { label: 'Skills,Subjects & Languages', link: 'skills'},
       { label: 'Certifications', link: 'certifications'},
       { label: 'Resume, Docs & Write-ups', link: 'resume'},
@@ -23,6 +23,7 @@ export class SeekerProfilePageComponent {
   ngOnInit(): void {
   }
 
-  viewProfile(): void {
+  editProfile(): void {
+    this.router.navigateByUrl('talent-page/seeker/edit-profile/:id');
   }
 }

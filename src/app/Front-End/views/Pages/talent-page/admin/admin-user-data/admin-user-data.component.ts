@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-user-data',
@@ -7,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AdminUserDataPageComponent {
 
+      constructor(private router: Router) { }
+
+      goToRecruiterPage(): void {
+      this.router.navigateByUrl('talent-page/admin/recruiter');
+    }
+
+    goToSeekerPage(): void {
+      this.router.navigateByUrl('talent-page/admin/seeker');
+    }
+
+    goToLocationPage(){
+      this.router.navigateByUrl('talent-page/admin/user-location');
+
+    }
 }
