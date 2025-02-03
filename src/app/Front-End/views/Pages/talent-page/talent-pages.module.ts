@@ -19,6 +19,7 @@ import { LayoutModule } from '../../Layouts/layout.module';
 import { SharedModule } from '../../shared/shared.module';
 import { SeekerPageModule } from './Seeker/seeker-pages.module';
 import { AdminPageModule } from './admin/admin-pages.module';
+import { OtpVerificationPageComponent } from './talent-sign-up/otp-verification-page/otp-verification-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AdminPageModule } from './admin/admin-pages.module';
     RegisterSeekerComponent,
     RegisterRecruiterComponent,
     ConfirmationComponent,
-    ErrorRegisterComponent ,
+    ErrorRegisterComponent,
+    OtpVerificationPageComponent
 
   ],
   imports: [
