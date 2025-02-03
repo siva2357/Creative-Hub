@@ -22,14 +22,14 @@ const routes: Routes = [
 	  children: [
 		{ path: 'dashboard', component: RecruiterDashboardComponent }, // Dashboard route
 		{ path: 'profile', loadChildren: () => import('./recruiter-profile/recruiter-profile.module').then((m) => m. RecruiterProfileModule)},
-		{ path: 'post-job', component: RecruiterPostJobPageComponent } ,// Hire Seeker page route
-		{ path: 'manage-jobs', component: RecruiterManageJobPageComponent } ,// Hire Seeker page route
-		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent },
-		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent } ,// Hire Seeker page route
-		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent } ,// Hire Seeker page route
-		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent }, // Hire Seeker page route
-    { path:'seeker-profile', component: RecruiterSeekerProfileComponent},
-    { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page'  },
+		{ path: 'post-job', component: RecruiterPostJobPageComponent, title: 'Post Jobpost Page'  } ,// Hire Seeker page route
+		{ path: 'manage-jobs', component: RecruiterManageJobPageComponent, title: 'Manage Jobpost Page'  } ,// Hire Seeker page route
+		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent,  title: 'View Jobpost Page'  },
+		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent,  title: 'Closed Jobs Page'  } ,// Hire Seeker page route
+		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
+		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
+        { path:'seeker-profile', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
+        { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page'  },
 
 	  ]
 	}
