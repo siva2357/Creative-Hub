@@ -16,13 +16,13 @@ const routes: Routes = [
 	  children: [
 		{ path: 'dashboard', component: SeekerDashboardComponent }, // Profile page route
 		{ path: 'profile', loadChildren: () => import('./seeker-profile/seeker-profile.module').then((m) => m. SeekerProfileModule)},
-		{ path: 'post-project', component: SeekerPostProjectPageComponent }, // Profile page route
-		{ path: 'manage-project', component: SeekerManageProjectPageComponent }, // Profile page route
-		{ path: 'portfolio', component: SeekerPortfolioComponent }, // Profile page route
-		{ path: 'jobProfile', component: SeekerJobProfileComponent }, // Profile page route
-		{ path: 'launchPad', component: SeekerLaunchpadComponent }, // Profile page route
-    { path: 'project-details/:id', component: ProjectDetailsComponent }, // Profile page route
-    {path:  'edit-profile/:id', component: SeekerEditProfileComponent, title: 'Seeker Edit Profile Page' },
+		{ path: 'post-project', component: SeekerPostProjectPageComponent, title: 'Seeker post project Page'   }, // Profile page route
+		{ path: 'manage-project', component: SeekerManageProjectPageComponent,  title: 'Seeker manage project Page'   }, // Profile page route
+		{ path: 'portfolio', component: SeekerPortfolioComponent,  title: 'Seeker portfolio Page'   }, // Profile page route
+		{ path: 'jobProfile', component: SeekerJobProfileComponent,  title: 'Seeker Job Profile Page'   }, // Profile page route
+		{ path: 'launchPad', component: SeekerLaunchpadComponent , title: 'Seeker LaunchPad Page'  }, // Profile page route
+        { path: 'project-details/:id', component: ProjectDetailsComponent,  title: 'Seeker Project details Page'   }, // Profile page route
+        {path:  'edit-profile/:id', component: SeekerEditProfileComponent, title: 'Seeker Edit Profile Page' },
 	  ]
 	}
   ];
