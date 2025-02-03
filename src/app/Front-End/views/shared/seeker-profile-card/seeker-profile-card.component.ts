@@ -12,6 +12,6 @@ export class SeekerProfileCardComponent {
 
   seekerProfile(){
     // this.router.navigateByUrl(`talent-page/recruiter/seeker-profile/${seeker._id}`)
-    this.router.navigateByUrl(`talent-page/recruiter/seeker-profile`)
+    this.router.navigateByUrl(`talent-page/recruiter/seeker-profile/:id`)
   }
 }

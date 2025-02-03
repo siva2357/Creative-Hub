@@ -21,7 +21,7 @@ import { SeekerPageModule } from './Seeker/seeker-pages.module';
 import { AdminPageModule } from './admin/admin-pages.module';
 import { OtpVerificationPageComponent } from './talent-sign-up/otp-verification-page/otp-verification-page.component';
 import { ChangePasswordPageComponent } from './talent-sign-up/change-password-page/change-password-page.component';
-
+import { SettingsPageComponent } from './talent-sign-up/settings-page/settings-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { ChangePasswordPageComponent } from './talent-sign-up/change-password-pa
     ConfirmationComponent,
     ErrorRegisterComponent,
     OtpVerificationPageComponent,
-    ChangePasswordPageComponent
+    ChangePasswordPageComponent,
+    SettingsPageComponent
 
   ],
   imports: [

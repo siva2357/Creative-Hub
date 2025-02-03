@@ -28,7 +28,7 @@ const routes: Routes = [
 		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent,  title: 'Closed Jobs Page'  } ,// Hire Seeker page route
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
-        { path:'seeker-profile', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
+        { path:'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
         { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
 
 	  ]
