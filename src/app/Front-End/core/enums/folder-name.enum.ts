@@ -1,9 +1,9 @@
 export enum Folder {
   Main_Folder = 'Creative-Hub',
   Recruiter_Folder = 'Recruiter',
-  Recruiter_Sub_Folder_1 = 'Registration-ProfileImages',
+  Recruiter_Sub_Folder_1 = 'ProfileDetails-ProfilePic',
   Seeker_Folder = 'Seeker',
-  Seeker_Sub_Folder_1 = 'Registration-ProfileImages',
+  Seeker_Sub_Folder_1 = 'ProfileDetails-ProfilePic',
   Admin_Folder = 'Admin',
-  Admin_Sub_Folder_1 = 'Registration-ProfileImages',
+  Admin_Sub_Folder_1 = 'ProfileDetails-ProfilePic',
 }

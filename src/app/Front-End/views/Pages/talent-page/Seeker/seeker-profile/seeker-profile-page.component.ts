@@ -14,7 +14,7 @@ export class SeekerProfilePageComponent {
       { label: 'Education Details', link: 'education'},
       { label: 'Skills,Subjects & Languages', link: 'skills'},
       { label: 'Certifications', link: 'certifications'},
-      { label: 'Resume, Docs & Write-ups', link: 'resume'},
+      { label: 'Resume', link: 'resume'},
     ];
 
 

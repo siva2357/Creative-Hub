@@ -34,12 +34,9 @@
             Had a basic knowledge of HTML,CSS.</td>
         </tr>
       </tbody>
-    </table>
+  </table>
 
-
-
-
-    <!-- social media accounts -->
+  <!-- social media accounts -->
 
   <div class="row d-flex justify-content-center align-items-center mb-3" style="margin-top: 50px;">
       <div class="col-10">
@@ -47,9 +44,10 @@
       </div>
 
       <div class="col-2 text-end">
-          <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-5" style="font-size: 14px; "  > <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+          <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-5" data-bs-toggle="modal" data-bs-target="#socialMediaModal" style="font-size: 14px;"> <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
       </div>
   </div>
+
   <hr class="mt-0">
 
   <div  class="container">
@@ -156,3 +154,51 @@
 
 
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="socialMediaModal" tabindex="-1" aria-labelledby="socialMediaModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-6 text-center" id="socialMediaModalLabel">Add Social Media Profile</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="  socialMediaForm" (ngSubmit)="save()">
+
+
+        <div class="col">
+          <select id="socialMediaProfile"   class="form-select form-select-sm" formControlName="socialMediaProfile" required>
+              <option value="">Select  social Media Profile</option>
+              <option value="3-5 Lakhs">companyName 1</option>
+              <option value="6-9 Lakhs">companyName 2</option>
+              <option value="10-12 Lakhs">companyName 3</option>
+              <option value="15-18 Lakhs">companyName 4</option>
+          </select>
+          <small *ngIf="socialMediaForm.get('socialMediaProfile')?.hasError('required') && socialMediaForm.get('socialMediaProfile')?.touched" class="text-danger"> socialMediaProfile is required.</small>
+
+      </div>
+
+
+
+        <div class="col mt-3 mb-3">
+          <input type="text" id="socialMediaLink" formControlName="socialMediaLink"  class="form-control form-control-sm" placeholder="Add link here" required>
+          <small *ngIf="socialMediaForm.get('socialMediaLink')?.hasError('required') && socialMediaForm.get('socialMediaLink')?.touched" class="text-danger">Social media link is required.</small>
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success"  [disabled]="socialMediaForm.invalid">Save</button>
+      </div>
+
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
