@@ -12,7 +12,7 @@ export class SeekerProfilePageComponent {
      profile:  ProfileBar[] = [
       { label: 'Basic Details', link: 'basic'},
       { label: 'Education Details', link: 'education'},
-      { label: 'Skills,Subjects & Languages', link: 'skills'},
+      { label: 'Skills and Languages', link: 'skills'},
       { label: 'Certifications', link: 'certifications'},
       { label: 'Resume', link: 'resume'},
     ];
