@@ -17,6 +17,9 @@ import { RecruiterProfileModule } from './recruiter-profile/recruiter-profile.mo
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
 import { LayoutModule } from "../../../Layouts/layout.module";
 import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
+import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruiter-profile-form.component';
+
+
 @NgModule({
   declarations: [
     RecruiterMainPageComponent,
@@ -27,7 +30,8 @@ import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruite
     RecruiterClosedJobsPageComponent,
     RecruiterJobApplicantsPageComponent,
     RecruiterEditJobPageComponent,
-    RecruiterEditProfileComponent
+    RecruiterEditProfileComponent,
+    RecruiterProfileFormComponent
   ],
   imports: [
     CommonModule,

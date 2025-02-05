@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Seeker } from 'src/app/Front-End/core/models/user-registration.model';
 
 @Component({
@@ -7,13 +8,30 @@ import { Seeker } from 'src/app/Front-End/core/models/user-registration.model';
   styleUrls: ['./seeker-basic-details.component.css']
 })
 export class SeekerBasicDetailsComponent {
-  @Input() profileDetails!: Seeker;
+
 
   isSocialMedia:boolean = false;
+  socialMediaForm!: FormGroup;
 
-  constructor() {}
+    constructor(private fb: FormBuilder) {}
+  
+    ngOnInit(): void{
+  
+      this.initializeForm();
+    }
+  
+    initializeForm() {
+      this.socialMediaForm = this.fb.group({
+        _id: [null],
+        socialMediaProfile: ['', [Validators.required]],
+        socialMediaLink: ['', [Validators.required]],
+      });
+    }
 
-  ngOnInit(): void {}
+
+    save() {
+
+    }
 
 
 }

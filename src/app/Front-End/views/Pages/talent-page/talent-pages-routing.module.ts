@@ -11,6 +11,10 @@ import { RegisterSeekerComponent } from './talent-sign-up/register-seeker/regist
 import { RegisterRecruiterComponent } from './talent-sign-up/register-recruiter/register-recruiter.component';
 import { ConfirmationComponent } from './talent-sign-up/account-confirmation/account-confirmation.component';
 import { ErrorRegisterComponent } from './talent-sign-up/error-account-register/account-confirmation.component';
+import { OtpVerificationPageComponent } from './talent-sign-up/otp-verification-page/otp-verification-page.component';
+import { ChangePasswordPageComponent } from './talent-sign-up/change-password-page/change-password-page.component';
+import { SettingsPageComponent } from './talent-sign-up/settings-page/settings-page.component';
+
 
 const routes: Routes = [
   // Default path for recruiter redirects to 'recruiter/dashboard'
@@ -22,20 +26,22 @@ const routes: Routes = [
     { path: 'main', component:  TalentMainPageComponent},
     { path: 'login', component:  TalentLoginComponent }, // Profile page route
     { path: 'signup', component: TalentSignUpComponent }, // Profile page route
+    { path: 'change-password-page', component: ChangePasswordPageComponent }, // Profile page route
+    { path: 'settings-page', component: SettingsPageComponent }, // Profile page route
     { path: 'register/seeker', component: RegisterSeekerComponent }, // Profile page route
     { path: 'register/recruiter', component: RegisterRecruiterComponent }, // Profile page route
-
+    { path: 'register/otp-verification-page', component: OtpVerificationPageComponent }, // Profile page route
     { path: 'register/confirmation-page', component: ConfirmationComponent }, // Profile page route
     { path: 'register/error-page', component: ErrorRegisterComponent }, // Profile page route
+    
     { path: 'recruiter',loadChildren: () => import('./Recruiter/recruiter-pages.module').then((m) => m.RecruiterPageModule),
       // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }
     },
     { path: 'seeker',loadChildren: () => import('./Seeker/seeker-pages.module').then((m) => m.SeekerPageModule),
-      // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }
+      // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'seeker' }
     },
-
     { path: 'admin',loadChildren: () => import('./admin/admin-pages.module').then((m) => m.AdminPageModule),
-      // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }
+      // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'admin' }
     },
     ]
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-talent-header',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 export class TalentHeaderComponent{
 
+  constructor(private router: Router){}
 
+  goToSettings(){
+    this.router.navigateByUrl('talent-page/settings-page')
+  }
 }

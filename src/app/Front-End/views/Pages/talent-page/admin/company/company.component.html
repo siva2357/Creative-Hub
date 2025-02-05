@@ -1,3 +1,144 @@
+<!-- Button trigger modal -->
+<div class="row d-flex justify-content-center align-items-center mb-3" style="margin-top: 50px;">
+  <div class="col-10">
+    <p style="margin-left: 40px; font-size: 18px;">Company list</p>
+  </div>
+
+  <div class="col-2 text-end">
+      <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 14px; "  > <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Register company</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+
+          <form [formGroup]="companyPostForm" (ngSubmit)="submitCompany()">
+          
+          
+          
+            <!-- Job ID, Job Role Title, Job Type, Job Level -->
+            <div class="container">
+              <h5 class="text-center mb-3">Company logo</h5>
+            </div>
+          
+            <div class="form-group col text-center step-container">
+              <div class="card-profile-body rounded-4 profile-container ">
+                <div class="profile-avatar rounded-circle">
+                  <img id="avatarImage" [src]="logoUploadUrl || 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg'" alt="Avatar">
+                </div>
+              </div>
+          
+              <small class="text-muted mt-2" style="font-size: 12px; display: flex; align-items: center;">
+                <span style="margin-right: 5px;"><i class="bi bi-info-circle"
+                    style="font-size: 1rem; color: rgb(0, 110, 255);"></i></span>
+                Allowed formats: JPEG, PNG, JPG
+              </small>
+          
+            </div>
+
+            <div class="col mt-3">
+              <input type="file" id="companyLogo" formControlName="companyLogo" class="form-control form-control-sm"  required>
+              <small *ngIf="companyPostForm.get('companyLogo')?.hasError('required') && companyPostForm.get('companyLogo')?.touched" class="text-danger"> Company logo is required.</small>
+          
+            </div>
+          
+  
+            <div class="col  mt-3">
+              <label for="companyId" class="form-label fw-bold" style="font-size: 14px;"> Company ID <span class="required">*</span></label>
+              <input type="text" id="companyId" formControlName="companyId" class="form-control form-control-sm" placeholder="Enter the company ID" required>
+              <small *ngIf="companyPostForm.get('companyId')?.hasError('required') && companyPostForm.get('companyId')?.touched" class="text-danger">Company ID is required.</small>
+            </div>
+          
+            <div class="col mt-3">
+              <label for="companyName" class="form-label fw-bold" style="font-size: 14px;">Company Name <span class="required">*</span></label>
+              <input type="text" id="companyName" formControlName="companyName" class="form-control form-control-sm" placeholder="Enter the company name" required>
+              <small *ngIf="companyPostForm.get('companyName')?.hasError('required') && companyPostForm.get('companyName')?.touched" class="text-danger"> Company name is required.</small>
+          
+            </div>
+          
+            <div class="col mt-3">
+              <label for="companyType" class="form-label fw-bold" style="font-size: 14px;">Company Type <span class="required">*</span></label>
+              <select id="companyType" class="form-select form-select-sm" formControlName="companyType" required>
+                <option value="">Select company Type</option>
+                <option value="Full-time">Sole Proprietorship</option>
+                <option value="Part-time">Partnership</option>
+                <option value="Contract">Limited Liability Partnership (LLP)</option>
+                <option value="Freelancer">Private Limited Companies</option>
+                <option value="Freelancer">Public Limited Companies</option>
+                <option value="Freelancer">One-Person Companies</option>
+                <option value="Freelancer">Section 8 Company</option>
+                <option value="Freelancer">Joint-Venture Company</option>
+
+              </select>
+              <small *ngIf="companyPostForm.get('companyType')?.hasError('required') && companyPostForm.get('companyType')?.touched" class="text-danger">Company type is required.</small>
+          
+            </div>
+          
+            <div class="col mt-3">
+              <label for="companyWebsite" class="form-label fw-bold" style="font-size: 14px;">Company website <span class="required">*</span></label>
+              <input type="text" id="companyWebsite" formControlName="companyWebsite" class="form-control form-control-sm" placeholder="Enter the company website" required>
+              <small *ngIf="companyPostForm.get('companyWebsite')?.hasError('required') && companyPostForm.get('companyWebsite')?.touched" class="text-danger">Company website is required.</small>
+            </div>
+          
+            <!--University Descriptions -->
+            <div class="col mt-3">
+              <label for="companyDescription" class="form-label fw-bold" style="font-size: 14px;">Company Description <span class="required">*</span></label>
+              <textarea class="form-control form-control-sm" formControlName="companyDescription" [placeholder]="'Enter company description'" required></textarea>
+              <small *ngIf="companyPostForm.get('companyDescription')?.hasError('required') && companyPostForm.get('companyDescription')?.touched" class="text-danger">Company description is required.</small>
+            </div>
+          
+            <div class="col mt-3">
+              <label for="companyDivision" class="form-label fw-bold" style="font-size: 14px;">Company Division <span class="required">*</span></label>
+              <input type="text" id="companyDivision" formControlName="companyDivision" class="form-control form-control-sm" placeholder="Enter the company division" required>
+              <small *ngIf="companyPostForm.get('companyDivision')?.hasError('required') && companyPostForm.get('companyDivision')?.touched" class="text-danger">Company division is required.</small>
+            </div>
+          
+            <div class="col mt-3">
+              <label for="companyCareer" class="form-label fw-bold" style="font-size: 14px;">Company Career <span class="required">*</span></label>
+              <input type="text" id="companyCareer" formControlName="companyCareer" class="form-control form-control-sm" placeholder="Enter the company career" required>
+              <small *ngIf="companyPostForm.get('companyCareer')?.hasError('required') && companyPostForm.get('companyCareer')?.touched" class="text-danger">Company career is required.</small>
+            </div>
+          
+          
+            <div class="footer mt-5" style="justify-content: space-between; display: flex;">
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success btn-sm" [disabled]="companyPostForm.invalid">Submit</button>
+            </div>
+          
+          
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container">
   <table class="table mt-5" style=" border-collapse: collapse; border: 1px solid #ddd;">
     <thead style="border: 1px solid; font-size: 14px;">
@@ -6,9 +147,9 @@
         <th style="border: 1px solid; width: 10%;">Company ID</th>
         <th style="border: 1px solid; width: 10%;">Company Logo</th>
         <th style="border: 1px solid; width: 15%;">Company Name</th>
-        <th style="border: 1px solid; width: 10%;">Company Description</th>
         <th style="border: 1px solid; width: 10%;">Company Type</th>
         <th style="border: 1px solid; width: 10%;">Website</th>
+        <th style="border: 1px solid; width: 10%;">Company Description</th>
         <th style="border: 1px solid; width: 25%;">Actions</th>
       </tr>
     </thead>
@@ -23,11 +164,13 @@
           <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1736057959/Logo_usvb7a.svg" alt="company logo" style="height: 50px; width: 50px;">
         </td>
         <td style="border: 1px solid; text-align: center;">Company Name</td>
-        <td style="border: 1px solid; text-align: center;">Company Description</td>
         <td style="border: 1px solid; text-align: center;">startup</td>
         <td style="border: 1px solid; text-align: center;">websitse.com</td>
+        <td style="border: 1px solid; text-align: center;">Company Description</td>
+
         <td style="border: 1px solid;">
           <div style=" display: flex; justify-content: space-around;">
+            <button  class="btn btn-sm btn-warning">Edit</button>
             <button  class="btn btn-sm btn-info" (click)="goToCompanyDetails()">View</button>
             <button class="btn btn-sm btn-danger">Delete</button>
           </div>

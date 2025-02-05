@@ -10,6 +10,7 @@ import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
 import { RecruiterSeekerProfileComponent } from './recruiter-seeker-profile/recruiter-seeker-profile.component';
 import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
+import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruiter-profile-form.component';
 
 
 
@@ -17,8 +18,11 @@ const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
-	{
-	  path: '', component: RecruiterMainPageComponent, // Main layout component with sidebar
+	{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
+	{ path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
+
+
+	{ path: '', component: RecruiterMainPageComponent, // Main layout component with sidebar
 	  children: [
 		{ path: 'dashboard', component: RecruiterDashboardComponent, title: 'Recruiter dashboard page'  }, // Dashboard route
 		{ path: 'profile', loadChildren: () => import('./recruiter-profile/recruiter-profile.module').then((m) => m. RecruiterProfileModule)},
@@ -28,8 +32,8 @@ const routes: Routes = [
 		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent,  title: 'Closed Jobs Page'  } ,// Hire Seeker page route
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
-        { path:'seeker-profile', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
-        { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
+        { path:'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
+		{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
 
 	  ]
 	}

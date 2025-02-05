@@ -1,33 +1,5 @@
 <div class="container-fluid mt-5">
   <div class="row bg-success">
-    <!-- Table Section -->
-    <div class="col-5 bg-info">
-        <table class="table  mt-3 text-center" style=" border-collapse: collapse; border: 1px solid #000000; font-size: 12px;">
-          <thead style="border: 1px solid;">
-            <tr style="border: 1px solid;">
-              <th style="border: 1px solid;">S.No</th>
-              <th style="border: 1px solid;">Recruiter Email</th>
-              <th style="border: 1px solid;">Date</th>
-              <th style="border: 1px solid;">Login Time</th>
-              <th style="border: 1px solid;">Logout Time</th>
-              <th style="border: 1px solid;">Status</th>
-              <th style="border: 1px solid;">Location</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr style="border: 1px solid;">
-              <td style="border: 1px solid;">1</td>
-              <td style="border: 1px solid;">Recruitergmail.com</td>
-              <td style="border: 1px solid;">01-02-2025</td>
-              <td style="border: 1px solid;">13:00 PM</td>
-              <td style="border: 1px solid;">13:30 PM</td>
-              <td class="text-success fw-bold" style="border: 1px solid;">Active</td>
-              <td style="border: 1px solid;"><a href=""><span style="text-decoration: underline;">View Location</span></a></td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
 
     <!-- Profile Section -->
     <div class="col-7 bg-warning d-flex align-items-center justify-content-center p-4">
@@ -35,7 +7,67 @@
         Recruiter complete profile details, projects uploaded, statistics
       </p>
     </div>
+
+    <!-- Table Section -->
+    <div class="col-5 bg-info">
+          <table class="table  mt-3 text-center" style=" border-collapse: collapse; border: 1px solid #000000; font-size: 12px;">
+            <thead style="border: 1px solid;">
+              <tr style="border: 1px solid;">
+                <th style="border: 1px solid;">S.No</th>
+                <th style="border: 1px solid;">Recruiter Email</th>
+                <th style="border: 1px solid;">Date</th>
+                <th style="border: 1px solid;">Login Time</th>
+                <th style="border: 1px solid;">Logout Time</th>
+                <th style="border: 1px solid;">Status</th>
+                <th style="border: 1px solid;">Location</th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <tr style="border: 1px solid;">
+                <td style="border: 1px solid;">1</td>
+                <td style="border: 1px solid;">Recruitergmail.com</td>
+                <td style="border: 1px solid;">01-02-2025</td>
+                <td style="border: 1px solid;">13:00 PM</td>
+                <td style="border: 1px solid;">13:30 PM</td>
+                <td class="text-success fw-bold" style="border: 1px solid;">Active</td>
+                <td style="border: 1px solid;"><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal"><span style="text-decoration: underline;">View Location</span></a></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  
+
+
   </div>
 </div>
 
+
+
+
+
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Google map location for individual recruiter
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 

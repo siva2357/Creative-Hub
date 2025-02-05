@@ -5,7 +5,7 @@
           <h5 style="margin: 0;">Certifications</h5>
       </div>
       <div class="col-2 text-end">
-          <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-5 " style="font-size: 14px; "  > <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+          <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-5"  data-bs-toggle="modal" data-bs-target="#certificateModal" style="font-size: 14px;"  > <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
       </div>
   </div>
 
@@ -66,6 +66,94 @@
     </div>
 
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg  modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-6 text-center" id="certificateModalLabel">Add Certificate</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
+          <form [formGroup]="certificateForm" (ngSubmit)="saveCertificate()">
+
+            <!-- Course Name, Course Issuing authority -->
+            <div class="row  p-3">
+
+                <div class="col">
+                    <input type="text" id="courseName" formControlName="courseName"  class="form-control form-control-sm" placeholder="Course Name" required>
+                    <small *ngIf="certificateForm.get('courseName')?.hasError('required') && certificateForm.get('courseName')?.touched" class="text-danger">Course name is required.</small>
+                </div>
+
+                <div class="col">
+                    <input type="text" id="associatedAuthority" formControlName="associatedAuthority"  class="form-control form-control-sm" placeholder="Associated authority" required>
+                    <small *ngIf="certificateForm.get('associatedAuthority')?.hasError('required') && certificateForm.get('associatedAuthority')?.touched" class="text-danger">Associated authority is required.</small>
+                </div>
+        
+            </div>
+
+            <!-- Certificate URL, License Number -->
+            <div class="row  p-3">
+
+                <div class="col">
+                    <input type="text" id="certificationURL" formControlName="certificationURL"  class="form-control form-control-sm" placeholder="Certification URL" required>
+                    <small *ngIf="certificateForm.get('certificationURL')?.hasError('required') && certificateForm.get('certificationURL')?.touched" class="text-danger">Certification URL is required.</small>
+                </div>
+        
+                
+                <div class="col">
+                    <input type="date" id="certificationDate" formControlName="certificationDate"  class="form-control form-control-sm" placeholder="Certification date" required>
+                    <small *ngIf="certificateForm.get('certificationDate')?.hasError('required') && certificateForm.get('certificationDate')?.touched" class="text-danger">Certification date is required.</small>
+                </div>
+        
+            </div>
+
+
+            <!-- Certificate Date -->
+            <div class="row  p-3">
+
+                <div class="col">
+                    <input type="file" id="certificateUpload" formControlName="certificateUpload"  class="form-control form-control-sm" placeholder="Certificate upload" required>
+                    <small *ngIf="certificateForm.get('certificateUpload')?.hasError('required') && certificateForm.get('certificateUpload')?.touched" class="text-danger">Please upload certificate</small>
+                </div>
+        
+        
+            </div>
+
+            <!-- Certificate Description -->
+            <div class="row  p-3">
+
+                <div class="col">
+                    <textarea id="ceritificationDescription" formControlName="ceritificationDescription"  class="form-control form-control-sm" placeholder="Ceritification description" required></textarea>
+                    <small *ngIf="certificateForm.get('ceritificationDescription')?.hasError('required') && certificateForm.get('ceritificationDescription')?.touched" class="text-danger">Certification description is required.</small>
+                </div>
+        
+            </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success"  [disabled]="certificateForm.invalid">Save</button>
+        </div>
+  
+        </form>
+        </div>
+  
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
 

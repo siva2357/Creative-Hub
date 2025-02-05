@@ -1,3 +1,125 @@
+<!-- Button trigger modal -->
+<div class="row d-flex justify-content-center align-items-center mb-3" style="margin-top: 50px;">
+  <div class="col-10">
+    <p style="margin-left: 40px; font-size: 18px;">University list</p>
+  </div>
+
+  <div class="col-2 text-end">
+      <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 14px; "  > <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Register university</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+
+          <form [formGroup]="universityPostForm" (ngSubmit)=" submitUniversity()">
+          
+          
+          
+            <!-- University ID, University Role Title, University Type, University Level -->
+            <div class="container">
+              <h5 class="text-center mb-3">University logo</h5>
+            </div>
+          
+            <div class="form-group col text-center step-container">
+              <div class="card-profile-body   rounded-4 profile-container ">
+                <div class="profile-avatar rounded-circle">
+                  <img id="avatarImage" [src]="logoUploadUrl || 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg'" alt="Avatar">
+                </div>
+              </div>
+          
+              <small class="text-muted mt-2" style="font-size: 12px; display: flex; align-items: center;">
+                <span style="margin-right: 5px;"><i class="bi bi-info-circle" style="font-size: 1rem; color: rgb(0, 110, 255);"></i></span>
+                Allowed formats: JPEG, PNG, JPG
+              </small>
+          
+            </div>
+
+            <div class="col mt-3">
+              <input type="file" id="universityLogo" formControlName="universityLogo" class="form-control form-control-sm" placeholder="Enter the University ID" required>
+              <small *ngIf="universityPostForm.get('universityLogo')?.hasError('required') && universityPostForm.get('universityLogo')?.touched" class="text-danger"> University logo is required.</small>
+            </div>
+          
+  
+            <div class="col  mt-3">
+              <label for="universityId" class="form-label fw-bold" style="font-size: 14px;"> University ID <span class="required">*</span></label>
+              <input type="text" id="universityId" formControlName="universityId" class="form-control form-control-sm" placeholder="Enter the University ID" required>
+              <small *ngIf="universityPostForm.get('universityId')?.hasError('required') && universityPostForm.get('universityId')?.touched" class="text-danger"> University ID is required.</small>
+            </div>
+          
+            <div class="col mt-3">
+              <label for="universityName" class="form-label fw-bold" style="font-size: 14px;">University Name <span class="required">*</span></label>
+              <input type="text" id="universityName" formControlName="universityName" class="form-control form-control-sm"placeholder="Enter the university name" required>
+              <small *ngIf="universityPostForm.get('universityName')?.hasError('required') && universityPostForm.get('universityName')?.touched" class="text-danger"> University name is required.</small>
+            </div>
+          
+            <div class="col mt-3">
+              <label for="universityType" class="form-label fw-bold" style="font-size: 14px;">University Type <span class="required">*</span></label>
+              <select id="universityType" class="form-select form-select-sm" formControlName="universityType" required>
+                <option value="">Select University Type</option>
+                <option value="Full-time">Central university</option>
+                <option value="Part-time">State university</option>
+                <option value="Contract">Deemed university</option>
+                <option value="Freelancer">Private university</option>
+                <option value="Freelancer">Autonomous College</option>
+              </select>
+              <small *ngIf="universityPostForm.get('universityType')?.hasError('required') && universityPostForm.get('universityType')?.touched" class="text-danger">University Type is required.</small>
+          
+            </div>
+          
+            <div class="col mt-3">
+              <label for="universityWebsite" class="form-label fw-bold" style="font-size: 14px;">University website <span class="required">*</span></label>
+              <input type="text" id="universityWebsite" formControlName="universityWebsite" class="form-control form-control-sm" placeholder="Enter the unviersity website" required>
+              <small *ngIf="universityPostForm.get('universityWebsite')?.hasError('required') && universityPostForm.get('universityWebsite')?.touched" class="text-danger">University website is required.</small>
+            </div>
+          
+            <!--University Descriptions -->
+            <div class="col mt-3">
+              <label for="universityDescription" class="form-label fw-bold" style="font-size: 14px;">University Description <span class="required">*</span></label>
+              <textarea class="form-control form-control-sm" formControlName="universityDescription" [placeholder]="'Enter university description'" required></textarea>
+              <small *ngIf="universityPostForm.get('universityDescription')?.hasError('required') && universityPostForm.get('universityDescription')?.touched" class="text-danger">University description is required.</small>
+            </div>
+          
+            <div class="col mt-3">
+              <label for="universityProgram" class="form-label fw-bold" style="font-size: 14px;">University Program <span class="required">*</span></label>
+              <input type="text" id="universityProgram" formControlName="universityProgram" class="form-control form-control-sm" placeholder="Enter the university program" required>
+              <small *ngIf="universityPostForm.get('universityProgram')?.hasError('required') && universityPostForm.get('universityProgram')?.touched" class="text-danger">University program is required.</small>
+            </div>
+          
+            <div class="col mt-3">
+              <label for="universityCourse" class="form-label fw-bold" style="font-size: 14px;">University Course <span class="required">*</span></label>
+              <input type="text" id="universityCourse" formControlName="universityCourse" class="form-control form-control-sm" placeholder="Enter the university course" required>
+              <small *ngIf="universityPostForm.get('universityCourse')?.hasError('required') && universityPostForm.get('universityCourse')?.touched" class="text-danger">University course is required.</small>
+            </div>
+          
+          
+            <div class="footer mt-5" style="justify-content: space-between; display: flex;">
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success btn-sm" [disabled]="universityPostForm.invalid">Submit</button>
+            </div>
+          
+          
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 <div class="container">
   <table class="table mt-5" style=" border-collapse: collapse; border: 1px solid #ddd;">
@@ -5,10 +127,11 @@
       <tr style="border: 1px solid;">
         <th style="border: 1px solid; width: 5%;">S.No</th>
         <th style="border: 1px solid; width: 10%;">University ID</th>
+        <th style="border: 1px solid; width: 10%;">University Logo</th>
         <th style="border: 1px solid; width: 15%;">University Name</th>
-        <th style="border: 1px solid; width: 10%;">University Description</th>
-        <th style="border: 1px solid; width: 10%;">UNiversity Type</th>
+        <th style="border: 1px solid; width: 10%;">University Type</th>
         <th style="border: 1px solid; width: 10%;">Website</th>
+        <th style="border: 1px solid; width: 10%;">University Description</th>
         <th style="border: 1px solid; width: 25%;">Actions</th>
       </tr>
     </thead>
@@ -18,12 +141,16 @@
         <td style="border: 1px solid; text-align: center; ">1</td>
 
         <td style="border: 1px solid; text-align: center;">COM - 1</td>
+        <td style="border: 1px solid; text-align: center;">
+          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg" alt="University logo" style="height: 50px; width: 50px;">
+        </td>
         <td style="border: 1px solid; text-align: center;">University Name</td>
-        <td style="border: 1px solid; text-align: center;">University Description</td>
         <td style="border: 1px solid; text-align: center;">Deemed/Private/Governtment</td>
         <td style="border: 1px solid; text-align: center;">websitse.com</td>
+        <td style="border: 1px solid; text-align: center;">University Description</td>
         <td style="border: 1px solid;">
           <div style=" display: flex; justify-content: space-around;">
+            <button  class="btn btn-sm btn-warning">Edit</button>
             <button  class="btn btn-sm btn-info" (click)="goToUniversityDetails()">View</button>
             <button class="btn btn-sm btn-danger">Delete</button>
           </div>
@@ -34,11 +161,6 @@
 
   </table>
 </div>
-
-
-
-
-
 
 
 

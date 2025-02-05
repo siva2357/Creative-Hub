@@ -1,13 +1,11 @@
 export interface Recruiter {
   _id?: string;
-    registrationDetails: {
-        signupDetails: {
+    profileDetails: {
+        basicDetails: {
             fullName: string;
             userName: string;
-            gender: string;
             email: string;
-            password: string;
-            confirmPassword?: string;
+            gender:string;
         },
 
         contactDetails: {
@@ -21,11 +19,11 @@ export interface Recruiter {
 
         professionalDetails: {
             companyName: string;
-            departmentName: string;
+            department: string;
             designation: string;
             jobLevel: string;
             experience:string;
-            companyId: string;
+            employeeCode: string;
         },
 
         bioDetails: {
@@ -33,7 +31,7 @@ export interface Recruiter {
         }
 
         profileDetails: {
-            profilePicture: string;  // Path or URL for the profile picture
+            profilePicture:  { fileName: string; url: string };  // Path or URL for the profile picture
         }
     };
 }
@@ -41,15 +39,12 @@ export interface Recruiter {
 
 export interface Seeker {
      _id?: string;
-    registrationDetails: {
-        signupDetails: {
+    profileDetails: {
+        basicDetails: {
             fullName: string;
             userName: string;
-            gender: string;
             email: string;
-            password: string;
-            confirmPassword?: string;
-
+            gender:string;
         },
         contactDetails: {
             phoneNumber: string;
@@ -60,17 +55,85 @@ export interface Seeker {
             pincode: string;
         },
         educationDetails: {
-            instituteName: string;
-            departmentName: string;
-            programOrDegree: string;
-            branchOrSpecialization: string;
+            institute: string;
+            degree: string;
+            department: string;
+            branch: string;
+            yearsOfStudying: string;
             instituteRollNumber: string;
         },
         bioDetails: {
             bio: string;
         }
         profileDetails: {
-            profilePicture: string;  // Path or URL for the profile picture
+            profilePicture:  { fileName: string; url: string };  // Path or URL for the profile picture
         }
     };
 }
+
+
+
+
+
+export interface SocialMedia {
+    seekerId:string;
+    _id?: string;
+      socialMediaDetails: {
+        socialMediaProfile: string;
+        socialMediaLink: string;
+      };
+  }
+  
+  export interface TechnicalSkills {
+    seekerId:string;
+      _id?: string;
+        skillDetails: {
+          skillSet: string;
+          proficiency: string;
+      };
+  }
+  
+  
+  export interface Languages {
+    seekerId:string;
+      _id?: string;
+        languageDetails: {
+          language: string;
+          proficiency: string;
+      };
+  }
+  
+  
+  export interface Subjects {
+    seekerId:string;
+      _id?: string;
+        subjectDetails: {
+          subject: string;
+          semester:string;
+          percentage: string;
+      };
+  }
+  
+  export interface Certifications {
+    seekerId:string;  
+    _id?: string;
+        certificationDetails: {
+          courseName: string;
+          associatedAuthority:string;
+          certificationURL: string;
+          certificationDate: string;
+          ceritificationDescription:string;
+          certificateUpload:{ fileName: string; url: string };
+      };
+  }
+  
+  
+  export interface Resume {
+    seekerId:string;
+      _id?: string;
+        resumeDetails: {
+          resumeTitle:String;
+          resumeUpload: { fileName: string; url: string };  // Changed from Array to Object
+          createdAt:Date;
+      };
+  }

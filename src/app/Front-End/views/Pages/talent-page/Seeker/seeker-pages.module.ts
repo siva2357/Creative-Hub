@@ -19,6 +19,7 @@ import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-rout
 
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { SeekerEditProfileComponent } from './seeker-edit-profile/seeker-edit-profile.component';
+import { SeekerProfileFormComponent } from './seeker-profile-form/seeker-profile-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SeekerEditProfileComponent } from './seeker-edit-profile/seeker-edit-pr
     SeekerManageProjectPageComponent,
     SeekerPostProjectPageComponent ,
     ProjectDetailsComponent,
-    SeekerEditProfileComponent
+    SeekerEditProfileComponent,
+    SeekerProfileFormComponent
 
   ],
   imports: [
