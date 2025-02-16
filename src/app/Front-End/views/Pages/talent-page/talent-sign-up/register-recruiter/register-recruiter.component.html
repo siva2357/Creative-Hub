@@ -16,45 +16,30 @@
               <!-- Full Name Input -->
               <!-- This input field allows the user to enter their full name. It has validation to ensure the field is not empty and follows a specific format -->
               <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': registrationForm.get('fullName')?.invalid && (registrationForm.get('fullName')?.touched || registrationForm.get('fullName')?.dirty)}"
-                  placeholder="Full Name" id="fullName" formControlName="fullName" type="text" class="form-control"
-                  style="height: 45px; border-radius: 10px;" />
+                <input [ngClass]="{'is-invalid': registrationForm.get('fullName')?.invalid && (registrationForm.get('fullName')?.touched || registrationForm.get('fullName')?.dirty)}" placeholder="Full Name" id="fullName" formControlName="fullName" type="text" class="form-control" style="height: 45px; border-radius: 10px;" />
                 <div *ngIf="registrationForm.get('fullName')?.touched">
-                  <small *ngIf="registrationForm.get('fullName')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Full Name is required.</small>
-                  <small *ngIf="registrationForm.get('fullName')?.errors?.['pattern']" class="text-danger">Invalid format. Must
-                    start with a capital letter.</small>
+                  <small *ngIf="registrationForm.get('fullName')?.errors?.['required']" class="text-danger" style="font-size: 13px;">Full Name is required.</small>
+                  <small *ngIf="registrationForm.get('fullName')?.errors?.['pattern']" class="text-danger">Invalid format. Must start with a capital letter.</small>
                 </div>
               </div>
 
               <!-- Username Input -->
               <!-- This input field allows the user to choose a username. It has validation to ensure the username follows the correct format -->
               <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched}"
-                  placeholder="Username" id="userName" formControlName="userName" type="text" class="form-control"
-                  style="height: 45px; border-radius: 10px;" />
+                <input [ngClass]="{'is-invalid': registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched}" placeholder="Username" id="userName" formControlName="userName" type="text" class="form-control" style="height: 45px; border-radius: 10px;" />
                 <div *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
-                  <small *ngIf="registrationForm.get('userName')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Username is required.</small>
-                  <small *ngIf="registrationForm.get('userName')?.errors?.['pattern']" class="text-danger">Invalid Username
-                    format.</small>
+                  <small *ngIf="registrationForm.get('userName')?.errors?.['required']" class="text-danger" style="font-size: 13px;">Username is required.</small>
+                  <small *ngIf="registrationForm.get('userName')?.errors?.['pattern']" class="text-danger">Invalid Username format.</small>
                 </div>
               </div>
 
               <!-- Email Input -->
               <!-- This input field allows the user to enter their email address. It has validation to ensure a valid email format -->
               <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched}"
-                  placeholder="Email Address" id="email" formControlName="email" type="email" class="form-control"
-                  style="height: 45px; border-radius: 10px;" />
+                <input [ngClass]="{'is-invalid': registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched}" placeholder="Email Address" id="email" formControlName="email" type="email" class="form-control"  style="height: 45px; border-radius: 10px;" />
                 <div *ngIf="registrationForm.get('email')?.touched">
-                  <small *ngIf="registrationForm.get('email')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Email is required.</small>
-                  <small *ngIf="registrationForm.get('email')?.errors?.['pattern']" class="text-danger">Invalid Email
-                    format.</small>
+                  <small *ngIf="registrationForm.get('email')?.errors?.['required']" class="text-danger" style="font-size: 13px;">Email is required.</small>
+                  <small *ngIf="registrationForm.get('email')?.errors?.['pattern']" class="text-danger">Invalid Email format.</small>
                 </div>
               </div>
 
