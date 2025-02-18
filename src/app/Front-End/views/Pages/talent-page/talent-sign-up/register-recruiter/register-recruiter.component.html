@@ -13,13 +13,24 @@
           <!-- Step 1: Basic User Information -->
           <div *ngIf="step === 1">
             <form [formGroup]="registrationForm">
-              <!-- Full Name Input -->
-              <!-- This input field allows the user to enter their full name. It has validation to ensure the field is not empty and follows a specific format -->
+
+
+              <!--First Name Input -->
               <div class="form-group row align-items-center mt-3">
-                <input [ngClass]="{'is-invalid': registrationForm.get('fullName')?.invalid && (registrationForm.get('fullName')?.touched || registrationForm.get('fullName')?.dirty)}" placeholder="Full Name" id="fullName" formControlName="fullName" type="text" class="form-control" style="height: 45px; border-radius: 10px;" />
-                <div *ngIf="registrationForm.get('fullName')?.touched">
-                  <small *ngIf="registrationForm.get('fullName')?.errors?.['required']" class="text-danger" style="font-size: 13px;">Full Name is required.</small>
-                  <small *ngIf="registrationForm.get('fullName')?.errors?.['pattern']" class="text-danger">Invalid format. Must start with a capital letter.</small>
+                <input [ngClass]="{'is-invalid': registrationForm.get('firstName')?.invalid && (registrationForm.get('firstName')?.touched || registrationForm.get('firstName')?.dirty)}" placeholder="First Name" id="firstName" formControlName="firstName" type="text" class="form-control" style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="registrationForm.get('firstName')?.touched">
+                  <small *ngIf="registrationForm.get('firstName')?.errors?.['required']" class="text-danger" style="font-size: 13px;">Fisrt Name is required.</small>
+                  <small *ngIf="registrationForm.get('firstName')?.errors?.['pattern']" class="text-danger">Invalid format. Must start with a capital letter.</small>
+                </div>
+              </div>
+
+
+              <!-- Last Name Input -->
+              <div class="form-group row align-items-center mt-3">
+                <input [ngClass]="{'is-invalid': registrationForm.get('lastName')?.invalid && (registrationForm.get('lastName')?.touched || registrationForm.get('lastName')?.dirty)}" placeholder="Last Name" id="lastName" formControlName="lastName" type="text" class="form-control" style="height: 45px; border-radius: 10px;" />
+                <div *ngIf="registrationForm.get('lastName')?.touched">
+                  <small *ngIf="registrationForm.get('lastName')?.errors?.['required']" class="text-danger" style="font-size: 13px;">Last Name is required.</small>
+                  <small *ngIf="registrationForm.get('lastName')?.errors?.['pattern']" class="text-danger">Invalid format. Must start with a capital letter.</small>
                 </div>
               </div>
 
@@ -57,73 +68,54 @@
           </div>
 
           <!-- Step 2: Password and Confirmation -->
-          <!-- This section allows the user to set a password and confirm it -->
-          <div *ngIf="step === 2">
-            <form [formGroup]="registrationForm">
+          <div *ngIf="step === 2" >
+            <form [formGroup]="registrationForm" (ngSubmit)="submit()">
               <!-- Password Input -->
               <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched}"
-                  placeholder="Create Password" id="password" formControlName="password" type="password" class="form-control"
-                  style="height: 45px; border-radius: 10px;" />
+                <input  [ngClass]="{'is-invalid': registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched}" placeholder="Create Password" id="password" formControlName="password" type="password" class="form-control" style="height: 45px; border-radius: 10px;" />
                 <div *ngIf="registrationForm.get('password')?.touched">
-                  <small *ngIf="registrationForm.get('password')?.errors?.['required']" class="text-danger"
-                    style="font-size: 13px;">Password is required.</small>
-                  <small *ngIf="registrationForm.get('password')?.errors?.['pattern']" class="text-danger">Invalid Password
-                    format.</small>
+                  <small *ngIf="registrationForm.get('password')?.errors?.['required']" class="text-danger" style="font-size: 13px;">Password is required.</small>
+                  <small *ngIf="registrationForm.get('password')?.errors?.['pattern']" class="text-danger">Invalid Password format.</small>
                 </div>
               </div>
 
               <!-- Confirm Password Input -->
               <div class="form-group row align-items-center mt-3">
-                <input
-                  [ngClass]="{'is-invalid': registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched}"
-                  placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" type="password"
-                  class="form-control" style="height: 45px; border-radius: 10px;" />
-                <small
-                  *ngIf="registrationForm.get('confirmPassword')?.touched && registrationForm.get('confirmPassword')?.hasError('required')"
-                  class="text-danger" style="font-size: 13px;">Confirm Password is required.</small>
-                <small *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('confirmPassword')?.touched"
-                  class="text-danger">Passwords do not match.</small>
+                <input [ngClass]="{'is-invalid': registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched}" placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control" style="height: 45px; border-radius: 10px;" />
+                <small *ngIf="registrationForm.get('confirmPassword')?.touched && registrationForm.get('confirmPassword')?.hasError('required')" class="text-danger" style="font-size: 13px;">Confirm Password is required.</small>
+                <small *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('confirmPassword')?.touched" class="text-danger">Passwords do not match.</small>
               </div>
 
               <!-- Navigation Buttons -->
               <div class="row justify-content-between mt-3">
                 <div class="col-auto">
-                  <button (click)="previous()" class="btn btn-secondary" type="button">Previous</button>
+                  <button (click)="previous()" class="btn btn-secondary">Previous</button>
                 </div>
                 <div class="col-auto">
-                  <button (click)="next()" class="btn btn-success" [disabled]="!isStepValid()" type="button">Next</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Submit</button>
                 </div>
               </div>
+
+
             </form>
           </div>
 
-          <!-- Step 3: Profile Upload -->
-          <!-- Login Link -->
-          <div class="col-12 justify-content-center mt-3">
-            <p class="mb-0 text-center fs-6 text-white">Already a member? <span class="text-primary" (click)="LoginPage()"
-                style="cursor: pointer;">Login</span></p>
-          </div>
+
         </div>
 
 
 
-
-
-        <div class="row d-flex justify-content-center align-items-center spinner-wrapper" *ngIf="isLoading">
-          <div class="text-center">
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-            <div class="mt-3">
-              <!-- <p *ngIf="registrationSuccess">Redirecting you to confirmation page</p>
-                      <p *ngIf="!registrationSuccess">Redirecting to signup page...</p> -->
-              <p>Registering you account details</p>
-
-            </div>
-          </div>
-        </div>
+  <div class="row d-flex justify-content-center align-items-center spinner-wrapper" *ngIf="isLoading">
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="mt-3">
+        <p *ngIf="registrationSuccess">Redirecting you to cofirmation page</p>
+        <p *ngIf="!registrationSuccess">Redirecting to signup...</p>
+      </div>
+    </div>
+  </div>
 
       </div>
     </div>
