@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
+import { AutoLogoutService } from 'src/app/Front-End/core/services/auto-logout.service';
 
 @Component({
   selector: 'app-seeker-main-page',
@@ -7,7 +8,9 @@ import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
   styleUrls: ['./seeker-main-page.component.css']
 })
 export class SeekerMainPageComponent {
-  constructor() { }
+  constructor(private autoLogoutService: AutoLogoutService) {
+    console.log('Auto logout service initialized');
+  }
 
   menu: MenuItem[] = [
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid'},

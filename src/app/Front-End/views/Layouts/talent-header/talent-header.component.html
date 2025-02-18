@@ -17,7 +17,7 @@
         </button>
 
 
-        <span class="me-3">Username</span>
+        <span class="me-3">{{ userName }}</span>
 
 <button class="nav-link d-flex justify-content-center align-items-center rounded-circle text-decoration-none bg-white" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
   <img [src]="'https://res.cloudinary.com/dpp8aspqs/image/upload/v1737957959/profie_images_j53njq.png'" alt="Profile Image" style="width: 35px; height: 35px; border-radius: 50%;">
@@ -26,9 +26,11 @@
 
         <div class="dropdown mt-5">
           <ul class="dropdown-menu dropdown-menu-end shadow">
-            <li><a class="dropdown-item" style="cursor: pointer; font-size: 14px;" (click)="goToSettings()">Settings</a></li>
+            
+            <li><a class="dropdown-item" (click)="goToAccountSettingsPage()">Settings</a></li>
+            <li><a class="dropdown-item" (click)="goToChangePasswordPage()">Change password</a></li>
             <hr class="mb-0 mt-0">
-            <li><a class="dropdown-item" style="cursor: pointer; font-size: 14px;">Sign Out</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer; font-size: 14px;" (click)="onLogout()">Sign Out</a></li>
           </ul>
         </div>
 

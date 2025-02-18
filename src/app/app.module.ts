@@ -26,6 +26,9 @@ import { UnauthorizedPageComponent } from './Front-End/views/other-pages/unautho
 import { LayoutModule } from "./Front-End/views/Layouts/layout.module";
 import { SharedModule } from './Front-End/views/shared/shared.module';
 import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-logo/introduction-logo.component';
+import { ForgotPasswordPageComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordOtpPageComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/reset-password-otp-page/reset-password-otp-page.component';
+import { ResetPasswordPageComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/reset-password-page/reset-password-page.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-
     CloudPageComponent,
     UnauthorizedPageComponent,
     IntroductionLogoComponent,
+    ForgotPasswordPageComponent,
+    ResetPasswordOtpPageComponent,
+    ResetPasswordPageComponent,
   ],
 
   imports: [

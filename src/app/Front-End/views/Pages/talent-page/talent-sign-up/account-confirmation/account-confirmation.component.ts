@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-confirmation',
@@ -8,4 +9,9 @@ import { Component } from '@angular/core';
 export class ConfirmationComponent {
 
 
+  constructor( private router: Router) {}
+
+  login() {
+    this.router.navigate(['talent-page/login']); // Corrected navigation
+  }
 }

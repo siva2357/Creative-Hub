@@ -2,3 +2,39 @@
 
 
 
+/* otp-verification.component.css */
+
+.otp-verification-container {
+    text-align: center;
+  }
+  
+  .otp-input-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+  
+  .otp-input {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    text-align: center;
+    margin: 5px;
+  }
+  
+  .timer {
+    margin-bottom: 20px;
+  }
+  
+  .resend-btn, .verify-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .resend-btn:disabled, .verify-btn:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
+  }
+  

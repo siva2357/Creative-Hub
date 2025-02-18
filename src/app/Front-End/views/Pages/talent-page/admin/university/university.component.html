@@ -11,7 +11,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog  modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Register university</h1>
@@ -88,17 +88,40 @@
               <small *ngIf="universityPostForm.get('universityDescription')?.hasError('required') && universityPostForm.get('universityDescription')?.touched" class="text-danger">University description is required.</small>
             </div>
           
-            <div class="col mt-3">
-              <label for="universityProgram" class="form-label fw-bold" style="font-size: 14px;">University Program <span class="required">*</span></label>
-              <input type="text" id="universityProgram" formControlName="universityProgram" class="form-control form-control-sm" placeholder="Enter the university program" required>
-              <small *ngIf="universityPostForm.get('universityProgram')?.hasError('required') && universityPostForm.get('universityProgram')?.touched" class="text-danger">University program is required.</small>
+            <div class="row">
+              <div class="col mt-3">
+                <label for="universityProgram" class="form-label fw-bold" style="font-size: 14px;">University Program <span class="required">*</span></label>
+                <input type="text" id="universityProgram" formControlName="universityProgram" class="form-control form-control-sm" placeholder="Enter the university program" required>
+                <small *ngIf="universityPostForm.get('universityProgram')?.hasError('required') && universityPostForm.get('universityProgram')?.touched" class="text-danger">University program is required.</small>
+              </div>
+            
+              <div class="col mt-3">
+                <label for="universityCourse" class="form-label fw-bold" style="font-size: 14px;">University Course <span class="required">*</span></label>
+                <input type="text" id="universityCourse" formControlName="universityCourse" class="form-control form-control-sm" placeholder="Enter the university course" required>
+                <small *ngIf="universityPostForm.get('universityCourse')?.hasError('required') && universityPostForm.get('universityCourse')?.touched" class="text-danger">University course is required.</small>
+              </div>
             </div>
-          
-            <div class="col mt-3">
-              <label for="universityCourse" class="form-label fw-bold" style="font-size: 14px;">University Course <span class="required">*</span></label>
-              <input type="text" id="universityCourse" formControlName="universityCourse" class="form-control form-control-sm" placeholder="Enter the university course" required>
-              <small *ngIf="universityPostForm.get('universityCourse')?.hasError('required') && universityPostForm.get('universityCourse')?.touched" class="text-danger">University course is required.</small>
+
+
+
+            <div class="row">
+              <div class="col mt-3">
+                <div class="list-group">
+                  <button type="button" class="list-group-item list-group-item-action">Program 1</button>
+                  <button type="button" class="list-group-item list-group-item-action">Program 2</button>
+                  <button type="button" class="list-group-item list-group-item-action">Program 3</button>
+                </div>
+              </div>
+            
+              <div class="col mt-3">
+                <div class="list-group">
+                  <button type="button" class="list-group-item list-group-item-action">Program 1- Course 1</button>
+                  <button type="button" class="list-group-item list-group-item-action">Program 1-Course 2</button>
+                  <button type="button" class="list-group-item list-group-item-action">Program 1-Coruse 3</button>
+                </div>
+              </div>
             </div>
+
           
           
             <div class="footer mt-5" style="justify-content: space-between; display: flex;">

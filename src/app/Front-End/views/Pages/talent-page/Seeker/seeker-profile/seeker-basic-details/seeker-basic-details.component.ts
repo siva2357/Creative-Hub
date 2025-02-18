@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Seeker } from 'src/app/Front-End/core/models/user-registration.model';
-
+import { Seeker } from 'src/app/Front-End/core/models/profile-details.model';
 @Component({
   selector: 'app-seeker-basic-details',
   templateUrl: './seeker-basic-details.component.html',

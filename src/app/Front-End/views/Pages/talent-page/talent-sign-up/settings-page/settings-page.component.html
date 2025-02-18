@@ -1,1 +1,46 @@
-<p>settings-page works!</p>
+<app-talent-header></app-talent-header>>
+
+<div class="container mt-4">
+  <ul class="nav nav-tabs" id="settingsTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="main-settings-tab" data-bs-toggle="tab" data-bs-target="#main-settings" type="button" role="tab">
+        Main Settings
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="change-password-tab" data-bs-toggle="tab" data-bs-target="#change-password" type="button" role="tab">
+        Change Password
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="social-network-tab" data-bs-toggle="tab" data-bs-target="#social-network" type="button" role="tab">
+        Social Network
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="manage-account-tab" data-bs-toggle="tab" data-bs-target="#manage-account" type="button" role="tab">
+        Manage Account
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3" id="settingsTabContent">
+    <div class="tab-pane fade show active" id="main-settings" role="tabpanel">
+      <h3>Main Settings</h3>
+      <p>Update your profile details here.</p>
+    </div>
+    <div class="tab-pane fade" id="change-password" role="tabpanel">
+      <h3>Change Password</h3>
+      <p>Update your password securely.</p>
+    </div>
+    <div class="tab-pane fade" id="social-network" role="tabpanel">
+      <h3>Social Network</h3>
+      <p>Connect your social accounts.</p>
+    </div>
+    <div class="tab-pane fade" id="manage-account" role="tabpanel">
+      <h3>Manage Account</h3>
+      <p>Delete or deactivate your account.</p>
+      <button (click)="deleteAccount()" class="btn btn-danger">Delete Account</button>
+    </div>
+  </div>
+</div>
