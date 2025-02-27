@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const mongoose = require('mongoose');
 
 const authRouter = require("./routers/authRoutes");
+const universityRouter = require("./University/universityRoutes");
+const companyRouter = require("./company/companyRoutes");
 
 const app = express();
 
@@ -38,13 +40,14 @@ mongoose.connect(process.env.MONGO_URI)
 
 // API Routes
 app.use('/api/auth', authRouter);
-
+app.use('/api',universityRouter);
+app.use('/api',companyRouter);
 // Root Endpoint
 app.get('/', (req, res) => {
     res.json({ message: "Hello from the server" });
 });
 
 // Start Server with Port Fallback
-app.listen(process.env.PORT || 4500, () => {
-    console.log(`Server started on port ${process.env.PORT || 4500}`);
+app.listen(process.env.PORT , () => {
+    console.log(`Server started on port ${process.env.PORT}`);
 });
