@@ -20,6 +20,11 @@ import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details
 import { SeekerDetailsComponent } from './seeker-details/seeker-details.component';
 import { UserLocationComponent } from './user-location/user-location.component';
 import { UniversityCompanyLocationComponent } from 'src/app/Front-End/views/Pages/talent-page/admin/university-company-location/university-company-location.component';
+import { UniversityPostComponent } from './university-post/university-post.component';
+import { UniversityEditComponent } from './university-edit/university-edit.component';
+import { CompanyPostComponent } from './company-post/company-post.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,11 @@ import { UniversityCompanyLocationComponent } from 'src/app/Front-End/views/Page
     RecruiterDetailsComponent,
     SeekerDetailsComponent,
     UserLocationComponent,
-    UniversityCompanyLocationComponent
+    UniversityCompanyLocationComponent,
+    UniversityEditComponent,
+    UniversityPostComponent,
+    CompanyPostComponent,
+    CompanyEditComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +52,8 @@ import { UniversityCompanyLocationComponent } from 'src/app/Front-End/views/Page
     FormsModule,
     ReactiveFormsModule,
     AdminPagesRoutingModule,
-    LayoutModule
+    LayoutModule,
+    NgxEditorModule
 ],
   providers: [DatePipe],
 

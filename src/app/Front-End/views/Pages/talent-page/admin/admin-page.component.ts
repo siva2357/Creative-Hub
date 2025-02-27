@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
+import { AutoLogoutService } from 'src/app/Front-End/core/services/auto-logout.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -7,8 +8,10 @@ import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent {
+  constructor(private autoLogoutService: AutoLogoutService) {
+    console.log('Auto logout service initialized');
+  }
 
-  constructor() { }
 
   menu: MenuItem[] = [
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid' },

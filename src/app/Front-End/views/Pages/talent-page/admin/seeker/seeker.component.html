@@ -1,12 +1,21 @@
-<div class="container">
+<div style="display: flex; align-items: center; gap: 5px; text-decoration: none;  color: inherit;">
+  <i class="bi bi-arrow-left" style="font-size: 2rem; cursor: pointer;" (click)="goToUserData()"></i>
+  <p style="margin: 0;">Back</p>
+</div>
+
+
+
+<h5>Seekers list</h5>
+<div class="container"  *ngIf="seekers.length > 0">
   <table class="table mt-5" style=" border-collapse: collapse; border: 1px solid #ddd;">
     <thead style="border: 1px solid; font-size: 14px;">
       <tr style="border: 1px solid;">
         <th style="border: 1px solid; width: 5%;">S.No</th>
-        <th style="border: 1px solid; width: 10%;">Seeker ID</th>
         <th style="border: 1px solid; width: 15%;">Seeker Name</th>
         <th style="border: 1px solid; width: 10%;">Seeker Email</th>
         <th style="border: 1px solid; width: 10%;">Created On </th>
+        <th style="border: 1px solid; width: 15%;">Login Time</th>
+        <th style="border: 1px solid; width: 15%;">Logout Time</th>
         <th style="border: 1px solid; width: 10%;">Verification</th>
         <th style="border: 1px solid; width: 15%;">Status</th>
         <th style="border: 1px solid; width: 25%;">Action</th>
@@ -15,19 +24,20 @@
     </thead>
 
     <tbody>
-      <tr style="border: 1px solid;" >
-        <td style="border: 1px solid; text-align: center; ">1</td>
+      <tr style="border: 1px solid;" *ngFor="let seeker of seekers; let i = index" >
+        <td style="border: 1px solid; text-align: center;" >{{i+1}}</td>
 
-        <td style="border: 1px solid; text-align: center;">123456</td>
-        <td style="border: 1px solid; text-align: center;">Seeker Name</td>
-        <td style="border: 1px solid; text-align: center;">Seekergmail.com</td>
-        <td style="border: 1px solid; text-align: center;">01-02-2025</td>
-        <td style="border: 1px solid; text-align: center;">Pending/Completed</td>
-        <td style="border: 1px solid; text-align: center;">Active</td>
+        <td style="border: 1px solid; text-align: center;">{{seeker.registrationDetails.firstName}}  {{seeker.registrationDetails.lastName}}</td>
+        <td style="border: 1px solid; text-align: center;">{{seeker.registrationDetails.email}}</td>
+        <td style="border: 1px solid; text-align: center;">{{seeker.createdAt}}</td>
+        <td style="border: 1px solid; text-align: center;">{{seeker.lastLoginAt}}</td>
+        <td style="border: 1px solid; text-align: center;">{{seeker.lastLogoutAt}}</td>
+        <td style="border: 1px solid; text-align: center;">{{seeker.registrationDetails.verified}}</td>
+        <td style="border: 1px solid; text-align: center;">{{seeker.status}}</td>
 
         <td style="border: 1px solid;">
           <div style=" display: flex; justify-content: space-around;">
-            <button  class="btn btn-sm btn-info" (click)="goToSeekerDetails()">View</button>
+            <button  class="btn btn-sm btn-info" (click)="goToSeekerDetails(seeker)">View</button>
             <button class="btn btn-sm btn-danger">Delete</button>
           </div>
         </td>
@@ -39,6 +49,9 @@
 </div>
 
 
+
+<div *ngIf="seekers.length == 0">
 <div class="container d-flex justify-content-center align-items-center">
   <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 600px; width: 600px;">
+</div>
 </div>

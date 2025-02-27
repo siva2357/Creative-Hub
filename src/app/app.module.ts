@@ -29,7 +29,9 @@ import { IntroductionLogoComponent } from './Front-End/views/Pages/introduction-
 import { ForgotPasswordPageComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordOtpPageComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/reset-password-otp-page/reset-password-otp-page.component';
 import { ResetPasswordPageComponent } from './Front-End/views/Pages/talent-page/talent-sign-up/reset-password-page/reset-password-page.component';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { ResetPasswordPageComponent } from './Front-End/views/Pages/talent-page/
     LayoutModule,
     SharedModule,
     TalentPageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
+    AngularFireStorageModule, // Use storage services
 
 ],
   providers: [ DatePipe ],
