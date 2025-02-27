@@ -62,7 +62,7 @@ src/app/Back-End/Source/otp-verification/otpVerificationController.js
 src/app/Back-End/Source/routers/authRoutes.js
 src/app/Back-End/Source/utils/hashing.js
 src/environments/environment.ts
-
+src/environments/environment.prod.ts
 src/app/Front-End/core/guards/auth.guard.ts
 src/app/Front-End/core/guards/role.guard.ts
 src/app/Front-End/core/interceptors/api-headers.interceptor.ts
