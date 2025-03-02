@@ -1,15 +1,220 @@
-import { Component} from '@angular/core';
-import { FormBuilder,} from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { JobPost } from 'src/app/Front-End/core/models/jobPost.model';
+import { JobPostService } from 'src/app/Front-End/core/services/jobPost.service';
+import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 
 @Component({
   selector: 'app-job-post-edit-form',
   templateUrl: './job-post-edit-form.component.html',
   styleUrls: ['./job-post-edit-form.component.css']
 })
-export class RecruiterEditJobPageComponent {
+export class RecruiterEditJobPageComponent implements OnInit,  OnDestroy{
+
+  public jobPost!: JobPost;
+
+  editor!: Editor;
+  toolbar: Toolbar = DEFAULT_TOOLBAR;
+
+  jobPostUpdateForm!: FormGroup;
+  isEditMode: boolean = false;
+
+  isUpdating = false;
+  isLoading = false;
+  jobPostActive: boolean = true;
+
+  errorMessage = '';
+  jobId!: string;
+  recruiterId!: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private activatedRouter: ActivatedRoute,
+    private router: Router,
+    private jobPostService: JobPostService,
+      private authService: AuthService
+  ) {}
 
 
-  constructor( private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+
+     // Get the userId and role from localStorage or AuthService
+     this.recruiterId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+     const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
+
+     console.log("User ID:", this.recruiterId);
+     console.log("User Role:", role); // Log the user role for debugging
+
+
+    this.editor = new Editor();
+    this.initializeForm();
+
+    this.activatedRouter.paramMap.subscribe((param) => {
+      this. jobId = param.get('id')!;
+      console.log('Company ID:', this. jobId);
+
+      if (this.jobId) {
+        this.fetchJobpostData(); // Call API only after ID is fetched
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
+}
+
+fetchJobpostData() {
+    this.jobPostService.getRecruiterJobPostById(this.recruiterId,  this.jobId).subscribe(
+      (jobPostData: JobPost) => {
+        if (jobPostData) {
+          this.jobPost = jobPostData;
+          this.initializeForm(); // Initialize form after data is fetched
+        } else {
+          this.errorMessage = 'University data not found';
+        }
+      },
+      (error) => {
+        this.errorMessage = 'Failed to load university data';
+      }
+    );
+  }
+
+   initializeForm() {
+    this.jobPostUpdateForm = this.fb.group({
+      jobId: ['', [Validators.required]],
+      jobRoleTitle: ['', [Validators.required]],
+      jobType: ['', [Validators.required]],
+      salary: ['', [Validators.required]],
+      vacancy: ['', [Validators.required]],
+      applyByDate: ['', [Validators.required]],
+      jobDescription: ['', [Validators.required]],
+      });
+
+      if (this.jobPost && this.jobPost.jobPostDetails) {
+        this.jobPostUpdateForm.patchValue({
+          jobId: this.jobPost.jobPostDetails.jobId,
+          jobRoleTitle: this.jobPost.jobPostDetails.jobRoleTitle,
+          jobType: this.jobPost.jobPostDetails.jobType,
+          salary: this.jobPost.jobPostDetails.salary,
+          vacancy: this.jobPost.jobPostDetails.vacancy,
+          applyByDate: [new Date(this.jobPost?.jobPostDetails?.applyByDate).toISOString().slice(0, 10)],
+
+          jobDescription: this.jobPost.jobPostDetails.jobDescription,
+
+        });
+      }
+
+      if (!this.isEditMode) {
+        this.jobPostUpdateForm.disable();
+      }
+    }
+
+    get jobDescriptionControl(): FormControl {
+      return this.jobPostUpdateForm.get('jobDescription') as FormControl;
+    }
+
+
+
+
+  openEditMode(): void {
+    if (this. jobPostActive) {
+      this.isEditMode = true;
+      this.jobPostUpdateForm.enable();
+    } else {
+      this.errorMessage = 'Project is closed, unable to edit.';
+      this.jobPostUpdateForm.disable();
+    }
+  }
+
+  discardChanges(): void {
+    this.jobPostUpdateForm.patchValue({
+      jobId: this.jobPost?.jobPostDetails?.jobId,
+      jobRoleTitle: this.jobPost?.jobPostDetails?.jobRoleTitle,
+      jobType: this.jobPost?.jobPostDetails?.jobType,
+      salary: this.jobPost?.jobPostDetails?.salary,
+      vacancy: this.jobPost?.jobPostDetails?.vacancy,
+      applyByDate: [new Date(this.jobPost?.jobPostDetails?.applyByDate).toISOString().slice(0, 10)],
+
+      jobDescription: this.jobPost?.jobPostDetails?.jobDescription,
+    });
+
+    this.jobPostUpdateForm.disable();
+    this.isEditMode = false;
+}
+
+
+  updateJobPost() {
+      if (this.jobPostUpdateForm.valid) {  // Ensure file is uploaded
+        console.log("Form Data:", this.jobPostUpdateForm.value); // Debugging
+        const jobPostData: JobPost = {
+         jobPostDetails: {
+            ...this.jobPostUpdateForm.value,
+          },
+        };
+
+        this.isUpdating = true;
+        this.jobPostService.updateJobPostById(this.recruiterId,  this.jobId,jobPostData).subscribe({
+          next: () => {
+            this.resetState(),
+            console.log("University submitted successfully!");
+            this.jobPostUpdateForm.reset();
+            this.isUpdating = false;
+            this.router.navigateByUrl('talent-page/recruiter/manage-jobs');
+
+          },
+          error: (err) => {
+            console.error("Error submitting company:", err);
+            this.errorMessage = "Submission failed. Please try again.";
+            this.isUpdating = false;
+          }
+        });
+      } else {
+        console.error("Form is invalid:", this.jobPostUpdateForm.errors);
+        this.errorMessage = "Please fill all required fields correctly.";
+      }
+    }
+
+  resetState(): void {
+    this.isEditMode = false;
+  }
+
+
+  // **Navigate to University Details with ID**
+  goToJobpostPage(): void {
+    this.router.navigateByUrl('talent-page/recruiter/manage-jobs');
+  }
+
+
+  confirmDiscard() {
+    if (confirm("Are you sure you want to discard the changes?")) {
+      this.discard();
+    }
+  }
+
+  // Reset the form and uploaded data
+  discard() {
+    this.jobPostUpdateForm.reset();
+  }
+
+  resetForm() {
+    this.jobPostUpdateForm.patchValue({
+      jobId: this.jobPost?.jobPostDetails?.jobId,
+      jobRoleTitle: this.jobPost?.jobPostDetails?.jobRoleTitle,
+      jobType: this.jobPost?.jobPostDetails?.jobType,
+      salary: this.jobPost?.jobPostDetails?.salary,
+      vacancy: this.jobPost?.jobPostDetails?.vacancy,
+      applyByDate: [new Date(this.jobPost?.jobPostDetails?.applyByDate).toISOString().slice(0, 10)],
+
+      jobDescription: this.jobPost?.jobPostDetails?.jobDescription,
+    });
+
+    this.isUpdating = false;
+  }
+
+
 
 
 

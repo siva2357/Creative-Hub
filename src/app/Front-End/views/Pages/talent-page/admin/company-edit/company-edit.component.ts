@@ -67,10 +67,8 @@ export class CompanyEditComponent  implements OnInit,  OnDestroy {
     });
   }
 
-
   ngOnDestroy(): void {
     this.editor.destroy();
-
 }
 
   fetchCompanyData() {
@@ -88,9 +86,6 @@ export class CompanyEditComponent  implements OnInit,  OnDestroy {
       }
     );
   }
-
-
-
 
    initializeForm() {
     this.companyUpdateForm = this.fb.group({
@@ -169,11 +164,11 @@ onFileChange(event: any, filePath: string): void {
     this.deleteCompanyLogo(filePath).subscribe({
       next: () => {
         console.log("Old file deleted successfully. Proceeding with new file upload.");
-        this.uploadNewFile(newFilePath, newFileRef, file); // ✅ Upload only after successful deletion
+        this.uploadNewFile(newFilePath, newFileRef, file);
       },
       error: (error) => {
         console.error("Error deleting old file. New file upload aborted.", error);
-        return; // ❌ Stop execution if deletion fails
+        return;
       }
     });
   } else {

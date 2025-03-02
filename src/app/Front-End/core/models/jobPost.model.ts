@@ -1,21 +1,34 @@
+import { SafeHtml } from "@angular/platform-browser";
+
+export interface Applicant {
+  seekerId: string;
+  appliedAt: Date;
+}
+
 export interface JobPost {
-    _id?: string;
+  _id?: string;
+  jobPostDetails: {
     jobId: string;
-    jobRoleTitle: string;
     jobType: string;
-    jobLevel: string;
-    category: string;
-    skills: string;
-    proficiency: string;
-    language: string;
+    jobRoleTitle: string;
     salary: string;
-    experience: number;
-    location: string;
     vacancy: number;
-    benefits: string;
+    jobDescription: string;
+    sanitizedJobDescription?: SafeHtml;
     postedOn: Date;
     applyByDate: Date;
-    jobDescription: string;
-    status?: string;
-  }
-  
+    status?: string;  // Optional, since backend defaults to "Open"
+  };
+
+  totalApplicants? :number,
+  applicants?: Applicant[];  // Array of Applicant objects
+
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}
+
+export interface JobResponse {
+  totalJobPosts: number;
+  jobPosts: JobPost[];
+}

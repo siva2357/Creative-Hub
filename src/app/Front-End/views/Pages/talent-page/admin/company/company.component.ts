@@ -81,7 +81,7 @@ export class CompanyComponent implements OnInit{
   }
 
 
-  get hasUniversites(): boolean {
+  get hasCompanies(): boolean {
     return this.companies.length > 0;
   }
 

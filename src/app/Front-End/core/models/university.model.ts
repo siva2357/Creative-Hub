@@ -14,7 +14,6 @@ import { SafeHtml } from "@angular/platform-browser";
       universityAddress: string;
       universityDescription: string;
       sanitizedUniversityDescription?: SafeHtml; // Change ty
-      createdAt: Date;
     };
   }
 

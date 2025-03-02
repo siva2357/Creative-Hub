@@ -13,7 +13,7 @@ export class TalentLoginComponent {
   loginDetails!: FormGroup;
 
   isLoading: boolean = false;
-  loginSuccess: boolean = false; 
+  loginSuccess: boolean = false;
 
   submitted = false;
   errorMessage = '';
@@ -104,5 +104,5 @@ export class TalentLoginComponent {
 
   }
 
- 
+
 }

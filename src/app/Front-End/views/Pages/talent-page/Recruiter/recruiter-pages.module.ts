@@ -18,7 +18,8 @@ import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edi
 import { LayoutModule } from "../../../Layouts/layout.module";
 import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
 import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruiter-profile-form.component';
-
+import { NgxEditorModule } from 'ngx-editor';
+import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruite
     RecruiterJobApplicantsPageComponent,
     RecruiterEditJobPageComponent,
     RecruiterEditProfileComponent,
-    RecruiterProfileFormComponent
+    RecruiterProfileFormComponent,
+    JobpostJobApplicantsComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruite
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    LayoutModule
+    LayoutModule,
+    NgxEditorModule
 ],
   providers: [DatePipe],
 })

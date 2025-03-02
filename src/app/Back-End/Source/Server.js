@@ -7,8 +7,11 @@ const cookieParser = require("cookie-parser");
 const mongoose = require('mongoose');
 
 const authRouter = require("./routers/authRoutes");
-const universityRouter = require("./University/universityRoutes");
-const companyRouter = require("./company/companyRoutes");
+const universityRouter = require("./routers/universityRoutes");
+const companyRouter = require("./routers/companyRoutes");
+const recruiterProfileRouter = require("./routers/recruiterProfileRoutes");
+const jobPostRouter = require("./jobPosts/jobPostsRoutes");
+
 
 const app = express();
 
@@ -42,6 +45,8 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/auth', authRouter);
 app.use('/api',universityRouter);
 app.use('/api',companyRouter);
+app.use('/api',recruiterProfileRouter);
+app.use('/api',jobPostRouter);
 // Root Endpoint
 app.get('/', (req, res) => {
     res.json({ message: "Hello from the server" });
