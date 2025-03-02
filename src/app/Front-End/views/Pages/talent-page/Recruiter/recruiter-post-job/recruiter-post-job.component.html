@@ -5,20 +5,20 @@
 
     <!-- Job ID, Job Role Title, Job Type, Job Level -->
     <div class="row mb-3">
-    
+
         <div class="col">
             <label for="jobId" class="form-label fw-bold">Job ID <span class="required">*</span></label>
             <input type="text" id="jobId" formControlName="jobId" class="form-control form-control-sm" placeholder="Enter the Job ID" required>
             <small *ngIf="jobPostForm.get('jobId')?.hasError('required') && jobPostForm.get('jobId')?.touched" class="text-danger">Job ID is required.</small>
         </div>
-    
+
         <div class="col">
             <label for="jobRoleTitle" class="form-label fw-bold">Job Role Title <span class="required">*</span></label>
             <input type="text" id="jobRoleTitle" formControlName="jobRoleTitle"  class="form-control form-control-sm" placeholder="Enter the job role" required>
             <small *ngIf="jobPostForm.get('jobRoleTitle')?.hasError('required') && jobPostForm.get('jobRoleTitle')?.touched" class="text-danger">Job Role Title is required.</small>
 
         </div>
-    
+
 
         <div class="col">
             <label for="jobType" class="form-label fw-bold">Job Type <span class="required">*</span></label>
@@ -34,85 +34,8 @@
         </div>
 
 
-        <div class="col">
-            <label for="jobLevel" class="form-label fw-bold">Job Level <span class="required">*</span></label>
-            <select id="jobLevel" class="form-select form-select-sm" formControlName="jobLevel" required>
-                <option value="">Select Job Level</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Freelancer">Freelancer</option>
-            </select>
-
-            <small *ngIf="jobPostForm.get('jobLevel')?.hasError('required') && jobPostForm.get('jobLevel')?.touched" class="text-danger">Job Level is required.</small>
-
-        </div>
-    
     </div>
 
-    <!-- Category, Skills, Proficiency, Languages -->
-    <div class="row mb-3">
-
-
-        <div class="col">
-            <label for="category" class="form-label fw-bold">Category<span class="required">*</span></label>
-            <select id="category" class="form-select form-select-sm"  formControlName="category" required>
-                <option value="">Select Category</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Freelancer">Freelancer</option>
-            </select>
-            <small *ngIf="jobPostForm.get('category')?.hasError('required') && jobPostForm.get('category')?.touched" class="text-danger">Category is required.</small>
-
-        </div>
-
-
-        <div class="col">
-            <label for="skills" class="form-label fw-bold">Skills<span class="required">*</span></label>
-            <select id="skills" class="form-select form-select-sm"  formControlName="skills" required>
-                <option value="">Select skills</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Freelancer">Freelancer</option>
-            </select>
-            <small *ngIf="jobPostForm.get('skills')?.hasError('required') && jobPostForm.get('skills')?.touched" class="text-danger">Skills is required.</small>
-
-        </div>
-
-
-        
-        <div class="col">
-            <label for="proficiency" class="form-label fw-bold">Proficiency<span class="required">*</span></label>
-            <select id="proficiency" class="form-select form-select-sm"  formControlName="proficiency" required>
-                <option value="">Select proficiency</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Freelancer">Freelancer</option>
-            </select>
-            <small *ngIf="jobPostForm.get('proficiency')?.hasError('required') && jobPostForm.get('proficiency')?.touched" class="text-danger">Proficiency is required.</small>
-
-        </div>
-
-
-                
-        <div class="col">
-            <label for="language" class="form-label fw-bold">Language<span class="required">*</span></label>
-            <select id="language" class="form-select form-select-sm"  formControlName="language" required>
-                <option value="">Select language</option>
-                <option value="English">English</option>
-                <option value="Hindi">Hindi</option>
-                <option value="Telugu">Telugu</option>
-            </select>
-            <small *ngIf="jobPostForm.get('language')?.hasError('required') && jobPostForm.get('language')?.touched" class="text-danger">Language is required.</small>
-
-        </div>
-
- 
-
-    </div>
 
     <!-- Salary, Experience, Location, Vacancy -->
     <div class="row mb-3">
@@ -132,21 +55,6 @@
 
 
         <div class="col">
-            <label for="experience" class="form-label fw-bold">Experience <span class="required">*</span></label>
-            <input type="number" id="experience" formControlName="experience"  class="form-control form-control-sm" placeholder="Enter the experience" required>
-            <small *ngIf="jobPostForm.get('experience')?.hasError('required') && jobPostForm.get('experience')?.touched" class="text-danger">Experience is required.</small>
-
-        </div>
-
-
-        <div class="col">
-            <label for="location" class="form-label fw-bold">Location <span class="required">*</span></label>
-            <input type="text" id="location" formControlName="location" class="form-control form-control-sm" placeholder="Enter the location" required>
-            <small *ngIf="jobPostForm.get('location')?.hasError('required') && jobPostForm.get('location')?.touched" class="text-danger">Location is required.</small>
-
-        </div>
-
-        <div class="col">
             <label for="vacancy" class="form-label fw-bold">Vacancy<span class="required">*</span></label>
             <input type="number" id="vacancy" formControlName="vacancy" class="form-control form-control-sm" placeholder="Enter the location" required>
             <small *ngIf="jobPostForm.get('vacancy')?.hasError('required') && jobPostForm.get('vacancy')?.touched" class="text-danger">Vacancy is required.</small>
@@ -154,30 +62,20 @@
         </div>
 
 
+        <div class="col">
+          <label for="applyByDate" class="form-label fw-bold">Apply By Date: <span class="required">*</span></label>
+          <input type="date" id="applyByDate" formControlName="applyByDate" class="form-control form-control-sm" required>
+          <small *ngIf="jobPostForm.get('applyByDate')?.hasError('required') && jobPostForm.get('applyByDate')?.touched" class="text-danger">Apply By Date is required.</small>
+
+      </div>
+
+
     </div>
 
     <!-- Benefits, Apply By Date -->
     <div class="row mb-3">
 
-        <div class="col">
-            <label for="benefits" class="form-label fw-bold">Benifits <span class="required">*</span></label>
-            <select id="benefits"  class="form-select form-select-sm" formControlName="benefits" aria-placeholder="select salary range" required>
-                <option value="">Select  benifits</option>
-                <option value="3-5 Lakhs">3-5 Lakhs</option>
-                <option value="6-9 Lakhs">6-9 Lakhs</option>
-                <option value="10-12 Lakhs">10-12 Lakhs</option>
-                <option value="15-18 Lakhs">15-18 Lakhs</option>
-            </select>
-            <small *ngIf="jobPostForm.get('benefits')?.hasError('required') && jobPostForm.get('benefits')?.touched" class="text-danger">Benefits is required.</small>
 
-        </div>
-
-        <div class="col">
-            <label for="applyByDate" class="form-label fw-bold">Apply By Date: <span class="required">*</span></label>
-            <input type="date" id="applyByDate" formControlName="applyByDate" class="form-control form-control-sm" required>
-            <small *ngIf="jobPostForm.get('applyByDate')?.hasError('required') && jobPostForm.get('applyByDate')?.touched" class="text-danger">Apply By Date is required.</small>
-
-        </div>
 
     </div>
 
@@ -185,13 +83,15 @@
     <div class="row">
         <div class="col">
             <label for="jobDescription" class="form-label fw-bold">Job Description <span class="required">*</span></label>
-            <textarea   class="form-control form-control-sm" formControlName="jobDescription" [placeholder]="'Enter job description'"  required ></textarea>
+            <div class="NgxEditor__Wrapper">
+              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+              <ngx-editor [editor]="editor"  class="form-control form-control-sm" formControlName="jobDescription" [placeholder]="'Enter job description'" required></ngx-editor>
+            </div>
             <small *ngIf="jobPostForm.get('jobDescription')?.hasError('required') && jobPostForm.get('jobDescription')?.touched" class="text-danger">Job Description is required.</small>
-
         </div>
     </div>
 
-   
+
     <div class="footer mt-5" style="justify-content: space-between; display: flex;">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-success" [disabled]="jobPostForm.invalid" >Submit</button>

@@ -3,7 +3,7 @@
   <h5 class="mb-3 mt-5">Close Job Posts</h5>
 
 
-  <div class="container mb-5 mt-5">
+  <div class="container mb-5 mt-5"  *ngIf="jobs.length > 0">
     <table class="table" style="border: 1px solid; width: 100%; text-align: center;">
 
       <thead style="border: 1px solid; font-size: 14px;">
@@ -21,23 +21,21 @@
       </thead>
 
       <tbody style="border: 1px solid; font-size: 14px;">
-        <tr style="border: 1px solid;">
-          <td style="border: 1px solid; text-align: center;">S.No</td>
-          <td style="border: 1px solid; text-align: center;">Job ID</td>
-          <td style="border: 1px solid; text-align: center;">Job Role</td>
-          <td style="border: 1px solid; text-align: center;">Job Type</td>
-          <td style="border: 1px solid; text-align: center;">Location</td>
-          <td style="border: 1px solid; text-align: center;">Salary</td>
-          <td style="border: 1px solid; text-align: center;">Posted On</td>
-          <td style="border: 1px solid; text-align: center;">Status</td>
+        <tr style="border: 1px solid;" *ngFor="let job of jobs; let i = index">
+          <td style="border: 1px solid; text-align: center;">{{i + 1}}</td>
+          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobId}}</td>
+          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobRoleTitle}}</td>
+          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobType}}</td> <!-- Add a field for location if available -->
+          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.salary}}</td>
+          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobId}}</td>
+          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.postedOn | date: 'shortDate'}}</td>
+          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.status}}</td>
           <td style="border: 1px solid;">
             <div style="display: flex; justify-content: space-evenly; align-items: center;">
-              <button class="btn btn-sm btn-info">Reopen</button>
-              <button class="btn btn-sm btn-danger"style="margin-left: 30px;">Delete</button>
+              <button class="btn btn-sm btn-info" (click)="reopenJobpostById(job)">Reopen</button>
+              <button class="btn btn-sm btn-danger"style="margin-left: 30px;" (click)="deleteJobpostById(job)">Delete</button>
             </div>
           </td>
-
-
         </tr>
       </tbody>
     </table>
@@ -47,7 +45,7 @@
 </div>
 
 
-<div >
+<div  *ngIf="jobs.length === 0">
   <div class="container d-flex flex-column justify-content-center align-items-center text-center">
     <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 550px; width: 550px; margin-bottom: 10px;">
   </div>

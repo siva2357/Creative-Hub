@@ -85,7 +85,8 @@
       <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"  [toolbar]="toolbar" > </ngx-editor-menu>
         <ngx-editor  [editor]="editor"  id="companyDescription"   class="form-control form-control-sm" [formControl]="companyDescriptionControl" [placeholder]="'Enter company description'" required></ngx-editor>
-      </div>      <small *ngIf="companyUpdateForm.get('companyDescription')?.hasError('required') && companyUpdateForm.get('companyDescription')?.touched"class="text-danger">Company description is required.</small>
+      </div>
+      <small *ngIf="companyUpdateForm.get('companyDescription')?.hasError('required') && companyUpdateForm.get('companyDescription')?.touched"class="text-danger">Company description is required.</small>
     </div>
 
     <div class="col mt-3">

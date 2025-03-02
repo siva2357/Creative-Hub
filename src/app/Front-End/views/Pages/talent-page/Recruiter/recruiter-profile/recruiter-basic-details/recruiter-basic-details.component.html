@@ -7,31 +7,31 @@
         <tbody>
           <tr>
             <td style="width: 20%; border: none;">Full Name:</td>
-            <td style="border: none;"> Seeker Name</td>
+            <td style="border: none;">{{profileDetails.profileDetails.basicDetails.firstName}} {{profileDetails.profileDetails.basicDetails.lastName}}</td>
           </tr>
           <tr>
             <td style="border: none;">Date Of Birth:</td>
-            <td style="border: none;">08 November, 2001</td>
+            <td style="border: none;">{{profileDetails.profileDetails.basicDetails.dateOfBirth}}</td>
           </tr>
           <tr>
             <td style="border: none;">Gender:</td>
-            <td style="border: none;">Male</td>
+            <td style="border: none;">{{profileDetails.profileDetails.basicDetails.gender}}</td>
           </tr>
           <tr>
-            <td style="border: none;">College Name:</td>
-            <td style="border: none;">SRM Unversity, chennai</td>
+            <td style="border: none;">Phone Number:</td>
+            <td style="border: none;">{{profileDetails.profileDetails.contactDetails.phoneNumber}}</td>
           </tr>
           <tr>
             <td style="border: none;">Bio-Data:</td>
-            <td style="border: none; text-align: justify;">I am Siva Prasad studying  civil engineering with computer applications.
-              I am interested in 3D Modelling design and want to persue my  career in Architecture field.
-              Had a basic knowledge of HTML,CSS.</td>
+            <td style="border: none; text-align: justify;">
+              <p [innerHTML]="profileDetails.profileDetails.bioDetails.sanitizedBioDescription"></p>
+            </td>
           </tr>
           <tr>
             <td style="border: none;">Address:</td>
-            <td style="border: none; text-align: justify;">I am Siva Prasad studying  civil engineering with computer applications.
-              I am interested in 3D Modelling design and want to persue my  career in Architecture field.
-              Had a basic knowledge of HTML,CSS.</td>
+            <td style="border: none; text-align: justify;">
+              {{profileDetails.profileDetails.contactDetails.streetAddress}}, {{profileDetails.profileDetails.contactDetails.state}}, {{profileDetails.profileDetails.contactDetails.country}}, {{profileDetails.profileDetails.contactDetails.pincode}}
+            </td>
           </tr>
         </tbody>
       </table>

@@ -1,7 +1,7 @@
 // university.routes.js (Routes)
 const express = require('express');
 const router = express.Router();
-const universityController = require('../University/universityController');
+const universityController = require('../university/universityController');
 const { identifier } = require('../middleware/identification');
 
 

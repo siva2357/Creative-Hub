@@ -11,7 +11,7 @@ import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edi
 import { RecruiterSeekerProfileComponent } from './recruiter-seeker-profile/recruiter-seeker-profile.component';
 import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
 import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruiter-profile-form.component';
-
+import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
 
 
 const routes: Routes = [
@@ -31,8 +31,9 @@ const routes: Routes = [
 		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent,  title: 'View Jobpost Page'  },
 		{ path: 'closed-jobs', component: RecruiterClosedJobsPageComponent,  title: 'Closed Jobs Page'  } ,// Hire Seeker page route
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
+    { path: 'jobpost/:jobPostId/applicants', component: JobpostJobApplicantsComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
-        { path:'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
+    { path:'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
 		{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
 
 	  ]

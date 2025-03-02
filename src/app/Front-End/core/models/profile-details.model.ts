@@ -1,40 +1,43 @@
-export interface Recruiter {
+import { SafeHtml } from "@angular/platform-browser";
+
+export interface RecruiterProfile {
   _id?: string;
-    profileDetails: {
-        basicDetails: {
-            fullName: string;
-            userName: string;
-            email: string;
-            gender:string;
-        },
-
-        contactDetails: {
-            phoneNumber: string;
-            streetAddress: string;
-            city: string;
-            state: string;
-            country:string;
-            pincode: string;
-        },
-
-        professionalDetails: {
-            companyName: string;
-            department: string;
-            designation: string;
-            jobLevel: string;
-            experience:string;
-            employeeCode: string;
-        },
-
-        bioDetails: {
-            bio: string;
-        }
-
-        profileDetails: {
-            profilePicture:  { fileName: string; url: string };  // Path or URL for the profile picture
-        }
+  profileDetails: {
+    profilePicture: {
+      fileName: string;
+      url: string;
     };
+    basicDetails: {
+      firstName?: string;
+      lastName?: string;
+      email?: string;
+      gender: string;
+      dateOfBirth: string;  // ✅ Fix: Keep as string since API returns a string
+    };
+    contactDetails: {
+      phoneNumber: string;
+      streetAddress: string;
+      city: string;
+      state: string;
+      country: string;
+      pincode: string;
+    };
+    professionalDetails: {
+      companyName: string;
+      designation: string;
+      experience: string;
+      employeeCode: string;
+    };
+    bioDetails: {  // ✅ Fix: Properly defined within profileDetails
+      bioDescription: string;
+      sanitizedBioDescription?: SafeHtml;
+    };
+  };
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
 }
+
 
 
 export interface Seeker {
@@ -63,7 +66,8 @@ export interface Seeker {
             instituteRollNumber: string;
         },
         bioDetails: {
-            bio: string;
+            bioDescription: string;
+            sanitizedBioDescription?:SafeHtml;
         }
         profileDetails: {
             profilePicture:  { fileName: string; url: string };  // Path or URL for the profile picture
@@ -83,7 +87,7 @@ export interface SocialMedia {
         socialMediaLink: string;
       };
   }
-  
+
   export interface TechnicalSkills {
     seekerId:string;
       _id?: string;
@@ -92,8 +96,8 @@ export interface SocialMedia {
           proficiency: string;
       };
   }
-  
-  
+
+
   export interface Languages {
     seekerId:string;
       _id?: string;
@@ -102,8 +106,8 @@ export interface SocialMedia {
           proficiency: string;
       };
   }
-  
-  
+
+
   export interface Subjects {
     seekerId:string;
       _id?: string;
@@ -113,9 +117,9 @@ export interface SocialMedia {
           percentage: string;
       };
   }
-  
+
   export interface Certifications {
-    seekerId:string;  
+    seekerId:string;
     _id?: string;
         certificationDetails: {
           courseName: string;
@@ -126,8 +130,8 @@ export interface SocialMedia {
           certificateUpload:{ fileName: string; url: string };
       };
   }
-  
-  
+
+
   export interface Resume {
     seekerId:string;
       _id?: string;

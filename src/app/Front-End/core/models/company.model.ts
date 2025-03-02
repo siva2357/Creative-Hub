@@ -13,7 +13,6 @@ import { SafeHtml } from "@angular/platform-browser";
       companyAddress: string;
       companyDescription: string;
       sanitizedCompanyDescription?: SafeHtml; // Change ty
-      createdAt: Date;
     };
   }
 
