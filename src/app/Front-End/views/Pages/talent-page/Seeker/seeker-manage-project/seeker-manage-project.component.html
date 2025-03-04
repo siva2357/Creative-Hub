@@ -1,6 +1,6 @@
 <div class="container  bg-body-secondary mt-5 ">
 
-  <div>
+  <div  *ngIf="projects.length > 0">
     <table class="table mt-5" style=" border-collapse: collapse; border: 1px solid #ddd;">
       <thead style="border: 1px solid; font-size: 14px;">
         <tr style="border: 1px solid;">
@@ -16,25 +16,34 @@
       </thead>
 
       <tbody>
-        <tr style="border: 1px solid;" >
-          <td style="border: 1px solid; text-align: center; ">1</td>
+        <tr style="border: 1px solid;" *ngFor="let project of projects; let i = index">
+          <td style="border: 1px solid; text-align: center; ">{{ i + 1 }}</td>
 
           <td style="border: 1px solid; text-align: center;">
 
-            <div >
-              <img src="" alt="Project Image" width="200px" height="auto">
+            <div *ngIf="isImage(project.projectDetails.file.url)">
+              <img [src]="project.projectDetails.file.url" alt="Project Image" width="200px" height="auto">
             </div>
+
+            <div *ngIf="isVideo(project.projectDetails.file.url)">
+              <video controls [src]="project.projectDetails.file.url" width="200px" height="auto"></video>
+            </div>
+
+            <div *ngIf="!isImage(project.projectDetails.file.url) && !isVideo(project.projectDetails.file.url)">
+              <p>Unsupported media type: {{ getFileExtension(project.projectDetails.file.url) }}</p>
+            </div>
+
           </td>
 
-          <td style="border: 1px solid; text-align: center;">projectTitle</td>
-          <td style="border: 1px solid; text-align: center;">projectType</td>
-          <td style="border: 1px solid; text-align: center;">softwares</td>
-          <td style="border: 1px solid; text-align: center;">tags</td>
-          <td style="border: 1px solid; text-align: center;">projectDescription</td>
+          <td style="border: 1px solid; text-align: center;">{{project.projectDetails.projectTitle}}</td>
+          <td style="border: 1px solid; text-align: center;">{{project.projectDetails.projectType}}</td>
+          <td style="border: 1px solid; text-align: center;">{{project.projectDetails.softwares}}</td>
+          <td style="border: 1px solid; text-align: center;">{{project.projectDetails.tags}}</td>
+          <td style="border: 1px solid; text-align: center;" [innerHTML]="project.projectDetails.sanitizedProjectDescription"></td>
           <td style="border: 1px solid;">
             <div style=" display: flex; justify-content: space-around;">
-              <button  class="btn btn-sm btn-info">View</button>
-              <button class="btn btn-sm btn-danger">Delete</button>
+              <button class="btn btn-sm btn-info" (click)="goToProjectEdit(project)">Edit</button>
+            <button class="btn btn-sm btn-danger"  (click)="deleteProjectById(project._id!, project.projectDetails.file.fileName)">Delete</button>
             </div>
           </td>
 
@@ -46,7 +55,7 @@
 
 
 
-  <div >
+  <div  *ngIf="projects.length === 0">
     <div class="container  d-flex justify-content-center align-items-center " >
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 580px; width: 580px;">
   </div>

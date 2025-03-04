@@ -37,11 +37,7 @@ if (token) {
 
 
   getAllUniversities(): Observable<{ totalUniversities: number; universities: University[] }> {
-    return this.http
-      .get<{ totalUniversities: number; universities: University[] }>(`${this.baseUrl}/universities`, {
-        headers: this.getHeaders(),
-      })
-      .pipe(catchError(this.handleError));
+    return this.http.get<{ totalUniversities: number; universities: University[] }>(`${this.baseUrl}/universities`, { headers: this.getHeaders(),}) .pipe(catchError(this.handleError));
   }
 
 
@@ -74,7 +70,7 @@ if (token) {
   }
 
   getCompanyById(id: string): Observable< Company> {
-    return this.http.get< Company>(`${this. baseUrl}/company/${id}`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
+    return this.http.get<Company>(`${this. baseUrl}/company/${id}`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
   updateCompanyById(id: string, companyData: Company): Observable< Company> {

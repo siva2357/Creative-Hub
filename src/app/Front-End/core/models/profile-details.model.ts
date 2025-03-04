@@ -40,40 +40,44 @@ export interface RecruiterProfile {
 
 
 
-export interface Seeker {
-     _id?: string;
-    profileDetails: {
-        basicDetails: {
-            fullName: string;
-            userName: string;
-            email: string;
-            gender:string;
-        },
-        contactDetails: {
-            phoneNumber: string;
-            streetAddress: string;
-            city: string;
-            state: string;
-            country:string;
-            pincode: string;
-        },
-        educationDetails: {
-            institute: string;
-            degree: string;
-            department: string;
-            branch: string;
-            yearsOfStudying: string;
-            instituteRollNumber: string;
-        },
-        bioDetails: {
-            bioDescription: string;
-            sanitizedBioDescription?:SafeHtml;
-        }
-        profileDetails: {
-            profilePicture:  { fileName: string; url: string };  // Path or URL for the profile picture
-        }
+export interface SeekerProfile {
+  _id?: string;
+  profileDetails: {
+    profilePicture: {
+      fileName: string;
+      url: string;
     };
+    basicDetails: {
+      firstName?: string;
+      lastName?: string;
+      email?: string;
+      gender: string;
+      dateOfBirth: string;  // ✅ Fix: Keep as string since API returns a string
+    };
+    contactDetails: {
+      phoneNumber: string;
+      streetAddress: string;
+      city: string;
+      state: string;
+      country: string;
+      pincode: string;
+    };
+    educationalDetails: {
+      universityName: string;
+      universityDegree: string;
+      yearOfGraduation: Date;
+      universityNumber: string;
+    };
+    bioDetails: {  // ✅ Fix: Properly defined within profileDetails
+      bioDescription: string;
+      sanitizedBioDescription?: SafeHtml;
+    };
+  };
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
 }
+
 
 
 

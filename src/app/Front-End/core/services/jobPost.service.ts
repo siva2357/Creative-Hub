@@ -89,8 +89,6 @@ export class JobPostService {
     return this.http.get<JobPost>(`${this.baseUrl}/jobPosts/${jobId}`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-
-
   // Fetch all job posts for recruiter
   getJobApplicants(recruiterId:string,jobPostId: string): Observable<any> {
     return this.http.get<JobPost[]>(`${this.baseUrl}/recruiter/${recruiterId}/jobpost/${jobPostId}/applicants`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
@@ -100,20 +98,6 @@ export class JobPostService {
   getRecruiterJobApplicants(recruiterId:string): Observable<{totalJobPosts: number;  jobPosts: JobPost[], totalApplicants:number}> {
     return this.http.get<{totalJobPosts: number; totalApplicants: number; jobPosts: JobPost[] }>(`${this.baseUrl}/recruiter/${recruiterId}/jobPosts/Applicants`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   applyJobPostById(id: string, jobPostData: JobPost): Observable<JobPost> {

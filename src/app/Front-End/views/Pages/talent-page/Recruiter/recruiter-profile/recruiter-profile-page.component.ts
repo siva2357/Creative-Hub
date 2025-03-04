@@ -58,6 +58,6 @@ export class RecruiterProfilePageComponent {
 
 
     editProfile(): void {
-      this.router.navigateByUrl('talent-page/recruiter/edit-profile/:id');
+      this.router.navigateByUrl(`talent-page/recruiter/edit-profile/${this.recruiterId}`);
     }
 }

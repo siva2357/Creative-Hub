@@ -7,9 +7,10 @@ import { SeekerJobProfileComponent } from './seeker-jobProfile/seeker-jobProfile
 import { SeekerLaunchpadComponent } from './seeker-launchPad/seeker-launchPad.component';
 import { SeekerPostProjectPageComponent } from './seeker-post-project/seeker-post-project.component';
 import { SeekerManageProjectPageComponent } from './seeker-manage-project/seeker-manage-project.component';
-import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { SeekerEditProfileComponent } from './seeker-edit-profile/seeker-edit-profile.component';
 import { SeekerProfileFormComponent } from './seeker-profile-form/seeker-profile-form.component';
+import { SeekerEditProjectComponent } from './seeker-edit-project/seeker-edit-project.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 const routes: Routes = [
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
@@ -25,7 +26,9 @@ const routes: Routes = [
 		{ path: 'portfolio', component: SeekerPortfolioComponent,  title: 'Seeker portfolio Page'   }, // Profile page route
 		{ path: 'jobProfile', component: SeekerJobProfileComponent,  title: 'Seeker Job Profile Page'   }, // Profile page route
 		{ path: 'launchPad', component: SeekerLaunchpadComponent , title: 'Seeker LaunchPad Page'  }, // Profile page route
-        { path: 'project-details/:id', component: ProjectDetailsComponent,  title: 'Seeker Project details Page'   }, // Profile page route
+    { path: 'edit-project/:projectId', component: SeekerEditProjectComponent,  title: 'Seeker Project details Page'   }, // Profile page route
+    { path: 'project-details/:projectId', component: ProjectDetailsComponent,  title: 'Seeker Project details Page'   }, // Profile page route
+
 	  ]
 	}
   ];

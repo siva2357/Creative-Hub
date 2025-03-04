@@ -11,7 +11,8 @@ const universityRouter = require("./routers/universityRoutes");
 const companyRouter = require("./routers/companyRoutes");
 const recruiterProfileRouter = require("./routers/recruiterProfileRoutes");
 const jobPostRouter = require("./jobPosts/jobPostsRoutes");
-
+const seekerProfileRouter = require("./routers/seekerProfileRoutes");
+const projectUploadRouter = require("./project-upload/projectUploadRoutes");
 
 const app = express();
 
@@ -47,6 +48,10 @@ app.use('/api',universityRouter);
 app.use('/api',companyRouter);
 app.use('/api',recruiterProfileRouter);
 app.use('/api',jobPostRouter);
+app.use('/api',seekerProfileRouter);
+app.use('/api',projectUploadRouter);
+
+
 // Root Endpoint
 app.get('/', (req, res) => {
     res.json({ message: "Hello from the server" });
