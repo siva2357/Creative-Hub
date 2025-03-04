@@ -61,15 +61,8 @@ export class RecruiterBasicDetailsComponent {
   }
 
 
-
-
-
-
-
-
-
-            sanitizeHtml(html: string): SafeHtml {
-              return this.sanitizer.bypassSecurityTrustHtml(html);
-            }
+sanitizeHtml(html: string): SafeHtml {
+return this.sanitizer.bypassSecurityTrustHtml(html);
+}
 
 }

@@ -108,6 +108,8 @@ export class CompanyEditComponent  implements OnInit,  OnDestroy {
         if (this.company.companyDetails.companyLogo?.url) {
           this.fetchedURL = this.company.companyDetails.companyLogo.url;
           this.ifFetched = true;
+
+
         }
       }
 

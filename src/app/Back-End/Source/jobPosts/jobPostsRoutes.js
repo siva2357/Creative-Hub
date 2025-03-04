@@ -11,17 +11,22 @@ router.put("/recruiter/:recruiterId/jobPost/:jobId/close", identifier, jobPostCo
 router.put("/recruiter/:recruiterId/jobPost/:jobId/reopen", identifier, jobPostController.reopenJobPost);
 
 router.delete("/recruiter/:recruiterId/jobPost/:jobId/delete", identifier, jobPostController.deleteJobPost);
-router.get("/jobPosts", jobPostController.getAllJobs);
-router.get("/jobPost/:jobId", jobPostController.getJobById);
+
+router.get("/seeker/jobPosts", identifier,jobPostController.getAllJobs);
+router.get("/seeker/jobPost/:jobId", identifier,jobPostController.getJobById);
+
+
 router.get("/recruiter/:recruiterId/jobPosts", jobPostController.getJobsByRecruiter);
 router.get("/recruiter/:recruiterId/jobPost/:jobId",jobPostController.getRecruiterJobPostById);
 router.get("/recruiter/:recruiterId/jobPosts/closed", jobPostController.getClosedJobsByRecruiter);
 router.get("/recruiter/:recruiterId/jobPosts/Applicants",  jobPostController.getJobApplicantsByRecruiter);
 
+
+
 router.post("/seeker/:seekerId/job-post/:jobId/apply",identifier, jobPostController.applyForJob);
 router.post("/seeker/:seekerId/job-post/:jobId/withdraw", identifier,jobPostController.withdrawApplication);
 router.get("/seeker/:seekerId/applied-jobs", jobPostController.getAppliedJobs);
-router.get("/recruiter/:recruiterId/jobpost/:jobPostId/applicants",  jobPostController.getJobApplicants);
+router.get("/recruiter/:recruiterId/jobpost/:jobId/applicants",  jobPostController.getJobApplicants);
 
 
 module.exports = router;

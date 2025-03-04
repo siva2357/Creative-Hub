@@ -1,23 +1,40 @@
-// seeker model
 const mongoose = require('mongoose');
 
-const seekerSchema = mongoose.Schema({
-    registrationDetails: {
-        firstName: { type: String, required: true },
-        lastName: { type: String, required: true },
-        userName: { type: String, required: true },
-        email: { type: String, required: [true, 'Email is required'], trim: true, unique: [true, 'Email must be unique!'], minLength: [5, "Email must have 5 characters!"], lowercase: true },
-        password: { type: String, required: [true, "Password is required"], trim: true, select: false },
-        verified: { type: Boolean, default: false },
-        verificationCode: { type: String, select: false },
-        verificationCodeValidation: { type: Number, select: false },
-        forgotPasswordCode: { type: String, select: false },
-        forgotPasswordCodeValidation: { type: Number, select: false }
-    },
-    role: { type: String, default: 'seeker' },
-    lastLoginAt: { type: Date },
-    lastLogoutAt: { type: Date },
-    status: { type: String, enum: ["active", "inactive"], default: "inactive" }
+const seekerProfileSchema = mongoose.Schema({
+    seekerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' , required: true}, // Reference to Recruiter
+    profileDetails: {
+      profilePicture:
+      {
+        fileName: { type: String, required: true },
+        url: { type: String, required: true }
+      },
+        basicDetails: {
+            firstName: { type: String, required: false },
+            lastName: { type: String, required: false },
+            userName: { type: String, required: false },
+            email: { type: String, required: false},
+            gender: { type: String, required: true },
+            dateOfBirth: { type: Date, required: true },
+        },
+        contactDetails: {
+            phoneNumber: { type: String, required: true },
+            streetAddress: { type: String, required: true },
+            city: { type: String, required: true },
+            state: { type: String, required: true },
+            country: { type: String, required: true },
+            pincode: { type: String, required: true },
+        },
+        educationalDetails: {
+          universityName: { type: String, required: true },
+          universityDegree: { type: String, required: true },
+          yearOfGraduation: { type: Date, required: true },
+          universityNumber: { type: String, required: true },
+        },
+        bioDetails: {
+            bioDescription: { type: String, required: true },
+        }
+
+    }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Seeker', seekerSchema);
+module.exports = mongoose.model('SeekerProfile', seekerProfileSchema);

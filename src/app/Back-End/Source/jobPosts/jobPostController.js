@@ -294,22 +294,55 @@ res.status(200).json(jobs);
 exports.applyForJob = async (req, res) => {
   try {
     const { seekerId } = req.params;
-    const { jobPostId } = req.body;
-
-    const jobPost = await JobPost.findById(jobPostId);
+    const { jobId } = req.body;
+    const jobPost = await JobPost.findById(jobId);
     if (!jobPost) return res.status(404).json({ message: "Job post not found" });
-
     const alreadyApplied = jobPost.applicants.some(app => app.seekerId.toString() === seekerId);
     if (alreadyApplied) return res.status(400).json({ message: "You have already applied for this job" });
-
     jobPost.applicants.push({ seekerId, appliedAt: new Date() });
     await jobPost.save();
-
     res.status(200).json({ message: "Application submitted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error applying for job", error });
   }
 };
+
+
+exports.applyForJob = async (req, res) => {
+  try {
+    const { seekerId, jobId } = req.params;
+
+    // Validate the ObjectId format for seekerId and jobId
+    if (!mongoose.Types.ObjectId.isValid(seekerId)) {
+      return res.status(400).json({ message: "Invalid seeker ID format" });
+    }
+    if (!mongoose.Types.ObjectId.isValid(jobId)) {
+      return res.status(400).json({ message: "Invalid job ID format" });
+    }
+
+    // Find the job post by its ID
+    const jobPost = await JobPost.findById(jobId);
+    if (!jobPost) {
+      return res.status(404).json({ message: "Job post not found" });
+    }
+
+    // Check if the seeker has already applied
+    const alreadyApplied = jobPost.applicants.some(app => app.seekerId.toString() === seekerId);
+    if (alreadyApplied) {
+      return res.status(400).json({ message: "You have already applied for this job" });
+    }
+
+    // Add the applicant to the job post
+    jobPost.applicants.push({ seekerId, appliedAt: new Date() });
+    await jobPost.save();
+
+    res.status(200).json({ message: "Application submitted successfully", jobPost });
+  } catch (error) {
+    console.error("Error applying for job:", error);
+    res.status(500).json({ message: "Error applying for job", error: error.message });
+  }
+};
+
 
 // Withdraw job application (within 2 minutes)
 exports.withdrawApplication = async (req, res) => {
@@ -404,13 +437,13 @@ exports.getJobApplicantsByRecruiter = async (req, res) => {
 
 exports.getJobApplicants = async (req, res) => {
   try {
-    const { recruiterId, jobPostId, seekerId } = req.params;
+    const { recruiterId, jobId, seekerId } = req.params;
 
     console.log("Recruiter ID from request:", recruiterId);
-    console.log("Job Post ID from request:", jobPostId);
+    console.log("Job Post ID from request:", jobId);
 
     const jobPost = await JobPost.findOne({
-      _id: new mongoose.Types.ObjectId(jobPostId),
+      _id: new mongoose.Types.ObjectId(jobId),
       recruiterId: new mongoose.Types.ObjectId(recruiterId),
     })
     .populate({

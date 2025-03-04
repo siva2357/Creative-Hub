@@ -20,7 +20,8 @@ import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-rout
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { SeekerEditProfileComponent } from './seeker-edit-profile/seeker-edit-profile.component';
 import { SeekerProfileFormComponent } from './seeker-profile-form/seeker-profile-form.component';
-
+import { NgxEditorModule } from 'ngx-editor';
+import { SeekerEditProjectComponent } from './seeker-edit-project/seeker-edit-project.component';
 @NgModule({
   declarations: [
     SeekerMainPageComponent,
@@ -33,7 +34,8 @@ import { SeekerProfileFormComponent } from './seeker-profile-form/seeker-profile
     SeekerPostProjectPageComponent ,
     ProjectDetailsComponent,
     SeekerEditProfileComponent,
-    SeekerProfileFormComponent
+    SeekerProfileFormComponent,
+    SeekerEditProjectComponent
 
   ],
   imports: [
@@ -45,7 +47,8 @@ import { SeekerProfileFormComponent } from './seeker-profile-form/seeker-profile
     ReactiveFormsModule,
     SharedModule,
     SeekerProfileModule,
-    SeekerProfileRoutingModule
+    SeekerProfileRoutingModule,
+    NgxEditorModule
   ],
   providers: [DatePipe],
 })

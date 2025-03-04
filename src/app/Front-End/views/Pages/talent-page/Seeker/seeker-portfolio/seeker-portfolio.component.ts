@@ -28,7 +28,7 @@ export class SeekerPortfolioComponent {
 
 
   viewDetails(): void {
-    this.router.navigateByUrl('talent-page/seeker/project-details/:id');
+    this.router.navigateByUrl('talent-page/seeker/project-details/:projectId');
   }
 
 

@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import {jwtDecode} from 'jwt-decode' ;
 import { University } from '../models/university.model';
 import { Company } from '../models/company.model';
-import { RecruiterProfile } from '../models/profile-details.model';
+import { RecruiterProfile, SeekerProfile } from '../models/profile-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +53,30 @@ if (token) {
   updateRecruiterProfile(updatedData: RecruiterProfile): Observable<RecruiterProfile> {
     return this.http.put<RecruiterProfile>(`${this.baseUrl}/recruiter/profile-details/${updatedData._id}`, updatedData, { headers: this.getHeaders() })
       .pipe(catchError(error => this.handleError(error)));
+}
+
+
+
+
+getSeekerProfileById(id: string): Observable<SeekerProfile> {
+  if (this.role === 'seeker' && this.userData._id === id) {
+    return of(this.userData);  // Return locally stored data if same user
+  } else {
+    return this.http.get<SeekerProfile>(`${this.baseUrl}/seeker/profile-details/${id}`, { headers: this.getHeaders() })
+      .pipe(catchError(error => this.handleError(error)));
+  }
+}
+
+// ✅ Create Recruiter Profile
+postSeekerProfile(profileData: SeekerProfile): Observable<SeekerProfile> {
+  return this.http.post<SeekerProfile>(`${this.baseUrl}/seeker/profile-details`, profileData, { headers: this.getHeaders() })
+    .pipe(catchError(error => this.handleError(error)));
+}
+
+// ✅ Update Recruiter Profile
+updateSeekerProfile(updatedData: SeekerProfile): Observable<SeekerProfile> {
+  return this.http.put<SeekerProfile>(`${this.baseUrl}/seeker/profile-details/${updatedData._id}`, updatedData, { headers: this.getHeaders() })
+    .pipe(catchError(error => this.handleError(error)));
 }
 
 

@@ -5,7 +5,7 @@ const jobPostSchema = new mongoose.Schema(
     recruiterId: { type: mongoose.Schema.Types.ObjectId, ref: "Recruiter", required: true },
     companyId: { type: mongoose.Schema.Types.ObjectId, ref: "Company", required: true },
     totalCount: { type: Number }, // Default value for safety
-    totalApplicants: { type: Number, default: 0 }, // ✅ Tracks total applicants
+    totalApplicants: { type: Number }, // ✅ Tracks total applicants
 
     jobPostDetails: {
       jobId: { type: String, required: true }, // Consider using ObjectId if it's unique per job
