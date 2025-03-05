@@ -16,7 +16,6 @@
             <label for="jobRoleTitle" class="form-label fw-bold">Job Role Title <span class="required">*</span></label>
             <input type="text" id="jobRoleTitle" formControlName="jobRoleTitle"  class="form-control form-control-sm" placeholder="Enter the job role" required>
             <small *ngIf="jobPostForm.get('jobRoleTitle')?.hasError('required') && jobPostForm.get('jobRoleTitle')?.touched" class="text-danger">Job Role Title is required.</small>
-
         </div>
 
 
@@ -30,7 +29,6 @@
                 <option value="Freelancer">Freelancer</option>
             </select>
             <small *ngIf="jobPostForm.get('jobType')?.hasError('required') && jobPostForm.get('jobType')?.touched" class="text-danger">Job Type is required.</small>
-
         </div>
 
 
@@ -50,7 +48,6 @@
                 <option value="15-18 Lakhs">15-18 Lakhs</option>
             </select>
             <small *ngIf="jobPostForm.get('salary')?.hasError('required') && jobPostForm.get('salary')?.touched" class="text-danger">Salary is required.</small>
-
         </div>
 
 
@@ -58,7 +55,6 @@
             <label for="vacancy" class="form-label fw-bold">Vacancy<span class="required">*</span></label>
             <input type="number" id="vacancy" formControlName="vacancy" class="form-control form-control-sm" placeholder="Enter the location" required>
             <small *ngIf="jobPostForm.get('vacancy')?.hasError('required') && jobPostForm.get('vacancy')?.touched" class="text-danger">Vacancy is required.</small>
-
         </div>
 
 
@@ -66,18 +62,10 @@
           <label for="applyByDate" class="form-label fw-bold">Apply By Date: <span class="required">*</span></label>
           <input type="date" id="applyByDate" formControlName="applyByDate" class="form-control form-control-sm" required>
           <small *ngIf="jobPostForm.get('applyByDate')?.hasError('required') && jobPostForm.get('applyByDate')?.touched" class="text-danger">Apply By Date is required.</small>
-
       </div>
 
-
     </div>
 
-    <!-- Benefits, Apply By Date -->
-    <div class="row mb-3">
-
-
-
-    </div>
 
     <!-- Job Descriptions -->
     <div class="row">
@@ -98,6 +86,7 @@
     </div>
 
     </form>
+
 </div>
 
 <div class="container-fluid" *ngIf="isLoading">

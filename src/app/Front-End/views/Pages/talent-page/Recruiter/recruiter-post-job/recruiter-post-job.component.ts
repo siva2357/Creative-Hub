@@ -1,14 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
 import { Company } from 'src/app/Front-End/core/models/company.model';
 import { JobPost } from 'src/app/Front-End/core/models/jobPost.model';
-import { Recruiter } from 'src/app/Front-End/core/models/user.model';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
-import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 import { JobPostService } from 'src/app/Front-End/core/services/jobPost.service';
-import { ProfileService } from 'src/app/Front-End/core/services/profile-service';
-import { UserService } from 'src/app/Front-End/core/services/user-service';
+
 
 @Component({
   selector: 'app-recruiter-post-job',
@@ -22,37 +19,16 @@ export class RecruiterPostJobPageComponent {
   jobCreated: boolean = false;
   isLoading: boolean = false;
   isSubmitting: boolean = false;
-  recruiterId!: string;
-  companyId!: string;
   public editor!: Editor;
   toolbar: Toolbar = DEFAULT_TOOLBAR;
-  public recruiter!: Recruiter;
-  userId!: string;
   loading: boolean = true;  // For managing loading state
 
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private jobService: JobPostService,
-    private profileService: ProfileService,
-    private userService: UserService,
-    private authService: AuthService
-  ) {}
+    private jobService: JobPostService) {}
 
   ngOnInit() {
-    // Get the userId and role from localStorage or AuthService
-    this.recruiterId = localStorage.getItem('userId') || this.authService.getUserId() || '';
-    const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
-
-    console.log("User ID:", this.recruiterId);
-    console.log("User Role:", role); // Log the user role for debugging
-
-    if (this.recruiterId && role) {
-      this.getRecruiterDetails();
-    } else {
-      this.errorMessage = 'User ID or Role is not available.';
-    }
-
     this.initializeForm();
     this.fetchCompanies();
     this.editor = new Editor();
@@ -62,24 +38,10 @@ export class RecruiterPostJobPageComponent {
     this.editor.destroy();
   }
 
-  getRecruiterDetails() {
-    // Using recruiterId here instead of userId
-    this.userService.getRecruiterById(this.recruiterId).subscribe(
-      (data: any) => {
-        console.log('Recruiter Details:', data);
-        this.recruiter = data;
-        this.loading = false;
-      },
-      (error) => {
-        this.handleError(error);
-      }
-    );
-  }
 
   fetchCompanies() {
     this.adminService.getAllCompanies().subscribe(
       (response: { companies: Company[] }) => {
-        // Assign the actual companies to the `companies` array
         this.companies = response.companies;
       },
       (error) => {
@@ -99,7 +61,7 @@ export class RecruiterPostJobPageComponent {
       vacancy: ['', [Validators.required]],
       applyByDate: ['', [Validators.required]],
       jobDescription: ['', [Validators.required]],
-      status: ['active']
+      status: ['Open']
     });
   }
 
@@ -107,20 +69,17 @@ export class RecruiterPostJobPageComponent {
     if (this.jobPostForm.valid) {
       this.isSubmitting = true; // Disable submit button
       const jobPostData: JobPost = {
-        recruiterId: this.recruiterId,
-        companyId: this.companyId, // Make sure to assign the companyId
-        ...this.jobPostForm.value,
-        status: this.jobPostForm.value.status || 'active'
+        jobPostDetails: {
+          ...this.jobPostForm.value, // This assumes your form has fields: jobId, jobRoleTitle, jobType, salary, vacancy, applyByDate, jobDescription, etc.
+          status: 'Open',
+        }
       };
       this.isLoading = true;
       this.jobService.createJobPost(jobPostData).subscribe({
         next: () => {
           this.isSubmitting = false;
           this.isLoading = false;
-          this.jobPostForm.reset({
-            salary: '',
-            jobType:'',
-          });
+          this.jobPostForm.reset({ salary: '', jobType:''});
           this.jobCreated = true; // Show success message
           setTimeout(() => {
             this.jobCreated = false; // Hide success message
