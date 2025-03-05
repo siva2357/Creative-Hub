@@ -17,7 +17,6 @@ export class SeekerJobProfileComponent implements OnInit {
   jobs: JobPost[] = [];
   appliedJobs: JobPost[] = [];
   selectedJob!: JobPost;
-  selectedAppliedJob!: JobPost;
 
   seekerId: string = ''; // populated from localStorage
   errorMessage: string = '';
@@ -37,6 +36,7 @@ export class SeekerJobProfileComponent implements OnInit {
 
     if (this.seekerId) {
       this.fetchJobPosts();
+      this.loadAppliedJobs();
     } else {
       this.errorMessage = 'Recruiter ID is missing. Please log in again.';
     }
@@ -46,38 +46,23 @@ export class SeekerJobProfileComponent implements OnInit {
     this.jobService.getAllJobPosts().subscribe(
       (response: JobPost[]) => {
         this.jobs = response.map((jobPost: JobPost) => ({
+
+
           ...jobPost,
           jobPostDetails: {
             ...jobPost.jobPostDetails,
-            // Sanitize the job description HTML
-            sanitizedJobDescription: this.sanitizeHtml(
-              jobPost.jobPostDetails.jobDescription
-            ),
+            sanitizedJobDescription: this.sanitizeHtml(jobPost.jobPostDetails.jobDescription || ''),
+            // Compute applied status based on the applicants array
+            isApplied: jobPost.applicants?.some(app => app.seekerId.toString() === this.seekerId) || false
           },
-          // Include recruiter details explicitly
-          recruiterId: jobPost.recruiterId
-            ? {
-                ...jobPost.recruiterId,
-                registrationDetails: {
-                  ...jobPost.recruiterId.registrationDetails,
-                },
-              }
-            : undefined,
-          // Update company details with sanitized description if available
-          companyId: jobPost.companyId
-            ? {
-                ...jobPost.companyId,
-                companyDetails: jobPost.companyId.companyDetails
-                  ? {
-                      ...jobPost.companyId.companyDetails,
-                      sanitizedCompanyDescription: this.sanitizeHtml(
-                        jobPost.companyId.companyDetails.companyDescription ||
-                          ''
-                      ),
-                    }
-                  : undefined,
-              }
-            : undefined,
+          recruiterId: jobPost.recruiterId ? { ...jobPost.recruiterId } : undefined,
+          companyId: jobPost.companyId ? {
+            ...jobPost.companyId,
+            companyDetails: jobPost.companyId.companyDetails ? {
+              ...jobPost.companyId.companyDetails,
+              sanitizedCompanyDescription: this.sanitizeHtml(jobPost.companyId.companyDetails.companyDescription || '')
+            } : undefined
+          } : undefined,
         }));
       },
       (error) => {
@@ -87,16 +72,33 @@ export class SeekerJobProfileComponent implements OnInit {
     );
   }
 
+
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
+  loadAppliedJobs(): void {
+    this.jobService.getAppliedJobPosts(this.seekerId).subscribe({
+      next: (applied: JobPost[]) => {
+        this.appliedJobs = applied;
+        this.jobs.forEach(job => {
+          job.jobPostDetails.isApplied = job.applicants?.some(app => app.seekerId.toString() === this.seekerId) || false;
+        });
+
+      },
+      error: (err) => {
+        console.error('Error loading applied jobs:', err);
+      }
+    });
+  }
+
+
+
+
   selectJob(job: JobPost): void {
-    this.selectedJob = { ...job };
+    this.selectedJob = { ...job, };
   }
-  selectAppliedJob(job: JobPost): void {
-    this.selectedAppliedJob = { ...job };
-  }
+
 
   applyJob(job: JobPost): void {
     if (!job._id) {
@@ -141,10 +143,10 @@ export class SeekerJobProfileComponent implements OnInit {
         next: (updatedJob: JobPost) => {
           job.jobPostDetails.isApplied = false;
           if (
-            this.selectedAppliedJob &&
-            this.selectedAppliedJob._id === jobId
+            this.selectedJob &&
+            this.selectedJob._id === jobId
           ) {
-            this.selectedAppliedJob.jobPostDetails.isApplied = false;
+            this.selectedJob.jobPostDetails.isApplied = false;
           }
           console.log('Job withdrawn:', job);
         },

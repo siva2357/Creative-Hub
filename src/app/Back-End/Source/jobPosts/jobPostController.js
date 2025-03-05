@@ -41,7 +41,10 @@ exports.createJobPost = async (req, res) => {
       return res.status(404).json({ message: "Company not found in database" });
     }
 
-    const formattedJobDescription = typeof jobPostDetails.jobDescription === "object" ? JSON.stringify(jobPostDetails.jobDescription): jobPostDetails.jobDescription;
+    const formattedJobDescription =
+    typeof jobPostDetails.jobDescription === "object"
+      ? JSON.stringify(jobPostDetails.jobDescription)
+      : jobPostDetails.jobDescription;
 
     // Create the job post
     const newJobPost = new JobPost({
@@ -358,9 +361,9 @@ exports.getAppliedJobs = async (req, res) => {
       .populate("companyId")
       .select("-applicants");
 
-    if (!appliedJobs.length) {
-      return res.status(404).json({ message: "No applied jobs found" });
-    }
+      if (!appliedJobs.length) {
+        return res.status(200).json({ count: 0, jobs: [] });
+      }
 
     // Get the count
     const count = appliedJobs.length;
