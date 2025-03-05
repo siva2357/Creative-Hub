@@ -48,9 +48,6 @@
                     <li class="nav-item flex-fill" role="presentation">
                         <a class="nav-link active text-center" id="allJobs-tab" data-bs-toggle="tab" href="#allJobs" role="tab" aria-controls="allJobs" aria-selected="true">All Jobs</a>
                     </li>
-                    <li class="nav-item flex-fill" role="presentation">
-                        <a class="nav-link text-center" id="appliedJobs-tab" data-bs-toggle="tab" href="#appliedJobs" role="tab" aria-controls="appliedJobs" aria-selected="false">Applied Jobs</a>
-                    </li>
                 </ul>
 
                 <!-- Tab Content -->
@@ -58,50 +55,35 @@
                     <!-- All Jobs Tab -->
                     <div class="tab-pane fade show active" id="allJobs" role="tabpanel" aria-labelledby="allJobs-tab">
                         <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 100%; height: 500px; overflow-y: auto;">
+                            <div class="list-group list-group-flush border-bottom" >
 
-                            <div class="list-group list-group-flush border-bottom">
-                                <div class="list-group-item list-group-item-action py-3 lh-sm">
-
-                                    <div class="d-flex align-items-center mb-3 justify-content-between" style="cursor: pointer;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-3">
-                                                <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1710832065/cyan-paint-brush-band-766278995_ikd5gy.jpg" alt="Company Logo" class="rounded-circle" style="width: 50px; height: 50px;">
-                                            </div>
-                                            <div>
-                                                <strong class="mb-1">List group item heading</strong>
-                                                <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Applied Jobs Tab -->
-                    <div class="tab-pane fade" id="appliedJobs" role="tabpanel" aria-labelledby="appliedJobs-tab">
-                      <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 100%; height: 500px; overflow-y: auto;">
-
-                        <div class="list-group list-group-flush border-bottom">
-                            <div class="list-group-item list-group-item-action py-3 lh-sm">
-
-                                <div class="d-flex align-items-center mb-3 justify-content-between" style="cursor: pointer;">
+                                <div class="list-group-item list-group-item-action py-3 lh-sm" *ngFor="let job of jobs; let i = index" (click)="selectJob(job)">
+                                  <div class="d-flex align-items-center justify-content-between" style="cursor: pointer;">
                                     <div class="d-flex align-items-center">
-                                        <div class="me-3">
-                                            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1710832065/cyan-paint-brush-band-766278995_ikd5gy.jpg" alt="Company Logo" class="rounded-circle" style="width: 50px; height: 50px;">
-                                        </div>
-                                        <div>
-                                            <strong class="mb-1">List group item heading</strong>
-                                            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                                        </div>
+                                      <div class="me-3">
+                                        <img [src]="job.companyId?.companyDetails?.companyLogo?.url"
+                                             alt="Company Logo"
+                                             class="rounded-circle"
+                                             style="width: 50px; height: 50px;">
+                                      </div>
+                                      <div>
+                                        <strong class="mb-1">{{ job.companyId?.companyDetails?.companyName }}</strong>
+                                        <div class="col-10 mb-1 small">{{ job.jobPostDetails.jobRoleTitle }}</div>
+                                      </div>
                                     </div>
+                                    <!-- Badge showing that the job is applied -->
+                                    <div *ngIf="job.jobPostDetails.isApplied">
+                                      <span class="badge bg-success">Applied</span>
+                                    </div>
+                                  </div>
                                 </div>
+
+
 
                             </div>
                         </div>
                     </div>
-                    </div>
+
 
                 </div>
 
@@ -109,32 +91,43 @@
 
 
             <div class="col-7 bg-warning">
-                <div class=" p-4" style="height: 80vh; overflow-y: auto;" >
+                <div class=" p-4" style="height: 80vh; overflow-y: auto;" *ngIf="selectedJob;">
                     <!-- Sticky Header -->
                     <div class="row g-4 justify-content-center">
 
                         <div class="d-flex align-items-center mb-3 justify-content-between">
                             <div class="d-flex align-items-center">
                                 <div class="me-3">
-                                    <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1710832065/cyan-paint-brush-band-766278995_ikd5gy.jpg" alt="Company Logo" class="rounded-circle" style="width: 50px; height: 50px;">
+                                    <img [src]="selectedJob.companyId?.companyDetails?.companyLogo?.url"alt="Company Logo" class="rounded-circle" style="width: 50px; height: 50px;">
                                 </div>
                                 <div>
                                     <h5 class="mb-0 fw-bold">Company Sector</h5>
                                     <p class="mb-0 text-muted">Company Description</p>
                                 </div>
                             </div>
-                            <button class="btn btn-success rounded-0 px-5">Apply</button>
+                            <div *ngIf="selectedJob">
+                              <!-- Show "Apply" if not applied -->
+                              <button *ngIf="!selectedJob.jobPostDetails.isApplied" class="btn btn-success" (click)="applyJob(selectedJob)">
+                                Apply
+                              </button>
+                              <!-- Show "Withdraw" if applied -->
+                              <button *ngIf="selectedJob.jobPostDetails.isApplied" class="btn btn-danger" (click)="withdrawJob(selectedJob)">
+                                Withdraw
+                              </button>
+                            </div>
+
+
                         </div>
 
                         <!-- Job Info -->
                         <div class="row  mb-4 mt-5 d-flex justify-content-between">
                             <div class="col-6">
                                 <p class="mb-1"><i class="bi bi-calendar-event me-2"></i>Posted On</p>
-                                <p class="fw-bold">job.postedOn</p>
+                                <p class="fw-bold">{{selectedJob.jobPostDetails.postedOn | date :'dd-MM-YYYY'}}</p>
                             </div>
                             <div class="col-6 text-end">
                                 <p class="mb-1"><i class="bi bi-calendar-check me-2"></i>Apply By</p>
-                                <p class="fw-bold">job.applyByDate</p>
+                                <p class="fw-bold">{{selectedJob.jobPostDetails.applyByDate | date :'dd-MM-YYYY'}}</p>
                             </div>
                         </div>
 
@@ -144,30 +137,23 @@
                             <div class="row text-start">
                                 <div class="col-12 col-md-4">
                                     <p class="mb-1"><i class="bi bi-cash"></i> Salary</p>
-                                    <p class="fw-bold">job.salary</p>
+                                    <p class="fw-bold">{{selectedJob.jobPostDetails.salary}}</p>
                                 </div>
-                                <div class="col-12 col-md-4">
-                                    <p class="mb-1"><i class="bi bi-geo-alt"></i> Location</p>
-                                    <p class="fw-bold">job.location</p>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <p class="mb-1"><i class="bi bi-tv"></i> Platform</p>
-                                    <p class="fw-bold">job.platform</p>
-                                </div>
+
                             </div>
 
                             <div class="row text-start">
                                 <div class="col-12 col-md-4">
                                     <p class="mb-1"><i class="bi bi-people"></i> Openings</p>
-                                    <p class="fw-bold">job.vacancy</p>
+                                    <p class="fw-bold">{{selectedJob.jobPostDetails.vacancy}}</p>
                                 </div>
                                 <div class="col-12 col-md-4">
                                     <p class="mb-1"><i class="bi bi-briefcase"></i> Job Role</p>
-                                    <p class="fw-bold">job.jobRoleTitle</p>
+                                    <p class="fw-bold">{{selectedJob.jobPostDetails.jobRoleTitle}}</p>
                                 </div>
                                 <div class="col-12 col-md-4">
                                     <p class="mb-1"><i class="bi bi-building"></i> Job Type</p>
-                                    <p class="fw-bold">job.jobType</p>
+                                    <p class="fw-bold">{{selectedJob.jobPostDetails.jobType}}</p>
                                 </div>
                             </div>
                         </div>
@@ -175,7 +161,7 @@
                         <!-- Job Description -->
                         <h6 class="fw-bold mb-0">Job Description:</h6>
                         <div class="card border p-3 mb-4">
-                            <p class="mb-0 text-justify">job.jobDescription</p>
+                            <p class="mb-0 text-justify" [innerHTML]="selectedJob.jobPostDetails.sanitizedJobDescription"></p>
                         </div>
 
                         <!-- Recruiter Info -->
@@ -183,11 +169,10 @@
                         <div class="card border p-3 mb-4">
                             <div class="d-flex align-items-center">
                                 <div class="me-3">
-                                    <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1710832065/cyan-paint-brush-band-766278995_ikd5gy.jpg"
-                                         alt="Recruiter Name" class="rounded-circle" style="width: 50px; height: 50px;">
+                                    <img [src]="selectedJob.companyId?.companyDetails?.companyLogo?.url" alt="Recruiter Name" class="rounded-circle" style="width: 50px; height: 50px;">
                                 </div>
                                 <div>
-                                    <h6 class="mb-0 fw-bold">Recruiter Name</h6>
+                                    <h6 class="mb-0 fw-bold">{{selectedJob.recruiterId?.registrationDetails?.firstName}} {{selectedJob.recruiterId?.registrationDetails?.lastName}}</h6>
                                     <p class="mb-0 text-muted">Recruiter Designation</p>
                                 </div>
                             </div>
@@ -196,15 +181,15 @@
                         <!-- Company Description -->
                         <h6 class="fw-bold mb-0">About Company:</h6>
                         <div class="card border p-3">
-                            <p class="mb-0 text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua.
+                            <p class="mb-0 text-justify" [innerHTML]="selectedJob.companyId?.companyDetails?.sanitizedCompanyDescription">
                             </p>
                         </div>
 
                     </div>
 
                 </div>
+
+
             </div>
 
         </div>

@@ -359,7 +359,7 @@ exports.withdrawApplication = async (req, res) => {
     const now = new Date();
     const diffMinutes = (now - appliedAt) / 60000;
 
-    if (diffMinutes > 2) return res.status(400).json({ message: "Withdrawal period has expired" });
+    if (diffMinutes > 60) return res.status(400).json({ message: "Withdrawal period has expired" });
 
     jobPost.applicants.splice(applicantIndex, 1);
     await jobPost.save();
