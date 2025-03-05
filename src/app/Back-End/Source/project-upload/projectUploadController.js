@@ -112,16 +112,25 @@ exports.deleteProject = async (req, res) => {
   }
 };
 
+
+
 exports.getProjects = async (req, res) => {
-    try {
-        const projects = await ProjectUpload.find();
-        res.status(200).json({
-            totalProjects: projects.length,
-            projects
-        });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+  try {
+    const { seekerId } = req.params;
+    const projects  = await ProjectUpload.find(
+      { seekerId: new mongoose.Types.ObjectId(seekerId)},
+      { "projectDetails": 1, _id: 1 }
+    );
+
+    return res.status(200).json({
+      totalProjects: projects.length,
+      projects: projects,
+    });
+
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    res.status(500).json({ message: "Error fetching projects", error: error.message });
+  }
 };
 
 
