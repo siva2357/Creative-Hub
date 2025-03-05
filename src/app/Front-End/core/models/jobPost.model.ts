@@ -18,7 +18,27 @@ export interface JobPost {
     postedOn: Date;
     applyByDate: Date;
     status?: string;  // Optional, since backend defaults to "Open"
+    isApplied :boolean;
   };
+  recruiterId?: {
+    registrationDetails?: {
+      firstName?: string;
+      lastName?: string;
+      userName?: string;
+      email?: string;
+      verified?: boolean;
+    };
+  }
+  companyId?:{
+    companyDetails?: {
+      companyId?: string;
+      companyLogo?: { fileName: string; url: string };
+      companyName?: string;
+      companyAddress?: string;
+      companyDescription?: string;
+      sanitizedCompanyDescription?: SafeHtml; // Change ty
+    };
+  }
 
   totalApplicants? :number,
   applicants?: Applicant[];  // Array of Applicant objects
