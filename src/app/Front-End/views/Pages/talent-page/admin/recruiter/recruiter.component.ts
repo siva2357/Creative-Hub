@@ -1,5 +1,5 @@
 import { UserService } from './../../../../../core/services/user-service';
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { Recruiter } from 'src/app/Front-End/core/models/user.model';
 
@@ -9,8 +9,9 @@ import { Recruiter } from 'src/app/Front-End/core/models/user.model';
   styleUrls: ['./recruiter.component.css'],
 })
 export class RecruiterComponent {
-  @Input() recruiters: Recruiter[] = [];
+  public recruiters: Recruiter[] = [];
   public errorMessage: string | null = null;
+  public totalRecruiters! :number;
 
   constructor(private router: Router, private userService: UserService) {}
 
@@ -34,15 +35,20 @@ export class RecruiterComponent {
 
   fetchRecruiters() {
     this.userService.getAllRecruiters().subscribe(
-      (data: Recruiter[]) => {
-        this.recruiters = data;
+      (data) => {
+        // data now contains two properties: totalRecruiters and recruiters
+        console.log('Recruiters data:', data);
+        // Optionally store the total count
+        this.totalRecruiters = data.totalRecruiters;
+        this.recruiters = data.recruiters;
       },
       (error) => {
-        console.error('Error fetching projects:', error);
-        this.errorMessage = 'Failed to load job posts. Please try again later.';
+        console.error('Error fetching recruiters:', error);
+        this.errorMessage = 'Failed to load recruiters. Please try again later.';
       }
     );
   }
+
 
   goToUserData(){
     this.router.navigateByUrl('talent-page/admin/user-data');

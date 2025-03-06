@@ -18,8 +18,6 @@ import { RecruiterComponent } from './recruiter/recruiter.component';
 import { SeekerComponent } from './seeker/seeker.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
 import { SeekerDetailsComponent } from './seeker-details/seeker-details.component';
-import { UserLocationComponent } from './user-location/user-location.component';
-import { UniversityCompanyLocationComponent } from 'src/app/Front-End/views/Pages/talent-page/admin/university-company-location/university-company-location.component';
 import { UniversityPostComponent } from './university-post/university-post.component';
 import { UniversityEditComponent } from './university-edit/university-edit.component';
 import { CompanyPostComponent } from './company-post/company-post.component';
@@ -39,8 +37,6 @@ import { NgxEditorModule } from 'ngx-editor';
     SeekerComponent,
     RecruiterDetailsComponent,
     SeekerDetailsComponent,
-    UserLocationComponent,
-    UniversityCompanyLocationComponent,
     UniversityEditComponent,
     UniversityPostComponent,
     CompanyPostComponent,

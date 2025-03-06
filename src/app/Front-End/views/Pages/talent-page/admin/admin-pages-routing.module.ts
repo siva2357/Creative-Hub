@@ -11,8 +11,6 @@ import { RecruiterComponent } from './recruiter/recruiter.component';
 import { SeekerComponent } from './seeker/seeker.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
 import { SeekerDetailsComponent } from './seeker-details/seeker-details.component';
-import { UserLocationComponent } from './user-location/user-location.component';
-import { UniversityCompanyLocationComponent } from 'src/app/Front-End/views/Pages/talent-page/admin/university-company-location/university-company-location.component';
 import { UniversityPostComponent } from './university-post/university-post.component';
 import { UniversityEditComponent } from './university-edit/university-edit.component';
 import { CompanyPostComponent } from './company-post/company-post.component';
@@ -34,8 +32,6 @@ const routes: Routes = [
 		{ path: 'seeker', component: SeekerComponent} ,// Hire Seeker page route
     { path: 'recruiter-details/:id', component: RecruiterDetailsComponent } ,// Hire Seeker page route
 		{ path: 'seeker-details/:id', component: SeekerDetailsComponent } ,// Hire Seeker page route
-    { path: 'user-location', component: UserLocationComponent } ,// Hire Seeker page route
-    { path: 'university-company-location', component: UniversityCompanyLocationComponent } ,// Hire Seeker page route
     { path: 'university-post-form', component: UniversityPostComponent } ,// Hire Seeker page route
     { path: 'university-edit-form/:id', component: UniversityEditComponent } ,// Hire Seeker page route
     { path: 'company-post-form', component: CompanyPostComponent } ,// Hire Seeker page route
