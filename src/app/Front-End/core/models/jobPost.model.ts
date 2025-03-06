@@ -24,17 +24,12 @@ export interface JobPost {
     registrationDetails?: {
       firstName?: string;
       lastName?: string;
-      userName?: string;
-      email?: string;
-      verified?: boolean;
     };
   }
   companyId?:{
     companyDetails?: {
-      companyId?: string;
       companyLogo?: { fileName: string; url: string };
       companyName?: string;
-      companyAddress?: string;
       companyDescription?: string;
       sanitizedCompanyDescription?: SafeHtml; // Change ty
     };

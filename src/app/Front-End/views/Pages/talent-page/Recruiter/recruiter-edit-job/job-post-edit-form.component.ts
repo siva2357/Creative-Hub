@@ -42,8 +42,8 @@ export class RecruiterEditJobPageComponent implements OnInit,  OnDestroy{
   ngOnInit(): void {
 
      // Get the userId and role from localStorage or AuthService
-     this.recruiterId = localStorage.getItem('userId') || this.authService.getUserId() || '';
-     const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
+     this.recruiterId = localStorage.getItem('userId') ||  '';
+     const role = localStorage.getItem('userRole') || '';
 
      console.log("User ID:", this.recruiterId);
      console.log("User Role:", role); // Log the user role for debugging
@@ -101,7 +101,6 @@ fetchJobpostData() {
           salary: this.jobPost.jobPostDetails.salary,
           vacancy: this.jobPost.jobPostDetails.vacancy,
           applyByDate: [new Date(this.jobPost?.jobPostDetails?.applyByDate).toISOString().slice(0, 10)],
-
           jobDescription: this.jobPost.jobPostDetails.jobDescription,
 
         });

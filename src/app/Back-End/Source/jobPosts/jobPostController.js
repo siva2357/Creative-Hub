@@ -7,21 +7,15 @@ const Seeker = require('../models/seekerModel');
 
 exports.createJobPost = async (req, res) => {
   try {
-    // Destructure jobPostDetails from the request body
-    const { jobId, jobRoleTitle, jobType, salary, location, category, vacancy, jobDescription, applyByDate } = req.body;
-
-    // Log request body for debugging
+    const { jobPostDetails } = req.body;
     console.log("Received request body:", req.body);
 
-    // Get recruiterId from authenticated user
-    const recruiterId = req.recruiterId;
 
-    // Validate recruiterId format
+    const recruiterId = req.recruiterId;
     if (!recruiterId || !mongoose.Types.ObjectId.isValid(recruiterId)) {
       return res.status(400).json({ message: "Invalid recruiter ID format" });
     }
 
-    // Fetch recruiter and recruiter profile
     const recruiter = await Recruiter.findById(recruiterId);
     if (!recruiter) {
       return res.status(404).json({ message: "Recruiter not found" });
@@ -32,49 +26,36 @@ exports.createJobPost = async (req, res) => {
       return res.status(404).json({ message: "Recruiter profile not found" });
     }
 
-    // Extract recruiter details
     const { firstName, lastName } = recruiter.registrationDetails || {};
     if (!firstName || !lastName) {
       return res.status(400).json({ message: "Recruiter does not have complete profile details" });
     }
 
-    // Check if recruiter has an associated company
     const companyName = recruiterProfile?.profileDetails?.professionalDetails?.companyName;
     if (!companyName) {
       return res.status(400).json({ message: "Recruiter does not have an associated company" });
     }
 
-    // Find the company in the database
     const company = await Company.findOne({ "companyDetails.companyName": companyName });
     if (!company) {
       return res.status(404).json({ message: "Company not found in database" });
     }
 
-    // Validate required job post fields
-    if (!jobId || !jobRoleTitle || !jobType || !salary || !vacancy || !applyByDate || !jobDescription) {
-      return res.status(400).json({ message: "All fields in jobPostDetails are required" });
-    }
-
-    // 🔥 Fix: Ensure jobDescription is always a string
     const formattedJobDescription =
-      typeof jobDescription === "object" ? JSON.stringify(jobDescription) : jobDescription;
+    typeof jobPostDetails.jobDescription === "object"
+      ? JSON.stringify(jobPostDetails.jobDescription)
+      : jobPostDetails.jobDescription;
 
     // Create the job post
     const newJobPost = new JobPost({
       recruiterId: recruiter._id,
       companyId: company._id,
       jobPostDetails: {
-        jobId,
-        jobRoleTitle,
-        jobType,
-        salary,
-        location,
-        category,
-        vacancy,
-        jobDescription: formattedJobDescription,  // 🔥 Fixed jobDescription
-        applyByDate,
+        ...jobPostDetails,
+        jobDescription: formattedJobDescription
       }
     });
+
 
     // Save the job post
     await newJobPost.save();
@@ -87,18 +68,19 @@ exports.createJobPost = async (req, res) => {
 };
 
 
+
+
+
 // ✅ Update Job Post
 exports.updateJobPost = async (req, res) => {
   try {
     const { jobId, recruiterId } = req.params; // Get jobId and recruiterId from URL params
 
-    // Find the existing job post under the given recruiter
     const existingJob = await JobPost.findOne({ _id: jobId, recruiterId });
     if (!existingJob) {
       return res.status(404).json({ message: "Job post not found for this recruiter" });
     }
 
-    // 🔥 Ensure `status` remains unchanged if not included in the update request
     const updatedJobDetails = {
       ...existingJob.jobPostDetails, // Keep existing job details
       ...req.body.jobPostDetails, // Override with new data
@@ -374,33 +356,29 @@ exports.withdrawApplication = async (req, res) => {
 exports.getAppliedJobs = async (req, res) => {
   try {
     const { seekerId } = req.params;
-    // const appliedJobs = await JobPost.find({ "applicants.seekerId": seekerId }).select("-applicants");
-    const appliedJobs = await JobPost.find({ "applicants.seekerId": seekerId }).populate("recruiterId").populate("companyId").select("-applicants");
+    const appliedJobs = await JobPost.find({ "applicants.seekerId": seekerId })
+      .populate("recruiterId")
+      .populate("companyId")
+      .select("-applicants");
 
-    if (!appliedJobs.length) {
-      return res.status(404).json({ message: "No applied jobs found" });
-    }
+      if (!appliedJobs.length) {
+        return res.status(200).json({ count: 0, jobs: [] });
+      }
 
-    res.status(200).json(appliedJobs);
+    // Get the count
+    const count = appliedJobs.length;
+    res.status(200).json({ count, jobs: appliedJobs });
   } catch (error) {
     res.status(500).json({ message: "Error fetching applied jobs", error });
   }
 };
 
 
-
 exports.getJobApplicantsByRecruiter = async (req, res) => {
   try {
     const { recruiterId} = req.params;
-
-    // Fetch all open job posts for the recruiter, excluding companyId and recruiterId in the response
     const jobPosts = await JobPost.find(
-      {
-        recruiterId: new mongoose.Types.ObjectId(recruiterId),
-        "jobPostDetails.status": "Open",
-      },
-
-    ).select("jobPostDetails applicants totalApplicants ");
+      { recruiterId: new mongoose.Types.ObjectId(recruiterId),"jobPostDetails.status": "Open"}).select("jobPostDetails applicants totalApplicants ");
 
     if (!jobPosts || jobPosts.length === 0) {
       console.log("No open job posts found for this recruiter");
@@ -428,12 +406,6 @@ exports.getJobApplicantsByRecruiter = async (req, res) => {
     res.status(500).json({ message: "Error fetching job posts", error: error.message });
   }
 };
-
-
-
-
-
-
 
 exports.getJobApplicants = async (req, res) => {
   try {

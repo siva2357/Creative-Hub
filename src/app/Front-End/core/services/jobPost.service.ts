@@ -40,17 +40,15 @@ export class JobPostService {
 
   constructor(private http: HttpClient) { }
 
-  // Create a new job post
+//Recruiter actions for job Posts
   createJobPost(jobPostData: JobPost): Observable<JobPost> {
     return this.http.post<JobPost>(`${this.baseUrl}/recruiter/jobPost`, jobPostData, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-    // Fetch all job posts for recruiter
-    getJobsByRecruiter(recruiterId:string,): Observable<{totalJobPosts: number;  jobPosts: JobPost[]}> {
+  getJobsByRecruiter(recruiterId:string,): Observable<{totalJobPosts: number;  jobPosts: JobPost[]}> {
       return this.http.get<{totalJobPosts: number;  jobPosts: JobPost[] }>(`${this.baseUrl}/recruiter/${recruiterId}/jobPosts`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
     }
 
-    // Fetch job post by ID for recruiter
   getRecruiterJobPostById(recruiterId:string, jobId: string): Observable<JobPost> {
     return this.http.get<JobPost>(`${this.baseUrl}/recruiter/${recruiterId}/jobPost/${jobId}`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
@@ -59,28 +57,24 @@ export class JobPostService {
     return this.http.get<{totalJobPosts: number;  jobPosts: JobPost[] }>(`${this.baseUrl}/recruiter/${recruiterId}/jobPosts/closed`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-  // Update job post by ID for recruiter
   updateJobPostById(recruiterId:string,jobId: string, jobPostData: JobPost): Observable<JobPost> {
     return this.http.put<JobPost>(`${this.baseUrl}/recruiter/${recruiterId}/jobPost/${jobId}/update`, jobPostData, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-  // Delete job post by ID for recruiter
   deleteJobPostById(recruiterId:string,jobId: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/recruiter/${recruiterId}/jobPost/${jobId}/delete`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-  // Close job post (Recruiter specific)
+
   closeJobPostById(recruiterId:string, jobId: string,jobPostData: JobPost): Observable<JobPost> {
     return this.http.put<JobPost>(`${this.baseUrl}/recruiter/${recruiterId}/jobPost/${jobId}/close`, jobPostData, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-    // Close job post (Recruiter specific)
   reopenJobPostById(recruiterId:string,jobId: string, jobPostData: JobPost): Observable<JobPost> {
     return this.http.put<JobPost>(`${this.baseUrl}/recruiter/${recruiterId}/jobPost/${jobId}/reopen`, jobPostData,  { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
 
-  // Fetch all job posts for recruiter
   getJobApplicants(recruiterId:string,jobPostId: string): Observable<any> {
     return this.http.get<JobPost[]>(`${this.baseUrl}/recruiter/${recruiterId}/jobpost/${jobPostId}/applicants`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
@@ -93,33 +87,26 @@ export class JobPostService {
 
 
 
-  // Fetch all job posts for recruiter
+// Seeker actions for job Posts
   getAllJobPosts(): Observable<JobPost[]> {
     return this.http.get<JobPost[]>(`${this.baseUrl}/seeker/jobPosts`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-  // Fetch job post by ID for recruiter
   getJobPostById(jobId: string): Observable<JobPost> {
     return this.http.get<JobPost>(`${this.baseUrl}/seeker/jobPosts/${jobId}`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
-
-
 
   applyJobPostById(seekerId:string, jobId: string, jobPostData: JobPost): Observable<JobPost> {
     return this.http.post<JobPost>(`${this.baseUrl}/seeker/${seekerId}/job-post/${jobId}/apply`, jobPostData, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-  // Fetch applied job posts (Seeker specific)
   getAppliedJobPosts(seekerId:string): Observable<JobPost[]> {
     return this.http.get<JobPost[]>(`${this.baseUrl}/seeker/${seekerId}/applied-jobs`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-
-  // Withdraw job application (Seeker specific)
   withdrawJobPostById(seekerId:string, jobId: string, jobPostData: JobPost): Observable<JobPost> {
     return this.http.post<JobPost>(`${this.baseUrl}/seeker/${seekerId}/job-post/${jobId}/withdraw`,jobPostData, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
-
 
 
   // Handle HTTP errors
