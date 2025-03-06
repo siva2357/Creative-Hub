@@ -4,22 +4,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-user-data',
   templateUrl: './admin-user-data.component.html',
-  styleUrls: ['./admin-user-data.component.css']
+  styleUrls: ['./admin-user-data.component.css'],
 })
 export class AdminUserDataPageComponent {
+  constructor(private router: Router) {}
 
-      constructor(private router: Router) { }
+  goToRecruiterPage(): void {
+    this.router.navigateByUrl('talent-page/admin/recruiter');
+  }
 
-      goToRecruiterPage(): void {
-      this.router.navigateByUrl('talent-page/admin/recruiter');
-    }
-
-    goToSeekerPage(): void {
-      this.router.navigateByUrl('talent-page/admin/seeker');
-    }
-
-    goToLocationPage(){
-      this.router.navigateByUrl('talent-page/admin/user-location');
-
-    }
+  goToSeekerPage(): void {
+    this.router.navigateByUrl('talent-page/admin/seeker');
+  }
 }

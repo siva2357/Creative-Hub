@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent {
-
-    constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   goToUniversityPage(): void {
     this.router.navigateByUrl('talent-page/admin/university');
@@ -16,11 +15,6 @@ export class AdminDashboardComponent {
 
   goToCompanyPage(): void {
     this.router.navigateByUrl('talent-page/admin/company');
-  }
-
-  goToLocationPage(){
-    this.router.navigateByUrl('talent-page/admin/university-company-location');
-
   }
 
 }

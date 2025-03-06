@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { Seeker } from 'src/app/Front-End/core/models/user.model';
 import { UserService } from 'src/app/Front-End/core/services/user-service';
@@ -9,9 +9,9 @@ import { UserService } from 'src/app/Front-End/core/services/user-service';
   styleUrls: ['./seeker.component.css'],
 })
 export class SeekerComponent {
-  @Input() seekers: Seeker[] = [];
+  public seekers: Seeker[] = [];
   public errorMessage: string | null = null;
-
+  public totalSeekers!: number;
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {
@@ -30,17 +30,24 @@ export class SeekerComponent {
     return this.seekers.length > 0;
   }
 
+
+
   fetchSeekers() {
     this.userService.getAllSeekers().subscribe(
-      (data: Seeker[]) => {
-        this.seekers = data;
+      (data) => {
+        // data now contains two properties: totalRecruiters and recruiters
+        console.log('Seekers data:', data);
+        // Optionally store the total count
+        this.totalSeekers = data.totalSeekers;
+        this.seekers = data.Seekers;
       },
       (error) => {
-        console.error('Error fetching projects:', error);
-        this.errorMessage = 'Failed to load job posts. Please try again later.';
+        console.error('Error fetching recruiters:', error);
+        this.errorMessage = 'Failed to load recruiters. Please try again later.';
       }
     );
   }
+
 
 
   goToUserData(){
