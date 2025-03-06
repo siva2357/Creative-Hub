@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
 import { ProfileService } from 'src/app/Front-End/core/services/profile-service';
@@ -20,7 +20,7 @@ import { Seeker } from 'src/app/Front-End/core/models/user.model';
   styleUrls: ['./seeker-profile-form.component.css']
 })
 
-export class SeekerProfileFormComponent{
+export class SeekerProfileFormComponent implements OnInit, OnDestroy{
   profileDetailsForm!: FormGroup;
   isSubmitting: boolean = false;
   errorMessage: string = '';
@@ -211,30 +211,22 @@ this.editor.destroy();
         // Construct the profile data correctly
         const profileData: SeekerProfile = {
             profileDetails: {
-                basicDetails: {
                     firstName: this.profileDetailsForm.value.firstName,
                     lastName: this.profileDetailsForm.value.lastName,
                     email: this.profileDetailsForm.value.email,
                     gender: this.profileDetailsForm.value.gender,
                     dateOfBirth: this.profileDetailsForm.value.dateOfBirth,
-                },
-                contactDetails: {
                     phoneNumber: this.profileDetailsForm.value.phoneNumber,
                     streetAddress: this.profileDetailsForm.value.streetAddress,
                     city: this.profileDetailsForm.value.city,
                     state: this.profileDetailsForm.value.state,
                     country: this.profileDetailsForm.value.country,
                     pincode: this.profileDetailsForm.value.pincode,
-                },
-                educationalDetails: {
                     universityName: this.profileDetailsForm.value.universityName,
                     universityDegree: this.profileDetailsForm.value. universityDegree,
                     yearOfGraduation: this.profileDetailsForm.value.yearOfGraduation,
                     universityNumber: this.profileDetailsForm.value.universityNumber,
-                },
-                bioDetails: {
                     bioDescription: this.profileDetailsForm.value.bioDescription,
-                },
                 profilePicture: this.uploadedFileData || { fileName: '', url: ''}, // Provide a default value when null
               }
         };

@@ -65,6 +65,6 @@ export class SeekerProfilePageComponent {
 
 
   editProfile(): void {
-    this.router.navigateByUrl(`talent-page/seeker/edit-profile/:${this.seekerId}`);
+    this.router.navigateByUrl(`talent-page/seeker/edit-profile/${this.seekerId}`);
   }
 }

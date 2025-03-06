@@ -7,30 +7,30 @@
         <tbody>
           <tr>
             <td style="width: 20%; border: none;">Full Name:</td>
-            <td style="border: none;">{{profileDetails.profileDetails.basicDetails.firstName}} {{profileDetails.profileDetails.basicDetails.lastName}}</td>
+            <td style="border: none;">{{ profile.profileDetails.firstName}} {{ profile.profileDetails.lastName}}</td>
           </tr>
           <tr>
             <td style="border: none;">Date Of Birth:</td>
-            <td style="border: none;">{{profileDetails.profileDetails.basicDetails.dateOfBirth}}</td>
+            <td style="border: none;">{{ profile.profileDetails.dateOfBirth}}</td>
           </tr>
           <tr>
             <td style="border: none;">Gender:</td>
-            <td style="border: none;">{{profileDetails.profileDetails.basicDetails.gender}}</td>
+            <td style="border: none;">{{ profile.profileDetails.gender}}</td>
           </tr>
           <tr>
             <td style="border: none;">Phone Number:</td>
-            <td style="border: none;">{{profileDetails.profileDetails.contactDetails.phoneNumber}}</td>
+            <td style="border: none;">{{ profile.profileDetails.phoneNumber}}</td>
           </tr>
           <tr>
             <td style="border: none;">Bio-Data:</td>
             <td style="border: none; text-align: justify;">
-              <p [innerHTML]="profileDetails.profileDetails.bioDetails.sanitizedBioDescription"></p>
+              <p [innerHTML]=" profile.profileDetails.sanitizedBioDescription"></p>
             </td>
           </tr>
           <tr>
             <td style="border: none;">Address:</td>
             <td style="border: none; text-align: justify;">
-              {{profileDetails.profileDetails.contactDetails.streetAddress}}, {{profileDetails.profileDetails.contactDetails.state}}, {{profileDetails.profileDetails.contactDetails.country}}, {{profileDetails.profileDetails.contactDetails.pincode}}
+              {{ profile.profileDetails.streetAddress}}, {{ profile.profileDetails.state}}, {{ profile.profileDetails.country}}, {{ profile.profileDetails.pincode}}
             </td>
           </tr>
         </tbody>

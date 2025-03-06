@@ -6,8 +6,8 @@ const { identifier } = require('../middleware/identification');
 
 
 router.post('/seeker/profile-details', identifier,seekerProfileController.createSeekerProfile);
-router.put('/seeker/profile-details', identifier, seekerProfileController.updateSeekerProfile);
-router.get('/seeker/profile-details/:seekerId', identifier, seekerProfileController.getSeekerProfile);
+router.put('/seeker/:seekerId/profile-details', identifier, seekerProfileController.updateSeekerProfile);
+router.get('/seeker/:seekerId/profile-details', identifier, seekerProfileController.getSeekerProfile);
 
 
 

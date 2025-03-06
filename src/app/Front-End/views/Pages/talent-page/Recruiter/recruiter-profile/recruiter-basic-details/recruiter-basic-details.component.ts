@@ -13,7 +13,7 @@ export class RecruiterBasicDetailsComponent {
   isSocialMedia:boolean = false;
     recruiterId!: string;
 
-    public profileDetails! :RecruiterProfile;
+    public profile! :RecruiterProfile;
     errorMessage: string = '';
 
         constructor(private router: Router,private authService: AuthService,
@@ -41,14 +41,12 @@ export class RecruiterBasicDetailsComponent {
       (response: RecruiterProfile) => {
         if (response) {
           // Ensure bioDetails is inside profileDetails
-          this.profileDetails = {
+          this. profile = {
             ...response,
             profileDetails: {
               ...response.profileDetails,
-              bioDetails: {
-                ...response.profileDetails.bioDetails,
-                sanitizedBioDescription: this.sanitizeHtml(response.profileDetails.bioDetails.bioDescription || '')
-              }
+                sanitizedBioDescription: this.sanitizeHtml(response.profileDetails.bioDescription || '')
+
             }
           };
         }

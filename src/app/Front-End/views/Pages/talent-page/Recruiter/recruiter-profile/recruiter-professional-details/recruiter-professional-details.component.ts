@@ -14,7 +14,7 @@ export class RecruiterProfessionalDetailsComponent {
     isSocialMedia:boolean = false;
       recruiterId!: string;
 
-      public profileDetails! :RecruiterProfile;
+      public profile! :RecruiterProfile;
       errorMessage: string = '';
 
           constructor(private router: Router,private authService: AuthService,
@@ -41,7 +41,7 @@ export class RecruiterProfessionalDetailsComponent {
                 (data:RecruiterProfile) => {
                   console.log('Recruiter profile details:', data);
                   if (data) {
-                    this.profileDetails = data;
+                    this.profile = data;
                   } else {
                     this.errorMessage = 'No profile data found';
                   }

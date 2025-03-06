@@ -211,30 +211,22 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
       // Construct the profile data correctly
       const profileData: RecruiterProfile = {
           profileDetails: {
-              basicDetails: {
                   firstName: this.profileDetailsForm.value.firstName,
                   lastName: this.profileDetailsForm.value.lastName,
                   email: this.profileDetailsForm.value.email,
                   gender: this.profileDetailsForm.value.gender,
                   dateOfBirth: this.profileDetailsForm.value.dateOfBirth,
-              },
-              contactDetails: {
                   phoneNumber: this.profileDetailsForm.value.phoneNumber,
                   streetAddress: this.profileDetailsForm.value.streetAddress,
                   city: this.profileDetailsForm.value.city,
                   state: this.profileDetailsForm.value.state,
                   country: this.profileDetailsForm.value.country,
                   pincode: this.profileDetailsForm.value.pincode,
-              },
-              professionalDetails: {
                   companyName: this.profileDetailsForm.value.companyName,
                   designation: this.profileDetailsForm.value.designation,
                   experience: this.profileDetailsForm.value.experience,
                   employeeCode: this.profileDetailsForm.value.employeeCode,
-              },
-              bioDetails: {
                   bioDescription: this.profileDetailsForm.value.bioDescription,
-              },
               profilePicture: this.uploadedFileData || { fileName: '', url: ''}, // Provide a default value when null
             }
       };
