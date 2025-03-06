@@ -51,12 +51,10 @@ export class SeekerBasicDetailsComponent {
             ...response,
             profileDetails: {
               ...response.profileDetails,
-              bioDetails: {
-                ...response.profileDetails.bioDetails,
                 sanitizedBioDescription: this.sanitizeHtml(
-                  response.profileDetails.bioDetails.bioDescription || ''
+                  response.profileDetails.bioDescription || ''
                 ),
-              },
+
             },
           };
         }

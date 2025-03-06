@@ -62,19 +62,28 @@ export class TalentLoginComponent {
             }
 
             setTimeout(() => {
-                this.isLoading = true;
+              this.isLoading = true;
 
-                // Navigate to the appropriate page based on user role
-                if (response.role === 'recruiter') {
-                    this.router.navigate(['talent-page/recruiter']);
-                } else if (response.role === 'seeker') {
-                    this.router.navigate(['talent-page/seeker']);
-                } else if (response.role === 'admin') {
-                    this.router.navigate(['talent-page/admin']);
+              // For both recruiters and seekers, if profileComplete is false, redirect to a common profile completion page.
+              if (response.role === 'recruiter') {
+                if (response.profileComplete) {
+                  this.router.navigate(['talent-page/recruiter']);
                 } else {
-                    console.warn('Unknown user role:', response.role);
+                  this.router.navigate(['talent-page/recruiter/profile-form']); // Common profile completion page
                 }
-            }, 3000); // Loading spinner delay
+              } else if (response.role === 'seeker') {
+                if (response.profileComplete) {
+                  this.router.navigate(['talent-page/seeker']);
+                } else {
+                  this.router.navigate(['talent-page/seeker/profile-form']); // Same common profile page
+                }
+              } else if (response.role === 'admin') {
+                this.router.navigate(['talent-page/admin']);
+              } else {
+                console.warn('Unknown user role:', response.role);
+              }
+            }, 3000);
+
         },
         error => {
             console.error('Login error:', error);

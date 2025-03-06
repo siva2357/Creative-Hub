@@ -251,29 +251,6 @@ export class SeekerEditProjectComponent implements OnInit, OnDestroy {
     }
   }
 
-  deletePreview(): void {
-    this.previewURL = null;
-    this.fileType = null;
-
-    if (this.uploadedFileData) {
-      const { filePath } = this.uploadedFileData;
-
-      this.storage
-        .ref(filePath)
-        .delete()
-        .subscribe({
-          next: () => {
-            console.log('File deleted from Firebase Storage');
-            this.uploadedFileData = null;
-            this.ifPreview = false;
-          },
-          error: (error) => {
-            console.error('Error deleting file from Firebase Storage:', error);
-            this.errorMessage = 'Failed to delete the file. Please try again.';
-          },
-        });
-    }
-  }
 
   onFileChange(event: any, filePath: string): void {
     const file = event.target.files && event.target.files[0];

@@ -7,31 +7,24 @@ export interface RecruiterProfile {
       fileName: string;
       url: string;
     };
-    basicDetails: {
       firstName?: string;
       lastName?: string;
+      userName?: string;
       email?: string;
       gender: string;
       dateOfBirth: string;  // ✅ Fix: Keep as string since API returns a string
-    };
-    contactDetails: {
       phoneNumber: string;
       streetAddress: string;
       city: string;
       state: string;
       country: string;
       pincode: string;
-    };
-    professionalDetails: {
       companyName: string;
       designation: string;
       experience: string;
-      employeeCode: string;
-    };
-    bioDetails: {  // ✅ Fix: Properly defined within profileDetails
+      employeeCode: string;// ✅ Fix: Properly defined within profileDetails
       bioDescription: string;
       sanitizedBioDescription?: SafeHtml;
-    };
   };
   createdAt?: string;
   updatedAt?: string;
@@ -43,36 +36,26 @@ export interface RecruiterProfile {
 export interface SeekerProfile {
   _id?: string;
   profileDetails: {
-    profilePicture: {
-      fileName: string;
-      url: string;
-    };
-    basicDetails: {
+    profilePicture: { fileName: string;url: string;};
       firstName?: string;
       lastName?: string;
+      userName?:string;
       email?: string;
       gender: string;
       dateOfBirth: string;  // ✅ Fix: Keep as string since API returns a string
-    };
-    contactDetails: {
       phoneNumber: string;
       streetAddress: string;
       city: string;
       state: string;
       country: string;
       pincode: string;
-    };
-    educationalDetails: {
       universityName: string;
       universityDegree: string;
       yearOfGraduation: Date;
-      universityNumber: string;
-    };
-    bioDetails: {  // ✅ Fix: Properly defined within profileDetails
+      universityNumber: string; // ✅ Fix: Properly defined within profileDetails
       bioDescription: string;
       sanitizedBioDescription?: SafeHtml;
     };
-  };
   createdAt?: string;
   updatedAt?: string;
   __v?: number;
