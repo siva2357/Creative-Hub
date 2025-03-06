@@ -37,7 +37,7 @@
                         <iframe [src]="previewURL" class="card-img-top" style="height: 200px; overflow: hidden; border: none;"  frameborder="0"></iframe>
                       </ng-container>
 
-                      <i class="bi bi-x-circle-fill position-absolute text-danger" style=" right: 5px; font-size: 1.5rem; cursor: pointer;" (click)="deletePreview()"></i>
+                      <i *ngIf="uploadComplete" class="bi bi-x-circle-fill position-absolute text-danger" style=" right: 5px; font-size: 1.5rem; cursor: pointer;" (click)="deletePreview()"></i>
                     </div>
                   </div>
 
