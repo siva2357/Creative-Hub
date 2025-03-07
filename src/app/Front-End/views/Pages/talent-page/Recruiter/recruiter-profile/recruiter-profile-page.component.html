@@ -16,17 +16,8 @@
           <button class="btn btn-sm btn-primary" (click)=" editProfile()">Edit Profile</button>
         </div>
 
-        <div class="list-group list-group-flush border-bottom scrollarea mt-3">
-          <ng-container *ngFor="let profile of profile">
-            <a [routerLink]="profile.link" [routerLinkActive]="'active'" class="list-group-item list-group-item-action" style="list-style: none;"  [attr.aria-label]="profile.label"> {{ profile.label }}</a>
-          </ng-container>
-        </div>
-
       </div>
 
-      <!-- Main Content -->
-      <div class="col px-5 mt-5">
-        <router-outlet></router-outlet>
-      </div>
+
     </div>
   </div>

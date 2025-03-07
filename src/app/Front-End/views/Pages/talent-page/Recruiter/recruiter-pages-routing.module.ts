@@ -12,7 +12,8 @@ import { RecruiterSeekerProfileComponent } from './recruiter-seeker-profile/recr
 import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
 import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruiter-profile-form.component';
 import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
-
+import { RecruiterProfilePageComponent } from './recruiter-profile/recruiter-profile-page.component';
+import { SettingsPageComponent } from '../talent-sign-up/settings-page/settings-page.component';
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
@@ -21,11 +22,10 @@ const routes: Routes = [
 	{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
 	{ path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
 
-
 	{ path: '', component: RecruiterMainPageComponent, // Main layout component with sidebar
 	  children: [
 		{ path: 'dashboard', component: RecruiterDashboardComponent, title: 'Recruiter dashboard page'  }, // Dashboard route
-		{ path: 'profile', loadChildren: () => import('./recruiter-profile/recruiter-profile.module').then((m) => m. RecruiterProfileModule)},
+		{ path: 'profile', component:RecruiterProfilePageComponent, title:"Recruiter profile page"},
 		{ path: 'post-job', component: RecruiterPostJobPageComponent, title: 'Post Jobpost Page'  } ,// Hire Seeker page route
 		{ path: 'manage-jobs', component: RecruiterManageJobPageComponent, title: 'Manage Jobpost Page'  } ,// Hire Seeker page route
 		{ path: 'view-jobPost/:id', component:  RecruiterEditJobPageComponent,  title: 'View Jobpost Page'  },
@@ -35,7 +35,7 @@ const routes: Routes = [
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
     { path:'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
 		{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
-
+    { path: 'account-settings/:id', component: SettingsPageComponent , title: 'Recruiter account-settings page' },
 	  ]
 	}
   ];

@@ -128,7 +128,7 @@ handleError(error: any) {
       console.error('User details are missing or invalid');
       return;
     }
-    this.router.navigate([`talent-page/account-settings/${this.userDetails._id}`]); // Redirect to change-password page
+    this.router.navigate([`talent-page/recruiter/account-settings/${this.userDetails._id}`]); // Redirect to change-password page
   }
 
   // Perform logout

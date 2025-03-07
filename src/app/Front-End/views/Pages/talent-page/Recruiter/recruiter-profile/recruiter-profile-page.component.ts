@@ -15,10 +15,6 @@ export class RecruiterProfilePageComponent {
   public profileDetails! :RecruiterProfile;
   errorMessage: string = '';
 
-   profile:  ProfileBar[] = [
-    { label: 'Basic Details', link: 'basic'},
-    { label: 'Professional Details', link: 'profession'},
-  ];
     constructor(private router: Router,private authService: AuthService,
         private profileService:ProfileService) { }
     ngOnInit() {

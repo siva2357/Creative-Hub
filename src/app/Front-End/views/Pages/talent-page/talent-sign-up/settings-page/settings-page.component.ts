@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuItem } from 'src/app/Front-End/core/models/sidebar-menu.model';
 import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user.model';
 import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 import { UserService } from 'src/app/Front-End/core/services/user-service';
@@ -16,7 +17,7 @@ export class SettingsPageComponent {
     public errorMessage: string | null = null;
     loading: boolean = true;  // For managing loading state
     public userDetails :any;
-  
+
     constructor(
       private userService: UserService,
       private router: Router,
@@ -29,10 +30,10 @@ export class SettingsPageComponent {
       // Get the userId and role from localStorage or AuthService
       this.userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
       const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
-  
+
       console.log("User ID:", this.userId);
       console.log("User Role:", role); // Log the user role for debugging
-  
+
       if (this.userId && role) {
         if (role === 'seeker') {
           this.getSeekerDetails();
@@ -47,7 +48,7 @@ export class SettingsPageComponent {
     }
 
 
-    
+
 getSeekerDetails() {
   this.userService.getSeekerById(this.userId).subscribe(
     (data: any) => {
@@ -94,7 +95,7 @@ deleteAccount() {
     deleteObservable.subscribe(
       () => {
         alert("Account deleted successfully.");
-        
+
         // **Clear user session & stored data**
         localStorage.clear();
         sessionStorage.clear();
@@ -122,6 +123,7 @@ handleError(error: any) {
   }
   this.loading = false;
 }
+
 
 
 }

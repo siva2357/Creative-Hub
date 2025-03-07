@@ -1,52 +1,46 @@
+<div class="container-fluid mt-5">
+  <h5 class="mb-3">Close Job Posts</h5>
 
-<div  class="container mt-5">
-  <h5 class="mb-3 mt-5">Close Job Posts</h5>
-
-
-  <div class="container mb-5 mt-5"  *ngIf="jobs.length > 0">
-    <table class="table" style="border: 1px solid; width: 100%; text-align: center;">
-
-      <thead style="border: 1px solid; font-size: 14px;">
-        <tr style="border: 1px solid;">
-          <th style="border: 1px solid; width: 5%;">S.No</th>
-          <th style="border: 1px solid; width: 10%;">Job ID</th>
-          <th style="border: 1px solid; width: 15%;">Job Role</th>
-          <th style="border: 1px solid; width: 10%;">Job Type</th>
-          <th style="border: 1px solid; width: 10%;">Location</th>
-          <th style="border: 1px solid; width: 10%;">Salary</th>
-          <th style="border: 1px solid; width: 10%;">Posted On</th>
-          <th style="border: 1px solid; width: 10%;">Status</th>
-          <th style="border: 1px solid; width: 25%;">Actions</th>
+  <!-- Responsive Table -->
+  <div *ngIf="jobs.length > 0" class="table-responsive mb-5">
+    <table class="table table-bordered text-center" style="font-size: 14px;">
+      <thead class="table-light">
+        <tr>
+          <th scope="col" style="width: 5%;">S.No</th>
+          <th scope="col" style="width: 10%;">Job ID</th>
+          <th scope="col" style="width: 15%;">Job Role</th>
+          <th scope="col" style="width: 10%;">Job Type</th>
+          <th scope="col" style="width: 10%;">Salary</th>
+          <th scope="col" style="width: 10%;">Posted On</th>
+          <th scope="col" style="width: 10%;">Status</th>
+          <th scope="col" style="width: 25%;">Actions</th>
         </tr>
       </thead>
-
-      <tbody style="border: 1px solid; font-size: 14px;">
-        <tr style="border: 1px solid;" *ngFor="let job of jobs; let i = index">
-          <td style="border: 1px solid; text-align: center;">{{i + 1}}</td>
-          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobId}}</td>
-          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobRoleTitle}}</td>
-          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobType}}</td> <!-- Add a field for location if available -->
-          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.salary}}</td>
-          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.jobId}}</td>
-          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.postedOn | date: 'shortDate'}}</td>
-          <td style="border: 1px solid; text-align: center;">{{job.jobPostDetails.status}}</td>
-          <td style="border: 1px solid;">
-            <div style="display: flex; justify-content: space-evenly; align-items: center;">
+      <tbody>
+        <tr *ngFor="let job of jobs; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ job.jobPostDetails.jobId }}</td>
+          <td>{{ job.jobPostDetails.jobRoleTitle }}</td>
+          <td>{{ job.jobPostDetails.jobType }}</td>
+          <td>{{ job.jobPostDetails.salary }}</td>
+          <td>{{ job.jobPostDetails.postedOn | date: 'shortDate' }}</td>
+          <td>{{ job.jobPostDetails.status }}</td>
+          <td>
+            <div class="d-flex justify-content-evenly align-items-center">
               <button class="btn btn-sm btn-info" (click)="reopenJobpostById(job)">Reopen</button>
-              <button class="btn btn-sm btn-danger"style="margin-left: 30px;" (click)="deleteJobpostById(job)">Delete</button>
+              <button class="btn btn-sm btn-danger" (click)="deleteJobpostById(job)">Delete</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-
-
 </div>
 
-
-<div  *ngIf="jobs.length === 0">
-  <div class="container d-flex flex-column justify-content-center align-items-center text-center">
-    <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 550px; width: 550px; margin-bottom: 10px;">
-  </div>
+<!-- No Data View -->
+<div *ngIf="jobs.length === 0" class="container d-flex flex-column justify-content-center align-items-center text-center">
+  <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg"
+       class="img-fluid"
+       alt="No Data"
+       style="max-width: 550px; max-height: 550px; margin-bottom: 10px;">
 </div>

@@ -38,11 +38,10 @@ const routes: Routes = [
 
 
     { path: 'change-password/:id', component: ChangePasswordPageComponent }, // Profile page route
-    { path: 'account-settings/:id', component: SettingsPageComponent }, // Profile page route
 
     { path: 'register/confirmation-page', component: ConfirmationComponent }, // Profile page route
     { path: 'register/error-page', component: ErrorRegisterComponent }, // Profile page route
-    
+
     { path: 'recruiter',loadChildren: () => import('./Recruiter/recruiter-pages.module').then((m) => m.RecruiterPageModule),
       // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }
     },

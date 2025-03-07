@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,14 +13,16 @@ import { RecruiterPostJobPageComponent } from './recruiter-post-job/recruiter-po
 import { RecruiterManageJobPageComponent } from './recruiter-manage-job/recruiter-manage-job.component';
 import { RecruiterClosedJobsPageComponent } from './recruiter-closed-jobs/recruiter-closed-jobs.component';
 import { RecruiterJobApplicantsPageComponent } from './recruiter-job-applicants/recruiter-job-applicants.component';
-import { RecruiterProfileRoutingModule } from './recruiter-profile/recruiter-profile-routing.module';
-import { RecruiterProfileModule } from './recruiter-profile/recruiter-profile.module';
 import { RecruiterEditJobPageComponent } from './recruiter-edit-job/job-post-edit-form.component';
 import { LayoutModule } from "../../../Layouts/layout.module";
 import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruiter-edit-profile.component';
 import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruiter-profile-form.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
+import { RecruiterProfilePageComponent } from './recruiter-profile/recruiter-profile-page.component';
+import { SettingsPageComponent } from '../talent-sign-up/settings-page/settings-page.component';
+
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -33,19 +36,20 @@ import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-
     RecruiterEditJobPageComponent,
     RecruiterEditProfileComponent,
     RecruiterProfileFormComponent,
-    JobpostJobApplicantsComponent
+    JobpostJobApplicantsComponent,
+    RecruiterProfilePageComponent,
+    SettingsPageComponent
   ],
   imports: [
     CommonModule,
     RecruiterPagesRoutingModule,
-    RecruiterProfileRoutingModule,
-    RecruiterProfileModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
     LayoutModule,
-    NgxEditorModule
+    NgxEditorModule,
+    NgChartsModule
 ],
   providers: [DatePipe],
 })

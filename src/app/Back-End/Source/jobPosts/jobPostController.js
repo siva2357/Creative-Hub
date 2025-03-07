@@ -31,7 +31,7 @@ exports.createJobPost = async (req, res) => {
       return res.status(400).json({ message: "Recruiter does not have complete profile details" });
     }
 
-    const companyName = recruiterProfile?.profileDetails?.professionalDetails?.companyName;
+    const companyName = recruiterProfile?.profileDetails?.companyName;
     if (!companyName) {
       return res.status(400).json({ message: "Recruiter does not have an associated company" });
     }
