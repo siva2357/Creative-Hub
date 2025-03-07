@@ -24,4 +24,11 @@ export class RecruiterMainPageComponent {
     { label: 'Hire Seeker', link: 'hire-seeker', icon: 'bi bi-person-add' },
   ];
 
+  sidebarOpen: boolean = true;
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
+
 }
