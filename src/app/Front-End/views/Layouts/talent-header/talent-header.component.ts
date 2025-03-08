@@ -27,6 +27,7 @@ export class TalentHeaderComponent implements OnInit {
   toggle() {
     this.sidebarOpen = !this.sidebarOpen;
     this.toggleSidebar.emit(); // Emit event to parent to toggle sidebar
+
   }
 
   constructor(

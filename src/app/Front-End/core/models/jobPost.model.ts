@@ -11,8 +11,12 @@ export interface JobPost {
     jobId: string;
     jobType: string;
     jobRoleTitle: string;
+    jobCategory: string;
+    experience: string;
     salary: string;
     vacancy: number;
+    location: number;
+    qualification: number;
     jobDescription: string;
     sanitizedJobDescription?: SafeHtml;
     postedOn: Date;

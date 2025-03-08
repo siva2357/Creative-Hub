@@ -36,7 +36,7 @@ export class RecruiterDashboardComponent implements OnInit {
     labels: ['Art Concepts', '3D Environment', '3D Animations', 'Game Development', 'AR/VR'],
     datasets: [
       {
-        data: [10, 20, 15, 5, 8],
+        data: [4, 6, 10, 5, 7],
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
         borderColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
         borderWidth: 1

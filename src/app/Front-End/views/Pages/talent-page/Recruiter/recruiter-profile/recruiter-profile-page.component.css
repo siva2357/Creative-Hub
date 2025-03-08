@@ -1,6 +1,6 @@
 /* Profile Sidebar Styles */
 .profile {
-    background-color: #cec5c552;
+
     border-radius: 10px;
     text-align: center;
   }
@@ -24,21 +24,3 @@
 
 
 
-/* Active Link Styling */
-.list-group-item.active {
-  background-color: rgba(227, 184, 254, 0.432) !important; /* Gray background for the active list item */
-  color: rgb(94, 0, 235);
-  font-weight: bold; /* Make the text bold inside active item */
-}
-
-/* Hover effect for active items */
-.list-group-item.active:hover {
-  background-color: #f0f0f0; /* Lighten the background color when hovered */
-}
-
-
-/* Scroll area */
-.scrollarea {
-  max-height: 400px; /* You can adjust this height to fit the design */
-  overflow-y: auto;
-}

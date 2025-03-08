@@ -55,10 +55,14 @@ export class RecruiterPostJobPageComponent {
     this.jobPostForm = this.fb.group({
       _id: [null],
       jobId: ['', [Validators.required]],
-      jobRoleTitle: ['', [Validators.required]],
+      jobTitle: ['', [Validators.required]],
+      jobCategory: ['', [Validators.required]],
       jobType: ['', [Validators.required]],
+      experience: ['', [Validators.required]],
       salary: ['', [Validators.required]],
       vacancy: ['', [Validators.required]],
+      location: ['', [Validators.required]],
+      qualification: ['', [Validators.required]],
       applyByDate: ['', [Validators.required]],
       jobDescription: ['', [Validators.required]],
       status: ['Open']
