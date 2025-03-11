@@ -21,4 +21,10 @@ export class SeekerMainPageComponent {
     { label: 'Job Profile', link: 'jobProfile', icon: 'bi bi-suitcase-lg'},
     { label: 'Launchpad', link: 'launchPad', icon: 'bi bi-rocket-takeoff'},
   ];
+
+  sidebarOpen: boolean = true;
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
 }

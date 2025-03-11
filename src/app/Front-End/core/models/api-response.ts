@@ -1,5 +1,3 @@
 export class ApiResponse<T> {
-  constructor() {}
-  requestId?: string;
-  data?: T;
+  constructor(public requestId?: string, public data?: T) {}
 }

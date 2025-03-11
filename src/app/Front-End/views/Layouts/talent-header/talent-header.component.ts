@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 import { UserService } from 'src/app/Front-End/core/services/user-service';
@@ -18,6 +18,17 @@ export class TalentHeaderComponent implements OnInit {
   userId!: string;
   public errorMessage: string | null = null;
   loading: boolean = true;  // For managing loading state
+
+
+
+  @Input() sidebarOpen: boolean = true; // Receives sidebar state
+  @Output() toggleSidebar = new EventEmitter<void>(); // Emits toggle event
+
+  toggle() {
+    this.sidebarOpen = !this.sidebarOpen;
+    this.toggleSidebar.emit(); // Emit event to parent to toggle sidebar
+
+  }
 
   constructor(
     private userService: UserService,
@@ -103,7 +114,7 @@ handleError(error: any) {
     this.loading = false;
 }
 
-  
+
   // Navigate to the change password page
   goToChangePasswordPage(): void {
     if (!this.userDetails || !this.userDetails._id) { // Assuming email is unique
@@ -112,13 +123,13 @@ handleError(error: any) {
     }
     this.router.navigate([`talent-page/change-password/${this.userDetails._id}`]); // Redirect to change-password page
   }
-  
+
   goToAccountSettingsPage(): void {
     if (!this.userDetails || !this.userDetails._id) { // Assuming email is unique
       console.error('User details are missing or invalid');
       return;
     }
-    this.router.navigate([`talent-page/account-settings/${this.userDetails._id}`]); // Redirect to change-password page
+    this.router.navigate([`talent-page/recruiter/account-settings/${this.userDetails._id}`]); // Redirect to change-password page
   }
 
   // Perform logout
@@ -126,5 +137,5 @@ handleError(error: any) {
     this.authService.logout(); // Call logout function from AuthService
     this.router.navigate(['talent-page/login']); // Redirect to login page after logout
   }
-  
+
 }

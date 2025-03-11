@@ -1,110 +1,143 @@
+
+
+
+
+
 <!-- Cover Section -->
-<div class="container mt-5 mb-5 p-5 rounded-5" style="background: radial-gradient(circle, rgba(255, 255, 255, 0.648), #11131c);   position: relative;  overflow: hidden;">
-    <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1735967997/hiring_people_dsgpfa.png"  alt="AR/VR Background"  style=" position: absolute;  top: 0;  left: 0;  width: 100%;  height: 700px;  object-fit: cover; z-index: 1; opacity: 0.3;">
 
-    <div style="position: relative; z-index: 2; text-align: center;">
-    
-      <div class="row" style="margin-top: 40px; margin-bottom: 40px;">
-          <div class=" text-center  rounded-3">
-              <h1 class=" mt-5 display-4 text-black">Hire <span class="fw-bold">Best</span> in industry talent</h1>
-              <p class="col-lg-6 mx-auto mb-4 mt-4 text-black fs-4">Find the perfect Talent for your next project</p>
-          </div>
-      </div>
 
+<!-- Cover Section -->
+<div class="container-fluid mt-5 mb-5 p-5 rounded-5" style="background: radial-gradient(circle, rgba(255, 255, 255, 0.648), #11131c);   position: relative;  overflow: hidden;">
+  <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1735967997/hiring_people_dsgpfa.png"  alt="AR/VR Background"  style=" position: absolute;  top: 0;  left: 0;  width: 100%;  height: 700px;  object-fit: cover; z-index: 1; opacity: 0.3;">
+
+  <div style="position: relative; z-index: 2; text-align: center;">
+
+    <div class="row" style="margin-top: 40px; margin-bottom: 40px;">
+        <div class=" text-center  rounded-3">
+            <h1 class=" mt-5 display-4 text-black">Hire <span class="fw-bold">Best</span> in industry talent</h1>
+            <p class="col-lg-6 mx-auto mb-4 mt-4 text-black fs-4">Find the perfect Talent for your next project</p>
+        </div>
     </div>
+
+  </div>
 </div>
 
 <!-- User Profiles Section -->
-<div class="container bg-dark mt-5 mb-5 p-5">
+<div class="container my-5">
+  <div class="row g-4">
+      <!-- Filter Section -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm p-4 rounded-4 border-0">
+          <h4 class="fw-semibold text-primary mb-3">Filters</h4>
 
-    <div class="row d-flex justify-content-between" >
-        <!-- Filter Section -->
-        <div class="col-3 bg-success justify-content-center">
-          <!-- Search by Post -->
-          <h4 class="fst-italic mt-3">Search</h4>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search posts" aria-label="Search posts" aria-describedby="search-button">
-            <button class="btn btn-outline-secondary" type="button" id="search-button" aria-label="Search posts">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a5.5 5.5 0 1 0-1.397 1.398l3.856 3.856a1 1 0 0 0 1.415-1.414l-3.854-3.854z" />
-                <path fill-rule="evenodd" d="M7 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8m1 7a6 6 0 1 1 0-12 6 6 0 0 1 0 12" />
-              </svg>
-            </button>
+          <!-- Search Posts -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Search Posts</label>
+            <input type="text" class="form-control form-control-md border-secondary" placeholder="Search posts">
           </div>
-      
-          <!-- Location Search -->
-          <h4 class="fst-italic">Location Search</h4>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search by location (e.g. New York)" aria-label="Location search" aria-describedby="location-button">
-            <button class="btn btn-outline-secondary" type="button" id="location-button" aria-label="Search by location">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                <path d="M11.206 2.794a7 7 0 1 0 0 10.412l-3.2 3.2a1 1 0 0 0-1.414 0l-3.2-3.2a7 7 0 1 0 4.242-4.242l3.2 3.2a1 1 0 0 0 1.414 0l3.2-3.2a7 7 0 0 0 0-10.412v.001zm-1.414 1.414a5 5 0 1 1-7.071 7.072 5 5 0 0 1 7.07-7.071z" />
-              </svg>
-            </button>
-          </div>
-      
-          <!-- Categories -->
-          <h4 class="fst-italic">Categories</h4>
-          <div class="d-flex gap-2 flex-wrap">
-            <button type="button" class="btn btn-outline-secondary rounded-pill category-btn" data-category="1">Sketch</button>
-            <button type="button" class="btn btn-outline-secondary rounded-pill category-btn" data-category="2">NFT</button>
-            <button type="button" class="btn btn-outline-secondary rounded-pill category-btn" data-category="3">Category 3</button>
-          </div>
-      
-          <!-- Apply Filter Button -->
-          <button type="button" class="btn btn-primary mt-4 w-100">Apply Filter</button>
-        </div>
-      
-        <!-- Profiles Display Section -->
-        <div class="col-9 bg-info p-5">
-        
-            <div class="container bg-body-secondary d-flex align-items-center justify-content-center min-vh-100">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                        <app-seeker-profile-card></app-seeker-profile-card>
-                    </div>
-                    <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                        <app-seeker-profile-card></app-seeker-profile-card>
-                    </div>
-                    <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                        <app-seeker-profile-card></app-seeker-profile-card>
-                    </div>
-                    <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                        <app-seeker-profile-card></app-seeker-profile-card>
-                    </div>
-                    <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                        <app-seeker-profile-card></app-seeker-profile-card>
-                    </div>
-                    <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                        <app-seeker-profile-card></app-seeker-profile-card>
-                    </div>
-                </div>
-            </div>
-            <!-- Pagination -->
-            <div class="container d-flex justify-content-center align-items-center mt-5">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-        
-        
-            </div>
-        
-        </div>
 
+          <!-- Location -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Location</label>
+            <input type="text" class="form-control form-control-md border-secondary" placeholder="Enter location">
+          </div>
+
+          <!-- Category Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Category</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Choose Category</option>
+              <option>Sketch</option>
+              <option>NFT</option>
+              <option>3D Art</option>
+            </select>
+          </div>
+
+          <!-- Languages Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Languages</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Select Language</option>
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+            </select>
+          </div>
+
+          <!-- Job Type Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Job Type</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Select Job Type</option>
+              <option>Full-Time</option>
+              <option>Part-Time</option>
+              <option>Freelance</option>
+            </select>
+          </div>
+
+          <!-- Qualification Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Qualification</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Select Qualification</option>
+              <option>Bachelor's</option>
+              <option>Master's</option>
+              <option>Diploma</option>
+            </select>
+          </div>
+
+          <!-- Skills Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Skills</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Select Skills</option>
+              <option>3D Modeling</option>
+              <option>Animation</option>
+              <option>Graphic Design</option>
+            </select>
+          </div>
+
+          <!-- Apply Filters Button -->
+          <button class="btn btn-primary w-100 mt-3">Apply Filters</button>
+
+        </div>
       </div>
-      
+
+
+      <!-- Profiles Display Section -->
+      <div class="col-lg-8">
+        <div class="row g-5">
+            <div class="col-md-6">
+                <app-seeker-profile-card></app-seeker-profile-card>
+            </div>
+            <div class="col-md-6">
+                <app-seeker-profile-card></app-seeker-profile-card>
+            </div>
+            <div class="col-md-6">
+                <app-seeker-profile-card></app-seeker-profile-card>
+            </div>
+            <div class="col-md-6">
+                <app-seeker-profile-card></app-seeker-profile-card>
+            </div>
+            <div class="col-md-6">
+                <app-seeker-profile-card></app-seeker-profile-card>
+            </div>
+            <div class="col-md-6">
+                <app-seeker-profile-card></app-seeker-profile-card>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-5 d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+        </nav>
+    </div>
+
+  </div>
 </div>

@@ -1,10 +1,9 @@
-<app-talent-header></app-talent-header>>
 
-<div class="container mt-4">
+<div class="container-fluid mt-4">
   <ul class="nav nav-tabs" id="settingsTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="main-settings-tab" data-bs-toggle="tab" data-bs-target="#main-settings" type="button" role="tab">
-        Main Settings
+        Profile Settings
       </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -26,12 +25,12 @@
 
   <div class="tab-content mt-3" id="settingsTabContent">
     <div class="tab-pane fade show active" id="main-settings" role="tabpanel">
-      <h3>Main Settings</h3>
-      <p>Update your profile details here.</p>
+      <h5>Profile Settings</h5>
+      <app-recruiter-edit-profile></app-recruiter-edit-profile>
     </div>
     <div class="tab-pane fade" id="change-password" role="tabpanel">
-      <h3>Change Password</h3>
-      <p>Update your password securely.</p>
+      <h5>Change Password</h5>
+      <app-change-password-page></app-change-password-page>
     </div>
     <div class="tab-pane fade" id="social-network" role="tabpanel">
       <h3>Social Network</h3>

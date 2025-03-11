@@ -18,4 +18,10 @@ export class AdminPageComponent {
     { label: 'User Data', link: 'user-data', icon: 'bi bi-database' },
   ];
 
+  sidebarOpen: boolean = true;
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
 }
