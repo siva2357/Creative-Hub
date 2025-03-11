@@ -3,16 +3,13 @@ import { SafeHtml } from "@angular/platform-browser";
 export interface RecruiterProfile {
   _id?: string;
   profileDetails: {
-    profilePicture: {
-      fileName: string;
-      url: string;
-    };
+    profilePicture: { fileName: string; url: string;};
       firstName?: string;
       lastName?: string;
       userName?: string;
       email?: string;
       gender: string;
-      dateOfBirth: string;  // ✅ Fix: Keep as string since API returns a string
+      dateOfBirth: string;
       phoneNumber: string;
       streetAddress: string;
       city: string;
@@ -22,7 +19,7 @@ export interface RecruiterProfile {
       companyName: string;
       designation: string;
       experience: string;
-      employeeCode: string;// ✅ Fix: Properly defined within profileDetails
+      employeeCode: string;
       bioDescription: string;
       sanitizedBioDescription?: SafeHtml;
   };

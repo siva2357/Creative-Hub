@@ -1,11 +1,22 @@
 import { SafeHtml } from "@angular/platform-browser";
+import { ApiSearchParams } from "./api-pagination-params";
 
 export interface Applicant {
   seekerId: string;
   appliedAt: Date;
 }
 
+export class JobPostFilterParams extends ApiSearchParams {
+  jobId?: string;
+  jobRoleTitle?: string;
+  jobCategory?: string;
+  jobType?: string;
+  experience?: string;
+  salary?: string;
+   vacancy?: number;
+}
 export interface JobPost {
+
   _id?: string;
   jobPostDetails: {
     jobId: string;

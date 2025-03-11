@@ -1,23 +1,28 @@
-<div class="container-fluid bg-body-secondary p-5 mt-5">
 
+
+<div class="container-fluid bg-body-secondary p-3 p-md-5 mt-3 mt-md-5">
   <div class="card">
     <div class="card-body">
-      <div class="col position-relative d-flex align-items-center justify-content-center" style="background-image: url('https://res.cloudinary.com/dpp8aspqs/image/upload/v1740547685/gradient-FZRCWTCT_d2bqiv.jpg');
-               background-size: cover;
-               background-position: center;
-               height: 15vh;
-               width: 100%;
-               border-radius: 10px;">
 
-        <!-- Profile Section (Left-Aligned on Top of Background) -->
-        <div class="profile text-center p-4 rounded position-absolute top-50 start-0 translate-middle-y "
-          style="margin-left: 30px;  border-radius: 10px; margin-top:80px; margin-left: 30px;">
-          <div class="profile-avatar rounded-circle mb-3">
-            <img id="avatarImage" [src]="profileDetails.profileDetails.profilePicture.url" alt="Avatar" class="img-fluid">
-          </div>
 
-        </div>
-      </div>
+<div class="col position-relative d-flex align-items-center justify-content-center" style="background-image: url('https://res.cloudinary.com/dpp8aspqs/image/upload/v1740547685/gradient-FZRCWTCT_d2bqiv.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 15vh;
+      width: 100%;
+      border-radius: 10px;">
+
+  <!-- Profile Section (Left-Aligned on Top of Background) -->
+  <div class="profile text-center p-4 rounded position-absolute top-50 start-0 translate-middle-y "
+    style="margin-left: 30px;  border-radius: 10px; margin-top:50px; margin-left: 30px;">
+    <div class="profile-avatar rounded-circle mb-3">
+
+      <img id="avatarImage" [src]="profileDetails.profileDetails.profilePicture.url" alt="Avatar" class="img-fluid">
+    </div>
+
+  </div>
+</div>
+
 
       <div class="row p-5 mt-5 g-4 text-dark d-flex align-items-start justify-content-start text-center" >
 
@@ -26,7 +31,7 @@
 
         <div class="col-auto d-flex flex-column mx-3">
           <p class="fw-semibold mb-0 text-primary">Recruiter Name</p>
-          <p class="fw-semibold mb-0 text-start">Designation</p>
+          <p class="fw-semibold mb-0 text-start">{{profileDetails.profileDetails.designation}}</p>
         </div>
 
 
@@ -61,110 +66,56 @@
 
       </div>
 
-      <div class="col px-5" style="margin-top: -40px;">
 
+
+      <div class="row px-3 px-md-5 mt-3 ">
+        <hr>
         <h6>Personal Bio</h6>
         <p [innerHTML]="profileDetails.profileDetails.bioDescription"></p>
       </div>
 
-
-      <div class="row px-5 g-4">
+      <div class="row px-3 px-md-5 g-4">
         <hr>
-        <div class="col-4">
-          <h6>Personal Info</h6>
-          <table class="table">
+
+        <!-- Personal Info -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <h6 class="text-center">Personal Info</h6>
+          <table class="table table-bordered table-hover">
             <tbody>
-              <tr>
-                <th scope="row">First Name</th>
-                <td>{{profileDetails.profileDetails.firstName}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Last Name</th>
-                <td>{{profileDetails.profileDetails.lastName}}</td>
-              </tr>
-              <tr>
-                <th scope="row">User Name</th>
-                <td>{{profileDetails.profileDetails.userName}}</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Email</th>
-                <td>{{profileDetails.profileDetails.email}}</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Gender</th>
-                <td>{{profileDetails.profileDetails.gender}}</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Date of birth</th>
-                <td>{{profileDetails.profileDetails.dateOfBirth | date :'dd-MM-YYYY'}}</td>
-              </tr>
-
+              <tr><th>First Name</th><td>{{profileDetails.profileDetails.firstName}}</td></tr>
+              <tr><th>Last Name</th><td>{{profileDetails.profileDetails.lastName}}</td></tr>
+              <tr><th>Email</th><td>{{profileDetails.profileDetails.email}}</td></tr>
+              <tr><th>Gender</th><td>{{profileDetails.profileDetails.gender}}</td></tr>
+              <tr><th>DOB</th><td>{{profileDetails.profileDetails.dateOfBirth | date:'dd-MM-yyyy'}}</td></tr>
             </tbody>
           </table>
         </div>
 
-
-
-        <div class="col-4">
-          <h6>Professional Info</h6>
-          <table class="table">
+        <!-- Professional Info -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <h6 class="text-center">Professional Info</h6>
+          <table class="table table-bordered table-hover">
             <tbody>
-              <tr>
-                <th scope="row">Company Name</th>
-                <td>{{profileDetails.profileDetails.firstName}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Company designation</th>
-                <td>{{profileDetails.profileDetails.lastName}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Work experience</th>
-                <td>{{profileDetails.profileDetails.userName}}</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Employee code</th>
-                <td>{{profileDetails.profileDetails.email}}</td>
-              </tr>
+              <tr><th>Company</th><td>{{profileDetails.profileDetails.companyName}}</td></tr>
+              <tr><th>Designation</th><td>{{profileDetails.profileDetails.designation}}</td></tr>
+              <tr><th>Experience</th><td>{{profileDetails.profileDetails.experience}}</td></tr>
+              <tr><th>Employee Code</th><td>{{profileDetails.profileDetails.employeeCode}}</td></tr>
             </tbody>
           </table>
         </div>
 
-        <div class="col-4">
-          <h6>Contact Info</h6>
-          <table class="table">
+        <!-- Contact Info -->
+        <div class="col-lg-4 col-md-12 col-12">
+          <h6 class="text-center">Contact Info</h6>
+          <table class="table table-bordered table-hover">
             <tbody>
-              <tr>
-                <th scope="row">Phone Number</th>
-                <td>{{profileDetails.profileDetails.phoneNumber}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Email</th>
-                <td>{{profileDetails.profileDetails.email}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Location</th>
-                <td>{{profileDetails.profileDetails.city}}, {{profileDetails.profileDetails.state}}, {{profileDetails.profileDetails.country}}, {{profileDetails.profileDetails.pincode}}</td>
-              </tr>
-
+              <tr><th>Phone</th><td>{{profileDetails.profileDetails.phoneNumber}}</td></tr>
+              <tr><th>Email</th><td>{{profileDetails.profileDetails.email}}</td></tr>
+              <tr><th>Location</th><td>{{profileDetails.profileDetails.city}}, {{profileDetails.profileDetails.state}}, {{profileDetails.profileDetails.country}}</td></tr>
             </tbody>
           </table>
         </div>
-
-
       </div>
-
     </div>
   </div>
-  <!-- Banner Section -->
-
-
-
-
-
 </div>
-
-

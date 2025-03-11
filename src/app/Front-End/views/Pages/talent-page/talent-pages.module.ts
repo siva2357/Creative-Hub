@@ -20,7 +20,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { SeekerPageModule } from './Seeker/seeker-pages.module';
 import { AdminPageModule } from './admin/admin-pages.module';
 import { OtpVerificationPageComponent } from './talent-sign-up/otp-verification-page/otp-verification-page.component';
-import { ChangePasswordPageComponent } from './talent-sign-up/change-password-page/change-password-page.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { ChangePasswordPageComponent } from './talent-sign-up/change-password-pa
     ConfirmationComponent,
     ErrorRegisterComponent,
     OtpVerificationPageComponent,
-    ChangePasswordPageComponent,
 
   ],
   imports: [

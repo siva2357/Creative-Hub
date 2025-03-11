@@ -7,8 +7,8 @@
 
   /* Avatar Styles */
   .profile-avatar {
-    width: 130px;
-    height: 130px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
     border: 3px solid black;
     display: flex;
@@ -24,3 +24,11 @@
 
 
 
+  .table th, .table td {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .table th {
+    font-weight: bold;
+    background-color: #f8f9fa; /* Light gray */
+  }

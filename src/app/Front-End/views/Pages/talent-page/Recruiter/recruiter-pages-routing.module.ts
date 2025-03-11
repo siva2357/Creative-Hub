@@ -13,14 +13,14 @@ import { RecruiterEditProfileComponent } from './recruiter-edit-profile/recruite
 import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruiter-profile-form.component';
 import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
 import { RecruiterProfilePageComponent } from './recruiter-profile/recruiter-profile-page.component';
-import { SettingsPageComponent } from '../talent-sign-up/settings-page/settings-page.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
 	{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
-	{ path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
+
 
 	{ path: '', component: RecruiterMainPageComponent, // Main layout component with sidebar
 	  children: [
@@ -33,9 +33,10 @@ const routes: Routes = [
 		{ path: 'job-applicants', component: RecruiterJobApplicantsPageComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
     { path: 'jobpost/:jobPostId/applicants', component: JobpostJobApplicantsComponent, title: 'Job Applicants Page'  } ,// Hire Seeker page route
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
-    { path:'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
+    { path: 'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
 		{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
     { path: 'account-settings/:id', component: SettingsPageComponent , title: 'Recruiter account-settings page' },
+    { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
 	  ]
 	}
   ];

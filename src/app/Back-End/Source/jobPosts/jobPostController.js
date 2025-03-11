@@ -221,7 +221,7 @@ exports.getClosedJobsByRecruiter = async (req, res) => {
     );
 
     return res.status(200).json({
-      totalClosedJobs: closedJobs.length,
+      totalJobPosts: closedJobs.length,
       jobPosts: closedJobs, // ✅ Returns empty array [] if no closed jobs exist
     });
 

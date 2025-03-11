@@ -14,10 +14,12 @@ import { SeekerProfileCardComponent } from './seeker-profile-card/seeker-profile
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+
   ],
   exports: [
     SeekerProfileCardComponent,
     CommonModule,
+
   ],
 
   providers: [DatePipe],

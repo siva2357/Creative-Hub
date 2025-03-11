@@ -20,9 +20,11 @@ import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruite
 import { NgxEditorModule } from 'ngx-editor';
 import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
 import { RecruiterProfilePageComponent } from './recruiter-profile/recruiter-profile-page.component';
-import { SettingsPageComponent } from '../talent-sign-up/settings-page/settings-page.component';
-
+import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 import { NgChartsModule } from 'ng2-charts';
+
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { NgChartsModule } from 'ng2-charts';
     RecruiterProfileFormComponent,
     JobpostJobApplicantsComponent,
     RecruiterProfilePageComponent,
-    SettingsPageComponent
+    SettingsPageComponent,
+    ChangePasswordPageComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +52,8 @@ import { NgChartsModule } from 'ng2-charts';
     SharedModule,
     LayoutModule,
     NgxEditorModule,
-    NgChartsModule
+    NgChartsModule,
+
 ],
   providers: [DatePipe],
 })

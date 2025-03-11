@@ -1,9 +1,11 @@
+import { Params } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode' ;
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { JobPost } from '../models/jobPost.model';
+import { JobPost, JobPostFilterParams } from '../models/jobPost.model';
+import { ApiSearchParams } from '../models/api-pagination-params';
 
 @Injectable({
   providedIn: 'root'
@@ -53,9 +55,29 @@ export class JobPostService {
     return this.http.get<JobPost>(`${this.baseUrl}/recruiter/${recruiterId}/jobPost/${jobId}`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
 
-  getClosedJobsByRecruiter(recruiterId:string,): Observable<{totalJobPosts: number;  jobPosts: JobPost[]}> {
-    return this.http.get<{totalJobPosts: number;  jobPosts: JobPost[] }>(`${this.baseUrl}/recruiter/${recruiterId}/jobPosts/closed`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
+  getClosedJobsByRecruiter(recruiterId:string, apiFilterParams?: ApiSearchParams): Observable<{totalJobPosts: number;  jobPosts: JobPost[]}> {
+    return this.http.get<{totalJobPosts: number;  jobPosts: JobPost[] }>(`${this.baseUrl}/recruiter/${recruiterId}/jobPosts/closed`, {  headers: this.getHeaders() }).pipe(catchError(this.handleError));
   }
+
+  // getClosedJobsByRecruiter(recruiterId: string, apiFilterParams?: JobPostFilterParams): Observable<{ totalJobPosts: number; jobPosts: JobPost[] }> {
+  //   let params = new HttpParams();
+
+  //   // Add query parameters for pagination and search
+  //   if (apiFilterParams) {
+  //     params = params.set('pageNumber', apiFilterParams.pageNumber.toString())
+  //                    .set('limit', apiFilterParams.limit.toString())
+  //                    .set('searchString', apiFilterParams.searchString || '');  // Ensure searchString is included if set
+  //   }
+
+  //   return this.http.get<{ totalJobPosts: number; jobPosts: JobPost[] }>(
+  //     `${this.baseUrl}/recruiter/${recruiterId}/jobPosts/closed`,
+  //     { headers: this.getHeaders(), params: params }
+  //   ).pipe(catchError(this.handleError));
+  // }
+
+
+
+
 
   updateJobPostById(recruiterId:string,jobId: string, jobPostData: JobPost): Observable<JobPost> {
     return this.http.put<JobPost>(`${this.baseUrl}/recruiter/${recruiterId}/jobPost/${jobId}/update`, jobPostData, { headers: this.getHeaders() }).pipe(catchError(this.handleError));

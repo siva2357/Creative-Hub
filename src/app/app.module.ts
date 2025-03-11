@@ -32,6 +32,7 @@ import { ResetPasswordPageComponent } from './Front-End/views/Pages/talent-page/
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { environment } from 'src/environments/environment';
     SharedModule,
     TalentPageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
-    AngularFireStorageModule, // Use storage services
+    AngularFireStorageModule, NgbModule, // Use storage services
 
 ],
   providers: [ DatePipe ],
