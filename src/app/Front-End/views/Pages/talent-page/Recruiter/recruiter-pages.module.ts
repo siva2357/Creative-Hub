@@ -21,7 +21,6 @@ import { NgxEditorModule } from 'ngx-editor';
 import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
 import { RecruiterProfilePageComponent } from './recruiter-profile/recruiter-profile-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 import { NgChartsModule } from 'ng2-charts';
 
 
@@ -41,7 +40,6 @@ import { NgChartsModule } from 'ng2-charts';
     JobpostJobApplicantsComponent,
     RecruiterProfilePageComponent,
     SettingsPageComponent,
-    ChangePasswordPageComponent,
   ],
   imports: [
     CommonModule,
