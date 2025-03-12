@@ -13,10 +13,28 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class CompanyComponent implements OnInit{
 
-  @Input() companies: Company[] = [];
-  public totalCompanies!:any
+    companies: Company[] = [];
+    errorMessage: string | null = null;
+    totalCompanies!: number;
+    loading: boolean = false;
+
+
+    searchTerm: string = ''; // Variable to store search term
+    filteredData: any[] = []; // Filtered jobs after applying search and checkbox filters
+    paginatedData: any[] = []; // Jobs for the current page
+    currentPage: number = 1;
+    itemsPerPage: number = 5;
+    totalPages: number = 1;
+    pageNumbers: number[] = [];
+    selectedCompany:any
+    selectedCompanies: any[] = []; // Define selectedCompanies with 'any' type
+    isFullTime = false;
+    isPartTime = false;
+    isDeleteVisible = false; // To control visibility of the delete button
+    selectAll: boolean = false;
+    totalEntries = this.filteredData.length;
+
   isViewMode: boolean = true;
-  public errorMessage: string | null = null;
   uploadedFileData: { fileName: string; url: string; filePath: string } | null = null;
 
 
@@ -54,6 +72,7 @@ export class CompanyComponent implements OnInit{
         if (filePath) {
           this.deleteCompanyLogo(filePath);
         }
+        this.fetchCompanies()
       },
       (error) => {
         console.error("Error deleting university:", error);
@@ -61,6 +80,8 @@ export class CompanyComponent implements OnInit{
         this.companies = originalCompanies;
       }
     );
+
+    this.updatePagination()
   }
 
   deleteCompanyLogo(filePath: string): void {
@@ -91,6 +112,7 @@ export class CompanyComponent implements OnInit{
     this.adminService.getAllCompanies().subscribe(
       (response: CompanyResponse) => {
         this.totalCompanies = response.totalCompanies; // Store total count
+
         this.companies = response.companies.map((company: Company) => ({
           ...company,
           companyDetails: {
@@ -98,6 +120,9 @@ export class CompanyComponent implements OnInit{
             sanitizedCompanyDescription: this.sanitizeHtml(company.companyDetails.companyDescription) // Assign inside universityDetails
           }
         }));
+        this.filteredData = [...this.companies]; // Ensure filteredJobs is updated
+        this.totalEntries = this.filteredData.length; // Ensure total count updates
+        this.updatePagination();
       },
       (error) => {
         console.error('Error fetching universities:', error);
@@ -160,6 +185,132 @@ getFileExtension(url: string): string {
     this.router.navigateByUrl('talent-page/admin/dashboard');
   }
 
+
+  updateselectedCompanies() {
+    this.selectedCompanies = this.paginatedData.filter( company => company.selected);
+  }
+
+
+toggleSelectAll() {
+  const shouldSelectAll = !this.isAllSelected();
+  this.paginatedData.forEach(company => {
+    company.selected = shouldSelectAll;
+  });
+
+  if (shouldSelectAll) {
+    this.selectedCompanies = [
+      ...this.selectedCompanies,
+      ...this.paginatedData.filter(job => !this.selectedCompanies.some(d => d.id === job.id))
+    ];
+  } else {
+    this.selectedCompanies = this.selectedCompanies.filter(
+      company => !this.paginatedData.some(pData => pData.id === company.id)
+    );
+  }
+}
+
+isAllSelected(): boolean {
+  return this.paginatedData.length > 0 && this.paginatedData.every(company => company.selected);
+}
+
+selectCompany(company: any) {
+  company.selected = !company.selected;
+  if (company.selected) {
+    this.selectedCompanies.push(company);
+  } else {
+    this.selectedCompanies = this.selectedCompanies.filter(c => c.id !== company.id);
+  }
+
+  this.selectAll = this.isAllSelected();
+}
+
+
+
+deleteSelected() {
+  this.companies= this.companies.filter(company => !this.selectedCompanies.includes(company));
+  this.filteredData = this.filteredData.filter(company => !this.selectedCompanies.includes(company));
+
+  this.selectedCompanies = [];
+  this.selectAll = false;
+
+  this.paginateJobs();
+}
+
+
+  filterData(): void {
+    let companies = [...this.companies];
+    if (this.searchTerm) {
+      companies = companies.filter(company =>
+        company.companyDetails.companyId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        company.companyDetails.companyName.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+
+    this.filteredData = companies;
+    this.totalEntries = this.filteredData.length;
+    this.currentPage = 1;
+    this.paginateJobs();
+  }
+
+
+
+
+
+  getStartIndex(): number {
+    if (this.totalEntries === 0) return 0;
+    return (this.currentPage - 1) * this.itemsPerPage + 1;
+  }
+
+  getEndIndex(): number {
+    return Math.min(this.currentPage * this.itemsPerPage, this.totalEntries);
+  }
+
+
+
+  calculatePagination() {
+    this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+    this.paginatedData = this.filteredData.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
+  }
+
+
+
+
+
+  paginateJobs(): void {
+    this.totalEntries = this.filteredData.length;
+    this.totalPages = Math.max(Math.ceil(this.totalEntries / this.itemsPerPage), 1); // Ensure at least 1 page
+
+    // ✅ Ensure current page is within valid bounds
+    this.currentPage = Math.max(1, Math.min(this.currentPage, this.totalPages));
+
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    this.paginatedData = this.filteredData.slice(startIndex, startIndex + this.itemsPerPage);
+
+    this.pageNumbers = this.totalPages > 0 ? Array.from({ length: this.totalPages }, (_, i) => i + 1) : [1];
+  }
+
+  updatePagination(): void {
+    this.totalEntries = this.filteredData.length;
+    this.totalPages = Math.max(Math.ceil(this.totalEntries / this.itemsPerPage), 1); // Ensure at least 1 page
+    this.paginateJobs();
+  }
+
+  onPageChange(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.paginateJobs();
+    }
+  }
+
+
+
+  resetSearch() {
+    this.searchTerm = '';
+    this.filterData();
+  }
 
 
 
