@@ -5,20 +5,20 @@
   <div class="card">
     <div class="card-body">
 
-  <h5 class="mb-4">Post New Job</h5>
+  <h5 class="mb-4  fw-semibold">Post New Job</h5>
   <hr>
     <form [formGroup]="jobPostForm" (ngSubmit)="submitJobPost()">
       <!-- Job ID, Job Role Title, Job Type -->
 
       <div class="row">
-        <div class="col">
-          <label for="jobId" class="form-label" style="font-size: 14px;"> Job ID <span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Job ID<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('jobId')?.invalid &&  jobPostForm.get('jobId')?.touched}" placeholder="Enter job id" id="jobId" formControlName="jobId" type="text" class="form-control form-control-sm rounded-0"/>
           <small *ngIf="jobPostForm.get('jobId')?.hasError('required') && jobPostForm.get('jobId')?.touched" class="text-danger"> Job ID is required. </small>
         </div>
 
-        <div class="col">
-          <label for="jobTitle" class="form-label" style="font-size: 14px;"> Job Title <span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Job title<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('jobTitle')?.invalid &&  jobPostForm.get('jobTitle')?.touched}" placeholder="Enter job Title" id="jobTitle" formControlName="jobTitle" type="text" class="form-control form-control-sm rounded-0" />
           <small *ngIf="jobPostForm.get('jobTitle')?.hasError('required') && jobPostForm.get('jobTitle')?.touched" class="text-danger"> Job Title is required. </small>
         </div>
@@ -27,15 +27,14 @@
 
 
       <div class="row mt-3">
-
-        <div class="col">
-          <label for="jobCategory" class="form-label" style="font-size: 14px;"> Job Category <span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Job Category<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('jobCategory')?.invalid &&  jobPostForm.get('jobCategory')?.touched}" placeholder="Enter job id" id="jobCategory" formControlName="jobCategory" type="text" class="form-control form-control-sm rounded-0" />
           <small *ngIf="jobPostForm.get('jobCategory')?.hasError('required') && jobPostForm.get('jobCategory')?.touched" class="text-danger"> Job Type is required. </small>
         </div>
 
-        <div class="col">
-          <label for="experience" class="form-label" style="font-size: 14px;"> Working Experience <span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Working experience<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('experience')?.invalid &&  jobPostForm.get('experience')?.touched}" placeholder="Enter job id" id="experience" formControlName="experience" type="text" class="form-control form-control-sm rounded-0" />
           <small *ngIf="jobPostForm.get('experience')?.hasError('required') && jobPostForm.get('experience')?.touched" class="text-danger"> Working experience is required. </small>
         </div>
@@ -43,15 +42,15 @@
 
 
       <div class="row mt-3">
-        <div class="col">
-          <label for="jobType" class="form-label" style="font-size: 14px;">Job Type <span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Job Type<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('jobType')?.invalid &&  jobPostForm.get('jobType')?.touched}" placeholder="Enter job type" id="jobType" formControlName="jobType" type="text" class="form-control form-control-sm rounded-0"/>
           <small *ngIf="jobPostForm.get('jobType')?.hasError('required') && jobPostForm.get('jobType')?.touched" class="text-danger"> Job Type is required. </small>
         </div>
 
 
-        <div class="col">
-          <label for="location" class="form-label" style="font-size: 14px;">Location<span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Location<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('location')?.invalid &&  jobPostForm.get('location')?.touched}"  placeholder="Enter location" id="location" formControlName="location" type="text" class="form-control form-control-sm rounded-0"/>
           <small *ngIf="jobPostForm.get('location')?.hasError('required') && jobPostForm.get('location')?.touched" class="text-danger">Location is required. </small>
         </div>
@@ -60,14 +59,14 @@
 
       <div class="row mt-3">
 
-        <div class="col">
-          <label for="vacancy" class="form-label" style="font-size: 14px;">Vacancies<span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Vacancies<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('vacancy')?.invalid &&  jobPostForm.get('vacancy')?.touched}" placeholder="Enter vacancy" id="vacancy" formControlName="vacancy" type="text" class="form-control form-control-sm rounded-0"/>
           <small *ngIf="jobPostForm.get('vacancy')?.hasError('required') && jobPostForm.get('vacancy')?.touched"  class="text-danger">Vacancy is required. </small>
         </div>
 
-        <div class="col">
-          <label for="salary" class="form-label" style="font-size: 14px;"> Salary <span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Salary<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('salary')?.invalid &&  jobPostForm.get('salary')?.touched}" placeholder="Enter salary" id="salary" formControlName="salary" type="text" class="form-control form-control-sm rounded-0"/>
           <small *ngIf="jobPostForm.get('salary')?.hasError('required') && jobPostForm.get('salary')?.touched" class="text-danger"> Salary is required. </small>
         </div>
@@ -76,15 +75,15 @@
 
 
       <div class="row mt-3">
-        <div class="col">
-          <label for="applyByDate" class="form-label" style="font-size: 14px;">Job Deadline<span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Job Deadline<span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('applyByDate')?.invalid &&  jobPostForm.get('applyByDate')?.touched}" placeholder="Enter job id" id="applyByDate" formControlName="applyByDate" type="date" class="form-control form-control-sm rounded-0"/>
           <small *ngIf="jobPostForm.get('applyByDate')?.hasError('required') && jobPostForm.get('applyByDate')?.touched" class="text-danger"> Job deadline is required. </small>
         </div>
 
 
-        <div class="col">
-          <label for="qualification" class="form-label" style="font-size: 14px;">Qualification <span class="required">*</span></label>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Qualification <span class="text-danger">*</span></label>
           <input [ngClass]="{'is-invalid':  jobPostForm.get('qualification')?.invalid &&  jobPostForm.get('qualification')?.touched}"  placeholder="Enter qualification" id="qualification" formControlName="qualification" type="text" class="form-control form-control-sm rounded-0"/>
           <small *ngIf="jobPostForm.get('qualification')?.hasError('required') && jobPostForm.get('qualification')?.touched" class="text-danger"> Qualificationis required. </small>
         </div>
@@ -92,23 +91,22 @@
       </div>
 
 
-       <div class="row mt-3">
-        <div class="col">
-          <label for="jobId" class="form-label" style="font-size: 14px;"> Job Description <span class="required">*</span></label>
+      <div class="col mt-3">
+          <label class="form-label fw-bold">Job Description <span class="text-danger">*</span></label>
           <div class="NgxEditor__Wrapper">
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
             <ngx-editor  [ngClass]="{'is-invalid':  jobPostForm.get('jobDescription')?.invalid &&  jobPostForm.get('jobDescription')?.touched}" [editor]="editor" id="jobDescription"  class="form-control form-control-sm"  formControlName="jobDescription" [placeholder]="'Enter job description'" required></ngx-editor>
           </div>
           <small *ngIf="jobPostForm.get('jobDescription')?.hasError('required') && jobPostForm.get('jobDescription')?.touched" class="text-danger"> Job description is required. </small>
-        </div>
        </div>
 <hr>
 
       <!-- Form Actions -->
-      <div class="d-flex justify-content-between mt-3">
-        <button type="button" class="btn btn-secondary btn-sm"> Discard</button>
-        <button type="submit" class="btn btn-success btn-sm" [disabled]="jobPostForm.invalid">Post Job</button>
-      </div>
+
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-sm btn-outline-danger px-4 py-2 fw-bold" (click)="confirmDiscard()">Discard</button>
+        <button type="submit" class="btn btn-sm btn-primary px-4 py-2  fw-bold" [disabled]="jobPostForm.invalid">Post Job</button>
+    </div>
     </form>
     </div>
   </div>

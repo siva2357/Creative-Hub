@@ -255,5 +255,17 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
   }
 
 
+  confirmDiscard() {
+    if (confirm("Are you sure you want to discard the changes?")) {
+      this.discard();
+    }
+  }
+
+  // Reset the form and uploaded data
+  discard() {
+    this.profileDetailsForm.reset();
+    this.uploadedFileData = null;
+    this.previewURL = null;
+  }
 
 }

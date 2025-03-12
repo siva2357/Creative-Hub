@@ -170,4 +170,5 @@ export class SeekerJobProfileComponent implements OnInit {
   goToUploadPage() {
     this.router.navigate(['talent-page/seeker/upload-section']);
   }
+
 }

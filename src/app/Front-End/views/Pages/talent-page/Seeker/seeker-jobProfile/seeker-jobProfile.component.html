@@ -1,381 +1,149 @@
-<div class="container-fluid ">
-
-  <div class="container-fluid p-5 mt-5">
-    <div class="row g-3 mt-3 mb-5">
-
-            <!-- Category/Sector Dropdown -->
-            <div class="col-md-2">
-                <select class="form-select form-select-sm" id="categorySelect" aria-label="Category/Sector select menu">
-                    <option selected style="font-size: 14px;">Select by Category</option>
-                    <option value="1" style="font-size: 14px;">Category 1</option>
-                    <option value="2" style="font-size: 14px;">Category 2</option>
-                    <option value="3" style="font-size: 14px;">Category 3</option>
-                </select>
-            </div>
 
 
-            <!-- Job Type Dropdown -->
-            <div class="col-md-2">
-                <select class="form-select form-select-sm" id="jobTypeSelect" aria-label="Job Type select menu">
-                    <option selected style="font-size: 14px;">Select Job Type</option>
-                    <option value="1" style="font-size: 14px;">Full-time</option>
-                    <option value="2" style="font-size: 14px;">Part-time</option>
-                    <option value="3" style="font-size: 14px;">Contract</option>
-                </select>
-            </div>
 
-                <!-- Search Input -->
-            <div class="col-md-2">
-                <input type="search" class="form-control form-control-sm" placeholder="Search by job title or location">
-            </div>
 
-                <!-- Clear Filters Button -->
-            <div class="col-md-2">
-                <button class="btn btn-danger btn-sm w-100" id="clearFiltersButton">Clear All Filters</button>
-            </div>
 
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Cover Section -->
+
+
+<!-- Cover Section -->
+<div class="container-fluid mt-5 mb-5 p-5 rounded-5" style="background: radial-gradient(circle, rgba(255, 255, 255, 0.648), #11131c);   position: relative;  overflow: hidden;">
+  <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1735967997/hiring_people_dsgpfa.png"  alt="AR/VR Background"  style=" position: absolute;  top: 0;  left: 0;  width: 100%;  height: 700px;  object-fit: cover; z-index: 1; opacity: 0.3;">
+
+  <div style="position: relative; z-index: 2; text-align: center;">
+
+
+        <div class="text-center rounded-3">
+          <h1 class="mt-5 display-4 text-black">Find Your <span class="fw-bold">Dream Job</span> Today</h1>
+          <p class="col-lg-6 mx-auto mb-4 mt-4 text-black fs-4">Search and apply for the best job opportunities that match your skills.</p>
+      </div>
+
     </div>
 
-
-    <div class="container-fluid">
-        <div class="row" style="border: 0.5px solid black;">
-
-            <div class="col-4" style="height: 100vh; overflow-y: auto; position: relative;">
-
-                <!-- Nav Tabs with Equal Width -->
-                <ul class="nav nav-tabs d-flex" id="jobTabs" role="tablist">
-                    <li class="nav-item flex-fill" role="presentation">
-                        <a class="nav-link active text-center" id="allJobs-tab" data-bs-toggle="tab" href="#allJobs" role="tab" aria-controls="allJobs" aria-selected="true">All Jobs</a>
-                    </li>
-                </ul>
-
-                <!-- Tab Content -->
-                <div class="tab-content mt-3" id="jobTabsContent">
-                    <!-- All Jobs Tab -->
-                    <div class="tab-pane fade show active" id="allJobs" role="tabpanel" aria-labelledby="allJobs-tab">
-                        <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 100%; height: 500px; overflow-y: auto;">
-
-
-                          <div class="list-group list-group-flush border-bottom" >
-
-                                <div class="list-group-item list-group-item-action py-3 lh-sm" *ngFor="let job of jobs; let i = index" (click)="selectJob(job)">
-                                  <div class="d-flex align-items-center justify-content-between" style="cursor: pointer;">
-                                    <div class="d-flex align-items-center">
-                                      <div class="me-3">
-                                        <img [src]="job.companyId?.companyDetails?.companyLogo?.url"
-                                             alt="Company Logo"
-                                             class="rounded-circle"
-                                             style="width: 50px; height: 50px;">
-                                      </div>
-                                      <div>
-                                        <strong class="mb-1">{{ job.companyId?.companyDetails?.companyName }}</strong>
-                                        <div class="col-10 mb-1 small">{{ job.jobPostDetails.jobRoleTitle }}</div>
-                                      </div>
-                                    </div>
-                                    <div *ngIf="job.jobPostDetails.isApplied">
-                                      <span class="badge bg-success">Applied</span>
-                                    </div>
-                                  </div>
-                                </div>
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-            <!-- <div class="col-7 bg-warning">
-                <div class=" p-4" style="height: 80vh; overflow-y: auto;" *ngIf="selectedJob;">
-                    <div class="row g-4 justify-content-center">
-
-                        <div class="d-flex align-items-center mb-3 justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <div class="me-3">
-                                    <img [src]="selectedJob.companyId?.companyDetails?.companyLogo?.url"alt="Company Logo" class="rounded-circle" style="width: 50px; height: 50px;">
-                                </div>
-                                <div>
-                                    <h5 class="mb-0 fw-bold">Company Sector</h5>
-                                    <p class="mb-0 text-muted">Company Description</p>
-                                </div>
-                            </div>
-                            <div *ngIf="selectedJob">
-                              <button *ngIf="!selectedJob.jobPostDetails.isApplied" class="btn btn-success" (click)="applyJob(selectedJob)">
-                                Apply
-                              </button>
-                              <button *ngIf="selectedJob.jobPostDetails.isApplied" class="btn btn-danger" (click)="withdrawJob(selectedJob)">
-                                Withdraw
-                              </button>
-                            </div>
-
-
-                        </div>
-
-                        <div class="row  mb-4 mt-5 d-flex justify-content-between">
-                            <div class="col-6">
-                                <p class="mb-1"><i class="bi bi-calendar-event me-2"></i>Posted On</p>
-                                <p class="fw-bold">{{selectedJob.jobPostDetails.postedOn | date :'dd-MM-YYYY'}}</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="mb-1"><i class="bi bi-calendar-check me-2"></i>Apply By</p>
-                                <p class="fw-bold">{{selectedJob.jobPostDetails.applyByDate | date :'dd-MM-YYYY'}}</p>
-                            </div>
-                        </div>
-
-
-                        <div class="card border mb-4 p-3">
-                            <div class="row text-start">
-                                <div class="col-12 col-md-4">
-                                    <p class="mb-1"><i class="bi bi-cash"></i> Salary</p>
-                                    <p class="fw-bold">{{selectedJob.jobPostDetails.salary}}</p>
-                                </div>
-
-                            </div>
-
-                            <div class="row text-start">
-                                <div class="col-12 col-md-4">
-                                    <p class="mb-1"><i class="bi bi-people"></i> Openings</p>
-                                    <p class="fw-bold">{{selectedJob.jobPostDetails.vacancy}}</p>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <p class="mb-1"><i class="bi bi-briefcase"></i> Job Role</p>
-                                    <p class="fw-bold">{{selectedJob.jobPostDetails.jobRoleTitle}}</p>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <p class="mb-1"><i class="bi bi-building"></i> Job Type</p>
-                                    <p class="fw-bold">{{selectedJob.jobPostDetails.jobType}}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h6 class="fw-bold mb-0">Job Description:</h6>
-                        <div class="card border p-3 mb-4">
-                            <p class="mb-0 text-justify" [innerHTML]="selectedJob.jobPostDetails.sanitizedJobDescription"></p>
-                        </div>
-
-                        <h6 class="fw-bold mb-0">Posted By:</h6>
-                        <div class="card border p-3 mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="me-3">
-                                    <img [src]="selectedJob.companyId?.companyDetails?.companyLogo?.url" alt="Recruiter Name" class="rounded-circle" style="width: 50px; height: 50px;">
-                                </div>
-                                <div>
-                                    <h6 class="mb-0 fw-bold">{{selectedJob.recruiterId?.registrationDetails?.firstName}} {{selectedJob.recruiterId?.registrationDetails?.lastName}}</h6>
-                                    <p class="mb-0 text-muted">Recruiter Designation</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h6 class="fw-bold mb-0">About Company:</h6>
-                        <div class="card border p-3">
-                            <p class="mb-0 text-justify" [innerHTML]="selectedJob.companyId?.companyDetails?.sanitizedCompanyDescription">
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-            </div> -->
-
-            <div class="col-8  d-flex justify-content-around" style="height: 100vh; overflow-y: auto; margin-top: 90px;">
-
-              <div class="card border-black mb-3 mt-3 rounded-4 p-3 bg-body-secondary " style="width: 55rem;">
-                  <div class="scrollable-content" style="height: 100vh; overflow-y: auto;">
-
-                      <div class="row align-items-center mb-3">
-
-                          <div class="col-md-8">
-                              <div class="row align-items-center">
-
-                                  <div class="col-md-2 d-flex justify-content-center">
-                                      <div class="card rounded-2"
-                                          style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
-                                          <img class="rounded-2"
-                                              src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1710832065/cyan-paint-brush-band-766278995_ikd5gy.jpg"
-                                              alt="Image" style="width: 40px; height: 40px;">
-                                      </div>
-                                  </div>
-
-                                  <div class="col-md-10" style="margin-left: -15px;">
-                                      <h6 class="card-title mb-0 fw-bold" style="font-size: 18px;">Company Sector</h6>
-                                      <p class="card-title mb-0 fw-regular" style="font-size: 18px;">Company Description</p>
-                                  </div>
-
-                              </div>
-                          </div>
-
-                          <div class="col-md-4 d-flex justify-content-end">
-                              <button type="button" class="btn btn-outline-success me-3 rounded-3"
-                                  style="font-size: 14px; width:100px;">Apply</button>
-                              <div class="nav-link d-flex justify-content-center align-items-center rounded-circle text-decoration-none bg-white"
-                                  style="width: 40px; height: 40px;">
-                                  <i class="bi bi-bookmark" style="font-size: 1.3rem; color: black;"></i>
-                              </div>
-                          </div>
-
-                      </div>
-
-                      <div class="row d-flex px-3">
-                          <div class="col-md-6 text-start">
-                              <p style="font-size: 14px;">Posted On : <span
-                                      style="font-size: 14px; font-weight: bold;">04-29-2024</span></p>
-                          </div>
-                          <div class="col-md-6 text-end">
-                              <p style="font-size: 14px;">Apply By : <span
-                                      style="font-size: 14px; font-weight: bold;">11-12-2024 </span></p>
-                          </div>
-                      </div>
-
-
-                      <div class="card border-black mb-3 rounded-4 " style="width: 48rem; text-align: justify; margin-left: 20px;">
-
-                          <div style="display: flex; flex-direction: row; align-items: center;">
-
-                              <div style="flex: 1; border-right: 1px solid black; text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                                  <p style="font-size: 14px; margin-top: 15px;"><i class="bi bi-cash me-2"></i>Salary</p>
-                                  <p style="font-size: 14px; margin-top: -15px; font-weight: bold;"><span style="margin-top: -10px;">5 L.P.A</span></p>
-                              </div>
-
-
-                              <div style="flex: 1; border-right: 1px solid black; text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                                  <p style="font-size: 14px; margin-top: 15px;"><i class="bi bi-geo-alt me-2"></i>Location</p>
-                                  <p style="font-size: 14px; margin-top: -15px; font-weight: bold;">Chennai</p>
-                              </div>
-
-                              <div style="flex: 1; border-right: 1px solid black; text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                                  <p style="font-size: 14px;  margin-top: 15px;"><i class="bi bi-tv me-2"></i>Platform</p>
-                                  <p style="font-size: 14px;  margin-top: -15px; font-weight: bold;">Unreal Engine</p>
-                              </div>
-
-                              <div style="flex: 1; border-right: 1px solid black; text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                                  <p style="font-size: 14px;  margin-top: 15px;"><i class="bi bi-people me-2"></i>Openings</p>
-                                  <p style="font-size: 14px;  margin-top: -15px; font-weight: bold;">12</p>
-                              </div>
-
-                              <div style="flex: 1; border-right: 1px solid black; text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                                  <p style="font-size: 14px;  margin-top: 15px;"><i class="bi bi-briefcase me-2"></i>Job Role</p>
-                                  <p style="font-size: 14px;  margin-top: -15px; font-weight: bold;">Game developer</p>
-                              </div>
-
-                              <div style="flex: 1;  text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                                  <p style="font-size: 14px;  margin-top: 15px;"><i class="bi bi-calendar me-2"></i>Job Type</p>
-                                  <p style="font-size: 14px;  margin-top: -15px; font-weight: bold;">Full Time</p>
-                              </div>
-
-                          </div>
-
-                      </div>
-
-
-
-
-
-                      <p class="px-3" style="font-size: 16px; font-weight: bold;">Job description:</p>
-
-                      <div class="card border-black mb-3 rounded-4 px-3 py-3" style="width: 48rem; text-align: justify; margin-left: 20px;">
-
-                          <p style="font-size: 14px; text-align: justify; padding: 3px;">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna
-                              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                              aliquip ex ea commodo consequat. Duis
-                              aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                              pariatur. Excepteur sint
-                              occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                              laborum.
-                          </p>
-                      </div>
-
-                      <p class="px-3" style="font-size: 16px; font-weight: bold;">Posted By:</p>
-
-                      <div class="card border-black mb-3 rounded-4 px-3" style="width: 48rem; margin-left: 20px;">
-                          <div class="row align-items-center justify-content-start px-3 py-2"
-                              style="margin-left: -60px;">
-
-                              <div class="col-md-2 d-flex justify-content-center">
-                                  <div class="card rounded-5"
-                                      style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;">
-                                      <img class="rounded-5"
-                                          src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1710832065/cyan-paint-brush-band-766278995_ikd5gy.jpg"
-                                          alt="Recruiter name" style="width: 50px; height: 50px;">
-                                  </div>
-                              </div>
-
-                              <div class="col-md-6" style="margin-left: -35px;">
-                                  <h6 class="card-title mb-0 fw-bold" style="font-size: 16px;">Recruiter Name</h6>
-                                  <p class="card-title mb-0 fw-regular" style="font-size: 16px;">Recruiter designation
-                                  </p>
-                              </div>
-
-                          </div>
-                      </div>
-
-                      <p style="font-size: 16px; font-weight: bold;" class="px-3">About company:</p>
-
-                      <div class="card border-black mb-3 rounded-4 px-3" style="width: 48rem;  margin-left: 20px;">
-                          <div class="row align-items-center justify-content-start px-3 py-2" style="margin-left: -60px;">
-
-                              <div class="col-md-2 d-flex justify-content-center">
-                                  <div class="card rounded-5"
-                                      style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;">
-                                      <img class="rounded-5" src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1710832065/cyan-paint-brush-band-766278995_ikd5gy.jpg" alt="Recruiter name" style="width: 50px; height: 50px;">
-                                  </div>
-                              </div>
-
-                              <div class="col-md-6" style="margin-left: -35px;">
-                                  <h6 class="card-title mb-0 fw-bold" style="font-size: 16px;">Recruiter Name</h6>
-                                  <p class="card-title mb-0 fw-regular" style="font-size: 16px;">Recruiter designation</p>
-                              </div>
-
-                          </div>
-
-                          <p style="font-size: 14px; text-align: justify; padding: 3px;">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna
-                              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                              aliquip ex ea commodo consequat. Duis
-                              aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                              pariatur. Excepteur sint
-                              occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                              laborum.
-                          </p>
-                      </div>
-
-                  </div>
-              </div>
-              <!--job description-->
+  </div>
+
+
+<!-- User Profiles Section -->
+<div class="container my-5">
+  <div class="row g-4">
+      <!-- Filter Section -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm p-4 rounded-4 border-0">
+          <h4 class="fw-semibold text-primary mb-3">Filters</h4>
+
+          <!-- Search Posts -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Search Posts</label>
+            <input type="text" class="form-control form-control-md border-secondary" placeholder="Search posts">
           </div>
 
+          <!-- Location -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Location</label>
+            <input type="text" class="form-control form-control-md border-secondary" placeholder="Enter location">
+          </div>
+
+          <!-- Category Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Category</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Choose Category</option>
+              <option>Sketch</option>
+              <option>NFT</option>
+              <option>3D Art</option>
+            </select>
+          </div>
+
+          <!-- Job Type Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Job Type</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Select Job Type</option>
+              <option>Full-Time</option>
+              <option>Part-Time</option>
+              <option>Freelance</option>
+            </select>
+          </div>
+
+          <!-- Qualification Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Qualification</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Select Qualification</option>
+              <option>Bachelor's</option>
+              <option>Master's</option>
+              <option>Diploma</option>
+            </select>
+          </div>
+
+          <!-- Skills Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Skills</label>
+            <select class="form-select  form-select-md border-secondary">
+              <option selected>Select Skills</option>
+              <option>3D Modeling</option>
+              <option>Animation</option>
+              <option>Graphic Design</option>
+            </select>
+          </div>
+
+          <!-- Apply Filters Button -->
+          <button class="btn btn-primary w-100 mt-3">Apply Filters</button>
 
         </div>
+      </div>
+
+
+      <!-- Profiles Display Section -->
+      <div class="col-lg-8">
+        <div class="row g-5">
+            <div class="col-md-6">
+                <app-job-post-card></app-job-post-card>
+            </div>
+            <div class="col-md-6">
+              <app-job-post-card></app-job-post-card>
+          </div>
+          <div class="col-md-6">
+            <app-job-post-card></app-job-post-card>
+        </div>
+        <div class="col-md-6">
+          <app-job-post-card></app-job-post-card>
+      </div>
+      <div class="col-md-6">
+        <app-job-post-card></app-job-post-card>
+    </div>
+    <div class="col-md-6">
+      <app-job-post-card></app-job-post-card>
+  </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-5 d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+        </nav>
     </div>
 
+  </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="container-fluid bg-body-tertiary ">
-    <div class="container d-flex justify-content-center align-items-center " >
-        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg" style="height: 600px; width: 600px;">
-    </div>
-</div> -->

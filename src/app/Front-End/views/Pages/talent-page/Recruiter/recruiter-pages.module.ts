@@ -22,6 +22,7 @@ import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-
 import { RecruiterProfilePageComponent } from './recruiter-profile/recruiter-profile-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { NgChartsModule } from 'ng2-charts';
+import { RecruiterAccountSettingsPageComponent } from './recruiter-account-settings-page/recruiter-account-settings-page.component';
 
 
 
@@ -40,6 +41,7 @@ import { NgChartsModule } from 'ng2-charts';
     JobpostJobApplicantsComponent,
     RecruiterProfilePageComponent,
     SettingsPageComponent,
+    RecruiterAccountSettingsPageComponent
   ],
   imports: [
     CommonModule,

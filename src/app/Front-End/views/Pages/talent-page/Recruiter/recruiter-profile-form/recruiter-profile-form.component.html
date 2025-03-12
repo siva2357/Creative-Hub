@@ -1,113 +1,110 @@
-<div class="container p-5  " *ngIf="!isLoading">
-    <h5 class="mb-3 text-center">Create Profile</h5>
-
-    <form [formGroup]="profileDetailsForm" (ngSubmit)="submitProfile()">
 
 
-    <!-- Job ID, Job Role Title, Job Type, Job Level -->
-    <h6>Profile Image </h6>
-    <div class="row  p-3">
-
-        <div class="col mb-5">
-
-            <div class="container d-flex flex-column align-items-center justify-content-center rounded-3" style="height: auto; border: dashed 2px black;">
-
-                <div class="col  p-3 mt-5">
-
-                  <div class="form-group col text-center step-container">
-                    <div class="card-profile-body   rounded-4 profile-container ">
-                      <div class="profile-avatar rounded-circle">
-                        <img id="avatarImage" [src]="previewURL || 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg'" alt="Avatar">
-                      </div>
-                    </div>
-
-                    <small class="text-muted mt-2" style="font-size: 12px; display: flex; align-items: center;">
-                      <span style="margin-right: 5px;"><i class="bi bi-info-circle" style="font-size: 1rem; color: rgb(0, 110, 255);"></i></span>Allowed formats: JPEG, PNG, JPG
-                    </small>
-
-                  </div>
 
 
-                  <input type="file" id="fileInput" formControlName="profilePicture" (change)="onFileChange($event)" hidden />
-                  <small *ngIf="profileDetailsForm .get('profilePicture')?.hasError('required') && profileDetailsForm .get('profilePicture')?.touched" class="text-danger"> Profile picture is required.</small>
+<div class="container-fluid mt-3" *ngIf="!isLoading">
 
 
-                  <div class="d-flex flex-column align-items-center justify-content-center text-center">
-
-                    <!-- Icon Section -->
-                    <label for="fileInput" class="file-upload-label">
-                      <i class="bi bi-cloud-arrow-up upload-icon" style="font-size: 40px;" aria-hidden="true"></i>
-                    </label>
-
-                    <p class="text-center upload-text">Please upload your files here</p>
-
-                    <!-- Dynamic Progress Bar -->
-                    <div class="progress w-75 mt-3 mb-5" *ngIf="fileUploadProgress" role="progressbar" aria-label="Dynamic File Upload Progress">
-                      <div class="progress-bar" [style.width.%]="fileUploadProgress | async"> {{ fileUploadProgress | async }}% </div>
-                    </div>
-
-                  </div>
+  <form [formGroup]="profileDetailsForm" (ngSubmit)="submitProfile()">
 
 
-                  <!-- Success message when upload is completed -->
-                  <div *ngIf="uploadComplete" class="mt-3">
-                    <p class="text-success text-center">Upload Completed!</p>
-                  </div>
+<div class="row mt-5">
+  <div class="col mb-5">
+    <div class="container d-flex flex-row align-items-center justify-content-start rounded-3">
+      <!-- Profile Image -->
+      <div class="profile-avatar position-relative rounded me-3" style="width: 100px; height: 100px; overflow: hidden;">
+        <img [src]="previewURL || 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg'"
+          alt="Avatar" class="w-100 h-100">
+      </div>
+
+      <!-- Title & Button Section -->
+      <div class="d-flex flex-column">
+        <!-- File Input inside Label -->
 
 
-              </div>
 
 
-        </div>
 
+<input type="file" id="fileInput" #fileInput name="fileInput" formControlName="profilePicture" (change)="onFileChange($event)" hidden />
+
+<button class="btn btn-primary btn-sm" (click)="fileInput.click()">
+
+  Upload Photo
+</button>
+
+
+        <small *ngIf="profileDetailsForm .get('profilePicture')?.hasError('required') && profileDetailsForm .get('profilePicture')?.touched" class="text-danger"> Profile picture is required.</small>
+
+
+        <small class="text-muted mt-2" style="font-size: 12px;">
+          <i class="bi bi-info-circle" style="font-size: 1rem; color: rgb(0, 110, 255);"></i> Allowed formats: JPEG, PNG, JPG
+        </small>
+
+        <small *ngIf="profileDetailsForm.get('profilePicture')?.hasError('required') && profileDetailsForm.get('profilePicture')?.touched"
+          class="text-danger">
+          Profile picture is required.
+        </small>
+
+        <p *ngIf="uploadComplete" class="text-success mt-2">Upload Completed!</p>
+      </div>
     </div>
+
+    <!-- Dynamic Progress Bar -->
+    <div class="progress w-100 mt-3 mb-5" *ngIf="fileUploadProgress | async as progress" role="progressbar">
+      <div class="progress-bar" [style.width.%]="progress">{{ progress }}%</div>
+    </div>
+  </div>
 </div>
 
-    <!-- Job ID, Job Role Title, Job Type, Job Level -->
-    <h6>Basic Details</h6>
-    <div class="row  p-3">
-
-        <div class="col">
-            <label for="firstName" class="form-label fw-bold">Fullname<span class="required">*</span></label>
-            <input type="text" id="firstName" formControlName="firstName" class="form-control form-control-sm" placeholder="First name" required>
-            <small *ngIf="profileDetailsForm.get('firstName')?.hasError('required') && profileDetailsForm.get('firstName')?.touched" class="text-danger">Firstname is required.</small>
-        </div>
 
 
-        <div class="col">
-          <label for="lastName" class="form-label fw-bold">Lastname<span class="required">*</span></label>
-          <input type="text" id="lastName" formControlName="lastName" class="form-control form-control-sm" placeholder="Last name" required>
-          <small *ngIf="profileDetailsForm.get('lastName')?.hasError('required') && profileDetailsForm.get('lastName')?.touched" class="text-danger">Lastname  is required.</small>
+<div class="container">
+  <!-- Job ID, Job Role Title, Job Type, Job Level -->
+  <h5>Basic Details</h5>
+  <div class="row mt-3">
+
+      <div class="col">
+          <label for="firstName" class="form-label ">Fullname : </label>
+          <input type="text" id="firstName" formControlName="firstName" class="form-control form-control-sm" placeholder="First name" required>
+          <small *ngIf="profileDetailsForm.get('firstName')?.hasError('required') && profileDetailsForm.get('firstName')?.touched" class="text-danger">Firstname is required.</small>
       </div>
 
 
-        <div class="col">
-            <label for="userName" class="form-label fw-bold">Username<span class="required">*</span></label>
-            <input type="text" id="userName" formControlName="userName"  class="form-control form-control-sm" placeholder="Username" required>
-            <small *ngIf="profileDetailsForm.get('userName')?.hasError('required') && profileDetailsForm.get('userName')?.touched" class="text-danger">Username is required.</small>
-        </div>
-
-
-
+      <div class="col">
+        <label for="lastName" class="form-label ">Lastname : </label>
+        <input type="text" id="lastName" formControlName="lastName" class="form-control form-control-sm" placeholder="Last name" required>
+        <small *ngIf="profileDetailsForm.get('lastName')?.hasError('required') && profileDetailsForm.get('lastName')?.touched" class="text-danger">Lastname  is required.</small>
     </div>
-
-    <div class="row  p-3">
 
 
       <div class="col">
-        <label for="email" class="form-label fw-bold">Email ID<span class="required">*</span></label>
+          <label for="userName" class="form-label">Username :</label>
+          <input type="text" id="userName" formControlName="userName"  class="form-control form-control-sm" placeholder="Username" required>
+          <small *ngIf="profileDetailsForm.get('userName')?.hasError('required') && profileDetailsForm.get('userName')?.touched" class="text-danger">Username is required.</small>
+      </div>
+
+
+
+  </div>
+
+
+    <div class="row mt-3">
+
+
+      <div class="col">
+        <label for="email" class="form-label">Email ID : </label>
         <input type="text" id="email" formControlName="email"  class="form-control form-control-sm" placeholder="Email" required>
         <small *ngIf="profileDetailsForm.get('email')?.hasError('required') && profileDetailsForm.get('email')?.touched" class="text-danger">Email is required.</small>
     </div>
 
         <div class="col">
-            <label for="email" class="form-label fw-bold">Date of Birth<span class="required">*</span></label>
+            <label for="email" class="form-label">Date of Birth :</label>
             <input type="date" id="dateOfBirth" formControlName="dateOfBirth"  class="form-control form-control-sm" placeholder="Email" required>
             <small *ngIf="profileDetailsForm.get('dateOfBirth')?.hasError('required') && profileDetailsForm.get('dateOfBirth')?.touched" class="text-danger">Date of birth is required.</small>
         </div>
 
         <div class="col">
-            <label for="gender" class="form-label fw-bold">Gender<span class="required">*</span></label>
+            <label for="gender" class="form-label">Gender :</label>
             <select id="gender" class="form-select form-select-sm"  formControlName="gender" required>
               <option value="">Select gender</option>
               <option value="Male">Male</option>
@@ -118,23 +115,25 @@
         </div>
 
     </div>
+</div>
 
-    <h6>Contact Details</h6>
+  <div class="container mt-5">
+    <h5>Contact Details</h5>
     <!-- Category, Skills, Proficiency, Languages -->
-    <div class="row  p-3">
+    <div class="row  mt-3">
 
         <div class="col">
-            <label for="streetAddress" class="form-label fw-bold">Street address<span class="required">*</span></label>
+            <label for="streetAddress" class="form-label">Street address :</label>
             <input type="text" id="streetAddress" formControlName="streetAddress" class="form-control form-control-sm" placeholder="Street address" required>
             <small *ngIf="profileDetailsForm.get('streetAddress')?.hasError('required') && profileDetailsForm.get('streetAddress')?.touched" class="text-danger">Street address is required.</small>
         </div>
 
     </div>
 
-    <div class="row  p-3">
+    <div class="row mt-3">
 
         <div class="col">
-            <label for="city" class="form-label fw-bold">City<span class="required">*</span></label>
+            <label for="city" class="form-label ">City : </label>
             <select id="city" class="form-select form-select-sm"  formControlName="city" required>
                 <option value="">Select city</option>
                 <option value="city 1">city 1</option>
@@ -146,7 +145,7 @@
 
 
         <div class="col">
-            <label for="state" class="form-label fw-bold">State<span class="required">*</span></label>
+            <label for="state" class="form-label">State :</label>
             <select id="state" class="form-select form-select-sm"  formControlName="state" required>
                 <option value="">Select state</option>
                 <option value="state 1">state 1</option>
@@ -158,7 +157,7 @@
         </div>
 
         <div class="col">
-            <label for="country" class="form-label fw-bold">Country<span class="required">*</span></label>
+            <label for="country" class="form-label">Country :</label>
             <select id="country" class="form-select form-select-sm"  formControlName="country" required>
                 <option value="">Select country</option>
                 <option value="country 1">country 1</option>
@@ -171,51 +170,54 @@
     </div>
 
 
-    <div class="row  p-3">
+    <div class="row  mt-3">
 
 
         <div class="col">
-            <label for="phoneNumber" class="form-label fw-bold">Phone number<span class="required">*</span></label>
+            <label for="phoneNumber" class="form-label">Phone number :</label>
             <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control form-control-sm" placeholder="Phonenumber" required>
             <small *ngIf="profileDetailsForm.get('phoneNumber')?.hasError('required') && profileDetailsForm.get('phoneNumber')?.touched" class="text-danger">Phone number is required.</small>
         </div>
 
         <div class="col">
-            <label for="pincode" class="form-label fw-bold">Pincode<span class="required">*</span></label>
+            <label for="pincode" class="form-label">Pincode : </label>
             <input type="text" id="pincode" formControlName="pincode" class="form-control form-control-sm" placeholder="Pincode" required>
             <small *ngIf="profileDetailsForm.get('pincode')?.hasError('required') && profileDetailsForm.get('pincode')?.touched" class="text-danger">Pincode is required.</small>
         </div>
 
 
     </div>
+  </div>
 
-    <h6>Professional Details</h6>
-    <!-- Salary, Experience, Location, Vacancy -->
-    <div class="row  p-3">
+
+  <div class="container mt-5">
+    <h5>Professional Details</h5>
+    <!-- Salary,   yearOfGraduation, Location, Vacancy -->
+    <div class="row  mt-3">
 
         <div class="col">
-            <label for="companyName" class="form-label fw-bold">Company <span class="required">*</span></label>
+            <label for="universityName" class="form-label">Company :</label>
             <select id="companyName"  class="form-select form-select-sm" formControlName="companyName" required>
-                <option value="">Select company</option>
-                <option *ngFor="let company of companyList" [value]="company.companyDetails.companyName">
-                  {{ company.companyDetails.companyName }}
-                </option>
+              <option value="">Select company</option>
+              <option *ngFor="let company of companyList" [value]="company.companyDetails.companyName">
+                {{ company.companyDetails.companyName }}
+              </option>
             </select>
-            <small *ngIf="profileDetailsForm.get('companyName')?.hasError('required') && profileDetailsForm.get('companyName')?.touched" class="text-danger">Company name is required.</small>
+            <small *ngIf="profileDetailsForm.get('universityName')?.hasError('required') && profileDetailsForm.get('universityName')?.touched" class="text-danger">University name is required.</small>
 
         </div>
 
 
         <div class="col">
-            <label for="designation" class="form-label fw-bold">Designation <span class="required">*</span></label>
+            <label for="universityDegree" class="form-label">Designation :</label>
             <select id="designation"  class="form-select form-select-sm" formControlName="designation" required>
-                <option value="">Select designation</option>
-                <option value="designation 1">designation 1</option>
-                <option value="designation 2">designation 2</option>
-                <option value="designation 3">designation 3</option>
-                <option value="designation 4">designation 4</option>
-            </select>
-            <small *ngIf="profileDetailsForm.get('designation')?.hasError('required') && profileDetailsForm.get('designation')?.touched" class="text-danger">Designation is required.</small>
+              <option value="">Select designation</option>
+              <option value="designation 1">designation 1</option>
+              <option value="designation 2">designation 2</option>
+              <option value="designation 3">designation 3</option>
+              <option value="designation 4">designation 4</option>
+          </select>
+            <small *ngIf="profileDetailsForm.get('universityDegree')?.hasError('required') && profileDetailsForm.get('universityDegree')?.touched" class="text-danger">University degree is required.</small>
 
         </div>
 
@@ -223,30 +225,33 @@
     </div>
 
 
-    <div class="row  p-3">
+    <div class="row mt-3">
 
         <div class="col">
-            <label for="experience" class="form-label fw-bold">Experience<span class="required">*</span></label>
+            <label for="yearOfGraduation" class="form-label">Experience:</label>
             <input type="number" id="experience" formControlName="experience"  class="form-control form-control-sm" placeholder="Experience" required>
             <small *ngIf="profileDetailsForm.get('experience')?.hasError('required') && profileDetailsForm.get('experience')?.touched" class="text-danger">Experience is required.</small>
         </div>
 
         <div class="col">
-            <label for="employeeCode" class="form-label fw-bold">Employee code<span class="required">*</span></label>
+            <label for="universityNumber" class="form-label ">Employee code :</label>
             <input type="text" id="employeeCode" formControlName="employeeCode"  class="form-control form-control-sm" placeholder="Employee code" required>
             <small *ngIf="profileDetailsForm.get('employeeCode')?.hasError('required') && profileDetailsForm.get('employeeCode')?.touched" class="text-danger">Employee code is required.</small>
         </div>
 
 
     </div>
+  </div>
 
-    <h6>Bio Details</h6>
+
+  <div class="container mt-5">
+    <h5>Bio Details</h5>
 
     <!-- Job Descriptions -->
-    <div class="row  p-3">
+    <div class="row  mt-3">
 
         <div class="col">
-            <label for=" bioDescription" class="form-label fw-bold">Bio <span class="required">*</span></label>
+            <label for=" bioDescription" class="form-label">Bio :</label>
             <div class="NgxEditor__Wrapper">
               <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
               <ngx-editor [editor]="editor"  class="form-control form-control-sm" formControlName="bioDescription" [placeholder]="'Enter bio description'" required></ngx-editor>
@@ -256,23 +261,29 @@
 
     </div>
 
+  </div>
 
-    <div class="footer mt-5" style="justify-content: space-between; display: flex;">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
-        <button type="submit" class="btn btn-success" [disabled]="profileDetailsForm.invalid">Save</button>
+  <div class="container mb-5">
+    <div class="d-flex justify-content-between mt-5">
+      <button type="button" class="btn btn-sm btn-outline-danger px-4 py-2 fw-bold" (click)="discard()">Discard</button>
+      <button type="submit" class="btn btn-sm btn-primary px-4 py-2  fw-bold" [disabled]="profileDetailsForm.invalid">Save</button>
     </div>
+  </div>
 
-    </form>
+
+
+
+  </form>
 </div>
 
 <div class="container-fluid" *ngIf="isLoading">
-    <div class="text-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="mt-3">
-            <p>Saving profile details</p>
-        </div>
-    </div>
+  <div class="text-center">
+      <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="mt-3">
+          <p>Saving profile details</p>
+      </div>
+  </div>
 </div>
 

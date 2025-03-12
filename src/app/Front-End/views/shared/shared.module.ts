@@ -4,10 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { SeekerProfileCardComponent } from './seeker-profile-card/seeker-profile-card.component';
-
+import { JobPostCardComponent } from './job-post-card/job-post-card.component';
 @NgModule({
   declarations: [
     SeekerProfileCardComponent,
+    JobPostCardComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +19,7 @@ import { SeekerProfileCardComponent } from './seeker-profile-card/seeker-profile
   ],
   exports: [
     SeekerProfileCardComponent,
+    JobPostCardComponent ,
     CommonModule,
 
   ],
