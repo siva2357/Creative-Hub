@@ -14,6 +14,7 @@ import { RecruiterProfileFormComponent } from './recruiter-profile-form/recruite
 import { JobpostJobApplicantsComponent } from './jobpost-job-applicants/jobpost-job-applicants.component';
 import { RecruiterProfilePageComponent } from './recruiter-profile/recruiter-profile-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { RecruiterAccountSettingsPageComponent } from './recruiter-account-settings-page/recruiter-account-settings-page.component';
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
@@ -35,7 +36,7 @@ const routes: Routes = [
 		{ path: 'hire-seeker', component: RecruiterHireSeekerPageComponent, title: 'Hire Seeker Page'  }, // Hire Seeker page route
     { path: 'seeker-profile/:id', component: RecruiterSeekerProfileComponent, title: 'Seeker Profile Page' },
 		{ path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
-    { path: 'account-settings/:id', component: SettingsPageComponent , title: 'Recruiter account-settings page' },
+    { path: 'account-settings/:id', component: RecruiterAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
     { path: 'edit-profile/:id', component: RecruiterEditProfileComponent, title: 'Recruiter Edit Profile Page' },
 	  ]
 	}

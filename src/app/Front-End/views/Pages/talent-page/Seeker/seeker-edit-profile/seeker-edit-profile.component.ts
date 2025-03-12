@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
 import { ProfileService } from 'src/app/Front-End/core/services/profile-service';

@@ -107,4 +107,15 @@ export class RecruiterPostJobPageComponent {
     }
     this.loading = false;
   }
+
+  confirmDiscard() {
+    if (confirm("Are you sure you want to discard the changes?")) {
+      this.discard();
+    }
+  }
+
+  // Reset the form and uploaded data
+  discard() {
+    this.jobPostForm.reset();
+  }
 }

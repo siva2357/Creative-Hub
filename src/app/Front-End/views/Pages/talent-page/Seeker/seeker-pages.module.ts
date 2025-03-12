@@ -14,28 +14,32 @@ import { SeekerManageProjectPageComponent } from './seeker-manage-project/seeker
 import { SeekerPostProjectPageComponent } from './seeker-post-project/seeker-post-project.component';
 import { LayoutModule } from '../../../Layouts/layout.module';
 import { SharedModule } from '../../../shared/shared.module';
-import { SeekerProfileModule } from './seeker-profile/seeker-profile.module';
-import { SeekerProfileRoutingModule } from './seeker-profile/seeker-profile-routing.module';
-
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { SeekerEditProfileComponent } from './seeker-edit-profile/seeker-edit-profile.component';
 import { SeekerProfileFormComponent } from './seeker-profile-form/seeker-profile-form.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { SeekerEditProjectComponent } from './seeker-edit-project/seeker-edit-project.component';
+import { SeekerProfilePageComponent } from './seeker-profile/seeker-profile-page.component';
+import { SeekerAccountSettingsPageComponent } from './seeker-account-settings-page/seeker-account-settings-page.component';
+import { NgChartsModule } from 'ng2-charts';
+import { JobDetailsComponent } from './job-details/job-details.component';
+
 @NgModule({
   declarations: [
     SeekerMainPageComponent,
     SeekerPortfolioComponent,
     SeekerDashboardComponent,
     SeekerJobProfileComponent,
-
+    SeekerProfilePageComponent,
     SeekerLaunchpadComponent,
     SeekerManageProjectPageComponent,
     SeekerPostProjectPageComponent ,
     ProjectDetailsComponent,
     SeekerEditProfileComponent,
     SeekerProfileFormComponent,
-    SeekerEditProjectComponent
+    SeekerEditProjectComponent,
+    SeekerAccountSettingsPageComponent,
+    JobDetailsComponent
 
   ],
   imports: [
@@ -46,9 +50,8 @@ import { SeekerEditProjectComponent } from './seeker-edit-project/seeker-edit-pr
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    SeekerProfileModule,
-    SeekerProfileRoutingModule,
-    NgxEditorModule
+    NgxEditorModule,
+    NgChartsModule
   ],
   providers: [DatePipe],
 })

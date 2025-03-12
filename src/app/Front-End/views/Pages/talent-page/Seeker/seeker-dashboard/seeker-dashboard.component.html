@@ -1,71 +1,85 @@
 <div class="container mt-5 mb-5 bg-body-tertiary">
-    <p class="fw-semibold fs-5">Dashboard</p>
+  <p class="fw-semibold fs-5">Dashboard</p>
 
-    <!-- cards display with count -->
-    <div class="row  bg-warning p-3 mb-5">
-        <!-- Card 1 -->
-        <div class="col-4">
-          <div class="card rounded-2 border-primary" style="cursor: pointer;">
-            <div class="card-body px-5">
-                <div class="row">
-                    <div class="col-9 bg-info">
-                        <h3 class="fs-5 text-body-emphasis">Projects uploaded</h3>
-                        <p class="text-align-right fs-5 mt-4 mb-4">5</p>
-                    </div>
-
-                    <div class="col-3 bg-warning">
-                        <div class="feature-icon d-flex align-items-center justify-content-center" style="margin-top: -10px;">
-                            <i class="bi bi-cloud-arrow-up" style="font-size: 1.8rem;"></i>
-                        </div>
-                    </div>
-                </div>
+  <!-- Cards Display with Count -->
+  <div class="row bg-warning mb-5">
+    <!-- Card 1 -->
+    <div class="col-md-6 col-12 mb-3 mb-md-0">
+      <div class="card rounded-2 border-primary " style="cursor: pointer;">
+        <div class="card-body px-5">
+          <div class="row">
+            <div class="col-9 text-start bg-info text-white p-3 rounded">
+              <h5 class=" mb-1">Projects uploaded</h5>
+              <p class="fs-6 my-2">5</p>
             </div>
-          </div>
-
-        </div>
-
-        <!-- Card 2 -->
-        <div class="col-4">
-            <div class="card rounded-2 border-primary h-100" style="cursor: pointer;">
-              <div class="card-body px-5 ">
-
-                  <div class="row ">
-                      <div class="col-9 bg-info">
-                          <h3 class="fs-5 text-body-emphasis">Jobs Applied</h3>
-                          <p class="text-align-right fs-5 mt-4 mb-4">5</p>
-                      </div>
-
-                      <div class="col-3 bg-warning">
-                          <div class="feature-icon d-flex align-items-center justify-content-center" style="margin-top: -10px;">
-                              <i class="bi bi-briefcase" style="font-size: 1.8rem;"></i>
-                          </div>
-                      </div>
-                  </div>
-
+            <div class="col-3 bg-warning">
+              <div class="feature-icon d-flex align-items-center justify-content-center" style="margin-top: -10px;">
+                <i class="bi  bi-cloud-upload" style="font-size: 2rem;"></i>
               </div>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-
-        <!-- Card 3 -->
-
+    <!-- Card 2 -->
+    <div class="col-md-6 col-12 mb-3 mb-md-0">
+      <div class="card rounded-2 border-primary " style="cursor: pointer;">
+        <div class="card-body px-5">
+          <div class="row">
+            <div class="col-9 text-start bg-info text-white p-3 rounded">
+              <h5 class=" mb-1">Jobs Applied</h5>
+              <p class="fs-6 my-2">5</p>
+            </div>
+            <div class="col-3 bg-warning">
+              <div class="feature-icon d-flex align-items-center justify-content-center" style="margin-top: -10px;">
+                <i class="bi bi-briefcase" style="font-size: 2rem;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
 
-     <!-- charts used to diaply project details -->
-    <div class="row  mb-5">
-        <div class="col-7">
-          <div class="container border border-dark" style="height: 450px;">
-            <p>Project Statistics</p>
-          </div>
-        </div>
 
-        <div class="col-5">
-          <div class="container border border-dark" style="height: 450px;">
-            <p>Project Statistics</p>
-          </div>
+  </div>
+
+
+
+  <div class="container mb-5">
+    <div class="row g-3">
+      <!-- Bar Chart for Job Posts Statistics -->
+      <div class="col-md-7 col-12">
+        <div class="chart-container" style="height: 450px; width: 100%;">
+          <canvas baseChart
+                  [datasets]="projectChartData.datasets"
+                  [labels]="projectChartData.labels"
+                  [options]=" projectChartOptions"
+                  [legend]=" projectChartLegend"
+                  [type]=" projectChartType">
+          </canvas>
         </div>
+      </div>
+
+      <!-- Pie Chart for Job Applicants Statistics -->
+      <div class="col-md-5 col-12">
+        <div class="chart-container" style="height: 450px; width: 100%;">
+          <canvas baseChart
+                  [datasets]="projectCategoryChartData.datasets"
+                  [labels]="projectCategoryChartData.labels"
+                  [options]="projectCategoryChartOptions"
+                  [type]="projectCategoryChartType">
+          </canvas>
+        </div>
+      </div>
     </div>
+  </div>
+
+
+
+
+
 
 
 

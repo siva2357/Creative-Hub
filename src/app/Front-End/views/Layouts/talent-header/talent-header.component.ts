@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 import { UserService } from 'src/app/Front-End/core/services/user-service';
-import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user.model';
+import { Admin, Recruiter, Seeker } from 'src/app/Front-End/core/models/user.model';
+import { ProfileService } from 'src/app/Front-End/core/services/profile-service';
+import { RecruiterProfile, SeekerProfile } from 'src/app/Front-End/core/models/profile-details.model';
 
 
 @Component({
@@ -12,9 +14,10 @@ import { Recruiter, Seeker } from 'src/app/Front-End/core/models/user.model';
 })
 export class TalentHeaderComponent implements OnInit {
 
-  public userDetails! :Recruiter | Seeker;
-  public userName!: Recruiter | Seeker;
-
+  public userDetails! :RecruiterProfile | SeekerProfile;
+  public adminDetails! : Admin;
+  public userName! :string;
+  public profile! :string;
   userId!: string;
   public errorMessage: string | null = null;
   loading: boolean = true;  // For managing loading state
@@ -33,7 +36,8 @@ export class TalentHeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+     private profileService:ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -64,9 +68,8 @@ export class TalentHeaderComponent implements OnInit {
     this.userService.getAdminById(this.userId).subscribe(
       (data: any) => {
         console.log('Admin Details:', data);
-        this.userDetails = data;
-        this.userName = data.registrationDetails.userName;
-
+        this.adminDetails = data;
+        this.userName = this.adminDetails.registrationDetails.userName;
         this.loading = false;
       },
       (error) => {
@@ -76,12 +79,14 @@ export class TalentHeaderComponent implements OnInit {
 }
 
 getSeekerDetails() {
-    this.userService.getSeekerById(this.userId).subscribe(
+    this.profileService.getSeekerProfileById(this.userId).subscribe(
       (data: any) => {
         console.log('Seeker Details:', data);
         this.userDetails = data;
-        this.userName = data.registrationDetails.userName;
         this.loading = false;
+        this.userName = this.userDetails?.profileDetails?.userName ?? '';
+        this.profile = this.userDetails.profileDetails.profilePicture.url
+
       },
       (error) => {
         this.handleError(error);
@@ -90,12 +95,12 @@ getSeekerDetails() {
 }
 
 getRecruiterDetails() {
-    this.userService.getRecruiterById(this.userId).subscribe(
+  this.profileService.getRecruiterProfileById(this.userId).subscribe(
       (data: any) => {
         console.log('Recruiter Details:', data);
         this.userDetails = data;
-        this.userName = data.registrationDetails.userName;
-
+        this.userName = this.userDetails?.profileDetails?.userName ?? '';
+        this.profile = this.userDetails.profileDetails.profilePicture.url
         this.loading = false;
       },
       (error) => {
@@ -125,12 +130,16 @@ handleError(error: any) {
   }
 
   goToAccountSettingsPage(): void {
-    if (!this.userDetails || !this.userDetails._id) { // Assuming email is unique
-      console.error('User details are missing or invalid');
+    const userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+    const userRole = localStorage.getItem('userRole') || this.authService.getRole() || '';
+    if (!userId || !userRole) {
+      console.error('User ID or role is missing');
       return;
     }
-    this.router.navigate([`talent-page/recruiter/account-settings/${this.userDetails._id}`]); // Redirect to change-password page
+    const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
+    this.router.navigate([`talent-page/${rolePath}/account-settings/${userId}`]);
   }
+
 
   // Perform logout
   onLogout(): void {
