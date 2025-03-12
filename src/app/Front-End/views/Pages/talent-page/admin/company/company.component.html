@@ -1,78 +1,142 @@
-<div style="display: flex; align-items: center; gap: 5px; text-decoration: none;  color: inherit;">
-  <i class="bi bi-arrow-left" style="font-size: 2rem; cursor: pointer;" (click)="goToDashboard()"></i>
-  <p style="margin: 0;">Back</p>
-</div>
 
 
 
 
 
-
-
-
-
-<!-- Button trigger modal -->
-<div class="row d-flex justify-content-center align-items-center mb-3" style="margin-top: 50px;">
-  <div class="col-10">
-    <p style="margin-left: 40px; font-size: 18px;">Companies</p>
+<div class="container-fluid  mt-5">
+  <div style="display: flex; align-items: center; gap: 5px; text-decoration: none;  color: inherit;">
+    <i class="bi bi-arrow-left" style="font-size: 2rem; cursor: pointer;" (click)="goToDashboard()"></i>
+    <p style="margin: 0;">Back</p>
   </div>
 
-  <div class="col-2 text-end">
-    <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-3" style="font-size: 14px; " (click)="goToCompanyPost()"> <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+
+  <div class="row d-flex justify-content-center align-items-center mb-3" style="margin-top: 50px;">
+    <div class="col-10">
+      <p style="margin-left: 40px; font-size: 18px;">Companies</p>
+    </div>
+
+    <div class="col-2 text-end">
+      <button class="btn btn-primary btn-sm px-3 d-flex align-items-center justify-content-center rounded-3" style="font-size: 14px; " (click)="goToCompanyPost()"> <i class="bi bi-plus me-2" style="font-size: 1rem;"></i><span style="margin-right: 10px; font-size: 14px;">Add New</span> </button>
+    </div>
   </div>
-</div>
+
+
+  <div class="mb-3 d-flex flex-wrap align-items-center gap-3">
+    <label for="search" class="form-label mb-0">Search Job Posts:</label>
+    <div class="flex-grow-1">
+      <input
+        type="text"
+        id="search"
+        [(ngModel)]="searchTerm"
+        class="form-control shadow-sm"
+        placeholder="Search by Job Role, Type, or Status"
+        (input)="filterData()"
+      >
+    </div>
+    <button class="btn btn-secondary px-4" (click)="resetSearch()">Reset</button>
+  </div>
 
 
 
+  <div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped text-center align-middle shadow-sm" style="font-size: 14px;">
+      <thead class="table-light">
+        <tr>
+          <th scope="col" style="width: 5%;">
+            <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll()">
+          </th>
+          <th scope="col" style="width: 5%;">S.No</th>
+          <th scope="col" style="width: 10%;">Company ID</th>
+          <th scope="col" style="width: 15%;">Company Logo</th>
+          <th scope="col" style="width: 10%;">Company Name</th>
+          <th scope="col" style="width: 10%;">Company Description</th>
+          <th scope="col" style="width: 25%;">Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredData.length > 0">
 
 
 
-<div class="container" *ngIf="companies.length > 0">
-  <table class="table mt-5" style=" border-collapse: collapse; border: 1px solid #ddd;">
-    <thead style="border: 1px solid; font-size: 14px;">
-      <tr style="border: 1px solid;">
-        <th style="border: 1px solid; width: 3%;">S.No</th>
-        <th style="border: 1px solid; width: 3%;">Company ID</th>
-        <th style="border: 1px solid; width: 5%;">Company Logo</th>
-        <th style="border: 1px solid; width: 10%;">Company Name</th>
-        <th style="border: 1px solid; width: 40%;">Company Description</th>
-        <th style="border: 1px solid; width: 5%;">Actions</th>
-      </tr>
-    </thead>
+        <tr *ngFor="let company of paginatedData; let i = index">
+          <td>
+            <input type="checkbox" [(ngModel)]="company.selected" (change)="selectCompany(company)">
+          </td>
+          <td>{{ (currentPage - 1) * itemsPerPage + (i + 1) }}</td>
 
-    <tbody>
-      <tr style="border: 1px solid;" *ngFor="let company of companies; let i = index">
-        <td style="border: 1px solid; text-align: center; ">{{ i + 1 }}</td>
+          <td>{{company.companyDetails.companyId}}</td>
 
-        <td style="border: 1px solid; text-align: center;">{{company.companyDetails.companyId}}</td>
+          <td>
+            <div *ngIf="isImage(company.companyDetails.companyLogo.url)">
+                <img [src]="company.companyDetails.companyLogo.url" alt="Project Image" width="100px" height="auto">
+            </div>
+          </td>
 
-        <td style="border: 1px solid; text-align: center;">
-          <div *ngIf="isImage(company.companyDetails.companyLogo.url)">
-              <img [src]="company.companyDetails.companyLogo.url" alt="Project Image" width="100px" height="auto">
-          </div>
-        </td>
+          <td>{{company.companyDetails.companyName}}</td>
+          <td [innerHTML]="company.companyDetails.sanitizedCompanyDescription"></td>
+          <td>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-sm btn-warning" (click)="goToCompanyEdit(company)">Edit</button>
+              <button class="btn btn-sm btn-info" (click)="goToCompanyDetails(company)">View</button>
+              <button class="btn btn-sm btn-danger"  (click)="deleteCompanyById(company._id!, company.companyDetails.companyLogo.fileName)">Delete</button>
+            </div>
+          </td>
 
-        <td style="border: 1px solid; text-align: center;">{{company.companyDetails.companyName}}</td>
-        <td style="border: 1px solid; text-align: left;" [innerHTML]="company.companyDetails.sanitizedCompanyDescription"></td>
-        <td style="border: 1px solid;">
-          <div style=" display: flex; justify-content: space-around;">
-            <button class="btn btn-sm btn-warning" (click)="goToCompanyEdit(company)">Edit</button>
-            <button class="btn btn-sm btn-info" (click)="goToCompanyDetails(company)">View</button>
-            <button class="btn btn-sm btn-danger"  (click)="deleteCompanyById(company._id!, company.companyDetails.companyLogo.fileName)">Delete</button>
-          </div>
-        </td>
+        </tr>
 
-      </tr>
-    </tbody>
+      </tbody>
 
-  </table>
-</div>
+      <tbody *ngIf="filteredData.length === 0">
+        <tr>
+          <td colspan="9" class="text-center text-muted fw-bold py-3">No jobs available to display.</td>
+        </tr>
+      </tbody>
+    </table>
 
+    <div *ngIf="selectedCompanies.length > 0" class="text-end">
+      <button class="btn btn-danger px-4 shadow-sm" (click)="deleteSelected()">Delete All </button>
+    </div>
+  </div>
 
 
-<div *ngIf="companies.length == 0">
-<div class="container d-flex justify-content-center align-items-center">
-  <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1716276008/No_data-amico_zhoryt.svg"
-    style="height: 600px; width: 600px;">
-</div>
-</div>
+
+  <div class="row align-items-center mb-3 p-2 border rounded shadow-sm bg-light">
+    <!-- Items per page selector -->
+    <div class="col-12 col-md-4 d-flex align-items-center mb-2 mb-md-0">
+      <label for="itemsPerPage" class="fw-bold me-2">Items per page:</label>
+      <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updatePagination()" class="form-select form-select-sm w-auto">
+        <option *ngFor="let size of [5, 10, 15, 20, 50, 100]" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+
+    <!-- Pagination -->
+    <div class="col-12 col-md-4 d-flex justify-content-center mb-2 mb-md-0">
+      <nav aria-label="Page navigation">
+        <ul class="pagination m-0 flex-wrap">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" aria-label="Previous" (click)="onPageChange(currentPage - 1)">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+
+          <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage">
+            <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+          </li>
+
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" aria-label="Next" (click)="onPageChange(currentPage + 1)">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Showing entries info -->
+    <div class="col-12 col-md-4 text-center text-md-end">
+      <div class="text-muted small">
+        <strong>Showing:</strong> {{ (currentPage - 1) * itemsPerPage + 1 }} - {{ getEndIndex() }} of {{ totalEntries }} entries
+      </div>
+    </div>
+  </div>
+
+
