@@ -10,7 +10,6 @@ import { TalentSignUpComponent } from './talent-sign-up/talent-sign-up.component
 import { RegisterSeekerComponent } from './talent-sign-up/register-seeker/register-seeker.component';
 import { RegisterRecruiterComponent } from './talent-sign-up/register-recruiter/register-recruiter.component';
 import { ConfirmationComponent } from './talent-sign-up/account-confirmation/account-confirmation.component';
-import { ErrorRegisterComponent } from './talent-sign-up/error-account-register/account-confirmation.component';
 import { OtpVerificationPageComponent } from './talent-sign-up/otp-verification-page/otp-verification-page.component';
 import { ForgotPasswordPageComponent } from './talent-sign-up/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordOtpPageComponent } from './talent-sign-up/reset-password-otp-page/reset-password-otp-page.component';
@@ -38,9 +37,7 @@ const routes: Routes = [
     { path: 'register/otp-verification', component:  OtpVerificationPageComponent }, // Profile page route
 
 
-
     { path: 'register/confirmation-page', component: ConfirmationComponent }, // Profile page route
-    { path: 'register/error-page', component: ErrorRegisterComponent }, // Profile page route
 
     { path: 'recruiter',loadChildren: () => import('./Recruiter/recruiter-pages.module').then((m) => m.RecruiterPageModule),
       // canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'recruiter' }

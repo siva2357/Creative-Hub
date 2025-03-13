@@ -14,7 +14,7 @@ export class TalentLoginComponent {
 
   isLoading: boolean = false;
   loginSuccess: boolean = false;
-
+  showPassword: boolean = false;
   submitted = false;
   errorMessage = '';
 

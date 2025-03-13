@@ -29,7 +29,6 @@
       <tr style="border: 1px solid;" *ngFor="let recruiter of recruiters; let i = index" >
         <td style="border: 1px solid; text-align: center; ">{{i+1}}</td>
 
-        <td style="border: 1px solid; text-align: center;">{{recruiter.registrationDetails.firstName}}  {{recruiter.registrationDetails.lastName}}</td>
         <td style="border: 1px solid; text-align: center;">{{recruiter.registrationDetails.email}}</td>
         <td style="border: 1px solid; text-align: center;">{{recruiter.createdAt}}</td>
         <td style="border: 1px solid; text-align: center;">{{recruiter.lastLoginAt}}</td>

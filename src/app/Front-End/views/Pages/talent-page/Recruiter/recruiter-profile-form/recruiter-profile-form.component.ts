@@ -109,9 +109,6 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
         if (data) {
           this.profileDetails = data;
           this.profileDetailsForm.patchValue({
-            firstName: data.registrationDetails?.firstName || '',
-            lastName: data.registrationDetails?.lastName || '',
-            userName: data.registrationDetails?.userName || '',
             email: data.registrationDetails?.email || '',
           });
         } else {
