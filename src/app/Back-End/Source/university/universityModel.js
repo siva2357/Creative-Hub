@@ -10,7 +10,6 @@ const UniversitySchema = new mongoose.Schema({
     universityLogo: { fileName: { type: String, required: true }, url: { type: String, required: true } },
     universityName: { type: String, required: true },
     universityAddress: { type: String, required: true },
-    universityDescription: { type: String, required: true },
   }
 }, { timestamps: true });
 

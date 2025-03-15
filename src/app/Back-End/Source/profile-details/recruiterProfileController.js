@@ -16,12 +16,12 @@ exports.createRecruiterProfile = async (req, res) => {
       return res.status(400).json({ message: "Profile already exists for this recruiter" });
     }
     const { registrationDetails } = recruiter;
-    const { firstName, lastName, userName, email } = registrationDetails || {};
+    const { email } = registrationDetails || {};
     const profileDetails = {
       profilePicture: req.body.profileDetails.profilePicture || {},
-      firstName: firstName || (req.body.profileDetails.firstName || ""),
-      lastName: lastName || (req.body.profileDetails.lastName || ""),
-      userName: userName || (req.body.profileDetails.userName || ""),
+      firstName: req.body.profileDetails.firstName,
+      lastName: req.body.profileDetails.lastName,
+      userName: req.body.profileDetails.userName,
       email: email || (req.body.profileDetails.email || ""),
       gender: req.body.profileDetails.gender,
       dateOfBirth: req.body.profileDetails.dateOfBirth,
@@ -32,7 +32,7 @@ exports.createRecruiterProfile = async (req, res) => {
       country: req.body.profileDetails.country,
       pincode: req.body.profileDetails.pincode,
       companyName: req.body.profileDetails.companyName,
-      designation: req.body.profileDetails. designation,
+      designation: req.body.profileDetails.designation,
       experience: req.body.profileDetails.experience,
       universityNumber: req.body.profileDetails.universityNumber,
       employeeCode: req.body.profileDetails. employeeCode,
@@ -74,9 +74,6 @@ exports.getRecruiterProfile = async (req, res) => {
     }
 
     // Update basic details from registration details
-    recruiterProfile.profileDetails.firstName = recruiter .registrationDetails.firstName;
-    recruiterProfile.profileDetails.lastName = recruiter .registrationDetails.lastName;
-    recruiterProfile.profileDetails.userName = recruiter .registrationDetails.userName;
     recruiterProfile.profileDetails.email = recruiter .registrationDetails.email;
 
     res.status(200).json(recruiterProfile);
@@ -103,18 +100,6 @@ exports.updateRecruiterProfile = async (req, res) => {
     const { profileDetails } = req.body;
     if (!profileDetails) {
       return res.status(400).json({ message: "Profile details are required" });
-    }
-
-    // Remove the deletion of basic fields so they can be updated.
-    // Optionally, update the Seeker registration details as well.
-    if (profileDetails.firstName) {
-      recruiter.registrationDetails.firstName = profileDetails.firstName;
-    }
-    if (profileDetails.lastName) {
-      recruiter.registrationDetails.lastName = profileDetails.lastName;
-    }
-    if (profileDetails.userName) {
-      recruiter.registrationDetails.userName = profileDetails.userName;
     }
 
     if (profileDetails.email) delete profileDetails.email;

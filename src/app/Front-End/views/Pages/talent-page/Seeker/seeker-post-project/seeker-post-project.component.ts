@@ -70,9 +70,6 @@ export class SeekerPostProjectPageComponent implements OnInit, OnDestroy {
   uploadFile(event: any) {
     const file = event.target.files && event.target.files[0];
     if (file) {
-
-
-
       const filePath = `${Folder.Main_Folder}/${Folder.Seeker_Folder}/${Folder.Seeker_Sub_Folder_2}/${file.name}`;
 
       const fileRef = this.storage.ref(filePath);

@@ -1,5 +1,5 @@
 import { Company } from 'src/app/Front-End/core/models/company.model';
-import { Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, Input,  OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
@@ -7,20 +7,13 @@ import { Folder } from 'src/app/Front-End/core/enums/folder-name.enum';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable, throwError } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
-
-
-
 @Component({
   selector: 'app-company-edit',
   templateUrl: './company-edit.component.html',
   styleUrls: ['./company-edit.component.css']
 })
-export class CompanyEditComponent  implements OnInit,  OnDestroy {
-  @Input() company!: Company;
-
-  editor!: Editor;
-  toolbar: Toolbar = DEFAULT_TOOLBAR;
+export class CompanyEditComponent  implements OnInit  {
+  public company!: Company;
 
   companyUpdateForm!: FormGroup;
   isEditMode: boolean = false;
@@ -54,8 +47,7 @@ export class CompanyEditComponent  implements OnInit,  OnDestroy {
 
   ngOnInit(): void {
 
-    this.editor = new Editor();
-    this.initializeForm();
+    this.initializeForm(); // Initialize form structure
 
     this.activatedRouter.paramMap.subscribe((param) => {
       this.companyId = param.get('id')!;
@@ -67,60 +59,51 @@ export class CompanyEditComponent  implements OnInit,  OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.editor.destroy();
-}
 
-  fetchCompanyData() {
-    this.adminService.getCompanyById(this.companyId).subscribe(
-      (companyData: Company) => {
-        if (companyData) {
-          this.company = companyData;
-          this.initializeForm(); // Initialize form after data is fetched
-        } else {
-          this.errorMessage = 'University data not found';
-        }
-      },
-      (error) => {
-        this.errorMessage = 'Failed to load university data';
+    fetchCompanyData() {
+      this.adminService.getCompanyById(this.companyId).subscribe(
+        (companyData: Company) => {
+            if (companyData) {
+              this.company= companyData;
+              this.initializeForm();
+            } else {
+              this.errorMessage = 'University data not found';
+            }
+          },
+          (error) => {
+            this.errorMessage = 'Failed to load university data';
+          }
+        );
       }
-    );
-  }
 
-   initializeForm() {
+  initializeForm() {
     this.companyUpdateForm = this.fb.group({
       companyLogo: [null, Validators.required],
-      companyId: ['', [Validators.required]],
-      companyName: ['', [Validators.required]],
-      companyAddress: ['', [Validators.required]],
-      companyDescription: ['', [Validators.required]],
+      companyId: ['', Validators.required],
+      companyName: ['', Validators.required],
+      companyAddress: ['', Validators.required],
+    });
+
+    if (this. company && this. company. companyDetails) {
+      this.companyUpdateForm.patchValue({
+        companyLogo: this.company.companyDetails.companyLogo.url || null,
+        companyId: this.company.companyDetails.companyId || '',
+        companyName: this.company.companyDetails.companyName || '',
+        companyAddress: this.company.companyDetails.companyAddress || '',
       });
+      console.log('Form Value After Patch:', this.companyUpdateForm.value);
 
-      if (this.company && this.company.companyDetails) {
-        this.companyUpdateForm.patchValue({
-          companyLogo: this.company.companyDetails.companyLogo.url || null,
-          companyId: this.company.companyDetails.companyId,
-          companyName: this.company.companyDetails.companyName,
-          companyAddress: this.company.companyDetails.companyAddress,
-          companyDescription: this.company.companyDetails.companyDescription,
-        });
-
-        if (this.company.companyDetails.companyLogo?.url) {
-          this.fetchedURL = this.company.companyDetails.companyLogo.url;
-          this.ifFetched = true;
-
-
-        }
-      }
-
-      if (!this.isEditMode) {
-        this.companyUpdateForm.disable();
+      if (this.company.companyDetails.companyLogo?.url) {
+        this.fetchedURL = this.company.companyDetails.companyLogo.url;
+        this.ifFetched = true;
       }
     }
 
-    get companyDescriptionControl(): FormControl {
-      return this.companyUpdateForm.get('companyDescription') as FormControl;
+    if (!this.isEditMode) {
+      this.companyUpdateForm.disable();
     }
+
+  }
 
 
 
@@ -141,7 +124,6 @@ export class CompanyEditComponent  implements OnInit,  OnDestroy {
       companyId: this.company?.companyDetails?.companyId,
       companyName: this.company?.companyDetails?.companyName,
       companyAddress: this.company?.companyDetails?.companyAddress,
-      companyDescription: this.company?.companyDetails?.companyDescription
     });
 
     this.companyUpdateForm.disable();
@@ -314,7 +296,6 @@ onFileChange(event: any, filePath: string): void {
       companyId: this.company?.companyDetails?.companyId,
       companyName: this.company?.companyDetails?.companyName,
       companyAddress: this.company?.companyDetails?.companyAddress,
-      companyDescription: this.company?.companyDetails?.companyDescription
     });
 
     this.uploadedFileData = null;

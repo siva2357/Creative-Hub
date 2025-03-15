@@ -20,7 +20,6 @@ const seekerProfileSchema = mongoose.Schema(
       universityDegree: { type: String, required: true },
       yearOfGraduation: { type: Date, required: true },
       universityNumber: { type: String, required: true },
-
       bioDescription: { type: String, required: true },
     },
   },

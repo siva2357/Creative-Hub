@@ -4,9 +4,9 @@ export interface RecruiterProfile {
   _id?: string;
   profileDetails: {
     profilePicture: { fileName: string; url: string;};
-      firstName?: string;
-      lastName?: string;
-      userName?: string;
+      firstName: string;
+      lastName: string;
+      userName: string;
       email?: string;
       gender: string;
       dateOfBirth: string;
@@ -34,9 +34,9 @@ export interface SeekerProfile {
   _id?: string;
   profileDetails: {
     profilePicture: { fileName: string;url: string;};
-      firstName?: string;
-      lastName?: string;
-      userName?:string;
+      firstName: string;
+      lastName: string;
+      userName:string;
       email?: string;
       gender: string;
       dateOfBirth: string;  // ✅ Fix: Keep as string since API returns a string

@@ -21,14 +21,14 @@ exports.createSeekerProfile = async (req, res) => {
 
     // Extract basic details from the seeker registration data
     const { registrationDetails } = seeker;
-    const { firstName, lastName, userName, email } = registrationDetails || {};
+    const { email } = registrationDetails || {};
 
     // Construct the profileDetails object
     const profileDetails = {
       profilePicture: req.body.profileDetails?.profilePicture || {},
-      firstName: firstName || (req.body.profileDetails?.firstName || ""),
-      lastName: lastName || (req.body.profileDetails?.lastName || ""),
-      userName: userName || (req.body.profileDetails?.userName || ""),
+      firstName: req.body.profileDetails?.firstName,
+      lastName: req.body.profileDetails?.lastName,
+      userName: req.body.profileDetails?.userName,
       email: email || (req.body.profileDetails?.email || ""),
       gender: req.body.profileDetails?.gender,
       dateOfBirth: req.body.profileDetails?.dateOfBirth,
@@ -82,9 +82,6 @@ exports.getSeekerProfile = async (req, res) => {
     }
 
     // Update basic details from registration details
-    seekerProfile.profileDetails.firstName = seeker.registrationDetails.firstName;
-    seekerProfile.profileDetails.lastName = seeker.registrationDetails.lastName;
-    seekerProfile.profileDetails.userName = seeker.registrationDetails.userName;
     seekerProfile.profileDetails.email = seeker.registrationDetails.email;
 
     res.status(200).json(seekerProfile);
@@ -113,17 +110,7 @@ exports.updateSeekerProfile = async (req, res) => {
       return res.status(400).json({ message: "Profile details are required" });
     }
 
-    // Remove the deletion of basic fields so they can be updated.
-    // Optionally, update the Seeker registration details as well.
-    if (profileDetails.firstName) {
-      seeker.registrationDetails.firstName = profileDetails.firstName;
-    }
-    if (profileDetails.lastName) {
-      seeker.registrationDetails.lastName = profileDetails.lastName;
-    }
-    if (profileDetails.userName) {
-      seeker.registrationDetails.userName = profileDetails.userName;
-    }
+
 
     if (profileDetails.email) delete profileDetails.email;
     await seeker.save();

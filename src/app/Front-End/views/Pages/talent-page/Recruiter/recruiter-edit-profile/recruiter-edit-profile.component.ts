@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
 import { Observable, throwError } from 'rxjs';
+import { Designation } from 'src/app/Front-End/core/enums/designation.enum';
 import { Folder } from 'src/app/Front-End/core/enums/folder-name.enum';
 import { Company } from 'src/app/Front-End/core/models/company.model';
 import { RecruiterProfile } from 'src/app/Front-End/core/models/profile-details.model';
@@ -18,6 +19,7 @@ import { ProfileService } from 'src/app/Front-End/core/services/profile-service'
 })
 
 export class RecruiterEditProfileComponent implements OnInit, OnDestroy {
+  @ViewChild('fileInput') fileInput!: ElementRef;
   updateProfileForm!: FormGroup;
   isSubmitting: boolean = false;
   errorMessage: string = '';
@@ -26,7 +28,7 @@ export class RecruiterEditProfileComponent implements OnInit, OnDestroy {
   recruiterId!: string;
   public profile!: RecruiterProfile;
   public companyList!: Company[];
-
+ public designations = Object.values(Designation); // Convert Enum to an array
 
   ifPreview: boolean = false;
   ifFetched: boolean = false;
@@ -39,6 +41,7 @@ export class RecruiterEditProfileComponent implements OnInit, OnDestroy {
   uploadComplete = false;
   fileRef: any;
   isEditMode: boolean = false;
+
   profileActive: boolean = true;
 
 
@@ -79,6 +82,7 @@ export class RecruiterEditProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.editor.destroy();
   }
+
 
 
 

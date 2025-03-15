@@ -70,6 +70,7 @@ export class TalentHeaderComponent implements OnInit {
         console.log('Admin Details:', data);
         this.adminDetails = data;
         this.userName = this.adminDetails.registrationDetails.userName;
+        this.profile = this.adminDetails.registrationDetails.profilePicture;
         this.loading = false;
       },
       (error) => {
@@ -122,11 +123,14 @@ handleError(error: any) {
 
   // Navigate to the change password page
   goToChangePasswordPage(): void {
-    if (!this.userDetails || !this.userDetails._id) { // Assuming email is unique
-      console.error('User details are missing or invalid');
+    const userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+    const userRole = localStorage.getItem('userRole') || this.authService.getRole() || '';
+    if (!userId || !userRole) {
+      console.error('User ID or role is missing');
       return;
     }
-    this.router.navigate([`talent-page/change-password/${this.userDetails._id}`]); // Redirect to change-password page
+    const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
+    this.router.navigate([`talent-page/change-password/${userId}`]); // Redirect to change-password page
   }
 
   goToAccountSettingsPage(): void {

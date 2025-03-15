@@ -11,9 +11,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminUserDataPageComponent } from './admin-user-data/admin-user-data.component';
 import { LayoutModule } from "../../../Layouts/layout.module";
 import { UniversityComponent } from './university/university.component';
-import { UniversityDetailsComponent } from './university-details/university-details.component';
 import { CompanyComponent } from './company/company.component';
-import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { SeekerComponent } from './seeker/seeker.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
@@ -30,9 +28,7 @@ import { NgxEditorModule } from 'ngx-editor';
     AdminDashboardComponent,
     AdminUserDataPageComponent,
     UniversityComponent,
-    UniversityDetailsComponent,
     CompanyComponent,
-    CompanyDetailsComponent,
     RecruiterComponent,
     SeekerComponent,
     RecruiterDetailsComponent,

@@ -14,6 +14,7 @@ import { Company } from 'src/app/Front-End/core/models/company.model';
   templateUrl: './company-post.component.html',
   styleUrls: ['./company-post.component.css']
 })
+
 export class CompanyPostComponent implements OnInit ,OnDestroy {
   companyPostForm!: FormGroup;
   uploading: boolean = false; // Track upload state
@@ -57,20 +58,22 @@ export class CompanyPostComponent implements OnInit ,OnDestroy {
       companyId: ['', Validators.required],
       companyName: ['', Validators.required],
       companyAddress: ['', Validators.required],
-      companyDescription: ['', Validators.required],
     });
   }
 
 
-
-  onFileChange(event: any): void {
+  uploadFile(event: any) {
     const file = event.target.files && event.target.files[0];
     if (file) {
       const filePath = `${Folder.Main_Folder}/${Folder.Admin_Folder}/${Folder.Admin_Sub_Folder_3}/${file.name}`;
+
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, file);
+      // this.previewURL = URL.createObjectURL(file);
       this.previewURL = this.domSanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file));
+
       this.fileType = this.getFileType(file);
+
       this.fileUploadProgress = task.percentageChanges();
       this.ifPreview = true;
 
@@ -79,10 +82,15 @@ export class CompanyPostComponent implements OnInit ,OnDestroy {
           if (snapshot?.state === 'success') {
             fileRef.getDownloadURL().subscribe((url) => {
               console.log('File uploaded successfully. URL:', url);
-              this.uploadedFileData = { fileName: file.name, url: url, filePath: filePath };
+
+              // Store the file details for later submission
+              this.uploadedFileData = {
+                fileName: file.name,
+                url: url,
+                filePath: filePath // Save the file path for deletion
+              };
               this.uploadComplete = true;
             });
-
           }
         },
         error: (error) => {
@@ -93,6 +101,32 @@ export class CompanyPostComponent implements OnInit ,OnDestroy {
 
     }
 
+  }
+
+
+
+
+  deletePreview(): void {
+    this.previewURL = null;
+    this.fileType = null;
+    this.fileUploadProgress = undefined;
+    this.uploadComplete =false;
+
+    if (this.uploadedFileData) {
+      const { filePath } = this.uploadedFileData;
+
+      this.storage.ref(filePath).delete().subscribe({
+        next: () => {
+          console.log('File deleted from Firebase Storage');
+          this.uploadedFileData = null;
+          this.ifPreview = false;
+        },
+        error: (error) => {
+          console.error('Error deleting file from Firebase Storage:', error);
+          this.errorMessage = 'Failed to delete the file. Please try again.';
+        }
+      });
+    }
   }
 
 

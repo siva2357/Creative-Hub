@@ -79,9 +79,9 @@ this.editor.destroy();
   initializeForm() {
     this.profileDetailsForm = this.fb.group({
       _id: [null],
-      firstName: [{ value: '', disabled: true }],
-      lastName: [{ value: '', disabled: true }],
-      userName: [{ value: '', disabled: true }],
+      firstName:  ['', Validators.required],
+      lastName:  ['', Validators.required],
+      userName:  ['', Validators.required],
       email: [{ value: '', disabled: true }],
       gender: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
@@ -210,6 +210,7 @@ this.editor.destroy();
             profileDetails: {
                     firstName: this.profileDetailsForm.value.firstName,
                     lastName: this.profileDetailsForm.value.lastName,
+                    userName: this.profileDetailsForm.value.userName,
                     email: this.profileDetailsForm.value.email,
                     gender: this.profileDetailsForm.value.gender,
                     dateOfBirth: this.profileDetailsForm.value.dateOfBirth,

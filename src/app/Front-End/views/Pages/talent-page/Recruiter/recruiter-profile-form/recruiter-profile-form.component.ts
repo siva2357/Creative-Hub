@@ -13,6 +13,8 @@ import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
 import { Folder } from 'src/app/Front-End/core/enums/folder-name.enum';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
 import { Company } from 'src/app/Front-End/core/models/company.model';
+import { Designation } from 'src/app/Front-End/core/enums/designation.enum';
+
 
 @Component({
   selector: 'app-recruiter-profile-form',
@@ -28,6 +30,7 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
   recruiterId!: string;
   public profileDetails! :Recruiter;
   public companyList! :Company[];
+  public designations = Object.values(Designation); // Convert Enum to an array
 
   ifPreview = false;
   uploadedFileData: { fileName: string; url: string; filePath: string } | null = null;
@@ -80,9 +83,9 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
   initializeForm() {
     this.profileDetailsForm = this.fb.group({
       _id: [null],
-      firstName: [{ value: '', disabled: true }],
-      lastName: [{ value: '', disabled: true }],
-      userName: [{ value: '', disabled: true }],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userName: ['', Validators.required],
       email: [{ value: '', disabled: true }],
       gender: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
@@ -210,6 +213,7 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
           profileDetails: {
                   firstName: this.profileDetailsForm.value.firstName,
                   lastName: this.profileDetailsForm.value.lastName,
+                  userName: this.profileDetailsForm.value.userName,
                   email: this.profileDetailsForm.value.email,
                   gender: this.profileDetailsForm.value.gender,
                   dateOfBirth: this.profileDetailsForm.value.dateOfBirth,
@@ -224,7 +228,7 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
                   experience: this.profileDetailsForm.value.experience,
                   employeeCode: this.profileDetailsForm.value.employeeCode,
                   bioDescription: this.profileDetailsForm.value.bioDescription,
-              profilePicture: this.uploadedFileData || { fileName: '', url: ''}, // Provide a default value when null
+                  profilePicture: this.uploadedFileData || { fileName: '', url: ''}, // Provide a default value when null
             }
       };
 

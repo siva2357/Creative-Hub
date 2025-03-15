@@ -1,5 +1,5 @@
 import { University } from './../../../../../core/models/university.model';
-import { Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
@@ -7,18 +7,15 @@ import { Folder } from 'src/app/Front-End/core/enums/folder-name.enum';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable, throwError } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-university-edit',
   templateUrl: './university-edit.component.html',
   styleUrls: ['./university-edit.component.css']
 })
-export class UniversityEditComponent  implements OnInit,  OnDestroy {
+export class UniversityEditComponent  implements OnInit  {
   public university!: University;
 
- editor!: Editor;
- toolbar: Toolbar = DEFAULT_TOOLBAR;
 
   universityUpdateForm!: FormGroup;
   isEditMode: boolean = false;
@@ -42,8 +39,6 @@ export class UniversityEditComponent  implements OnInit,  OnDestroy {
 
 
 
-
-
   constructor(
     private fb: FormBuilder,
     private activatedRouter: ActivatedRoute,
@@ -55,10 +50,7 @@ export class UniversityEditComponent  implements OnInit,  OnDestroy {
 
   ngOnInit(): void {
 
-    this.editor = new Editor();
-
     this.initializeForm();
-    console.log('Form Controls:', this.universityUpdateForm.controls);
 
     this.activatedRouter.paramMap.subscribe((param) => {
       this.universityId = param.get('id')!;
@@ -74,10 +66,6 @@ export class UniversityEditComponent  implements OnInit,  OnDestroy {
   }
 
 
-  ngOnDestroy(): void {
-      this.editor.destroy();
-
-  }
 
 
 
@@ -105,16 +93,15 @@ export class UniversityEditComponent  implements OnInit,  OnDestroy {
       universityId: ['', [Validators.required]],
       universityName: ['', [Validators.required]],
       universityAddress: ['', [Validators.required]],
-      universityDescription: ['', [Validators.required]],
     });
 
     if (this.university && this.university.universityDetails) {
       this.universityUpdateForm.patchValue({
         universityLogo: this.university.universityDetails.universityLogo.url || null,
-        universityId: this.university.universityDetails.universityId,
-        universityName: this.university.universityDetails.universityName,
-        universityAddress: this.university.universityDetails.universityAddress,
-        universityDescription: this.university.universityDetails.universityDescription,
+        universityId: this.university.universityDetails.universityId || '',
+        universityName: this.university.universityDetails.universityName  || '',
+        universityAddress: this.university.universityDetails.universityAddress  || ''
+
       });
 
       if (this.university.universityDetails.universityLogo?.url) {
@@ -127,13 +114,6 @@ export class UniversityEditComponent  implements OnInit,  OnDestroy {
       this.universityUpdateForm.disable();
     }
   }
-
-  get universityDescriptionControl(): FormControl {
-    return this.universityUpdateForm.get('universityDescription') as FormControl;
-  }
-
-
-
 
   openEditMode(): void {
     if (this.universityActive) {
@@ -149,8 +129,8 @@ export class UniversityEditComponent  implements OnInit,  OnDestroy {
         universityLogo: this.university?.universityDetails?.universityLogo?.url || '',
         universityId: this.university?.universityDetails?.universityId,
         universityName: this.university?.universityDetails?.universityName,
-        universityAddress: this.university?.universityDetails?.universityAddress,
-        universityDescription: this.university?.universityDetails?.universityDescription
+        universityAddress: this.university?.universityDetails?. universityAddress
+
     });
 
     this.universityUpdateForm.disable();
@@ -323,9 +303,7 @@ onFileChange(event: any, filePath: string): void {
     this.universityUpdateForm.patchValue({
       universityLogo: this.university?.universityDetails?.universityLogo?.url || '',
       universityId: this.university?.universityDetails?.universityId,
-      universityName: this.university?.universityDetails?.universityName,
-      universityAddress: this.university?.universityDetails?.universityAddress,
-      universityDescription: this.university?.universityDetails?.universityDescription
+      universityName: this.university?.universityDetails?.universityName
     });
 
     this.uploadedFileData = null;

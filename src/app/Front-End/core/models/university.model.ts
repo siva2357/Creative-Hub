@@ -12,8 +12,7 @@ import { SafeHtml } from "@angular/platform-browser";
       universityLogo: { fileName: string; url: string };
       universityName: string;
       universityAddress: string;
-      universityDescription: string;
-      sanitizedUniversityDescription?: SafeHtml; // Change ty
     };
   }
+
 
