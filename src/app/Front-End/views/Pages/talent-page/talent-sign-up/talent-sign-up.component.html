@@ -1,33 +1,33 @@
-<div class="container-fluid  d-flex justify-content-center align-items-center vh-100" style="background: #11131c;">
-  <div class="card text-center " style="max-width: 400px; width: 100%; border:  1px solid rgba(0, 0, 255, 0.7); box-shadow: 0 0 10px 5px rgba(0, 149, 255, 0.7);  border-radius: 20px; -webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px); background: radial-gradient(circle, rgba(255, 255, 255, 0.274), #11131c); " >
+<div class="container-fluid  d-flex justify-content-center align-items-center position-absolute top-50 start-50 translate-middle" style="font-family: 'Poppins', sans-serif;" >
+  <div class="card text-center shadow-lg " style="max-width: 400px; width: 100%; border: 1px solid #007bff; border-radius: 15px;">
 
-  
-  
+
+
       <div class="card-body" style="border-radius: 15px;">
-        <div class="container pb-3 text-center align-items-center">
-          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1713107223/Screenshot_2024-04-14_203418-removebg-preview_hg6usb.png" alt="Logo" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+        <div class="container pb-3 mt-3 text-center align-items-center">
+          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg" alt="Logo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
         </div>
 
 
-        <div class="row justify-content-center mb-5 mt-3">
+        <div class="row justify-content-center mb-3 mt-3">
           <div class="d-flex flex-column align-items-center justify-content-center">
 
-            <h4 class="text-center text-white mb-5">Registration Details</h4>
+            <h4 class="text-center mb-5 poppins-bold">Registration Details</h4>
 
               <div class="mb-4">
                 <div class="d-flex  justify-content-center align-items-center gap-5">
                     <input type="radio" id="seekerRadio" name="userType" class="btn-check" (change)="selectUserType('seeker')" autocomplete="off">
-                    <label class="btn btn-outline-secondary rounded-3  fw-bold" for="seekerRadio">As Seeker</label>
+                    <label class="btn btn-outline-primary rounded-3  px-4 py-2 poppins-medium" for="seekerRadio" style="font-size: 14px;">As Seeker</label>
 
                     <input type="radio" id="recruiterRadio" name="userType" class="btn-check" (change)="selectUserType('recruiter')" autocomplete="off">
-                    <label class="btn btn-outline-secondary rounded-3  fw-bold" for="recruiterRadio">As Recruiter</label>
+                    <label class="btn btn-outline-primary rounded-3  px-4 py-2 poppins-medium" for="recruiterRadio" style="font-size: 14px;">As Recruiter</label>
                 </div>
               </div>
-              
 
-            <button *ngIf="isUserTypeSelected" type="button" class="btn btn-outline-secondary fw-bold" (click)="navigateToRegistration()">Sign Up</button>
 
-            <p class="mb-0 text-center text-white fs-6 mt-5">Already a member? <span class="text-primary" (click)="login()" style="cursor: pointer;">Login</span></p>
+            <button *ngIf="isUserTypeSelected" type="button" class="btn btn-outline-primary rounded-3  px-4 py-2 poppins-medium"  style="font-size: 14px;" (click)="navigateToRegistration()"> Sign Up</button>
+
+            <p class="mb-0 text-center  mt-3  poppins-regular" style="font-size: 14px;">Already a member? <span class="text-primary poppins-semibold" (click)="login()" style="cursor: pointer;">Login</span></p>
 
           </div>
       </div>
@@ -36,3 +36,8 @@
   </div>
 
   </div>
+
+
+
+
+

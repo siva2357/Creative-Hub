@@ -4,9 +4,7 @@ import { AdminPageComponent } from './admin-page.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminUserDataPageComponent } from './admin-user-data/admin-user-data.component';
 import { UniversityComponent } from './university/university.component';
-import { UniversityDetailsComponent } from './university-details/university-details.component';
 import { CompanyComponent } from './company/company.component';
-import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { SeekerComponent } from './seeker/seeker.component';
 import { RecruiterDetailsComponent } from './recruiter-details/recruiter-details.component';
@@ -26,8 +24,6 @@ const routes: Routes = [
 		{ path: 'user-data', component: AdminUserDataPageComponent } ,// Hire Seeker page route
     { path: 'university', component: UniversityComponent } ,// Hire Seeker page route
 		{ path: 'company', component: CompanyComponent } ,// Hire Seeker page route
-    { path: 'university-details/:id', component: UniversityDetailsComponent } ,// Hire Seeker page route
-		{ path: 'company-details/:id', component: CompanyDetailsComponent } ,// Hire Seeker page route
     { path: 'recruiter', component: RecruiterComponent } ,// Hire Seeker page route
 		{ path: 'seeker', component: SeekerComponent} ,// Hire Seeker page route
     { path: 'recruiter-details/:id', component: RecruiterDetailsComponent } ,// Hire Seeker page route

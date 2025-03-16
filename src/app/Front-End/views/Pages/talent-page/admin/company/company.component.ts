@@ -45,61 +45,6 @@ export class CompanyComponent implements OnInit{
     this.fetchCompanies();
   }
 
-  goToCompanyDetails(company:Company) {
-    if (!company || !company._id) {
-      console.error('Universtiy ID is missing or invalid');
-      return;
-    }
-      this.router.navigateByUrl(`talent-page/admin/company-details/${company._id}`)
-  }
-
-
-
-
-  deleteCompanyById(id: string, filePath: string) {
-    if (!id) {
-      console.error("University ID is missing or invalid.");
-      return;
-    }
-
-    const confirmDelete = confirm("Are you sure you want to delete this university?");
-    if (!confirmDelete) return;
-    const originalCompanies = [...this.companies];
-    this.companies = this.companies.filter(company => company._id !== id);
-    this.adminService.deleteCompanyById(id).subscribe(
-      () => {
-        console.log("Company deleted successfully!");
-        if (filePath) {
-          this.deleteCompanyLogo(filePath);
-        }
-        this.fetchCompanies()
-      },
-      (error) => {
-        console.error("Error deleting university:", error);
-        alert("Failed to delete the university. Please try again.");
-        this.companies = originalCompanies;
-      }
-    );
-
-    this.updatePagination()
-  }
-
-  deleteCompanyLogo(filePath: string): void {
-    if (!filePath) {
-      console.error("No file path provided for deletion.");
-      return;
-    }
-    const correctedFilePath = `${Folder.Main_Folder}/${Folder.Admin_Folder}/${Folder.Admin_Sub_Folder_3}/${filePath}`;
-    this.storage.ref(correctedFilePath).delete().subscribe({
-      next: () => {
-        console.log("University logo deleted successfully from Firebase Storage");
-      },
-      error: (error) => {
-        console.error("Error deleting university logo from Firebase Storage:", error);
-        alert("Failed to delete the university logo. Please try again.");
-      }
-    });
-  }
 
 
   get hasCompanies(): boolean {
@@ -112,14 +57,7 @@ export class CompanyComponent implements OnInit{
     this.adminService.getAllCompanies().subscribe(
       (response: CompanyResponse) => {
         this.totalCompanies = response.totalCompanies; // Store total count
-
-        this.companies = response.companies.map((company: Company) => ({
-          ...company,
-          companyDetails: {
-            ...company.companyDetails,
-            sanitizedCompanyDescription: this.sanitizeHtml(company.companyDetails.companyDescription) // Assign inside universityDetails
-          }
-        }));
+        this.companies = response.companies;
         this.filteredData = [...this.companies]; // Ensure filteredJobs is updated
         this.totalEntries = this.filteredData.length; // Ensure total count updates
         this.updatePagination();
@@ -131,9 +69,6 @@ export class CompanyComponent implements OnInit{
     );
   }
 
-  sanitizeHtml(html: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
-  }
 
 // Common method to check file extension
 private hasValidExtension(url: string, validExtensions: string[]): boolean {
@@ -146,17 +81,6 @@ isImage(url: string): boolean {
   return this.hasValidExtension(url, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
 }
 
-isVideo(url: string): boolean {
-  return this.hasValidExtension(url, ['mp4', 'webm', 'ogg']);
-}
-
-isAudio(url: string): boolean {
-  return this.hasValidExtension(url, ['mp3']);
-}
-
-isPDF(url: string): boolean {
-  return this.hasValidExtension(url, ['pdf']);
-}
 
 getFileExtension(url: string): string {
   const ext = url.split('?')[0].toLowerCase();
@@ -254,8 +178,6 @@ deleteSelected() {
 
 
 
-
-
   getStartIndex(): number {
     if (this.totalEntries === 0) return 0;
     return (this.currentPage - 1) * this.itemsPerPage + 1;
@@ -266,7 +188,6 @@ deleteSelected() {
   }
 
 
-
   calculatePagination() {
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
     this.paginatedData = this.filteredData.slice(
@@ -274,9 +195,6 @@ deleteSelected() {
       this.currentPage * this.itemsPerPage
     );
   }
-
-
-
 
 
   paginateJobs(): void {
@@ -305,11 +223,55 @@ deleteSelected() {
     }
   }
 
-
-
   resetSearch() {
     this.searchTerm = '';
     this.filterData();
+  }
+
+
+  deleteCompanyById(id: string, filePath: string) {
+    if (!id) {
+      console.error("University ID is missing or invalid.");
+      return;
+    }
+
+    const confirmDelete = confirm("Are you sure you want to delete this university?");
+    if (!confirmDelete) return;
+    const originalCompanies = [...this.companies];
+    this.companies = this.companies.filter(company => company._id !== id);
+    this.adminService.deleteCompanyById(id).subscribe(
+      () => {
+        console.log("Company deleted successfully!");
+        if (filePath) {
+          this.deleteCompanyLogo(filePath);
+        }
+        this.fetchCompanies()
+      },
+      (error) => {
+        console.error("Error deleting university:", error);
+        alert("Failed to delete the university. Please try again.");
+        this.companies = originalCompanies;
+      }
+    );
+
+    this.updatePagination()
+  }
+
+  deleteCompanyLogo(filePath: string): void {
+    if (!filePath) {
+      console.error("No file path provided for deletion.");
+      return;
+    }
+    const correctedFilePath = `${Folder.Main_Folder}/${Folder.Admin_Folder}/${Folder.Admin_Sub_Folder_3}/${filePath}`;
+    this.storage.ref(correctedFilePath).delete().subscribe({
+      next: () => {
+        console.log("University logo deleted successfully from Firebase Storage");
+      },
+      error: (error) => {
+        console.error("Error deleting university logo from Firebase Storage:", error);
+        alert("Failed to delete the university logo. Please try again.");
+      }
+    });
   }
 
 

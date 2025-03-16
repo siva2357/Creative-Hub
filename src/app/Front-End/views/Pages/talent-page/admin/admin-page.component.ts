@@ -12,13 +12,12 @@ export class AdminPageComponent {
     console.log('Auto logout service initialized');
   }
 
-
   menu: MenuItem[] = [
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid' },
     { label: 'User Data', link: 'user-data', icon: 'bi bi-database' },
   ];
 
-  sidebarOpen: boolean = true;
+  sidebarOpen: boolean = false;
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;

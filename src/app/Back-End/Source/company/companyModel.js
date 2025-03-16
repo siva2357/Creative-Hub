@@ -9,7 +9,6 @@ const CompanySchema = new mongoose.Schema({
     companyLogo: { fileName: { type: String, required: true }, url: { type: String, required: true } },
     companyName: { type: String, required: true },
     companyAddress: { type: String, required: true },
-    companyDescription: { type: String, required: true },
   }
 }, { timestamps: true });
 

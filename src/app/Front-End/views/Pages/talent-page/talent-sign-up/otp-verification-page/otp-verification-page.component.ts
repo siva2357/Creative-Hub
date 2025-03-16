@@ -76,7 +76,7 @@ export class OtpVerificationPageComponent  implements OnInit {
       this.errorMessage = 'User data is missing.';
       return;
     }
-  
+
     const otp = [
       this.otpForm.value.otp1,
       this.otpForm.value.otp2,
@@ -85,27 +85,27 @@ export class OtpVerificationPageComponent  implements OnInit {
       this.otpForm.value.otp5,
       this.otpForm.value.otp6
     ].join('');
-  
+
     if (otp.length !== 6) {
       this.errorMessage = 'Please enter a valid 6-digit OTP.';
       return;
     }
-  
+
     this.isLoading = true;
-  
+
     console.log('Verifying OTP for:', this.userData.role, 'Email:', this.userData.registrationDetails.email);
-  
+
     this.authService.verifyOtp(otp, this.userData.registrationDetails.email).subscribe(
       (response: any) => {
         console.log('OTP verified successfully', response);
-  
+
         // Ensure the response contains the role (recruiter/seeker)
         if (response.success && response.role) {
           this.isLoading = false;  // Hide loading after OTP is verified
           this.userData.role = response.role;  // Update role in userData
-  
+
           console.log('Redirecting to confirmation page based on role:', response.role);
-          
+
           if (response.role === 'Recruiter') {
             this.router.navigateByUrl('talent-page/register/confirmation-page', { replaceUrl: true });
           } else if (response.role === 'Seeker') {
@@ -125,10 +125,10 @@ export class OtpVerificationPageComponent  implements OnInit {
       }
     );
   }
-  
-  
-  
-  
+
+
+
+
 
   resendOtp(): void {
     this.isLoading = true;
@@ -155,13 +155,25 @@ export class OtpVerificationPageComponent  implements OnInit {
     );
   }
 
-  // Move to next OTP field after input
   moveFocus(index: number, event: any): void {
-    if (event.target.value.length === 1 && index < 5) {
+    const inputLength = event.target.value.length;
+
+    if (inputLength === 1 && index < 5) {
+      // Move forward if a digit is entered
       const nextInput = document.getElementsByClassName('otp-input').item(index + 1) as HTMLInputElement;
       if (nextInput) {
         nextInput.focus();
       }
     }
+
+    else if (inputLength === 0 && index > 0 && event.inputType === "deleteContentBackward") {
+      // Move backward if backspace is pressed
+      const prevInput = document.getElementsByClassName('otp-input').item(index - 1) as HTMLInputElement;
+      if (prevInput) {
+        prevInput.focus();
+      }
+    }
   }
+
+
 }

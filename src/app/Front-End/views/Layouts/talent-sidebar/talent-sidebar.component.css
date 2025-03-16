@@ -11,7 +11,7 @@
   left: 0;
   top: 0;
   height: 100vh;
-  width: 80px;
+  width: 65px;
   background: #11101D;
   align-items: center;
   z-index: 99;
@@ -19,31 +19,6 @@
 
 .sidebar.open {
   width: 200px;
-}
-
-.sidebar .logo-details {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.sidebar .logo-details .logo {
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-.sidebar .logo-details .logo_name {
-  color: #fff;
-  font-weight: 600;
-
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-.sidebar.open .logo-details .logo,
-.sidebar.open .logo-details .logo_name {
-  opacity: 1;
 }
 
 .sidebar .logo-details #btn {
@@ -62,8 +37,8 @@
 
 .sidebar i {
   color: #fff;
-  height: 60px;
-  min-width: 60px;
+  height: 45px;
+  min-width: 45px;
   text-align: center;
   line-height: 50px;
 }
@@ -143,7 +118,7 @@ color: black;
 
 .sidebar li a .links_name {
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   white-space: nowrap;
   opacity: 0;
@@ -162,12 +137,7 @@ color: black;
   color: #11101D;
 }
 
-.sidebar li i {
-  height: 50px;
-  line-height: 50px;
-  font-size: 18px;
-  border-radius: 12px;
-}
+
 
 
 

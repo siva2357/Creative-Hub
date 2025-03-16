@@ -11,7 +11,6 @@ import { TalentSignUpComponent } from './talent-sign-up/talent-sign-up.component
 import { RegisterSeekerComponent } from './talent-sign-up/register-seeker/register-seeker.component';
 import { RegisterRecruiterComponent } from './talent-sign-up/register-recruiter/register-recruiter.component';
 import { ConfirmationComponent } from './talent-sign-up/account-confirmation/account-confirmation.component';
-import { ErrorRegisterComponent } from './talent-sign-up/error-account-register/account-confirmation.component';
 
 import { TalentPagesRoutingModule } from './talent-pages-routing.module';
 import { RecruiterPageModule } from './Recruiter/recruiter-pages.module';
@@ -30,7 +29,6 @@ import { ChangePasswordPageComponent } from './talent-sign-up/change-password-pa
     RegisterSeekerComponent,
     RegisterRecruiterComponent,
     ConfirmationComponent,
-    ErrorRegisterComponent,
     OtpVerificationPageComponent,
     ChangePasswordPageComponent,
 
