@@ -8,7 +8,7 @@ export interface Applicant {
 
 export class JobPostFilterParams extends ApiSearchParams {
   jobId?: string;
-  jobRoleTitle?: string;
+  jobTitle?: string;
   jobCategory?: string;
   jobType?: string;
   experience?: string;
@@ -21,7 +21,7 @@ export interface JobPost {
   jobPostDetails: {
     jobId: string;
     jobType: string;
-    jobRoleTitle: string;
+    jobTitle: string;
     jobCategory: string;
     experience: string;
     salary: string;

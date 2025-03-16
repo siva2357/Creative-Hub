@@ -26,7 +26,7 @@ exports.createJobPost = async (req, res) => {
       return res.status(404).json({ message: "Recruiter profile not found" });
     }
 
-    const { firstName, lastName } = recruiter.registrationDetails || {};
+    const { firstName, lastName } = recruiterProfile.profileDetails || {};
     if (!firstName || !lastName) {
       return res.status(400).json({ message: "Recruiter does not have complete profile details" });
     }
@@ -238,7 +238,7 @@ exports.getJobById = async (req, res) => {
 
     const job = await JobPost.findById(jobId)
       .populate("companyId", "companyDetails") // Fetch company details
-      .populate("recruiterId", "profileDetails.basicDetails.firstName profileDetails.basicDetails.lastName profileDetails.contactDetails.email"); // Fetch recruiter details
+      .populate("recruiterId", "profileDetails.firstName profileDetails.lastName profileDetails.email"); // Fetch recruiter details
 
     if (!job) return res.status(404).json({ message: "Job post not found" });
 
@@ -255,6 +255,7 @@ exports.getJobById = async (req, res) => {
     res.status(500).json({ message: "Error fetching job post", error: error.message });
   }
 };
+
 
 exports.getAllJobs = async (req, res) => {
   try {
@@ -293,38 +294,20 @@ exports.applyForJob = async (req, res) => {
 exports.applyForJob = async (req, res) => {
   try {
     const { seekerId, jobId } = req.params;
-
-    // Validate the ObjectId format for seekerId and jobId
-    if (!mongoose.Types.ObjectId.isValid(seekerId)) {
-      return res.status(400).json({ message: "Invalid seeker ID format" });
-    }
-    if (!mongoose.Types.ObjectId.isValid(jobId)) {
-      return res.status(400).json({ message: "Invalid job ID format" });
-    }
-
-    // Find the job post by its ID
+    if (!mongoose.Types.ObjectId.isValid(seekerId)) { return res.status(400).json({ message: "Invalid seeker ID format" });}
+    if (!mongoose.Types.ObjectId.isValid(jobId)) { return res.status(400).json({ message: "Invalid job ID format" });}
     const jobPost = await JobPost.findById(jobId);
-    if (!jobPost) {
-      return res.status(404).json({ message: "Job post not found" });
-    }
-
-    // Check if the seeker has already applied
+    if (!jobPost) { return res.status(404).json({ message: "Job post not found" });}
     const alreadyApplied = jobPost.applicants.some(app => app.seekerId.toString() === seekerId);
-    if (alreadyApplied) {
-      return res.status(400).json({ message: "You have already applied for this job" });
-    }
-
-    // Add the applicant to the job post
+    if (alreadyApplied) { return res.status(400).json({ message: "You have already applied for this job" });}
     jobPost.applicants.push({ seekerId, appliedAt: new Date() });
     await jobPost.save();
-
     res.status(200).json({ message: "Application submitted successfully", jobPost });
   } catch (error) {
     console.error("Error applying for job:", error);
     res.status(500).json({ message: "Error applying for job", error: error.message });
   }
 };
-
 
 // Withdraw job application (within 2 minutes)
 exports.withdrawApplication = async (req, res) => {
@@ -421,7 +404,7 @@ exports.getJobApplicants = async (req, res) => {
     .populate({
       path: "applicants.seekerId",
       model: "Seeker",
-      select: "registrationDetails phone resume",
+      select: "registrationDetails",
     })
     .populate("companyId", "companyName location");
 
@@ -453,9 +436,10 @@ exports.getJobApplicants = async (req, res) => {
       totalApplicants, // ✅ Include total number of applicants
       applicants: jobPost.applicants.map(app => ({
         seekerId: app.seekerId?._id,
-        firstName: app.seekerId?.registrationDetails?.firstName,
-        lastName: app.seekerId?.registrationDetails?.lastName,
+        firstName: app.seekerId?.profileDetails?.firstName,
+        lastName: app.seekerId?.profileDetails?.lastName,
         email: app.seekerId?.registrationDetails?.email,
+        phoneNumber: app.seekerId?.profileDetails?.phoneNumber,
         appliedAt: app.appliedAt
       })),
       seekerDetails, // Only if seekerId is provided

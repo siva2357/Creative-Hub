@@ -1,12 +1,15 @@
 import { Component} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
+import { QUALIFICATION } from 'src/app/Front-End/core/enums/qualification.enum';
 import { Company } from 'src/app/Front-End/core/models/company.model';
 import { JobPost } from 'src/app/Front-End/core/models/jobPost.model';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
 import { JobPostService } from 'src/app/Front-End/core/services/jobPost.service';
-
-
+import { EXPERIENCE } from 'src/app/Front-End/core/enums/experience.enum';
+import { JOBCATEGORY } from 'src/app/Front-End/core/enums/job-category.enum';
+import { JOBTYPE } from 'src/app/Front-End/core/enums/job-type.enum';
+import { SALARY } from 'src/app/Front-End/core/enums/salary.enum';
 @Component({
   selector: 'app-recruiter-post-job',
   templateUrl: './recruiter-post-job.component.html',
@@ -22,6 +25,12 @@ export class RecruiterPostJobPageComponent {
   public editor!: Editor;
   toolbar: Toolbar = DEFAULT_TOOLBAR;
   loading: boolean = true;  // For managing loading state
+  public qualifications = Object.values(QUALIFICATION); // Convert Enum to an array
+  public experience = Object.values(EXPERIENCE); // Convert Enum to an array
+  public salaries = Object.values(SALARY); // Convert Enum to an array
+  public jobType = Object.values(JOBTYPE); // Convert Enum to an array
+  public jobCategories = Object.values(JOBCATEGORY); // Convert Enum to an array
+
 
   constructor(
     private fb: FormBuilder,
@@ -83,7 +92,7 @@ export class RecruiterPostJobPageComponent {
         next: () => {
           this.isSubmitting = false;
           this.isLoading = false;
-          this.jobPostForm.reset({ salary: '', jobType:''});
+          this.jobPostForm.reset({ salary: '', jobType:'', jobCategory :'', experience:'', qualification:''});
           this.jobCreated = true; // Show success message
           setTimeout(() => {
             this.jobCreated = false; // Hide success message

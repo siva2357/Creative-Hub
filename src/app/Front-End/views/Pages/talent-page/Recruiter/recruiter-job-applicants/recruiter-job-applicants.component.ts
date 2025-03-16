@@ -136,7 +136,7 @@ export class RecruiterJobApplicantsPageComponent implements OnInit {
 
       if (this.searchTerm) {
         jobs = jobs.filter(job =>
-          job.jobPostDetails.jobRoleTitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          job.jobPostDetails.jobTitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
           job.jobPostDetails.jobType.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
           job.jobPostDetails.jobId.toLowerCase().includes(this.searchTerm.toLowerCase())
 
