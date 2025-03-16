@@ -1,48 +1,39 @@
-<div class="container bg-body-tertiary  mt-5 mb-5" *ngIf="!isLoading">
+<div class="container bg-body-tertiary mt-5 mb-5 p-4 rounded shadow" *ngIf="!isLoading">
 
   <h5 class="mb-5">{{ isEditMode ? 'Edit Project' : 'View project' }}</h5>
 
   <form [formGroup]="updateProjectForm" (ngSubmit)="updateProject()">
 
-    <!-- Image Upload Section -->
     <div class="col mb-5">
 
-      <div class="container d-flex flex-column align-items-center justify-content-center rounded-3 file-upload-container" style=" border: dashed 2px black;">
+      <div class="container d-flex flex-column align-items-center justify-content-center rounded-3 file-upload-container p-4 border border-primary border-dashed">
         <!-- Hidden File Input -->
+        <div class="col w-100">
 
-        <!-- PREVIEW SECTION -->
-
-        <div class="col">
-
-        <div *ngIf="!ifPreview" class="container d-flex flex-wrap align-items-center justify-content-center bg-body-secondary rounded-3 mt-5"  style="height: 250px; border: dashed 2px black; gap: 10px;">
-          <div class="card position-relative">
+          <div *ngIf="!ifPreview" class="d-flex align-items-center justify-content-center bg-light rounded-3 mt-4 p-4 border border-secondary" style="min-height: 200px;">
+            <div class="card position-relative">
 
             <ng-container *ngIf="fileType === 'image'">
-              <img  *ngIf="fetchedURL" [src]="project.projectDetails.file.url" class="card-img-top" style=" height: 200px;"  alt="Preview Image">
+              <img  *ngIf="fetchedURL" [src]="project.projectDetails.file.url" class="card-img-top" style=" height: 150px;"  alt="Preview Image">
             </ng-container>
 
             <ng-container *ngIf="fileType === 'video'">
-              <video *ngIf="fetchedURL" [src]="project.projectDetails.file.url" class="card-img-top" style=" height: 200px;"  style=" height: 200px;" controls></video>
+              <video *ngIf="fetchedURL" [src]="project.projectDetails.file.url" class="card-img-top" style=" height: 150px;"  style=" height: 200px;" controls></video>
             </ng-container>
 
           </div>
           </div>
 
-          <div *ngIf="ifPreview" class="container d-flex flex-wrap align-items-center justify-content-center bg-body-secondary rounded-3 mt-5"  style="height: 250px; border: dashed 2px black; gap: 10px;">
+          <div *ngIf="ifPreview" class="d-flex flex-wrap align-items-center justify-content-center bg-light rounded-3 mt-4 p-2 border border-secondary">
             <div class="card position-relative">
-
-              <!-- Image Preview -->
-              <ng-container *ngIf="fileType === 'image'">
-                <img [src]="previewURL" class="card-img-top" style=" height: 200px;" alt="Preview Image">
-              </ng-container>
-
-              <!-- Video Preview -->
-              <ng-container *ngIf="fileType === 'video'">
-                <video [src]="previewURL" class="card-img-top" style=" height: 200px;" controls></video>
-              </ng-container>
-
+                <ng-container *ngIf="fileType === 'image'">
+                    <img [src]="previewURL" class="card-img-top rounded" style="height: 150px;" alt="Preview Image">
+                </ng-container>
+                <ng-container *ngIf="fileType === 'video'">
+                    <video [src]="previewURL" class="card-img-top rounded" style="height: 150px;" controls></video>
+                </ng-container>
             </div>
-          </div>
+        </div>
 
         </div>
 
@@ -76,75 +67,58 @@
 
     <!-- Project Details Section -->
     <div class="row">
-
-      <div class="col">
-        <h6 class="form-label fw-bold text-start">Project Title <span class="required" style="color: red;">*</span></h6>
-        <input type="text" id="projectTitle" formControlName="projectTitle" class="form-control mb-3" placeholder="Enter Project Title" required>
-        <small *ngIf="updateProjectForm.get('projectTitle')?.hasError('required') && updateProjectForm.get('projectTitle')?.touched"
-          class="text-danger">Project title is required.</small>
+      <div class="col-md-6">
+          <label class="form-label fw-bold">Project Title <span class="text-danger">*</span></label>
+          <input type="text" formControlName="projectTitle" class="form-control form-control-sm rounded-0" placeholder="Enter Project Title" required>
+          <small *ngIf="updateProjectForm.get('projectTitle')?.hasError('required') && updateProjectForm.get('projectTitle')?.touched" class="text-danger">Project title is required.</small>
       </div>
 
-      <div class="col">
+      <div class="col-md-6">
+          <label class="form-label fw-bold">Project Type <span class="text-danger">*</span></label>
+          <select formControlName="projectType" class="form-control form-control-sm rounded-0" required>
+              <option value="">Select Project Type</option>
+              <option value="Art Concepts">Art Concepts</option>
+              <option value="3D Environment">3D Environment</option>
+              <option value="3D Animations">3D Animations</option>
+              <option value="Game Development">Game Development</option>
+              <option value="AR/VR">AR/VR</option>
+          </select>
+          <small *ngIf="updateProjectForm.get('projectType')?.hasError('required') && updateProjectForm.get('projectType')?.touched" class="text-danger">Please select a project type.</small>
+      </div>
+  </div>
 
-        <!-- Project Type -->
-        <h6 class="form-label fw-bold text-start">Project Type <span class="required" style="color: red;">*</span> </h6>
-        <select id="projectType" formControlName="projectType" class="form-control mb-3" required
-          style="font-size: 14px;">
-          <option value="">Select Project Type</option>
-          <option value="Art Concepts">Art Concepts</option>
-          <option value="3D Environment">3D Environment</option>
-          <option value="3D Animations">3D Animations</option>
-          <option value="Game Development">Game Development</option>
-          <option value="AR/VR">AR/VR</option>
-        </select>
-
-        <div *ngIf="updateProjectForm.get('projectType')?.hasError('required') && updateProjectForm.get('projectType')?.touched">
-          <small style="font-size: 14px; color: red; text-align: start;">Please select project type</small>
-        </div>
+  <div class="row mt-3">
+      <div class="col-md-6">
+          <label class="form-label fw-bold">Softwares Used <span class="text-danger">*</span></label>
+          <input type="text" formControlName="softwares" class="form-control form-control-sm rounded-0" placeholder="Enter software names" required>
+          <small *ngIf="updateProjectForm.get('softwares')?.hasError('required') && updateProjectForm.get('softwares')?.touched" class="text-danger">Software is required.</small>
       </div>
 
-    </div>
-
-    <div class="row">
-
-      <div class="col">
-        <!-- Tools Used -->
-        <h6 class="form-label fw-bold text-start">Softwares Used <span class="required" style="color: red;">*</span>
-        </h6>
-        <input type="text" id="softwares" formControlName="softwares" class="form-control mb-3" placeholder="Enter softwares" required>
-        <small *ngIf="updateProjectForm.get('softwares')?.hasError('required') && updateProjectForm.get('softwares')?.touched" class="text-danger">Software is required.</small>
+      <div class="col-md-6">
+          <label class="form-label fw-bold">Tags <span class="text-danger">*</span></label>
+          <input type="text" formControlName="tags" class="form-control form-control-sm rounded-0" placeholder="Enter tags" required>
+          <small *ngIf="updateProjectForm.get('tags')?.hasError('required') && updateProjectForm.get('tags')?.touched" class="text-danger">Tag is required.</small>
       </div>
+  </div>
 
-      <div class="col">
-
-        <!-- Tags -->
-        <h6 class="form-label fw-bold text-start">Tags <span class="required" style="color: red;">*</span></h6>
-        <input type="text" id="tags" formControlName="tags" class="form-control mb-3" placeholder="Enter tag" required>
-        <small *ngIf="updateProjectForm.get('tags')?.hasError('required') && updateProjectForm.get('tags')?.touched" class="text-danger">Tag is required.</small>
-      </div>
-    </div>
-
-
-    <div class="col">
-      <h6 class="fw-bold text-start">About Project <span class="required" style="color: red;">*</span></h6>
+  <div class="col mt-3">
+      <label class="form-label fw-bold">About Project <span class="text-danger">*</span></label>
       <div class="NgxEditor__Wrapper">
-        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-        <ngx-editor [editor]="editor"  id="projectDescription"  class="form-control form-control-sm" [formControl]="projectDescriptionControl" [placeholder]="'Enter project description'" required></ngx-editor>
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+          <ngx-editor [editor]="editor" class="form-control form-control-sm" [formControl]="projectDescriptionControl" placeholder="Enter project description" required></ngx-editor>
       </div>
-      <small
-        *ngIf="updateProjectForm.get('projectDescription')?.hasError('required') && updateProjectForm.get('projectDescription')?.touched"
-        class="text-danger">Project description is required.</small>
-    </div>
+      <small *ngIf="updateProjectForm.get('projectDescription')?.hasError('required') && updateProjectForm.get('projectDescription')?.touched" class="text-danger">Project description is required.</small>
+  </div>
 
 
 
 
 
     <div class="d-flex justify-content-between mt-5">
-      <button type="button" class="btn btn-secondary" (click)="discardChanges()" *ngIf="isEditMode">Discard</button>
-      <button type="submit" class="btn btn-primary" *ngIf="isEditMode">Update</button>
-      <button type="button" class="btn btn-secondary" (click)="goBack()" *ngIf="!isEditMode">Back</button>
-      <button type="button" class="btn btn-warning" (click)="openEditMode()" *ngIf="!isEditMode">Edit</button>
+      <button type="button" class="btn btn-sm btn-outline-danger px-4 py-2 fw-bold" (click)="discardChanges()" *ngIf="isEditMode">Discard</button>
+      <button type="submit" class="btn btn-sm btn-outline-primary px-4 py-2 fw-bold" *ngIf="isEditMode">Update</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary px-4 py-2 fw-bold" (click)="goBack()" *ngIf="!isEditMode">Back</button>
+      <button type="button" class="btn btn-sm btn-outline-info px-4 py-2 fw-bold" (click)="openEditMode()" *ngIf="!isEditMode">Edit</button>
     </div>
 
   </form>

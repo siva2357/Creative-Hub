@@ -26,7 +26,7 @@
 
 
   <div class="table-responsive mb-5">
-    <table class="table table-bordered table-hover table-striped text-center align-middle shadow-sm" style="font-size: 14px;">
+    <table class="table table-hover  text-center align-middle shadow-sm" style="font-size: 14px;">
       <thead class="table-light">
         <tr>
           <th scope="col" style="width: 5%;">
@@ -88,8 +88,8 @@
           <td [innerHTML]="project.projectDetails.sanitizedProjectDescription"></td>
           <td>
             <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-sm btn-info shadow-sm px-3" (click)="goToProjectEdit(project)">Edit</button>
-              <button class="btn btn-sm btn-danger shadow-sm px-3"  (click)="deleteProjectById(project._id!, project.projectDetails.file.fileName)">Delete</button>
+              <button class="btn btn-sm btn-outline-info shadow-sm px-3" (click)="goToProjectEdit(project)">Edit</button>
+              <button class="btn btn-sm btn-outline-danger shadow-sm px-3"  (click)="deleteProjectById(project._id!, project.projectDetails.file.fileName)">Delete</button>
             </div>
           </td>
         </tr>
