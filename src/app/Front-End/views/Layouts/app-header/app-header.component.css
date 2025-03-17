@@ -1,0 +1,21 @@
+.navbar-toggler {
+  padding: 5px 10px;
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navbar Background when Expanded */
+.navbar-collapse {
+  transition: all 0.4s ease-in-out;
+}
+
+/* Navbar Links Styling */
+.nav-link {
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.nav-link:hover {
+color: #3baaf5 !important;
+}
