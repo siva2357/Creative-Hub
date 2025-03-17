@@ -9,9 +9,13 @@ const jobPostSchema = new mongoose.Schema(
     jobPostDetails: {
       jobId: { type: String, required: true }, // Consider using ObjectId if it's unique per job
       jobType: { type: String, required: true },
-      jobRoleTitle: { type: String, required: true },
+      jobTitle: { type: String, required: true },
+      jobCategory: { type: String, required: true },
+      experience: { type: String, required: true },
       salary: { type: String, required: true },
-      vacancy: { type: Number, required: true },
+      vacancy: { type: String, required: true },
+      location: { type: String, required: true },
+      qualification: { type: String, required: true },
       jobDescription: { type: String, required: true },
       postedOn: { type: Date, default: Date.now },
       applyByDate: { type: Date, required: true },

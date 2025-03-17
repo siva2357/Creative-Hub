@@ -1,4 +1,4 @@
-export enum Designation {
+export enum DESIGNATION {
   JUNIOR_GAME_DESIGNER = "Junior Game Designer",
   GAME_DESIGNER = "Game Designer",
   SENIOR_GAME_DESIGNER = "Senior Game Designer",

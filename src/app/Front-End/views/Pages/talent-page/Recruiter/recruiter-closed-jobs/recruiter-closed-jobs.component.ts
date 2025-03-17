@@ -184,7 +184,7 @@ deleteSelectedJobs() {
 
     if (this.searchTerm) {
       jobs = jobs.filter(job =>
-        job.jobPostDetails.jobRoleTitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        job.jobPostDetails.jobTitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         job.jobPostDetails.jobType.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         job.jobPostDetails.status?.toLowerCase().includes(this.searchTerm.toLowerCase())
 

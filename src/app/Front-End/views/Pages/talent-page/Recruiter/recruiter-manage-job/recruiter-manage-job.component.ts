@@ -128,7 +128,7 @@ deleteSelectedJobs() {
 
     if (this.searchTerm) {
       jobs = jobs.filter(job =>
-        job.jobPostDetails.jobRoleTitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        job.jobPostDetails.jobTitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         job.jobPostDetails.jobType.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         job.jobPostDetails.status?.toLowerCase().includes(this.searchTerm.toLowerCase())
 
@@ -201,9 +201,7 @@ deleteSelectedJobs() {
 
       const confirmClose = confirm("Are you sure you want to close this job post?");
       if (!confirmClose) return;
-
       const previousPage = this.currentPage; // ✅ Store the current page before update
-
       this.jobService.closeJobPostById(this.recruiterId, jobPostData._id, jobPostData).subscribe(
         () => {
           console.log("Job closed successfully!");

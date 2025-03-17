@@ -5,6 +5,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { JobPost } from 'src/app/Front-End/core/models/jobPost.model';
 import { JobPostService } from 'src/app/Front-End/core/services/jobPost.service';
 import { AuthService } from 'src/app/Front-End/core/services/auth.service';
+import { QUALIFICATION } from 'src/app/Front-End/core/enums/qualification.enum';
+import { EXPERIENCE } from 'src/app/Front-End/core/enums/experience.enum';
+import { SALARY } from 'src/app/Front-End/core/enums/salary.enum';
+import { JOBCATEGORY } from 'src/app/Front-End/core/enums/job-category.enum';
+import { JOBTYPE } from 'src/app/Front-End/core/enums/job-type.enum';
 
 @Component({
   selector: 'app-job-post-edit-form',
@@ -14,20 +19,23 @@ import { AuthService } from 'src/app/Front-End/core/services/auth.service';
 export class RecruiterEditJobPageComponent implements OnInit,  OnDestroy{
 
   public jobPost!: JobPost;
-
   editor!: Editor;
   toolbar: Toolbar = DEFAULT_TOOLBAR;
-
   jobPostUpdateForm!: FormGroup;
   isEditMode: boolean = false;
 
   isUpdating = false;
   isLoading = false;
   jobPostActive: boolean = true;
-
   errorMessage = '';
   jobId!: string;
   recruiterId!: string;
+
+    public qualifications = Object.values(QUALIFICATION); // Convert Enum to an array
+    public experience = Object.values(EXPERIENCE); // Convert Enum to an array
+    public salaries = Object.values(SALARY); // Convert Enum to an array
+    public jobType = Object.values(JOBTYPE); // Convert Enum to an array
+    public jobCategories = Object.values(JOBCATEGORY); // Convert Enum to an array
 
   constructor(
     private fb: FormBuilder,
@@ -84,11 +92,16 @@ fetchJobpostData() {
 
    initializeForm() {
     this.jobPostUpdateForm = this.fb.group({
+      _id: [null],
       jobId: ['', [Validators.required]],
-      jobRoleTitle: ['', [Validators.required]],
+      jobTitle: ['', [Validators.required]],
+      jobCategory: ['', [Validators.required]],
       jobType: ['', [Validators.required]],
+      experience: ['', [Validators.required]],
       salary: ['', [Validators.required]],
       vacancy: ['', [Validators.required]],
+      location: ['', [Validators.required]],
+      qualification: ['', [Validators.required]],
       applyByDate: ['', [Validators.required]],
       jobDescription: ['', [Validators.required]],
       });
@@ -96,10 +109,14 @@ fetchJobpostData() {
       if (this.jobPost && this.jobPost.jobPostDetails) {
         this.jobPostUpdateForm.patchValue({
           jobId: this.jobPost.jobPostDetails.jobId,
-          jobRoleTitle: this.jobPost.jobPostDetails.jobRoleTitle,
+          jobTitle: this.jobPost.jobPostDetails.jobTitle,
           jobType: this.jobPost.jobPostDetails.jobType,
+          jobCategory: this.jobPost.jobPostDetails.jobCategory,
+          experience: this.jobPost.jobPostDetails. experience,
           salary: this.jobPost.jobPostDetails.salary,
           vacancy: this.jobPost.jobPostDetails.vacancy,
+          location: this.jobPost.jobPostDetails.location,
+          qualification: this.jobPost.jobPostDetails.  qualification,
           applyByDate: [new Date(this.jobPost?.jobPostDetails?.applyByDate).toISOString().slice(0, 10)],
           jobDescription: this.jobPost.jobPostDetails.jobDescription,
 
@@ -130,14 +147,17 @@ fetchJobpostData() {
 
   discardChanges(): void {
     this.jobPostUpdateForm.patchValue({
-      jobId: this.jobPost?.jobPostDetails?.jobId,
-      jobRoleTitle: this.jobPost?.jobPostDetails?.jobRoleTitle,
-      jobType: this.jobPost?.jobPostDetails?.jobType,
-      salary: this.jobPost?.jobPostDetails?.salary,
-      vacancy: this.jobPost?.jobPostDetails?.vacancy,
-      applyByDate: [new Date(this.jobPost?.jobPostDetails?.applyByDate).toISOString().slice(0, 10)],
-
-      jobDescription: this.jobPost?.jobPostDetails?.jobDescription,
+      jobId: this.jobPost.jobPostDetails.jobId,
+      jobTitle: this.jobPost.jobPostDetails.jobTitle,
+      jobType: this.jobPost.jobPostDetails.jobType,
+      jobCategory: this.jobPost.jobPostDetails.jobCategory,
+      experience: this.jobPost.jobPostDetails. experience,
+      salary: this.jobPost.jobPostDetails.salary,
+      vacancy: this.jobPost.jobPostDetails.vacancy,
+      location: this.jobPost.jobPostDetails.location,
+      qualification: this.jobPost.jobPostDetails.  qualification,
+      applyByDate: [new Date(this.jobPost.jobPostDetails.applyByDate).toISOString().slice(0, 10)],
+      jobDescription: this.jobPost.jobPostDetails.jobDescription,
     });
 
     this.jobPostUpdateForm.disable();
@@ -200,14 +220,17 @@ fetchJobpostData() {
 
   resetForm() {
     this.jobPostUpdateForm.patchValue({
-      jobId: this.jobPost?.jobPostDetails?.jobId,
-      jobRoleTitle: this.jobPost?.jobPostDetails?.jobRoleTitle,
-      jobType: this.jobPost?.jobPostDetails?.jobType,
-      salary: this.jobPost?.jobPostDetails?.salary,
-      vacancy: this.jobPost?.jobPostDetails?.vacancy,
-      applyByDate: [new Date(this.jobPost?.jobPostDetails?.applyByDate).toISOString().slice(0, 10)],
-
-      jobDescription: this.jobPost?.jobPostDetails?.jobDescription,
+      jobId: this.jobPost.jobPostDetails.jobId,
+      jobTitle: this.jobPost.jobPostDetails.jobTitle,
+      jobType: this.jobPost.jobPostDetails.jobType,
+      jobCategory: this.jobPost.jobPostDetails.jobCategory,
+      experience: this.jobPost.jobPostDetails. experience,
+      salary: this.jobPost.jobPostDetails.salary,
+      vacancy: this.jobPost.jobPostDetails.vacancy,
+      location: this.jobPost.jobPostDetails.location,
+      qualification: this.jobPost.jobPostDetails.  qualification,
+      applyByDate: [new Date(this.jobPost.jobPostDetails.applyByDate).toISOString().slice(0, 10)],
+      jobDescription: this.jobPost.jobPostDetails.jobDescription,
     });
 
     this.isUpdating = false;

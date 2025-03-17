@@ -1,21 +1,20 @@
 
 
 
-  <div class="container-fluid mt-5">
+<div class="container-fluid mt-5" style="font-family: 'Poppins', sans-serif;">
 
     <div class="mb-3 d-flex flex-wrap align-items-center gap-3">
-      <label for="search" class="form-label mb-0">Search Job Posts:</label>
+      <label for="search" class="form-label mb-0 poppins-medium" style="font-size: 14px;">Search Job Posts:</label>
       <div class="flex-grow-1">
         <input
           type="text"
           id="search"
           [(ngModel)]="searchTerm"
-          class="form-control shadow-sm"
+          class="form-control shadow-sm form-control-sm"
           placeholder="Search by Job Role, Type, or Job Id"
-          (input)="filterJobs()"
-        >
+          (input)="filterJobs()">
       </div>
-      <button class="btn btn-secondary px-4" (click)="resetSearch()">Reset</button>
+      <button class="btn btn-sm btn-outline-secondary px-4 poppins-medium" (click)="resetSearch()">Reset</button>
     </div>
 
 
@@ -24,7 +23,7 @@
 
 
     <div class="table-responsive mb-5">
-      <table class="table table-bordered table-hover table-striped text-center align-middle shadow-sm" style="font-size: 14px;">
+      <table class="table table-hover text-center align-middle shadow-sm poppins-medium" style="font-size: 14px;">
         <thead class="table-light">
           <tr>
             <th scope="col" style="width: 5%;">
@@ -32,7 +31,9 @@
             </th>
             <th scope="col" style="width: 5%;">S.No</th>
             <th scope="col" style="width: 10%;">Job ID</th>
-            <th scope="col" style="width: 15%;">Job Role</th>
+            <th scope="col" style="width: 15%;">Job Title</th>
+            <th scope="col" style="width: 15%;">Job Category</th>
+            <th scope="col" style="width: 15%;">Job Type</th>
             <th scope="col" style="width: 10%;">Applicants</th>
             <th scope="col" style="width: 10%;">Actions</th>
           </tr>
@@ -45,11 +46,13 @@
             </td>
             <td>{{ (currentPage - 1) * itemsPerPage + (i + 1) }}</td>
             <td>{{ job.jobPostDetails.jobId }}</td>
-            <td>{{ job.jobPostDetails.jobRoleTitle }}</td>
+            <td>{{ job.jobPostDetails.jobTitle }}</td>
+            <td>{{ job.jobPostDetails.jobCategory }}</td>
+            <td>{{ job.jobPostDetails.jobType }}</td>
             <td>{{ job.totalApplicants }}</td>
             <td>
               <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-sm btn-info shadow-sm px-3"  (click)="viewApplicants(job)">View</button>
+                <button class="btn btn-sm btn-outline-info px-4 poppins-medium"   (click)="viewApplicants(job)">View</button>
               </div>
             </td>
           </tr>
@@ -57,7 +60,7 @@
 
         <tbody *ngIf="filteredJobs.length === 0">
           <tr>
-            <td colspan="9" class="text-center text-muted fw-bold py-3">No Applicants available to display.</td>
+            <td colspan="9" class="text-center text-muted poppins-medium py-3">No Applicants available to display.</td>
           </tr>
         </tbody>
       </table>
@@ -72,7 +75,7 @@
     <div class="row align-items-center mb-3 p-2 border rounded shadow-sm bg-light">
       <!-- Items per page selector -->
       <div class="col-12 col-md-4 d-flex align-items-center mb-2 mb-md-0">
-        <label for="itemsPerPage" class="fw-bold me-2">Items per page:</label>
+        <label for="itemsPerPage" class="poppins-medium me-2" style="font-size: 14px;">Items per page:</label>
         <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updatePagination()" class="form-select form-select-sm w-auto">
           <option *ngFor="let size of [5, 10, 15, 20, 50, 100]" [value]="size">{{ size }}</option>
         </select>

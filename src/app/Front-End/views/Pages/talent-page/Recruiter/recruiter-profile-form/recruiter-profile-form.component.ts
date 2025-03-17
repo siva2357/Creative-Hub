@@ -13,7 +13,7 @@ import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
 import { Folder } from 'src/app/Front-End/core/enums/folder-name.enum';
 import { AdminService } from 'src/app/Front-End/core/services/admin.service';
 import { Company } from 'src/app/Front-End/core/models/company.model';
-import { Designation } from 'src/app/Front-End/core/enums/designation.enum';
+import { DESIGNATION } from 'src/app/Front-End/core/enums/designation.enum';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class RecruiterProfileFormComponent implements OnInit,OnDestroy {
   recruiterId!: string;
   public profileDetails! :Recruiter;
   public companyList! :Company[];
-  public designations = Object.values(Designation); // Convert Enum to an array
+  public designations = Object.values(DESIGNATION); // Convert Enum to an array
 
   ifPreview = false;
   uploadedFileData: { fileName: string; url: string; filePath: string } | null = null;
