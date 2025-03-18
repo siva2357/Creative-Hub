@@ -10,12 +10,13 @@ export class TalentMainPageComponent {
 
     constructor(private router: Router) {}
 
-  login() {
-    this.router.navigate(['talent-page/login']); // Corrected navigation
-  }
+    login() {
+      window.open('/talent-page/login', '_blank'); // Opens login in a new tab
+    }
 
-  signUp() {
-    this.router.navigate(['talent-page/signup']); // Corrected navigation
-  }
+    signUp() {
+      window.open('/talent-page/signup', '_blank'); // Opens signup in a new tab
+    }
+
 
 }
